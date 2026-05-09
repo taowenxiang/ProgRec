@@ -1,0 +1,56 @@
+[
+  {
+    "project_id": "p_001",
+    "mentor_id": "m_001",
+    "title": "Graph-based Research Matching",
+    "topic_tags": ["social network analysis", "recommendation systems", "graph learning"],
+    "required_skills": ["python", "data analysis", "network analysis", "statistics"],
+    "difficulty": "medium",
+    "description": "Build heterogeneous academic graph features for student–mentor matching."
+  },
+  {
+    "project_id": "p_002",
+    "mentor_id": "m_001",
+    "title": "Visualization for Collaboration Networks",
+    "topic_tags": ["visualization", "social network analysis"],
+    "required_skills": ["python", "communication", "data analysis"],
+    "difficulty": "easy",
+    "description": "Interactive dashboards for lab collaboration graphs."
+  },
+  {
+    "project_id": "p_003",
+    "mentor_id": "m_002",
+    "title": "Secure Protocol Verification Toolkit",
+    "topic_tags": ["applied cryptography", "network analysis"],
+    "required_skills": ["python", "careful reasoning about adversaries", "linux security tooling"],
+    "difficulty": "hard",
+    "description": "Lightweight checks for campus authentication experiments."
+  },
+  {
+    "project_id": "p_004",
+    "mentor_id": "m_002",
+    "title": "Privacy Metrics for Graph Analytics",
+    "topic_tags": ["differential privacy", "network analysis"],
+    "required_skills": ["statistics", "python", "data analysis"],
+    "difficulty": "medium",
+    "description": "Measure disclosure risk on synthetic collaboration graphs."
+  },
+  {
+    "project_id": "p_005",
+    "mentor_id": "m_003",
+    "title": "Human-centered NLP for Advising Bots",
+    "topic_tags": ["human-centered nlp", "machine learning"],
+    "required_skills": ["python", "scientific writing", "communication"],
+    "difficulty": "medium",
+    "description": "Prototype NLP assistants that explain course pathways."
+  },
+  {
+    "project_id": "p_006",
+    "mentor_id": "m_003",
+    "title": "Ecological Text Mining",
+    "topic_tags": ["ecology", "machine learning"],
+    "required_skills": ["python", "laboratory techniques", "data analysis"],
+    "difficulty": "easy",
+    "description": "Extract species mentions from citizen-science narratives."
+  }
+]

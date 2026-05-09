@@ -1,0 +1,16 @@
+[
+  {
+    "mentor_id": "m_001",
+    "topic_score": 0.82,
+    "graph_score": 0.71,
+    "community_id": "c_a",
+    "final_score": 0.79
+  },
+  {
+    "mentor_id": "m_002",
+    "topic_score": 0.55,
+    "graph_score": 0.6,
+    "community_id": "c_b",
+    "final_score": 0.58
+  }
+]

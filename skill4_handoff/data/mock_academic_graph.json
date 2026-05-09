@@ -1,0 +1,84 @@
+{
+  "version": "1.0-test",
+  "nodes": {
+    "mentor": [
+      {"mentor_id": "m_001", "name": "Test Mentor One"},
+      {"mentor_id": "m_002", "name": "Test Mentor Two"}
+    ],
+    "paper": [],
+    "topic": [
+      {"topic_id": "t_sna", "label": "social network analysis"},
+      {"topic_id": "t_ml", "label": "machine learning"}
+    ],
+    "project": [
+      {
+        "project_id": "p_001",
+        "title": "Graph-based Research Matching",
+        "mentor_id": "m_001",
+        "topic_ids": ["t_sna"],
+        "required_skills": ["python", "data analysis", "network analysis"]
+      },
+      {
+        "project_id": "p_003",
+        "title": "Secure Protocol Lab",
+        "mentor_id": "m_002",
+        "topic_ids": ["t_ml"],
+        "required_skills": ["python", "statistics"]
+      }
+    ],
+    "student": [
+      {
+        "student_id": "student_a",
+        "grade": "Senior",
+        "major": "Computer Science",
+        "skills": ["python", "data analysis"],
+        "interests": ["social network analysis", "machine learning"],
+        "availability": "high",
+        "experience_summary": "",
+        "profile_source": "mock"
+      },
+      {
+        "student_id": "student_b",
+        "grade": "Junior",
+        "major": "Biology",
+        "skills": ["network analysis", "statistics", "scientific writing"],
+        "interests": ["ecology", "social network analysis"],
+        "availability": "moderate",
+        "experience_summary": "",
+        "profile_source": "mock"
+      }
+    ]
+  },
+  "edges": [
+    {
+      "type": "project_leads",
+      "source": {"type": "mentor", "id": "m_001"},
+      "target": {"type": "project", "id": "p_001"},
+      "weight": 1.0,
+      "metadata": {}
+    },
+    {
+      "type": "project_leads",
+      "source": {"type": "project", "id": "p_003"},
+      "target": {"type": "mentor", "id": "m_002"},
+      "weight": 1.0,
+      "metadata": {}
+    },
+    {
+      "type": "shared_interest",
+      "source": {"type": "student", "id": "student_a"},
+      "target": {"type": "student", "id": "student_b"},
+      "weight": 0.8,
+      "metadata": {}
+    },
+    {
+      "type": "skill_complementarity",
+      "source": {"type": "student", "id": "student_a"},
+      "target": {"type": "student", "id": "student_b"},
+      "weight": 0.9,
+      "metadata": {}
+    }
+  ],
+  "statistics": {},
+  "build_meta": {}
+}

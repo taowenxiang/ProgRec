@@ -1,0 +1,100 @@
+{
+  "coverage": {
+    "per_kind": {
+      "mentor": {
+        "expected": 200,
+        "matched": 200,
+        "coverage": 1.0
+      },
+      "paper": {
+        "expected": 900,
+        "matched": 900,
+        "coverage": 1.0
+      },
+      "topic": {
+        "expected": 18,
+        "matched": 18,
+        "coverage": 1.0
+      },
+      "project": {
+        "expected": 86,
+        "matched": 86,
+        "coverage": 1.0
+      },
+      "student": {
+        "expected": 1629,
+        "matched": 1629,
+        "coverage": 1.0,
+        "note": "Skill 1 JSONL subset; CSV students.csv not used for expected IDs."
+      }
+    },
+    "overall_coverage": 1.0
+  },
+  "alignment": {
+    "alias_rows": 13,
+    "resolved": 13,
+    "alignment_success_rate": 1.0,
+    "details": [
+      {
+        "canonical_id": "m_001",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_002",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_003",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_004",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_005",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_006",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_007",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_008",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_009",
+        "resolved": true
+      },
+      {
+        "canonical_id": "m_010",
+        "resolved": true
+      },
+      {
+        "canonical_id": "p_00001",
+        "resolved": true
+      },
+      {
+        "canonical_id": "p_00002",
+        "resolved": true
+      },
+      {
+        "canonical_id": "p_00003",
+        "resolved": true
+      }
+    ]
+  },
+  "connectivity": {
+    "num_nodes": 2831,
+    "num_edges": 1233589,
+    "num_components": 1,
+    "largest_component_frac": 1.0,
+    "avg_degree": 871.4864005651713,
+    "density": 0.3079457245813326
+  }
+}

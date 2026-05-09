@@ -1,0 +1,13 @@
+{
+  "target_student_id": "student_a",
+  "skill1_profiles": "../../skill1_handoff/student_profiles_normalized.jsonl",
+  "skill2_graph": "../../skill2_handoff/outputs/academic_graph.json",
+  "skill2_students": "../../skill2_handoff/outputs/student_profiles_standard.json",
+  "skill2_mentors": "../../skill2_handoff/outputs/mentor_profiles_standard.json",
+  "mentor_candidates": "",
+  "mock_projects": "mock_projects.json",
+  "mock_mentor_candidates": "mock_mentor_candidates.json",
+  "top_n_projects": 3,
+  "top_n_teammates": 3,
+  "max_candidate_teammates": 80
+}

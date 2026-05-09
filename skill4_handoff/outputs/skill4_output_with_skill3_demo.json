@@ -1,0 +1,2374 @@
+{
+  "target_student_id": "s_002",
+  "target_student_profile": {
+    "grade": "Year 2",
+    "major": "Computer Engineering",
+    "skills": [
+      "c++",
+      "probability",
+      "sql",
+      "tensorflow"
+    ],
+    "interests": [
+      "computer vision",
+      "robotics",
+      "security",
+      "theory"
+    ],
+    "availability": "moderate"
+  },
+  "mentor_project_teammate_recommendations": [
+    {
+      "mentor_id": "m_090",
+      "mentor_base_score": 0.368,
+      "topic_score": 0.197,
+      "graph_score": 0.6543,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.575,
+      "centrality_score": 0.9347,
+      "network_proximity": 0.0,
+      "mentor_name": "Joseph Foster",
+      "skill3_rank": 1,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in c++, security.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_190",
+      "mentor_base_score": 0.3338,
+      "topic_score": 0.1609,
+      "graph_score": 0.503,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.7437,
+      "centrality_score": 0.7186,
+      "network_proximity": 0.0,
+      "mentor_name": "Nina Perry",
+      "skill3_rank": 2,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in security.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_032",
+      "mentor_base_score": 0.2775,
+      "topic_score": 0.1282,
+      "graph_score": 0.4925,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.5162,
+      "centrality_score": 0.7035,
+      "network_proximity": 0.0,
+      "mentor_name": "Zara Taylor",
+      "skill3_rank": 3,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in c++, computer.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_154",
+      "mentor_base_score": 0.273,
+      "topic_score": 0.1478,
+      "graph_score": 0.4889,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4138,
+      "centrality_score": 0.6985,
+      "network_proximity": 0.0,
+      "mentor_name": "Angela Cole",
+      "skill3_rank": 4,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer, vision.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_046",
+      "mentor_base_score": 0.272,
+      "topic_score": 0.2389,
+      "graph_score": 0.1231,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.6525,
+      "centrality_score": 0.1759,
+      "network_proximity": 0.0,
+      "mentor_name": "Peter Nguyen",
+      "skill3_rank": 5,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in c++, computer, vision.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_175",
+      "mentor_base_score": 0.2712,
+      "topic_score": 0.1031,
+      "graph_score": 0.5487,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4812,
+      "centrality_score": 0.7839,
+      "network_proximity": 0.0,
+      "mentor_name": "Samuel Hall",
+      "skill3_rank": 6,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in probability.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_004",
+      "mentor_base_score": 0.2672,
+      "topic_score": 0.0701,
+      "graph_score": 0.6367,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.44,
+      "centrality_score": 0.9095,
+      "network_proximity": 0.0,
+      "mentor_name": "Thomas Tran",
+      "skill3_rank": 7,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_197",
+      "mentor_base_score": 0.2644,
+      "topic_score": 0.1213,
+      "graph_score": 0.4291,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.5625,
+      "centrality_score": 0.6131,
+      "network_proximity": 0.0,
+      "mentor_name": "Amelia Park",
+      "skill3_rank": 8,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_161",
+      "mentor_base_score": 0.2617,
+      "topic_score": 0.068,
+      "graph_score": 0.5558,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.5463,
+      "centrality_score": 0.794,
+      "network_proximity": 0.0,
+      "mentor_name": "Ryan Russell",
+      "skill3_rank": 9,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in probability.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_061",
+      "mentor_base_score": 0.2589,
+      "topic_score": 0.0912,
+      "graph_score": 0.5558,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "s_015",
+          "teammate_score": 0.61,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "computer vision",
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as computer vision, robotics, security. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_083",
+          "teammate_score": 0.565,
+          "shared_interest_score": 0.6,
+          "complementarity_score": 0.5,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security",
+            "theory"
+          ],
+          "complementary_skills": [
+            "c++",
+            "sql",
+            "tensorflow"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security, theory. They can complement missing skills: c++, sql, tensorflow."
+        },
+        {
+          "student_id": "s_028",
+          "teammate_score": 0.49,
+          "shared_interest_score": 0.3333,
+          "complementarity_score": 0.6,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "robotics",
+            "security"
+          ],
+          "complementary_skills": [
+            "c++",
+            "probability",
+            "sql"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as robotics, security. They can complement missing skills: c++, probability, sql."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.435,
+      "centrality_score": 0.794,
+      "network_proximity": 0.0,
+      "mentor_name": "William King",
+      "skill3_rank": 10,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in probability.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    }
+  ],
+  "data_sources": {
+    "student_profiles": "skill2_handoff/outputs/student_profiles_standard.json",
+    "academic_graph": "skill4_handoff/data/mock_academic_graph.json",
+    "mentor_candidates": "/tmp/skill3_s002.json",
+    "mentor_candidate_source": "skill3_json",
+    "project_source": "none",
+    "target_student_resolution": "resolved_ok",
+    "requested_target_student_id": "s_002",
+    "effective_target_student_id": "s_002",
+    "sample_student_ids": [
+      "s_001",
+      "s_002",
+      "s_003",
+      "s_004",
+      "s_005",
+      "s_006",
+      "s_007",
+      "s_008",
+      "s_009",
+      "s_010"
+    ],
+    "skill3_graph_status": "loaded",
+    "skill3_target_student_id": "s_002",
+    "skill3_declared_student_id": "s_002",
+    "skill3_output_path": "/tmp/skill3_s002.json",
+    "skill3_output_in_use": true,
+    "allow_target_fallback_with_skill3": false,
+    "embeddings_aligned": "loaded_ok"
+  },
+  "warnings": [],
+  "reason_graphs": [
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_090",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_190",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_032",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_154",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_046",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_175",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_004",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_197",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_161",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "s_002",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_061",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "s_015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "s_083",
+          "id": 6
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "tensorflow",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "s_028",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 11
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "sql",
+          "id": 13
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 4,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 14,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 6,
+          "source": 6,
+          "target": 7
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 6,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 6,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 12,
+          "source": 10,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 13,
+          "source": 10,
+          "target": 13
+        }
+      ],
+      "format": "networkx_node_link"
+    }
+  ]
+}

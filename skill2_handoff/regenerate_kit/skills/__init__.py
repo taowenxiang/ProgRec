@@ -1,0 +1,1 @@
+"""StuRec course skills package."""

@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Editor settings
+.vscode/
+.idea/
+
+skill2_handoff/outputs/academic_graph.json
