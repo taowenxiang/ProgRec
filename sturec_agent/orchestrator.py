@@ -5,7 +5,7 @@ from pathlib import Path
 
 from sturec_agent.adapters.skill2_adapter import resolve_skill2_resources
 from sturec_agent.adapters.skill3_adapter import run_skill3
-from sturec_agent.adapters.skill4_adapter import run_skill4_dataset_mode
+from sturec_agent.adapters.skill4_adapter import run_skill4_custom_mode, run_skill4_dataset_mode
 from sturec_agent.adapters.skill5_adapter import run_skill5
 
 
@@ -44,6 +44,36 @@ class StuRecOrchestrator:
             "mode": "dataset_mode",
             "student_profile": student_profile,
             "resource_context": resources,
+            "skill3_result": skill3_result,
+            "skill4_result": skill4_result,
+            "skill5_result": skill5_result,
+            "temporary_paths": [skill3_path, skill4_path, skill5_path],
+        }
+
+    def recommend_for_profile(self, student_profile: dict[str, object], top_k: int = 5) -> dict[str, object]:
+        skill3_path = self.temp_dir / "skill3.json"
+        skill4_path = self.temp_dir / "skill4.json"
+        skill5_path = self.temp_dir / "skill5.json"
+        skill3_result = run_skill3(self.repo_root, student_profile, top_k)
+        skill3_path.write_text(json.dumps(skill3_result, ensure_ascii=False, indent=2), encoding="utf-8")
+        skill4_result = run_skill4_custom_mode(
+            repo_root=self.repo_root,
+            student_profile=student_profile,
+            skill3_result=skill3_result,
+            output_path=skill4_path,
+        )
+        skill5_result = run_skill5(
+            repo_root=self.repo_root,
+            skill3_path=skill3_path,
+            skill4_path=skill4_path,
+            output_path=skill5_path,
+            student_id=str(student_profile["student_id"]),
+            top_k=top_k,
+        )
+        return {
+            "mode": "custom_profile_mode",
+            "student_profile": student_profile,
+            "resource_context": {"resource_mode": "custom_profile_mode"},
             "skill3_result": skill3_result,
             "skill4_result": skill4_result,
             "skill5_result": skill5_result,
