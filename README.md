@@ -41,6 +41,30 @@ Run tests:
 python3 -m unittest discover -s tests -v
 ```
 
+## StuRec Agent CLI
+
+Run the interactive CLI agent from the repository root:
+
+```bash
+python3 -m sturec_agent.repl
+```
+
+The first version supports two recommendation entry modes:
+
+- existing `student_id` from the current standardized student bundle
+- manual profile entry with structured fields and optional `resume_text`
+
+Supported commands:
+
+- `recommend`
+- `show mentor <id>`
+- `show profile`
+- `restart`
+- `help`
+- `exit`
+
+Manual profile runs are labeled `custom_profile_mode`. They still use the existing Skill 2-5 resources, but the student is treated as a temporary profile instead of a graph-native student node.
+
 ## Notes
 
 - The repository already has a GitHub remote configured at `origin`.
