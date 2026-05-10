@@ -1,0 +1,85 @@
+<h2>Skill 3 PPT Narrative Options</h2>
+<p class="subtitle">Same course-style template, different storytelling emphasis for your 2-4 page section</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">A. Problem → Upgrade → Result</div>
+        <div class="mockup-body" style="padding:18px">
+          <div style="font-size:28px;font-weight:700;color:#315a98;margin-bottom:16px">Why baseline mentor retrieval is not enough</div>
+          <div style="display:flex;gap:12px;align-items:center;justify-content:center;margin:24px 0">
+            <div style="padding:12px 16px;border:2px solid #d2dced;border-radius:14px;background:#f5f8fe">Topic Recall</div>
+            <div style="font-size:26px">+</div>
+            <div style="padding:12px 16px;border:2px solid #d5e7d1;border-radius:14px;background:#f4fbf1">Trust-aware Graph</div>
+            <div style="font-size:26px">=</div>
+            <div style="padding:12px 16px;border:2px solid #f1d28f;border-radius:14px;background:#fff8e8">Reliable Mentor Ranking</div>
+          </div>
+          <div style="font-size:18px;color:#555">Best for short talks and clear “what I improved” storytelling.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Option A: Most balanced</h3>
+      <p>老师最容易一眼听懂你做了什么，以及为什么不是普通排序。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">B. Graph Paths as the Hero</div>
+        <div class="mockup-body" style="padding:18px">
+          <div style="font-size:26px;font-weight:700;color:#315a98;margin-bottom:18px">student → project → mentor</div>
+          <div style="font-size:26px;font-weight:700;color:#315a98;margin-bottom:18px">student → shared interest → student → mentor</div>
+          <div style="font-size:26px;font-weight:700;color:#315a98;margin-bottom:18px">student → complementarity → student → mentor</div>
+          <div style="margin-top:20px;padding:10px 14px;border-radius:12px;background:#eef4ff;color:#444">High / Medium / Low trust tiers decide how much each path counts</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Option B: Most SNA-flavored</h3>
+      <p>最突出图路径、trust tier、explainability，学术味更强。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">C. Engineering + Evaluation</div>
+        <div class="mockup-body" style="padding:18px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div style="padding:12px;border-radius:12px;background:#f5f8fe;border:2px solid #d2dced">Lightweight subgraph fallback</div>
+            <div style="padding:12px;border-radius:12px;background:#f5fbf3;border:2px solid #d1e8cf">Ablation summary</div>
+            <div style="padding:12px;border-radius:12px;background:#fff8eb;border:2px solid #f0d6a2">Perturbation stability</div>
+            <div style="padding:12px;border-radius:12px;background:#f9f2fb;border:2px solid #e2cce9">CLI + JSON outputs</div>
+          </div>
+          <div style="margin-top:18px;font-size:18px;color:#555">Best if you want to look solid, complete, and implementation-heavy.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Option C: Most engineering-heavy</h3>
+      <p>更像“我不仅想法好，而且真的做完了、测了、能落地”。</p>
+    </div>
+  </div>
+</div>
+
+<div class="pros-cons" style="margin-top:18px">
+  <div class="pros">
+    <h4>My Recommendation</h4>
+    <ul>
+      <li>Pick <strong>Option A</strong> as the main spine.</li>
+      <li>Borrow one path-trust diagram from <strong>Option B</strong>.</li>
+      <li>Use one evaluation/robustness callout from <strong>Option C</strong>.</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h4>Why</h4>
+    <ul>
+      <li>2-4 pages is too short for a fully engineering-first talk.</li>
+      <li>Only讲 baseline + 改进 + 亮点，最适合课堂展示节奏。</li>
+      <li>老师更容易记住“trust-aware graph reranker”这个关键词。</li>
+    </ul>
+  </div>
+</div>

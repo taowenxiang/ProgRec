@@ -8,10 +8,7 @@ from pathlib import Path
 class Skill3CliTest(unittest.TestCase):
     def test_cli_prints_ranked_candidates_for_sample_student(self):
         repo_root = Path(__file__).resolve().parents[1]
-        student_bundle = json.loads(
-            (repo_root / "skill2_handoff" / "outputs" / "student_profiles_standard.json").read_text()
-        )
-        student_id = student_bundle["students"][0]["student_id"]
+        student_id = "jamie-taylor-00008"
         cmd = [
             sys.executable,
             str(repo_root / "skill3_mentor_discovery" / "run_skill3.py"),
@@ -25,7 +22,21 @@ class Skill3CliTest(unittest.TestCase):
         payload = json.loads(completed.stdout)
         self.assertEqual(len(payload["mentor_candidates"]), 3)
         self.assertIn("graph_status", payload)
-        self.assertIn("mentor_id", payload["mentor_candidates"][0])
+        first_candidate = payload["mentor_candidates"][0]
+        self.assertIn("mentor_id", first_candidate)
+        self.assertIn("personalized_proximity", first_candidate)
+        self.assertIn("graph_confidence", first_candidate)
+        self.assertIn("mentor_authority", first_candidate)
+        self.assertIn("meta_path_breakdown", first_candidate)
+        self.assertIn("top_evidence_paths", first_candidate)
         if payload["graph_status"] == "loaded_lightweight_mentor_subgraph":
             self.assertIn("graph_notice", payload)
             self.assertIn("switched", payload["graph_notice"].lower())
+            self.assertTrue(
+                any(
+                    candidate["personalized_proximity"] > 0.0
+                    or candidate["top_evidence_paths"]
+                    for candidate in payload["mentor_candidates"]
+                ),
+                payload["mentor_candidates"],
+            )

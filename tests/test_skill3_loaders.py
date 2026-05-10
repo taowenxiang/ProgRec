@@ -132,3 +132,173 @@ class LoaderResolutionTest(unittest.TestCase):
         self.assertEqual(graph_status, "loaded_lightweight_mentor_subgraph")
         self.assertIn("switched", graph_notice.lower())
         self.assertEqual(len(prepared_graph["edges"]), 2)
+
+    def test_prepare_graph_for_ranking_preserves_student_local_trust_edges(self):
+        graph = {
+            "nodes": {
+                "mentor": [{"mentor_id": "m_1"}, {"mentor_id": "m_2"}],
+                "student": [{"student_id": "s_target"}, {"student_id": "s_peer"}, {"student_id": "s_other"}],
+            },
+            "edges": [
+                {
+                    "type": "collaboration",
+                    "source": {"type": "mentor", "id": "m_1"},
+                    "target": {"type": "mentor", "id": "m_2"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+                {
+                    "type": "shared_interest",
+                    "source": {"type": "student", "id": "s_target"},
+                    "target": {"type": "student", "id": "s_peer"},
+                    "weight": 0.6,
+                    "metadata": {},
+                },
+                {
+                    "type": "shared_interest",
+                    "source": {"type": "student", "id": "s_target"},
+                    "target": {"type": "student", "id": "s_peer"},
+                    "weight": 0.6,
+                    "metadata": {},
+                },
+                {
+                    "type": "skill_complementarity",
+                    "source": {"type": "student", "id": "s_peer"},
+                    "target": {"type": "student", "id": "s_target"},
+                    "weight": 0.25,
+                    "metadata": {},
+                },
+                {
+                    "type": "advising",
+                    "source": {"type": "mentor", "id": "m_1"},
+                    "target": {"type": "student", "id": "s_peer"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+                {
+                    "type": "advising",
+                    "source": {"type": "mentor", "id": "m_2"},
+                    "target": {"type": "student", "id": "s_other"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+            ],
+        }
+        prepared_graph, graph_status, graph_notice = prepare_graph_for_ranking(
+            graph,
+            max_full_graph_edges=2,
+            student_id="s_target",
+        )
+        self.assertEqual(graph_status, "loaded_lightweight_mentor_subgraph")
+        self.assertIn("switched", graph_notice.lower())
+        self.assertEqual(
+            prepared_graph["edges"],
+            [
+                {
+                    "type": "collaboration",
+                    "source": {"type": "mentor", "id": "m_1"},
+                    "target": {"type": "mentor", "id": "m_2"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+                {
+                    "type": "shared_interest",
+                    "source": {"type": "student", "id": "s_target"},
+                    "target": {"type": "student", "id": "s_peer"},
+                    "weight": 0.6,
+                    "metadata": {},
+                },
+                {
+                    "type": "skill_complementarity",
+                    "source": {"type": "student", "id": "s_peer"},
+                    "target": {"type": "student", "id": "s_target"},
+                    "weight": 0.25,
+                    "metadata": {},
+                },
+                {
+                    "type": "advising",
+                    "source": {"type": "mentor", "id": "m_1"},
+                    "target": {"type": "student", "id": "s_peer"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+            ],
+        )
+
+    def test_prepare_graph_for_ranking_preserves_project_ledges_for_target_student(self):
+        graph = {
+            "nodes": {
+                "mentor": [{"mentor_id": "m_1"}, {"mentor_id": "m_2"}],
+                "student": [{"student_id": "s_target"}],
+                "project": [{"project_id": "p_1"}, {"project_id": "p_2"}],
+            },
+            "edges": [
+                {
+                    "type": "collaboration",
+                    "source": {"type": "mentor", "id": "m_1"},
+                    "target": {"type": "mentor", "id": "m_2"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+                {
+                    "type": "project_participation",
+                    "source": {"type": "student", "id": "s_target"},
+                    "target": {"type": "project", "id": "p_1"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+                {
+                    "type": "project_leads",
+                    "source": {"type": "mentor", "id": "m_1"},
+                    "target": {"type": "project", "id": "p_1"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+                {
+                    "type": "project_leads",
+                    "source": {"type": "mentor", "id": "m_2"},
+                    "target": {"type": "project", "id": "p_2"},
+                    "weight": 1.0,
+                    "metadata": {},
+                },
+            ],
+        }
+
+        prepared_graph, graph_status, graph_notice = prepare_graph_for_ranking(
+            graph,
+            max_full_graph_edges=2,
+            student_id="s_target",
+        )
+
+        self.assertEqual(graph_status, "loaded_lightweight_mentor_subgraph")
+        self.assertIn("student-local trust evidence", graph_notice.lower())
+        self.assertIn(
+            {
+                "type": "project_participation",
+                "source": {"type": "student", "id": "s_target"},
+                "target": {"type": "project", "id": "p_1"},
+                "weight": 1.0,
+                "metadata": {},
+            },
+            prepared_graph["edges"],
+        )
+        self.assertIn(
+            {
+                "type": "project_leads",
+                "source": {"type": "mentor", "id": "m_1"},
+                "target": {"type": "project", "id": "p_1"},
+                "weight": 1.0,
+                "metadata": {},
+            },
+            prepared_graph["edges"],
+        )
+        self.assertNotIn(
+            {
+                "type": "project_participation",
+                "source": {"type": "student", "id": "s_target"},
+                "target": {"type": "project", "id": "p_2"},
+                "weight": 1.0,
+                "metadata": {},
+            },
+            prepared_graph["edges"],
+        )

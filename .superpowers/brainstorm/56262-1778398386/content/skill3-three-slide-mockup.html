@@ -1,0 +1,349 @@
+<style>
+  .deck {
+    display: grid;
+    gap: 28px;
+  }
+  .slide {
+    background: white;
+    border: 6px solid #355998;
+    border-radius: 10px;
+    min-height: 760px;
+    position: relative;
+    padding: 40px 54px 84px 54px;
+    box-sizing: border-box;
+  }
+  .slide-title {
+    font-size: 46px;
+    line-height: 1.1;
+    color: #355998;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+  .footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 48px;
+    background: #355998;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    box-sizing: border-box;
+    font-size: 17px;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .section-label {
+    font-size: 32px;
+    font-weight: 500;
+    margin: 18px 0 8px;
+    color: #111;
+  }
+  .plain-list {
+    margin: 0;
+    padding-left: 28px;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #222;
+  }
+  .plain-text {
+    font-size: 24px;
+    line-height: 1.45;
+    color: #222;
+  }
+  .io-flow {
+    margin-top: 34px;
+    display: grid;
+    gap: 16px;
+  }
+  .io-box {
+    border-radius: 18px;
+    padding: 18px 20px;
+    font-size: 24px;
+    line-height: 1.35;
+    border: 3px solid #c9d6ee;
+    background: #f5f8ff;
+  }
+  .arrow {
+    text-align: center;
+    font-size: 34px;
+    color: #355998;
+    font-weight: 700;
+  }
+  .takeaway {
+    margin-top: 28px;
+    padding: 16px 20px;
+    border-left: 7px solid #355998;
+    background: #eef4ff;
+    font-size: 24px;
+    line-height: 1.4;
+    color: #21324f;
+  }
+  .pipeline {
+    display: grid;
+    grid-template-columns: 1fr auto 1.15fr;
+    gap: 18px;
+    align-items: center;
+    margin: 22px 0 26px;
+  }
+  .stage {
+    border-radius: 20px;
+    padding: 22px 22px;
+    min-height: 235px;
+    box-sizing: border-box;
+  }
+  .stage.topic {
+    background: #f4f7fe;
+    border: 3px solid #cfdaf0;
+  }
+  .stage.graph {
+    background: #f6fbf3;
+    border: 3px solid #d3e7cb;
+  }
+  .stage h3 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    color: #355998;
+    font-weight: 600;
+  }
+  .stage ul {
+    margin: 0;
+    padding-left: 24px;
+    font-size: 22px;
+    line-height: 1.5;
+  }
+  .big-arrow {
+    font-size: 50px;
+    color: #355998;
+    font-weight: 700;
+  }
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+  .mini-card {
+    border-radius: 16px;
+    padding: 16px;
+    background: #fff;
+    border: 2px solid #dbe3f2;
+  }
+  .mini-card .k {
+    font-size: 21px;
+    font-weight: 700;
+    color: #355998;
+    margin-bottom: 8px;
+  }
+  .mini-card .v {
+    font-size: 18px;
+    line-height: 1.4;
+    color: #333;
+  }
+  .trust-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .trust {
+    border-radius: 16px;
+    padding: 16px 18px;
+    min-height: 122px;
+  }
+  .trust h4 {
+    margin: 0 0 8px;
+    font-size: 24px;
+  }
+  .trust p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+  .high { background: #eef6ec; border: 2px solid #b8d8ae; }
+  .medium { background: #eef4ff; border: 2px solid #bdd1f0; }
+  .low { background: #fff7e9; border: 2px solid #f0d091; }
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: start;
+  }
+  .highlight-box {
+    border-radius: 18px;
+    padding: 20px;
+    border: 3px solid #d9e2f2;
+    background: #fbfcff;
+  }
+  .highlight-box h3 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    color: #355998;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .chip {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: #eef4ff;
+    border: 2px solid #cad9f3;
+    font-size: 19px;
+    color: #24416f;
+  }
+  .three-points {
+    display: grid;
+    gap: 14px;
+  }
+  .point {
+    border-radius: 16px;
+    padding: 16px 18px;
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  .point strong {
+    color: #355998;
+  }
+</style>
+
+<h2>Skill 3 Three-Slide Mockup</h2>
+<p class="subtitle">This is a webpage-style preview of how your 3 PPT pages can look using the same clean course template.</p>
+
+<div class="deck">
+  <section class="slide">
+    <div class="slide-title">Skill 3: Mentor Discovery Skill</div>
+    <div class="two-col">
+      <div>
+        <div class="section-label">Function:</div>
+        <div class="plain-text">Retrieve Top-K mentor candidates for a student based on topic relevance and graph-aware signals.</div>
+
+        <div class="section-label">Input:</div>
+        <ul class="plain-list">
+          <li>Student profile from Skill 1</li>
+          <li>Mentor profiles from Skill 2</li>
+          <li>Academic graph from Skill 2</li>
+        </ul>
+
+        <div class="section-label">Output:</div>
+        <ul class="plain-list">
+          <li>Ranked mentor candidate list</li>
+          <li>Topic score + graph score</li>
+          <li>Explanation-ready fields for later skills</li>
+        </ul>
+      </div>
+
+      <div class="io-flow">
+        <div class="io-box"><strong>Student Profile</strong><br>major, skills, interests, experience</div>
+        <div class="io-box"><strong>Academic Graph</strong><br>mentors, projects, topics, students, edges</div>
+        <div class="arrow">↓</div>
+        <div class="io-box" style="background:#355998;color:white;border-color:#355998"><strong>Skill 3</strong><br>Mentor Discovery</div>
+        <div class="arrow">↓</div>
+        <div class="io-box"><strong>Mentor Candidates</strong><br>ranked list with scores and explanations</div>
+      </div>
+    </div>
+
+    <div class="takeaway">Baseline topic matching alone is not enough for trustworthy mentor recommendation.</div>
+    <div class="footer"><span>HKUST(GZ)</span><span>May 11, 2026</span><span>8</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-title">Skill 3: Core Upgrade</div>
+    <div class="plain-text" style="font-size:26px;margin-bottom:8px">
+      We upgrade a normal mentor retriever into a <strong>topic recall + trust-aware graph reranking</strong> pipeline.
+    </div>
+
+    <div class="pipeline">
+      <div class="stage topic">
+        <h3>Stage 1: Topic Recall</h3>
+        <ul>
+          <li>Build student representation from major, skills, interests, and experience</li>
+          <li>Score mentor-topic relevance</li>
+          <li>Retrieve a candidate pool</li>
+        </ul>
+      </div>
+
+      <div class="big-arrow">→</div>
+
+      <div class="stage graph">
+        <h3>Stage 2: Trust-Aware Graph Reranking</h3>
+        <div class="mini-grid">
+          <div class="mini-card">
+            <div class="k">Personalized Proximity</div>
+            <div class="v">Student-specific closeness to each mentor</div>
+          </div>
+          <div class="mini-card">
+            <div class="k">Meta-path Evidence</div>
+            <div class="v">Project, interest, complementarity, and advising paths</div>
+          </div>
+          <div class="mini-card">
+            <div class="k">Graph Confidence</div>
+            <div class="v">Downweight weak or noisy graph evidence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:8px">Trust Tiers:</div>
+    <div class="trust-row">
+      <div class="trust high">
+        <h4>High Trust</h4>
+        <p>project participation<br>project leads<br>advising</p>
+      </div>
+      <div class="trust medium">
+        <h4>Medium Trust</h4>
+        <p>shared interest<br>topic similarity<br>collaboration</p>
+      </div>
+      <div class="trust low">
+        <h4>Low Trust</h4>
+        <p>skill complementarity</p>
+      </div>
+    </div>
+
+    <div class="takeaway">Topic relevance remains primary, while graph evidence improves personalization, trustworthiness, and explainability.</div>
+    <div class="footer"><span>HKUST(GZ)</span><span>May 11, 2026</span><span>9</span></div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-title">Skill 3: Why It Stands Out</div>
+
+    <div class="highlight-grid">
+      <div class="highlight-box">
+        <h3>Example Output Fields</h3>
+        <div class="chips">
+          <div class="chip">personalized_proximity</div>
+          <div class="chip">graph_confidence</div>
+          <div class="chip">meta_path_breakdown</div>
+          <div class="chip">top_evidence_paths</div>
+          <div class="chip">reasons</div>
+        </div>
+        <div class="takeaway" style="margin-top:18px">
+          Output is not only a ranking list, but also explanation-ready evidence for later skills and final reporting.
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h3>Key Highlights</h3>
+        <div class="three-points">
+          <div class="point" style="background:#eef4ff;border:2px solid #cad9f3"><strong>Explainable</strong><br>Path-level evidence and human-readable reasons</div>
+          <div class="point" style="background:#f2faef;border:2px solid #c9e1bf"><strong>Trust-Aware</strong><br>Weak graph signals are downweighted instead of treated equally</div>
+          <div class="point" style="background:#fff8eb;border:2px solid #efd39d"><strong>Scalable</strong><br>Large graphs can switch to a lightweight subgraph fallback</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway" style="margin-top:22px">
+      Engineering highlight: even on a graph with more than 1.25M edges, Skill 3 can preserve student-local trust evidence through lightweight graph fallback.
+    </div>
+
+    <div class="footer"><span>HKUST(GZ)</span><span>May 11, 2026</span><span>10</span></div>
+  </section>
+</div>
