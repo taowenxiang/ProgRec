@@ -28,4 +28,7 @@ env/
 .vscode/
 .idea/
 
+# Local agent temp directories
+.progrec_agent_tmp/
+
 skill2_handoff/outputs/academic_graph.json

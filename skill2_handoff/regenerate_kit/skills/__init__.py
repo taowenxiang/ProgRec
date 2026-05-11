@@ -1,1 +1,1 @@
-"""StuRec course skills package."""
+"""ProgRec course skills package."""

@@ -2,7 +2,7 @@
 
 **Author:** Yueran (Skill 1)
 **Date:** 2026-05-07
-**For:** StuRec Agent teammates (Skill 2, 3, 4, 5)
+**For:** ProgRec Agent teammates (Skill 2, 3, 4, 5)
 
 ---
 

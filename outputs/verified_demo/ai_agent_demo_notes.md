@@ -1,4 +1,4 @@
-# StuRec AI Agent Demo Notes
+# ProgRec AI Agent Demo Notes
 
 ## Suggested Live Demo
 
@@ -6,7 +6,7 @@
 
 ```bash
 export OPENAI_API_KEY=your_key_here
-python3 -m sturec_agent.repl
+python3 -m progrec_agent.repl
 ```
 
 2. Enter an initial request:
@@ -37,5 +37,5 @@ Recommend again, but care more about teammate complementarity than mentor presti
 
 ## Demo Framing
 
-Use this demo to emphasize that StuRec is no longer a fixed recommendation pipeline.
+Use this demo to emphasize that ProgRec is no longer a fixed recommendation pipeline.
 It is now an AI agent that plans over the existing five SNA skills, adapts its strategy, and explains its decisions.

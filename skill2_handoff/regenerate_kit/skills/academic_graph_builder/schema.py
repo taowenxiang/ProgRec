@@ -1,4 +1,4 @@
-"""Structured graph payloads for StuRec Skill 2 (Academic Graph Builder)."""
+"""Structured graph payloads for ProgRec Skill 2 (Academic Graph Builder)."""
 
 from __future__ import annotations
 

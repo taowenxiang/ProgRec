@@ -86,7 +86,7 @@ pip install -r requirements.txt
 python3 scripts/build_graph.py
 ```
 
-### B — Integrated Skill 1 students + aligned embeddings (recommended for StuRec)
+### B — Integrated Skill 1 students + aligned embeddings (recommended for ProgRec)
 
 ```bash
 python3 scripts/build_graph.py \

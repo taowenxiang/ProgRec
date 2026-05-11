@@ -41,12 +41,12 @@ Run tests:
 python3 -m unittest discover -s tests -v
 ```
 
-## StuRec Agent CLI
+## ProgRec Agent CLI
 
 Run the interactive CLI agent from the repository root:
 
 ```bash
-python3 -m sturec_agent.repl
+python3 -m progrec_agent.repl
 ```
 
 The first version supports two recommendation entry modes:
@@ -65,9 +65,9 @@ Supported commands:
 
 Manual profile runs are labeled `custom_profile_mode`. They still use the existing Skill 2-5 resources, but the student is treated as a temporary profile instead of a graph-native student node.
 
-## StuRec AI Agent CLI
+## ProgRec AI Agent CLI
 
-The repository now also includes an AI-agent upgrade path inside `sturec_agent/`.
+The repository now also includes an AI-agent upgrade path inside `progrec_agent/`.
 This version keeps the existing multi-skill recommendation core, but adds:
 
 - natural-language user input
@@ -79,7 +79,7 @@ Set an API key before running if you want LLM-backed profile drafting:
 
 ```bash
 export OPENAI_API_KEY=your_key_here
-python3 -m sturec_agent.repl
+python3 -m progrec_agent.repl
 ```
 
 Without an API key, the CLI still starts and falls back to a lightweight local profile-drafting path.
@@ -104,7 +104,7 @@ See [`AGENTS.md`](AGENTS.md) for the full multi-skill Agent contract, stable ski
 Quick start (non-interactive pipeline):
 
 ```bash
-python3 sturec_agent/run_agent.py \
+python3 progrec_agent/run_agent.py \
   --mode demo \
   --output outputs/final_recommendation_demo.json
 ```
@@ -116,13 +116,13 @@ Use `--student-id <id>` when the default (first id in the mode’s student bundl
 Documented example student and frozen outputs: [`outputs/verified_demo/README.md`](outputs/verified_demo/README.md).
 
 ```bash
-python3 sturec_agent/run_agent.py \
+python3 progrec_agent/run_agent.py \
   --mode graph \
   --student-id jamie-taylor-00008 \
   --top-k 10 \
   --output outputs/final_recommendation_graph.json \
   --artifacts-dir outputs/run_artifacts_graph
-python3 sturec_agent/inspect_output.py --output outputs/final_recommendation_graph.json
+python3 progrec_agent/inspect_output.py --output outputs/final_recommendation_graph.json
 ```
 
 ## Notes

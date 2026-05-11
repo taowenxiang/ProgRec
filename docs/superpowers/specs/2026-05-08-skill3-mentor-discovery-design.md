@@ -1,12 +1,12 @@
 # Skill 3 Mentor Discovery Design
 
-> For agentic workers: this document defines the approved design for Skill 3 in the StuRec final project. Implementation should follow this spec before writing detailed task plans.
+> For agentic workers: this document defines the approved design for Skill 3 in the ProgRec final project. Implementation should follow this spec before writing detailed task plans.
 
 **Date:** 2026-05-08
 
 **Owner:** Skill 3
 
-**Project Context:** StuRec is a course project agent for undergraduate research recommendation. Skill 3 is responsible for retrieving and scoring mentor candidates for a given student profile.
+**Project Context:** ProgRec is a course project agent for undergraduate research recommendation. Skill 3 is responsible for retrieving and scoring mentor candidates for a given student profile.
 
 ---
 
@@ -42,7 +42,7 @@ Skill 3 is responsible for mentor candidate generation only. It does not produce
 - Teammate recommendation
 - Final whole-system reranking across mentors, projects, and teammates
 - UI/frontend work
-- Conversational orchestration logic for the final StuRec agent
+- Conversational orchestration logic for the final ProgRec agent
 
 ---
 

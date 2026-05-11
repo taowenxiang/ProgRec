@@ -13,7 +13,7 @@ It owns the mentor stage only:
 
 - Input: one standardized student profile plus Skill 2 student, mentor, and graph artifacts
 - Output: JSON with `student_id`, `graph_status`, `data_sources`, and `mentor_candidates[]`
-- Downstream consumers: `skill4_handoff`, `sturec_agent`, or manual inspection
+- Downstream consumers: `skill4_handoff`, `progrec_agent`, or manual inspection
 
 The ranking pipeline has two stages:
 
@@ -27,7 +27,7 @@ Skill 3 does not recommend projects or teammates, and it does not perform final 
 Use Skill 3 when:
 
 - you need mentor candidates for a single `student_id`
-- you want a JSON artifact for Skill 4 or the StuRec agent
+- you want a JSON artifact for Skill 4 or the ProgRec agent
 - you need to compare default bundle behavior against explicit Skill 2 graph-mode paths
 - you are debugging why mentor results changed after a graph rebuild
 - you want lightweight offline evaluation for graph-aware reranking
@@ -142,7 +142,7 @@ python3 skill3_mentor_discovery/run_skill3.py \
 
 ### Graph-aligned explicit run
 
-Use this when you want Skill 3 to consume the same processed bundle as graph-mode `sturec_agent/run_agent.py`.
+Use this when you want Skill 3 to consume the same processed bundle as graph-mode `progrec_agent/run_agent.py`.
 
 ```bash
 python3 skill3_mentor_discovery/run_skill3.py \

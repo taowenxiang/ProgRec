@@ -1,12 +1,12 @@
 # Skill 3 Trust-Aware Graph Reranker Design
 
-> For agentic workers: this document defines the approved upgrade design for Skill 3 in the StuRec final project. Implementation should follow this spec before writing the detailed implementation plan.
+> For agentic workers: this document defines the approved upgrade design for Skill 3 in the ProgRec final project. Implementation should follow this spec before writing the detailed implementation plan.
 
 **Date:** 2026-05-09
 
 **Owner:** Skill 3
 
-**Project Context:** StuRec is a course project agent for undergraduate research recommendation. Skill 3 is responsible for retrieving and scoring mentor candidates for a given student profile. This design upgrades Skill 3 from a baseline graph-enhanced ranker into a trust-aware, graph-centric mentor recommender with stronger social-network-analysis depth and clearer trustworthiness analysis.
+**Project Context:** ProgRec is a course project agent for undergraduate research recommendation. Skill 3 is responsible for retrieving and scoring mentor candidates for a given student profile. This design upgrades Skill 3 from a baseline graph-enhanced ranker into a trust-aware, graph-centric mentor recommender with stronger social-network-analysis depth and clearer trustworthiness analysis.
 
 ---
 

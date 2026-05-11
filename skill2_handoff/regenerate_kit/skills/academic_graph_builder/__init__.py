@@ -1,4 +1,4 @@
-"""Academic Graph Builder Skill (StuRec Skill 2)."""
+"""Academic Graph Builder Skill (ProgRec Skill 2)."""
 
 from .builder import (
     build_default_graph,

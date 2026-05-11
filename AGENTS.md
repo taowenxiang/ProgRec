@@ -1,6 +1,6 @@
-# StuRec Agent — Multi-Skill Architecture
+# ProgRec Agent — Multi-Skill Architecture
 
-This document describes how the **StuRec** recommendation stack is organized as separate skills, how they chain together, and how to run and debug the pipeline. It reflects the **current repository layout** (handoff folders, CLI entrypoints, and the `sturec_agent/` package).
+This document describes how the **ProgRec** recommendation stack is organized as separate skills, how they chain together, and how to run and debug the pipeline. It reflects the **current repository layout** (handoff folders, CLI entrypoints, and the `progrec_agent/` package).
 
 For a short repo map, see also the root `README.md`.
 
@@ -11,7 +11,7 @@ For a short repo map, see also the root `README.md`.
 The end-to-end flow is modeled as one virtual agent root and five stable skill identifiers:
 
 ```
-/sturec-agent
+/progrec-agent
   → /student-profiling
   → /academic-graph
   → /mentor-discovery
@@ -23,23 +23,23 @@ In practice, **Skills 1 and 2** are usually **artifact producers** (batch jobs o
 
 ---
 
-## Existing `sturec_agent/` (interactive prototype)
+## Existing `progrec_agent/` (interactive prototype)
 
 The repo already includes a small Python package that orchestrates Skills 3–5 and exposes an interactive CLI:
 
 | Module | Role |
 |--------|------|
-| `sturec_agent/orchestrator.py` | `StuRecOrchestrator`: loads a student profile, runs Skill 3 (in-process), Skill 4 (dataset or custom mode), Skill 5 (subprocess to `joint_ranker.py`), returns a combined result dict. |
-| `sturec_agent/repl.py` | Interactive REPL (`python3 -m sturec_agent.repl`): commands such as `recommend`, `show mentor`, `show profile`, `help`, `exit`. |
-| `sturec_agent/session.py` | Session state for the REPL (current profile, mode, cached results). |
-| `sturec_agent/render.py` | Terminal-friendly formatting of recommendations. |
-| `sturec_agent/adapters/skill1_adapter.py` | Normalizes **manual** CLI profile fields into the Skill-1-shaped dict used downstream (`custom_profile_mode`). |
-| `sturec_agent/adapters/skill2_adapter.py` | Resolves which Skill 2 **bundle** exists on disk (`outputs/` vs `regenerate_kit/data/processed/` vs `data/processed/`). |
-| `sturec_agent/adapters/skill3_adapter.py` | Calls Skill 3 ranking APIs in-process (`load_standardized_resources`, `rank_mentors_for_student`). Optional explicit Skill 2 paths (`skill2_graph`, `skill2_students`, `skill2_mentors`) match the graph-mode `ResourceConfig` bundle. |
-| `sturec_agent/adapters/skill4_adapter.py` | Runs Skill 4 pipeline (`run_pipeline_from_cli_config` or `discover_projects_and_teammates` for custom profiles). |
-| `sturec_agent/adapters/skill5_adapter.py` | Runs `skill5_student-recommendation-ranker/scripts/joint_ranker.py` as a subprocess with `--skill3`, `--skill4`, `--output`, `--student-id`, `--students`. |
+| `progrec_agent/orchestrator.py` | `ProgRecOrchestrator`: loads a student profile, runs Skill 3 (in-process), Skill 4 (dataset or custom mode), Skill 5 (subprocess to `joint_ranker.py`), returns a combined result dict. |
+| `progrec_agent/repl.py` | Interactive REPL (`python3 -m progrec_agent.repl`): commands such as `recommend`, `show mentor`, `show profile`, `help`, `exit`. |
+| `progrec_agent/session.py` | Session state for the REPL (current profile, mode, cached results). |
+| `progrec_agent/render.py` | Terminal-friendly formatting of recommendations. |
+| `progrec_agent/adapters/skill1_adapter.py` | Normalizes **manual** CLI profile fields into the Skill-1-shaped dict used downstream (`custom_profile_mode`). |
+| `progrec_agent/adapters/skill2_adapter.py` | Resolves which Skill 2 **bundle** exists on disk (`outputs/` vs `regenerate_kit/data/processed/` vs `data/processed/`). |
+| `progrec_agent/adapters/skill3_adapter.py` | Calls Skill 3 ranking APIs in-process (`load_standardized_resources`, `rank_mentors_for_student`). Optional explicit Skill 2 paths (`skill2_graph`, `skill2_students`, `skill2_mentors`) match the graph-mode `ResourceConfig` bundle. |
+| `progrec_agent/adapters/skill4_adapter.py` | Runs Skill 4 pipeline (`run_pipeline_from_cli_config` or `discover_projects_and_teammates` for custom profiles). |
+| `progrec_agent/adapters/skill5_adapter.py` | Runs `skill5_student-recommendation-ranker/scripts/joint_ranker.py` as a subprocess with `--skill3`, `--skill4`, `--output`, `--student-id`, `--students`. |
 
-**Note:** The REPL remains the interactive entrypoint; batch runs use `sturec_agent/run_agent.py` (see Phase 3 below).
+**Note:** The REPL remains the interactive entrypoint; batch runs use `progrec_agent/run_agent.py` (see Phase 3 below).
 
 ---
 
@@ -47,12 +47,12 @@ The repo already includes a small Python package that orchestrates Skills 3–5 
 
 | Module | Role |
 |--------|------|
-| `sturec_agent/config.py` | `ResourceConfig` + `resolve_repo_root()` + `resolve_resource_config(mode, repo_root)` — central **demo** vs **graph** paths. Graph mode **raises** if `academic_graph.json` is missing, invalid JSON, has no `nodes.project`, or has no `project_leads` edges (**no silent fallback** to demo). |
-| `sturec_agent/skill_registry.py` | `SKILL_REGISTRY` metadata for the five stable `/…` identifiers; `get_skill()`, `list_skills()`. |
-| `sturec_agent/schemas.py` | Lightweight JSON checks: `validate_student_profiles`, `validate_skill3_output`, `validate_skill4_output`, `validate_skill5_output`, `get_skill3_student_id`, `get_skill4_student_id`, `assert_agent_student_alignment`, `assert_same_student_id` (delegates to alignment; used by `orchestrator` before Skill 5 and by `run_agent` post-run). |
-| `sturec_agent/run_agent.py` | Non-interactive CLI: `--mode {demo,graph}`, `--list-students`, `--skip-skill5`, `--verbose`, `--artifacts-dir`, etc. Paths come from `config`. **Demo** mode: Skill 3 uses default loaders (`skill2_handoff/outputs/` bundles). **Graph** mode: Skill 3 receives the same `ResourceConfig` graph + student + mentor paths as Skill 4 (regenerated processed bundle); `run_agent` warns if Skill 3’s `data_sources` disagree with the bundle. |
+| `progrec_agent/config.py` | `ResourceConfig` + `resolve_repo_root()` + `resolve_resource_config(mode, repo_root)` — central **demo** vs **graph** paths. Graph mode **raises** if `academic_graph.json` is missing, invalid JSON, has no `nodes.project`, or has no `project_leads` edges (**no silent fallback** to demo). |
+| `progrec_agent/skill_registry.py` | `SKILL_REGISTRY` metadata for the five stable `/…` identifiers; `get_skill()`, `list_skills()`. |
+| `progrec_agent/schemas.py` | Lightweight JSON checks: `validate_student_profiles`, `validate_skill3_output`, `validate_skill4_output`, `validate_skill5_output`, `get_skill3_student_id`, `get_skill4_student_id`, `assert_agent_student_alignment`, `assert_same_student_id` (delegates to alignment; used by `orchestrator` before Skill 5 and by `run_agent` post-run). |
+| `progrec_agent/run_agent.py` | Non-interactive CLI: `--mode {demo,graph}`, `--list-students`, `--skip-skill5`, `--verbose`, `--artifacts-dir`, etc. Paths come from `config`. **Demo** mode: Skill 3 uses default loaders (`skill2_handoff/outputs/` bundles). **Graph** mode: Skill 3 receives the same `ResourceConfig` graph + student + mentor paths as Skill 4 (regenerated processed bundle); `run_agent` warns if Skill 3’s `data_sources` disagree with the bundle. |
 
-**Tests:** `python3 -m unittest discover -s sturec_agent/tests -v` (stdlib only). `skill4_handoff/tests/` still use **pytest**-style tests; run `pytest skill4_handoff/tests -q` when pytest is installed.
+**Tests:** `python3 -m unittest discover -s progrec_agent/tests -v` (stdlib only). `skill4_handoff/tests/` still use **pytest**-style tests; run `pytest skill4_handoff/tests -q` when pytest is installed.
 
 ---
 
@@ -64,7 +64,7 @@ The repo already includes a small Python package that orchestrates Skills 3–5 
 | `/academic-graph` | Skill 2 — `skill2_handoff/` (outputs + `regenerate_kit/`) |
 | `/mentor-discovery` | Skill 3 — `skill3_mentor_discovery/` |
 | `/project-teammate-discovery` | Skill 4 — `skill4_handoff/` |
-| `/social-ranking` | Skill 5 — canonical tree `skill5_student-recommendation-ranker/`; entrypoint `skill5_student-recommendation-ranker/scripts/joint_ranker.py` (used by `sturec_agent`). |
+| `/social-ranking` | Skill 5 — canonical tree `skill5_student-recommendation-ranker/`; entrypoint `skill5_student-recommendation-ranker/scripts/joint_ranker.py` (used by `progrec_agent`). |
 
 ---
 
@@ -121,10 +121,10 @@ The repo already includes a small Python package that orchestrates Skills 3–5 
 - **Function:** Joint re-scoring and MMR-style diversity over **mentors**, **projects**, and **teammates** using Skill 3 + Skill 4 JSON plus optional Skill 1 JSONL for richer profiles.
 - **Input:** `--skill3` path, `--skill4` path, optional `--students` (Skill 1 JSONL), `--student-id`, `--top-k`, optional `--weights`, `--format`.
 - **Output:** `final_recommendation.json` (or path from `--output`) with ranked lists and per-dimension scores (see `skill5_student-recommendation-ranker/SKILL.md`).
-- **Entrypoint:** `python3 skill5_student-recommendation-ranker/scripts/joint_ranker.py …` (same script path invoked from `sturec_agent/adapters/skill5_adapter.py`).
+- **Entrypoint:** `python3 skill5_student-recommendation-ranker/scripts/joint_ranker.py …` (same script path invoked from `progrec_agent/adapters/skill5_adapter.py`).
 - **Trigger examples:**  
   `python3 skill5_student-recommendation-ranker/scripts/joint_ranker.py --skill3 /tmp/skill3.json --skill4 /tmp/skill4.json --output /tmp/final.json --student-id <id> --top-k 10`
-- **Notes / limitations:** The ranker script may **not fail loudly** if Skill 3’s `student_id` and Skill 4’s `target_student_id` disagree. **`sturec_agent` enforces a hard alignment check** (`assert_agent_student_alignment` in `schemas.py`, called from `orchestrator.py` after Skill 4 writes disk artifacts and before Skill 5, including when `--skip-skill5` is set) so mismatches raise `ValueError` and Skill 5 is never invoked with inconsistent inputs.
+- **Notes / limitations:** The ranker script may **not fail loudly** if Skill 3’s `student_id` and Skill 4’s `target_student_id` disagree. **`progrec_agent` enforces a hard alignment check** (`assert_agent_student_alignment` in `schemas.py`, called from `orchestrator.py` after Skill 4 writes disk artifacts and before Skill 5, including when `--skip-skill5` is set) so mismatches raise `ValueError` and Skill 5 is never invoked with inconsistent inputs.
 
 ---
 
@@ -155,9 +155,9 @@ Skills 1–2 supply **artifacts**; they do not replace 3–5’s ranking roles.
 
 ## `student_id` alignment (risks)
 
-1. **Do not mix two different `student_profiles_standard.json` files** across Skill 3, Skill 4, and Skill 5 for the same run. In **`sturec_agent/run_agent.py --mode graph`**, Skill 3 and Skill 4 both use the **`ResourceConfig`** processed bundle (`regenerate_kit/data/processed/`). For manual runs, pass the same `--skill2-students` (and graph/mentors) to Skill 3 and Skill 4, or rely on Skill 3 defaults only when you intentionally use the `outputs/` cohort.
+1. **Do not mix two different `student_profiles_standard.json` files** across Skill 3, Skill 4, and Skill 5 for the same run. In **`progrec_agent/run_agent.py --mode graph`**, Skill 3 and Skill 4 both use the **`ResourceConfig`** processed bundle (`regenerate_kit/data/processed/`). For manual runs, pass the same `--skill2-students` (and graph/mentors) to Skill 3 and Skill 4, or rely on Skill 3 defaults only when you intentionally use the `outputs/` cohort.
 2. **Use one `student_id` namespace end-to-end:** the same string must exist in the student bundle, match Skill 3’s `--student-id`, match Skill 4’s `--target-student-id`, and match Skill 5’s `--student-id` (or embedded ids in the JSON).
-3. **Agent hard gate (not a warning):** before Skill 5, `StuRecOrchestrator` requires the selected `student_id`, Skill 3’s on-disk `student_id` (else `target_student_id`), and Skill 4’s `target_student_id` to **all match**. Any mismatch is a **`ValueError`** with paths and the three id strings in the message; Skill 5 is **not** called. This prevents the joint ranker from silently mixing mentors/projects for different students.
+3. **Agent hard gate (not a warning):** before Skill 5, `ProgRecOrchestrator` requires the selected `student_id`, Skill 3’s on-disk `student_id` (else `target_student_id`), and Skill 4’s `target_student_id` to **all match**. Any mismatch is a **`ValueError`** with paths and the three id strings in the message; Skill 5 is **not** called. This prevents the joint ranker from silently mixing mentors/projects for different students.
 
 ---
 
@@ -179,7 +179,7 @@ Until `academic_graph.json` exists, `run_agent --mode graph` fails at config res
 |-------|------|----------|
 | **Skill 3** | No usable graph or rebuild fails | Falls back to **topic-only** (or similar) ranking; payload includes `graph_status` / `graph_notice` explaining the path (see `run_skill3.py` + `loaders.py`). |
 | **Skill 4** | No `academic_graph.json` or mentor–project edges missing | Uses **mock projects** and/or mentor lists from `mentor_profiles_standard.json` or `data/mock_mentor_candidates.json` as documented in `Skill4_README.md`. |
-| **Skill 5** | Skill 3 vs Skill 4 `student_id` mismatch | **StuRec orchestrator blocks the run** before invoking `joint_ranker.py` (`assert_agent_student_alignment`). The ranker itself may still be permissive if invoked standalone without that gate. |
+| **Skill 5** | Skill 3 vs Skill 4 `student_id` mismatch | **ProgRec orchestrator blocks the run** before invoking `joint_ranker.py` (`assert_agent_student_alignment`). The ranker itself may still be permissive if invoked standalone without that gate. |
 
 ---
 
@@ -224,10 +224,10 @@ python3 skill5_student-recommendation-ranker/scripts/joint_ranker.py \
   --students skill1_handoff/student_profiles_normalized.jsonl
 ```
 
-**Interactive StuRec agent (current repo):**
+**Interactive ProgRec agent (current repo):**
 
 ```bash
-python3 -m sturec_agent.repl
+python3 -m progrec_agent.repl
 ```
 
 **Agent batch runner (`run_agent.py`) — Demo mode**
@@ -235,7 +235,7 @@ python3 -m sturec_agent.repl
 Uses `skill2_handoff/outputs/` student + mentor bundles, **`skill4_handoff/data/mock_academic_graph.json`** as the Skill 4 graph, and `skill1_handoff/student_profiles_normalized.jsonl`. Omit `--student-id` to default to the **first** student in the outputs bundle.
 
 ```bash
-python3 sturec_agent/run_agent.py \
+python3 progrec_agent/run_agent.py \
   --mode demo \
   --student-id <valid_demo_student_id> \
   --top-k 10 \
@@ -248,7 +248,7 @@ python3 sturec_agent/run_agent.py \
 Requires a prior Skill 2 build: **`skill2_handoff/regenerate_kit/data/processed/academic_graph.json`** (plus matching `student_profiles_standard.json` and `mentor_profiles_standard.json` in the same folder). Graph mode **does not** silently fall back to demo assets if the graph is missing or structurally invalid. Skill 3 and Skill 4 both consume this same processed triple; after a successful run, compare `skill3_result.data_sources` in artifacts (or stderr warnings) if anything looks misaligned.
 
 ```bash
-python3 sturec_agent/run_agent.py \
+python3 progrec_agent/run_agent.py \
   --mode graph \
   --student-id <valid_graph_student_id> \
   --top-k 10 \
@@ -263,7 +263,7 @@ The repo includes **documented** graph-mode parameters and example finals under 
 **Recommended reproduce command** (from repository root; requires a built processed bundle):
 
 ```bash
-python3 sturec_agent/run_agent.py \
+python3 progrec_agent/run_agent.py \
   --mode graph \
   --student-id jamie-taylor-00008 \
   --top-k 10 \
@@ -279,12 +279,12 @@ python3 sturec_agent/run_agent.py \
 | `skill4.json` | Skill 4 expansion: projects/teammates per mentor + `data_sources` (e.g. `project_source`). |
 | `skill5.json` | Same body as `--output` when Skill 5 runs: joint ranker result with `summary` and `recommendations`. |
 
-**Before Skill 5**, `StuRecOrchestrator` calls **`assert_agent_student_alignment`**: the selected `student_id`, Skill 3’s on-disk `student_id` (or `target_student_id`), and Skill 4’s `target_student_id` must match; otherwise a **`ValueError`** is raised and **`joint_ranker.py` is not invoked** (this is a hard error, not a warning).
+**Before Skill 5**, `ProgRecOrchestrator` calls **`assert_agent_student_alignment`**: the selected `student_id`, Skill 3’s on-disk `student_id` (or `target_student_id`), and Skill 4’s `target_student_id` must match; otherwise a **`ValueError`** is raised and **`joint_ranker.py` is not invoked** (this is a hard error, not a warning).
 
 **Inspect a final JSON** (read-only):
 
 ```bash
-python3 sturec_agent/inspect_output.py --output outputs/final_recommendation_graph.json
+python3 progrec_agent/inspect_output.py --output outputs/final_recommendation_graph.json
 ```
 
 **Other useful flags**
@@ -341,13 +341,13 @@ Check `data_sources` for which graph and mentor candidate paths were used, and s
 ### 5. REPL / orchestration issues
 
 - Run unit tests: `python3 -m unittest discover -s tests -v` (see root `README.md`).
-- Trace which bundle `sturec_agent/adapters/skill2_adapter.py` picks (`outputs_bundle` vs `regenerate_bundle`).
+- Trace which bundle `progrec_agent/adapters/skill2_adapter.py` picks (`outputs_bundle` vs `regenerate_bundle`).
 
 ---
 
 ## Summary (documentation + Agent layer)
 
 - **`AGENTS.md`** (this file): architecture, skills, demo/graph contracts, CLI, debugging, and **Phase 3** package layout.
-- **`sturec_agent/`**: `config.py`, `skill_registry.py`, `schemas.py`, `run_agent.py`, `tests/`, plus existing orchestration and adapters. Skill **1–5 core algorithms** stay in their own trees.
+- **`progrec_agent/`**: `config.py`, `skill_registry.py`, `schemas.py`, `run_agent.py`, `tests/`, plus existing orchestration and adapters. Skill **1–5 core algorithms** stay in their own trees.
 
 ---

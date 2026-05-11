@@ -27,7 +27,7 @@ _COURSE_ROOT = course_repo_root(_BUNDLE_ROOT)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Build StuRec academic graph from CSV seeds.")
+    parser = argparse.ArgumentParser(description="Build ProgRec academic graph from CSV seeds.")
     parser.add_argument(
         "--seeds",
         type=Path,

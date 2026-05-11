@@ -1,6 +1,6 @@
 # Verified graph-mode demo
 
-This folder documents a **known-good graph-mode** StuRec Agent run (Skills **3 → 4 → 5**) using the regenerated Skill 2 processed bundle. It does not duplicate large JSON artifacts; see the paths below for example outputs already in `outputs/`.
+This folder documents a **known-good graph-mode** ProgRec Agent run (Skills **3 → 4 → 5**) using the regenerated Skill 2 processed bundle. It does not duplicate large JSON artifacts; see the paths below for example outputs already in `outputs/`.
 
 ## Student ID
 
@@ -8,7 +8,7 @@ This folder documents a **known-good graph-mode** StuRec Agent run (Skills **3 �
 
 ## Mode
 
-- **`graph`** — `sturec_agent/config.py` resolves:
+- **`graph`** — `progrec_agent/config.py` resolves:
   - `skill2_handoff/regenerate_kit/data/processed/academic_graph.json`
   - `skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json`
   - `skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json`
@@ -34,7 +34,7 @@ These were produced with graph mode and show **non-zero** ranked mentors, projec
 Reproduce a similar run from the repository root:
 
 ```bash
-python3 sturec_agent/run_agent.py \
+python3 progrec_agent/run_agent.py \
   --mode graph \
   --student-id jamie-taylor-00008 \
   --top-k 10 \
@@ -45,7 +45,7 @@ python3 sturec_agent/run_agent.py \
 Inspect any final JSON:
 
 ```bash
-python3 sturec_agent/inspect_output.py --output outputs/final_recommendation_graph_phase5.json
+python3 progrec_agent/inspect_output.py --output outputs/final_recommendation_graph_phase5.json
 ```
 
 ## What the final file contains

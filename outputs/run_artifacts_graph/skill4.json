@@ -1052,7 +1052,7 @@
   "data_sources": {
     "student_profiles": "/Users/chialinchen/Social Network/ProgRec/skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json",
     "academic_graph": "/Users/chialinchen/Social Network/ProgRec/skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
-    "mentor_candidates": "/var/folders/l5/ph3yyb8x7ql7cyvch8k5mkw40000gn/T/sturec_run_l3ejg77y/skill3.json",
+    "mentor_candidates": "/var/folders/l5/ph3yyb8x7ql7cyvch8k5mkw40000gn/T/progrec_run_l3ejg77y/skill3.json",
     "mentor_candidate_source": "skill3_json",
     "project_source": "skill2_graph",
     "target_student_resolution": "resolved_ok",
@@ -1072,7 +1072,7 @@
     ],
     "skill3_target_student_id": "jamie-taylor-00008",
     "skill3_declared_student_id": "jamie-taylor-00008",
-    "skill3_output_path": "/var/folders/l5/ph3yyb8x7ql7cyvch8k5mkw40000gn/T/sturec_run_l3ejg77y/skill3.json",
+    "skill3_output_path": "/var/folders/l5/ph3yyb8x7ql7cyvch8k5mkw40000gn/T/progrec_run_l3ejg77y/skill3.json",
     "skill3_output_in_use": true,
     "allow_target_fallback_with_skill3": false
   },

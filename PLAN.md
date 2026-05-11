@@ -1,4 +1,4 @@
-# PRD: StuRec 本科生科研导师匹配 Agent
+# PRD: ProgRec 本科生科研导师匹配 Agent
 
 ## 摘要
 - 项目定位：一个面向本科生的科研推荐助手，主任务是“找导师”，同时输出相关科研项目和潜在队友，形成从“想做科研”到“找到入口”的完整路径。
@@ -14,7 +14,7 @@
 - 非目标：首版不做完整聊天产品，不做跨校真实交易式撮合，不承诺真实联系导师或自动发邮件。
 
 ## Agent 设计
-- Agent 名称：`StuRec Agent`
+- Agent 名称：`ProgRec Agent`
 - Agent 输入：`student_profile`、`resume_text`、`research_interest_query`、可选筛选条件（方向、导师风格、时间投入、技能要求）。
 - Agent 输出：`mentor_recommendations`、`project_recommendations`、`teammate_recommendations`、`reason_graph`、`summary_report`。
 - 编排流程：用户画像解析，异构科研网络构建，导师候选召回，项目与队友候选补充，联合排序与重排，解释生成与结果汇总。
