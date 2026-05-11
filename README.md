@@ -65,6 +65,38 @@ Supported commands:
 
 Manual profile runs are labeled `custom_profile_mode`. They still use the existing Skill 2-5 resources, but the student is treated as a temporary profile instead of a graph-native student node.
 
+## StuRec AI Agent CLI
+
+The repository now also includes an AI-agent upgrade path inside `sturec_agent/`.
+This version keeps the existing multi-skill recommendation core, but adds:
+
+- natural-language user input
+- LLM-based profile drafting when an API key is available
+- planner-driven clarification and execution decisions
+- decision traces and bounded rerun behavior
+
+Set an API key before running if you want LLM-backed profile drafting:
+
+```bash
+export OPENAI_API_KEY=your_key_here
+python3 -m sturec_agent.repl
+```
+
+Without an API key, the CLI still starts and falls back to a lightweight local profile-drafting path.
+
+Example prompts:
+
+- `I want a mentor in trustworthy AI and NLP.`
+- `I only have three hours per week.`
+- `Recommend again, but prioritize teammate complementarity.`
+
+Useful commands:
+
+- `show profile`
+- `show trace`
+- `show mentor <id>`
+- `restart`
+
 ## Agent-level execution
 
 See [`AGENTS.md`](AGENTS.md) for the full multi-skill Agent contract, stable skill identifiers, demo vs graph mode, and debugging.

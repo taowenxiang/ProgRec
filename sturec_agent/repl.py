@@ -6,11 +6,13 @@ from pathlib import Path
 
 from sturec_agent.adapters.skill1_adapter import normalize_manual_profile
 from sturec_agent.agent_schema import AgentProfile, ExecutionPlan
+from sturec_agent.explainer import build_final_response
 from sturec_agent.llm_client import LLMClient, LLMConfig
 from sturec_agent.orchestrator import StuRecOrchestrator
 from sturec_agent.planner import build_execution_plan
 from sturec_agent.profile_enricher import build_profiles_from_text
-from sturec_agent.render import render_agent_summary, render_mentor_detail, render_summary
+from sturec_agent.render import render_mentor_detail, render_summary
+from sturec_agent.result_judge import judge_results
 from sturec_agent.session import AgentSession
 from sturec_agent.strategy import build_strategy
 
@@ -96,6 +98,18 @@ def run_agent_turn(session: AgentSession, user_text: str, orchestrator: StuRecOr
 
     session.decision_trace.append("Planner selected the full recommendation pipeline.")
     result = orchestrator.recommend_for_profile(skill_profile, top_k=int(strategy["top_k"]))
+    verdict = judge_results(
+        skill5_result=result["skill5_result"],
+        strategy=strategy,
+        rerun_count=session.rerun_count,
+    )
+    if verdict["rerun_needed"]:
+        session.rerun_count += 1
+        strategy["top_k"] = max(int(strategy["top_k"]), 8)
+        session.set_active_strategy(strategy)
+        session.decision_trace.append(f"Reran with adjusted strategy: {', '.join(verdict['reasons'])}")
+        result = orchestrator.recommend_for_profile(skill_profile, top_k=int(strategy["top_k"]))
+
     session.set_mode(result["mode"])
     session.set_resource_context(result["resource_context"])
     session.set_results(
@@ -104,7 +118,11 @@ def run_agent_turn(session: AgentSession, user_text: str, orchestrator: StuRecOr
         skill5_result=result["skill5_result"],
         temporary_paths=result["temporary_paths"],
     )
-    return render_agent_summary(result, session.decision_trace, agent_profile.goal)
+    return build_final_response(
+        agent_profile=asdict(agent_profile),
+        skill5_result=result["skill5_result"],
+        decision_trace=session.decision_trace,
+    )
 
 
 def main() -> int:
