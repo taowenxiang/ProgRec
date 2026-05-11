@@ -158,6 +158,7 @@ class GraphFeatureTest(unittest.TestCase):
         self.assertIn("community_", first.community_id)
         self.assertGreaterEqual(first.final_score, 0.0)
         self.assertGreaterEqual(len(first.reasons), 1)
+        self.assertTrue(first.reason_text)
 
     def test_mentor_candidate_to_dict_includes_trust_aware_fields(self):
         candidate = MentorCandidate(
@@ -184,3 +185,4 @@ class GraphFeatureTest(unittest.TestCase):
             payload["top_evidence_paths"],
             ["student->topic->mentor", "student->peer->mentor"],
         )
+        self.assertEqual(payload["reason_text"], "")

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
+from progrec_agent.llm_client import LLMClient, LLMConfig
 from skill3_mentor_discovery.loaders import load_standardized_resources
 from skill3_mentor_discovery.retrieval import rank_mentors_for_student
 
@@ -16,6 +18,19 @@ def _data_sources(resources) -> dict[str, object]:
         else None,
         "resource_mode": paths.resource_mode,
     }
+
+
+def _build_reason_llm_from_env() -> LLMClient | None:
+    api_key = (os.getenv("PROGREC_AGENT_API_KEY") or os.getenv("OPENAI_API_KEY") or "").strip()
+    if not api_key:
+        return None
+    model = (os.getenv("PROGREC_AGENT_MODEL") or os.getenv("OPENAI_MODEL") or "gpt-4.1-mini").strip()
+    endpoint = (
+        os.getenv("PROGREC_AGENT_BASE_URL")
+        or os.getenv("OPENAI_BASE_URL")
+        or "https://api.openai.com/v1/responses"
+    ).strip()
+    return LLMClient(LLMConfig(model=model, api_key=api_key, endpoint=endpoint))
 
 
 def run_skill3(
@@ -39,6 +54,7 @@ def run_skill3(
         resources.mentors,
         graph=resources.graph,
         top_k=top_k,
+        llm_client=_build_reason_llm_from_env(),
     )
     return {
         "student_id": str(student_profile.get("student_id", "")),

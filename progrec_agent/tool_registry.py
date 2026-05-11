@@ -19,6 +19,15 @@ TOOLS: dict[str, dict[str, object]] = {
         "side_effects": [],
         "executor_name": "show_current_profile",
     },
+    "show_recommended_mentor_profile": {
+        "name": "show_recommended_mentor_profile",
+        "purpose": "Return the current top recommended mentor profile from session state and mentor bundle.",
+        "intent_tags": ["inspect", "explain"],
+        "risk_level": "safe",
+        "requires_confirmation": False,
+        "side_effects": [],
+        "executor_name": "show_recommended_mentor_profile",
+    },
     "inspect_artifacts": {
         "name": "inspect_artifacts",
         "purpose": "Inspect the latest skill artifacts and surface high-level metadata.",

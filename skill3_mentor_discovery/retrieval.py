@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from math import sqrt
 
-from skill3_mentor_discovery.explanations import build_reasons
+from skill3_mentor_discovery.explanations import (
+    build_reason_evidence,
+    build_reasons,
+    generate_reason_text,
+)
 from skill3_mentor_discovery.graph_features import graph_features_for_mentors
 from skill3_mentor_discovery.models import MentorCandidate
 from skill3_mentor_discovery.profile_utils import (
@@ -36,6 +40,7 @@ def rank_mentors_for_student(
     graph: dict[str, object] | None = None,
     top_k: int = 10,
     candidate_pool_size: int = 30,
+    llm_client=None,
 ):
     student_counter = build_student_counter(student)
     student_terms = student_interest_skill_terms(student)
@@ -104,6 +109,19 @@ def rank_mentors_for_student(
         graph_confidence = float(graph_feature.get("graph_confidence", 0.0))
         effective_graph_score = graph_confidence * float(item["raw_graph_score"])
         effective_graph_component = graph_confidence * norm_graph
+        reason_evidence = build_reason_evidence(
+            mentor=mentor,
+            overlap_terms=set(item["overlap_terms"]),
+            community_id=str(graph_feature.get("community_id", "community_unknown")),
+            activity_score=activity_score,
+            meta_path_breakdown=dict(graph_feature.get("meta_path_breakdown") or {}),
+            graph_confidence=graph_confidence,
+            top_evidence_paths=list(graph_feature.get("top_evidence_paths") or []),
+            topic_score=float(item["topic_score"]),
+            graph_score=effective_graph_score,
+            personalized_proximity=float(graph_feature.get("personalized_proximity", 0.0)),
+            mentor_authority=float(graph_feature.get("mentor_authority", 0.0)),
+        )
         ranked.append(
             MentorCandidate(
                 mentor_id=mentor_id,
@@ -129,6 +147,7 @@ def rank_mentors_for_student(
                     graph_confidence=graph_confidence,
                     top_evidence_paths=list(graph_feature.get("top_evidence_paths") or []),
                 ),
+                reason_text=generate_reason_text(reason_evidence, llm_client=llm_client),
             )
         )
     ranked.sort(key=lambda item: item.final_score, reverse=True)

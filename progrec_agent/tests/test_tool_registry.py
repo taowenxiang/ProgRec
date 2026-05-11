@@ -18,6 +18,7 @@ class TestToolRegistry(unittest.TestCase):
     def test_list_tools_includes_registry_entries(self) -> None:
         names = {tool["name"] for tool in list_tools()}
         self.assertIn("show_current_profile", names)
+        self.assertIn("show_recommended_mentor_profile", names)
 
 
 if __name__ == "__main__":

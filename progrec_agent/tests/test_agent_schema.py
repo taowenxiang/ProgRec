@@ -42,8 +42,13 @@ class TestAgentSchema(unittest.TestCase):
             self.assertEqual(session.rerun_count, 1)
 
     def test_router_decision_defaults(self) -> None:
-        decision = RouterDecision(intent="chat", confidence=0.2, candidate_tools=[])
-        self.assertEqual(decision.intent, "chat")
+        decision = RouterDecision(
+            message_type="unsafe_or_blocked",
+            intent="out_of_scope_other",
+            confidence=0.2,
+            candidate_tools=[],
+        )
+        self.assertEqual(decision.intent, "out_of_scope_other")
         self.assertEqual(decision.candidate_tools, [])
         self.assertFalse(decision.needs_clarification)
 

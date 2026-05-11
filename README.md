@@ -41,62 +41,46 @@ Run tests:
 python3 -m unittest discover -s tests -v
 ```
 
-## ProgRec Agent CLI
+## ProgRec Conversational Agent CLI
 
-Run the interactive CLI agent from the repository root:
-
-```bash
-python3 -m progrec_agent.repl
-```
-
-The first version supports two recommendation entry modes:
-
-- existing `student_id` from the current standardized student bundle
-- manual profile entry with structured fields and optional `resume_text`
-
-Supported commands:
-
-- `recommend`
-- `show mentor <id>`
-- `show profile`
-- `restart`
-- `help`
-- `exit`
-
-Manual profile runs are labeled `custom_profile_mode`. They still use the existing Skill 2-5 resources, but the student is treated as a temporary profile instead of a graph-native student node.
-
-## ProgRec AI Agent CLI
-
-The repository now also includes an AI-agent upgrade path inside `progrec_agent/`.
-This version keeps the existing multi-skill recommendation core, but adds:
+The repository includes a chat-first agent inside `progrec_agent/`.
+It keeps the existing multi-skill recommendation core, but adds:
 
 - chat-first natural-language requests
-- LLM-based profile drafting when an API key is available
+- LLM-first routing and bounded conversation handling
 - clarification when intent is ambiguous
 - confirmation before graph/profile rebuild actions
 - repository-local debugging and inspection help
 
-Set an API key before running if you want LLM-backed profile drafting:
+Set the model configuration before running:
 
 ```bash
 export OPENAI_API_KEY=your_key_here
+export OPENAI_BASE_URL=https://api.openai.com
+export OPENAI_MODEL=gpt-4.1-mini
 python3 -m progrec_agent.repl
 ```
 
-Without an API key, the CLI still starts and falls back to a lightweight local profile-drafting path.
+You can also use the ProgRec-specific names instead:
+
+```bash
+export PROGREC_AGENT_API_KEY=your_key_here
+export PROGREC_AGENT_BASE_URL=https://your-compatible-endpoint
+export PROGREC_AGENT_MODEL=gpt-4.1-mini
+python3 -m progrec_agent.repl
+```
+
+The conversational REPL requires an LLM API key. Without one, startup stops with a configuration error instead of falling back to pretend-smart local routing.
 
 Example prompts:
 
-- `I want a mentor in trustworthy AI and NLP.`
-- `I only have three hours per week.`
-- `Recommend again, but prioritize teammate complementarity.`
+- `Find me an NLP mentor.`
+- `I'm interested in trustworthy AI and only have 4 hours per week.`
+- `Show me the current profile of the top mentor.`
+- `Why did you recommend this mentor?`
+- `Check whether my graph-mode artifacts are valid.`
 
-Useful commands:
-
-- `show profile`
-- `show trace`
-- `show mentor <id>`
-- `restart`
+If you ask a question outside the recommendation workflow, the agent says so clearly instead of guessing.
 
 ## Agent-level execution
 

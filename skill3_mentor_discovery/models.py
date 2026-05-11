@@ -20,6 +20,7 @@ class MentorCandidate:
     meta_path_breakdown: dict[str, float] = field(default_factory=dict)
     top_evidence_paths: list[str] = field(default_factory=list)
     reasons: list[str] = field(default_factory=list)
+    reason_text: str = ""
 
     def to_dict(self) -> dict[str, object]:
         return asdict(self)

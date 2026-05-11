@@ -23,6 +23,10 @@ class AgentSession:
     last_router_decision: JsonDict | None = None
     last_response_summary: str = ""
     pending_confirmation_action: JsonDict | None = None
+    last_action_kind: str | None = None
+    last_tool_name: str | None = None
+    last_tool_arguments: JsonDict | None = None
+    last_action_result_summary: str | None = None
     decision_trace: list[str] = field(default_factory=list)
     rerun_count: int = 0
     pending_clarification_questions: list[JsonDict] = field(default_factory=list)
@@ -69,6 +73,19 @@ class AgentSession:
     def set_last_response_summary(self, summary: str) -> None:
         self.last_response_summary = summary
 
+    def set_last_action(
+        self,
+        *,
+        kind: str,
+        tool_name: str,
+        tool_arguments: dict[str, object],
+        result_summary: str,
+    ) -> None:
+        self.last_action_kind = kind
+        self.last_tool_name = tool_name or None
+        self.last_tool_arguments = dict(tool_arguments)
+        self.last_action_result_summary = result_summary
+
     def set_pending_confirmation(self, pending: object) -> None:
         self.pending_confirmation_action = (
             asdict(pending) if hasattr(pending, "__dataclass_fields__") else dict(pending)
@@ -101,6 +118,10 @@ class AgentSession:
         self.last_router_decision = None
         self.last_response_summary = ""
         self.pending_confirmation_action = None
+        self.last_action_kind = None
+        self.last_tool_name = None
+        self.last_tool_arguments = None
+        self.last_action_result_summary = None
         self.decision_trace = []
         self.rerun_count = 0
         self.pending_clarification_questions = []

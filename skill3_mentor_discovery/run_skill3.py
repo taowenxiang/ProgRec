@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -18,6 +19,7 @@ from skill3_mentor_discovery.evaluate import (
     evaluate_perturbation_summary,
 )
 from skill3_mentor_discovery.retrieval import rank_mentors_for_student
+from progrec_agent.llm_client import LLMClient, LLMConfig
 
 
 def _resolve_student(resources, student_id: str) -> dict[str, object]:
@@ -40,6 +42,19 @@ def _data_sources(resources) -> dict[str, object]:
         else None,
         "resource_mode": paths.resource_mode,
     }
+
+
+def _build_reason_llm_from_env() -> LLMClient | None:
+    api_key = (os.getenv("PROGREC_AGENT_API_KEY") or os.getenv("OPENAI_API_KEY") or "").strip()
+    if not api_key:
+        return None
+    model = (os.getenv("PROGREC_AGENT_MODEL") or os.getenv("OPENAI_MODEL") or "gpt-4.1-mini").strip()
+    endpoint = (
+        os.getenv("PROGREC_AGENT_BASE_URL")
+        or os.getenv("OPENAI_BASE_URL")
+        or "https://api.openai.com/v1/responses"
+    ).strip()
+    return LLMClient(LLMConfig(model=model, api_key=api_key, endpoint=endpoint))
 
 
 def main() -> None:
@@ -121,11 +136,13 @@ def main() -> None:
             student_id=str(student.get("student_id", "")) or None,
         )
         resources.graph = prepared_graph
+    reason_llm = _build_reason_llm_from_env()
     mentor_candidates = rank_mentors_for_student(
         student,
         resources.mentors,
         graph=resources.graph,
         top_k=args.top_k,
+        llm_client=reason_llm,
     )
     payload = {
         "student_id": args.student_id,

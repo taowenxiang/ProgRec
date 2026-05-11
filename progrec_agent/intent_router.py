@@ -2,37 +2,114 @@ from __future__ import annotations
 
 from progrec_agent.agent_schema import RouterDecision
 from progrec_agent.prompts import ROUTER_PROMPT
+from progrec_agent.tool_registry import TOOLS
+
+
+def _route_user_message_local(user_text: str) -> RouterDecision:
+    normalized = user_text.lower().strip()
+    if any(phrase in normalized for phrase in ["which skill", "what tool", "what did you do", "last response"]):
+        return RouterDecision(
+            message_type="meta_question",
+            intent="ask_last_action",
+            confidence=0.65,
+            candidate_tools=[],
+            answer_only=True,
+        )
+    if any(phrase in normalized for phrase in ["show mentor", "mentor profile", "top mentor"]):
+        return RouterDecision(
+            message_type="domain_task",
+            intent="inspect_current_mentor",
+            confidence=0.9,
+            candidate_tools=["show_recommended_mentor_profile"],
+            tool_name="show_recommended_mentor_profile",
+        )
+    if any(phrase in normalized for phrase in ["show profile", "current profile"]):
+        tool_name = "show_recommended_mentor_profile" if "mentor" in normalized else "show_current_profile"
+        intent = "inspect_current_mentor" if "mentor" in normalized else "show_current_profile"
+        return RouterDecision(
+            message_type="domain_task",
+            intent=intent,
+            confidence=0.9,
+            candidate_tools=[tool_name],
+            tool_name=tool_name,
+        )
+    if any(word in normalized for word in ["weather", "temperature", "forecast"]):
+        return RouterDecision(
+            message_type="out_of_scope",
+            intent="out_of_scope_other",
+            confidence=0.95,
+            candidate_tools=[],
+            in_scope=False,
+            answer_only=True,
+            meta_reply="That question is outside ProgRec's recommendation scope.",
+        )
+    if any(word in normalized for word in ["mentor", "recommend", "project", "teammate"]):
+        return RouterDecision(
+            message_type="domain_task",
+            intent="recommend_mentor",
+            confidence=0.8,
+            candidate_tools=["recommend_full_pipeline"],
+            tool_name="recommend_full_pipeline",
+        )
+    if "rebuild" in normalized and "graph" in normalized:
+        return RouterDecision(
+            message_type="domain_task",
+            intent="rebuild_graph",
+            confidence=0.9,
+            candidate_tools=["rebuild_skill2_graph"],
+            tool_name="rebuild_skill2_graph",
+        )
+    if any(word in normalized for word in ["why", "debug", "mismatch", "graph mode"]):
+        return RouterDecision(
+            message_type="domain_task",
+            intent="debug_graph_mode",
+            confidence=0.75,
+            candidate_tools=["debug_graph_mode", "inspect_artifacts"],
+            tool_name="debug_graph_mode",
+        )
+    return RouterDecision(
+        message_type="unsafe_or_blocked",
+        intent="out_of_scope_other",
+        confidence=0.0,
+        candidate_tools=[],
+        in_scope=False,
+        answer_only=True,
+        meta_reply="I couldn't safely classify that request inside ProgRec's scope.",
+        reasoning_summary="Local safeguard could not confidently classify the request.",
+    )
 
 
 def route_user_message(user_text: str, *, llm_client, session) -> RouterDecision:
-    normalized = user_text.lower().strip()
     if llm_client is not None:
-        payload = llm_client.complete_json(f"{ROUTER_PROMPT}\nUser message: {user_text}")
-        return RouterDecision(
-            intent=str(payload.get("intent", "chat")),
-            confidence=float(payload.get("confidence", 0.0)),
-            candidate_tools=[str(item) for item in payload.get("candidate_tools", [])],
-            needs_clarification=bool(payload.get("needs_clarification")),
-            clarification_question=str(payload.get("clarification_question", "")),
-            reasoning_summary=str(payload.get("reasoning_summary", "")),
-        )
-    if any(word in normalized for word in ["mentor", "recommend", "project", "teammate"]):
-        return RouterDecision(intent="recommend", confidence=0.8, candidate_tools=["recommend_full_pipeline"])
-    if "rebuild" in normalized and "graph" in normalized:
-        return RouterDecision(intent="rebuild", confidence=0.9, candidate_tools=["rebuild_skill2_graph"])
-    if any(word in normalized for word in ["why", "debug", "mismatch", "graph mode"]):
-        return RouterDecision(
-            intent="debug",
-            confidence=0.75,
-            candidate_tools=["debug_graph_mode", "inspect_artifacts"],
-        )
-    if any(word in normalized for word in ["show profile", "current profile"]):
-        return RouterDecision(intent="inspect", confidence=0.9, candidate_tools=["show_current_profile"])
-    return RouterDecision(
-        intent="chat",
-        confidence=0.35,
-        candidate_tools=[],
-        needs_clarification=True,
-        clarification_question="Do you want recommendations, an explanation, or a graph/debug check?",
-        reasoning_summary="Fallback router could not confidently classify the request.",
-    )
+        try:
+            payload = llm_client.complete_json(f"{ROUTER_PROMPT}\nUser message: {user_text}")
+            decision = RouterDecision(
+                message_type=str(payload.get("message_type", "unsafe_or_blocked")),
+                intent=str(payload.get("intent", "out_of_scope_other")),
+                confidence=float(payload.get("confidence", 0.0)),
+                candidate_tools=[str(item) for item in payload.get("candidate_tools", [])],
+                in_scope=bool(payload.get("in_scope", True)),
+                needs_clarification=bool(payload.get("needs_clarification")),
+                clarification_question=str(payload.get("clarification_question", "")),
+                answer_only=bool(payload.get("answer_only", False)),
+                tool_name=str(payload.get("tool_name", "")),
+                tool_arguments=dict(payload.get("tool_arguments") or {}),
+                meta_reply=str(payload.get("meta_reply", "")),
+                reasoning_summary=str(payload.get("reasoning_summary", "")),
+            )
+            decision.candidate_tools = [tool_name for tool_name in decision.candidate_tools if tool_name in TOOLS]
+            if decision.tool_name and decision.tool_name not in TOOLS:
+                decision.tool_name = ""
+            return decision
+        except Exception:
+            return RouterDecision(
+                message_type="unsafe_or_blocked",
+                intent="out_of_scope_other",
+                confidence=0.0,
+                candidate_tools=[],
+                in_scope=False,
+                answer_only=True,
+                meta_reply="I hit a routing failure and couldn't safely classify that request.",
+                reasoning_summary="LLM routing failed.",
+            )
+    return _route_user_message_local(user_text)

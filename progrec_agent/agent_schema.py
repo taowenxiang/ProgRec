@@ -3,7 +3,21 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Literal
 
-IntentName = Literal["recommend", "explain", "inspect", "debug", "rebuild", "help", "chat"]
+IntentName = Literal[
+    "recommend_mentor",
+    "recommend_project",
+    "recommend_teammate",
+    "inspect_current_mentor",
+    "explain_recommendation",
+    "show_current_profile",
+    "inspect_artifacts",
+    "debug_graph_mode",
+    "rebuild_graph",
+    "ask_last_action",
+    "ask_capabilities",
+    "out_of_scope_other",
+]
+MessageType = Literal["domain_task", "meta_question", "out_of_scope", "startup_help", "unsafe_or_blocked"]
 RiskLevel = Literal["safe", "confirm", "restricted"]
 
 
@@ -51,11 +65,17 @@ class PendingConfirmation:
 
 @dataclass
 class RouterDecision:
+    message_type: MessageType
     intent: IntentName
     confidence: float
     candidate_tools: list[str]
+    in_scope: bool = True
     needs_clarification: bool = False
     clarification_question: str = ""
+    answer_only: bool = False
+    tool_name: str = ""
+    tool_arguments: dict[str, Any] = field(default_factory=dict)
+    meta_reply: str = ""
     reasoning_summary: str = ""
 
 

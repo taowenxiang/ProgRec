@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import subprocess
 from pathlib import Path
 
@@ -20,11 +21,77 @@ class ToolExecutor:
             return ToolExecutionResult(tool_name=tool_name, ok=False, error=f"Unknown tool: {tool_name}")
         return handler(arguments, session=session)
 
+    def _resolve_mentors_path(self, *, session) -> Path | None:
+        resource_context = dict(session.resource_context or {})
+        mentors_path = resource_context.get("mentors_path")
+        if mentors_path:
+            return Path(str(mentors_path))
+        try:
+            resources = resolve_resource_config("demo", self.repo_root)
+        except (FileNotFoundError, ValueError):
+            return None
+        return resources.skill2_mentors
+
+    @staticmethod
+    def _load_mentor_profiles(mentors_path: Path) -> dict[str, dict[str, object]]:
+        payload = json.loads(mentors_path.read_text(encoding="utf-8"))
+        rows = payload.get("mentors") if isinstance(payload, dict) else payload
+        mentors = rows if isinstance(rows, list) else []
+        return {
+            str(mentor.get("mentor_id")): dict(mentor)
+            for mentor in mentors
+            if isinstance(mentor, dict) and mentor.get("mentor_id")
+        }
+
     def _tool_show_current_profile(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
         return ToolExecutionResult(
             tool_name="show_current_profile",
             ok=True,
             payload={"student_profile": dict(session.student_profile or {})},
+        )
+
+    def _tool_show_recommended_mentor_profile(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
+        skill5_result = dict(session.skill5_result or {})
+        recs = dict(skill5_result.get("recommendations") or {})
+        mentors = list(recs.get("mentors") or [])
+        if not mentors:
+            return ToolExecutionResult(
+                tool_name="show_recommended_mentor_profile",
+                ok=False,
+                error="No mentor recommendations are available yet. Run recommend first.",
+            )
+
+        requested_mentor_id = str(arguments.get("mentor_id") or "").strip()
+        mentor_recommendation = (
+            next((item for item in mentors if str(item.get("mentor_id")) == requested_mentor_id), None)
+            if requested_mentor_id
+            else None
+        )
+        if mentor_recommendation is None:
+            mentor_recommendation = dict(mentors[0])
+        else:
+            mentor_recommendation = dict(mentor_recommendation)
+
+        mentor_id = str(mentor_recommendation.get("mentor_id") or "").strip()
+        mentor_profile: dict[str, object] = {}
+        mentors_path = self._resolve_mentors_path(session=session)
+        if mentors_path and mentors_path.is_file():
+            mentor_profile = self._load_mentor_profiles(mentors_path).get(mentor_id, {})
+
+        if not mentor_profile:
+            mentor_profile = {
+                "mentor_id": mentor_id,
+                "name": mentor_recommendation.get("mentor_name") or mentor_id,
+            }
+
+        return ToolExecutionResult(
+            tool_name="show_recommended_mentor_profile",
+            ok=True,
+            payload={
+                "rank": mentor_recommendation.get("rank") or 1,
+                "mentor_recommendation": mentor_recommendation,
+                "mentor_profile": mentor_profile,
+            },
         )
 
     def _tool_recommend_full_pipeline(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
