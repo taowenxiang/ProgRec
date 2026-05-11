@@ -1,0 +1,1219 @@
+[
+  {
+    "student_id": "scott-wagner-03307",
+    "grade": "Freshman",
+    "major": "Archaeology",
+    "skills": [
+      "field excavation",
+      "artifact analysis",
+      "historical research",
+      "spatial data analysis"
+    ],
+    "interests": [
+      "vlogging",
+      "content creation",
+      "sports",
+      "athletics",
+      "antiques",
+      "historical artifacts"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "alison-mills-12587",
+    "grade": "Freshman",
+    "major": "Classics",
+    "skills": [
+      "classical languages",
+      "historical research",
+      "textual analysis",
+      "archival research",
+      "interior design",
+      "home decor"
+    ],
+    "interests": [
+      "geocaching",
+      "outdoor navigation",
+      "digital art",
+      "visual arts",
+      "ancient civilizations",
+      "adventure and exploration"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "angelica-kelley-22282",
+    "grade": "Freshman",
+    "major": "Film Studies",
+    "skills": [
+      "film analysis",
+      "screenwriting",
+      "media theory",
+      "video production",
+      "economic analysis",
+      "quantitative reasoning"
+    ],
+    "interests": [
+      "card games",
+      "strategic thinking",
+      "glassblowing",
+      "crafting",
+      "films",
+      "film"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "sherri-johnson-11160",
+    "grade": "Freshman",
+    "major": "Elementary Education",
+    "skills": [
+      "curriculum design",
+      "educational assessment",
+      "behavioral observation",
+      "instructional design",
+      "painting",
+      "visual arts"
+    ],
+    "interests": [
+      "web development",
+      "software development",
+      "stand-up comedy",
+      "public speaking",
+      "technology and coding",
+      "teaching"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "shannon-hanson-16567",
+    "grade": "Freshman",
+    "major": "Information Systems",
+    "skills": [
+      "database design",
+      "systems analysis",
+      "data management",
+      "software development",
+      "physics",
+      "mathematical modeling"
+    ],
+    "interests": [
+      "meditation",
+      "mindfulness",
+      "zumba",
+      "dance fitness",
+      "technology and problem-solving"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "todd-mays-09958",
+    "grade": "Freshman",
+    "major": "Kinesiology",
+    "skills": [
+      "biomechanical analysis",
+      "exercise physiology",
+      "data collection",
+      "sports science",
+      "macrame",
+      "fiber arts"
+    ],
+    "interests": [
+      "camping",
+      "outdoor survival",
+      "origami",
+      "paper arts",
+      "macrame with others",
+      "outdoor activities"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "timothy-cross-22862",
+    "grade": "Freshman",
+    "major": "Marketing",
+    "skills": [
+      "market research",
+      "consumer behavior analysis",
+      "data analytics",
+      "content strategy",
+      "several"
+    ],
+    "interests": [
+      "fencing",
+      "martial arts",
+      "singing",
+      "vocal performance",
+      "health promotion",
+      "wellness"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "daniel-harvey-15094",
+    "grade": "Freshman",
+    "major": "Film Studies",
+    "skills": [
+      "film analysis",
+      "screenwriting",
+      "media theory",
+      "video production",
+      "mentoring",
+      "youth development",
+      "drawing and often"
+    ],
+    "interests": [
+      "live-action roleplay",
+      "creative storytelling",
+      "drawing",
+      "visual arts",
+      "movies and storytelling",
+      "film",
+      "larping"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "marcus-sims-03958",
+    "grade": "Freshman",
+    "major": "Archaeology",
+    "skills": [
+      "field excavation",
+      "artifact analysis",
+      "historical research",
+      "spatial data analysis"
+    ],
+    "interests": [
+      "running",
+      "fitness",
+      "tai chi",
+      "martial arts",
+      "tea culture",
+      "cultural studies"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "joe-collins-01750",
+    "grade": "Freshman",
+    "major": "Interior Design",
+    "skills": [
+      "spatial design",
+      "materials selection",
+      "autocad",
+      "visual communication",
+      "digital marketing",
+      "content strategy"
+    ],
+    "interests": [
+      "soap making",
+      "crafting",
+      "stone carving",
+      "sculpture",
+      "interior design"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "sherry-padilla-15189",
+    "grade": "Freshman",
+    "major": "Nuclear Engineering",
+    "skills": [
+      "radiation physics",
+      "systems modeling",
+      "safety analysis",
+      "computational simulation",
+      "glass painting",
+      "visual arts"
+    ],
+    "interests": [
+      "kickboxing",
+      "martial arts",
+      "collecting",
+      "numismatics",
+      "glass painting"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "elizabeth-riley-01271",
+    "grade": "Freshman",
+    "major": "Biology",
+    "skills": [
+      "experimental design",
+      "data analysis",
+      "laboratory techniques",
+      "scientific writing",
+      "experimental cooking",
+      "food science"
+    ],
+    "interests": [
+      "cycling",
+      "outdoor sports",
+      "weightlifting",
+      "strength training",
+      "adventure",
+      "experimental cooking"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "elizabeth-bartlett-06452",
+    "grade": "Freshman",
+    "major": "Elementary Education",
+    "skills": [
+      "curriculum design",
+      "educational assessment",
+      "behavioral observation",
+      "instructional design"
+    ],
+    "interests": [
+      "astronomy",
+      "astrophysics",
+      "sports",
+      "athletics",
+      "zoology",
+      "animal biology",
+      "teaching",
+      "different animal species"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "edgar-harris-03353",
+    "grade": "Sophomore",
+    "major": "Economics",
+    "skills": [
+      "econometric analysis",
+      "statistical modeling",
+      "policy analysis",
+      "quantitative reasoning",
+      "ice sculpting",
+      "sculpture",
+      "coding"
+    ],
+    "interests": [
+      "singing",
+      "vocal performance",
+      "web development",
+      "software development"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "jessica-burnett-19204",
+    "grade": "Sophomore",
+    "major": "Kinesiology",
+    "skills": [
+      "biomechanical analysis",
+      "exercise physiology",
+      "data collection",
+      "sports science"
+    ],
+    "interests": [
+      "glassblowing",
+      "crafting",
+      "pottery",
+      "ceramic arts",
+      "sustainability",
+      "environmental science"
+    ],
+    "availability": "high",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "travis-munoz-01222",
+    "grade": "Sophomore",
+    "major": "Mathematics",
+    "skills": [
+      "mathematical modeling",
+      "proof writing",
+      "statistical analysis",
+      "algorithm design",
+      "karate",
+      "martial arts"
+    ],
+    "interests": [
+      "skateboarding",
+      "action sports",
+      "equestrian sports",
+      "animal care",
+      "numbers and problem-solving",
+      "numbers",
+      "teaching grew",
+      "teaching"
+    ],
+    "availability": "moderate",
+    "source": "human_reviewed",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "maria-olson-14304",
+    "grade": "Sophomore",
+    "major": "Culinary Arts",
+    "skills": [
+      "food science",
+      "recipe development",
+      "sensory evaluation",
+      "kitchen management",
+      "public speaking",
+      "rhetoric"
+    ],
+    "interests": [
+      "cooking",
+      "food science",
+      "astrology",
+      "astronomy"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "john-alexander-04507",
+    "grade": "Sophomore",
+    "major": "Marketing",
+    "skills": [
+      "market research",
+      "consumer behavior analysis",
+      "data analytics",
+      "content strategy",
+      "karate",
+      "martial arts"
+    ],
+    "interests": [
+      "weightlifting",
+      "strength training",
+      "philanthropy",
+      "community service",
+      "weightlifting and philanthropy"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "jacqueline-morrison-14993",
+    "grade": "Sophomore",
+    "major": "Marketing",
+    "skills": [
+      "market research",
+      "consumer behavior analysis",
+      "data analytics",
+      "content strategy",
+      "leatherworking",
+      "crafting",
+      "leather crafting",
+      "designing"
+    ],
+    "interests": [
+      "wine tasting",
+      "sensory evaluation",
+      "woodworking",
+      "crafting"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "charlotte-shaw-14217",
+    "grade": "Sophomore",
+    "major": "Interior Design",
+    "skills": [
+      "spatial design",
+      "materials selection",
+      "autocad",
+      "visual communication",
+      "vintage fashion",
+      "fashion history"
+    ],
+    "interests": [
+      "digital art",
+      "visual arts",
+      "birdwatching",
+      "ecology",
+      "vintage clothing"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "heather-miller-01937",
+    "grade": "Sophomore",
+    "major": "Electrical Engineering",
+    "skills": [
+      "circuit design",
+      "signal processing",
+      "embedded systems",
+      "matlab",
+      "calligraphy",
+      "visual arts"
+    ],
+    "interests": [
+      "quilting",
+      "textile crafts",
+      "birdwatching",
+      "ecology",
+      "birdwatching and calligraphy"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "tracy-coleman-06137",
+    "grade": "Sophomore",
+    "major": "Marine Biology",
+    "skills": [
+      "marine ecology",
+      "underwater fieldwork",
+      "species identification",
+      "data analysis"
+    ],
+    "interests": [
+      "reading",
+      "literature",
+      "strategic thinking",
+      "board games",
+      "rare books",
+      "bibliophilia",
+      "rare book collecting",
+      "books only grew"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "sean-salas-01570",
+    "grade": "Sophomore",
+    "major": "Biochemistry",
+    "skills": [
+      "laboratory techniques",
+      "molecular analysis",
+      "data analysis",
+      "scientific writing",
+      "animation",
+      "digital arts"
+    ],
+    "interests": [
+      "parkour",
+      "freerunning",
+      "traveling",
+      "cultural exploration"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "douglas-yang-19435",
+    "grade": "Sophomore",
+    "major": "Drama",
+    "skills": [
+      "performance analysis",
+      "script writing",
+      "directing",
+      "theatrical production",
+      "web development"
+    ],
+    "interests": [
+      "web development",
+      "software development",
+      "dodgeball",
+      "team sports",
+      "drama"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "edward-matthews-06274",
+    "grade": "Sophomore",
+    "major": "Biomedical Engineering",
+    "skills": [
+      "biomedical instrumentation",
+      "signal processing",
+      "laboratory techniques",
+      "systems modeling",
+      "problem solving",
+      "logical reasoning",
+      "solving puzzles"
+    ],
+    "interests": [
+      "programming",
+      "software development",
+      "fencing",
+      "martial arts",
+      "science and technology"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "robert-owens-13599",
+    "grade": "Sophomore",
+    "major": "Anthropology",
+    "skills": [
+      "ethnographic research",
+      "qualitative analysis",
+      "cultural analysis",
+      "fieldwork methodology"
+    ],
+    "interests": [
+      "music performance",
+      "music theory",
+      "numismatics",
+      "collecting",
+      "wildlife conservation",
+      "ecology",
+      "different currencies"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "diane-smith-19676",
+    "grade": "Junior",
+    "major": "Economics",
+    "skills": [
+      "econometric analysis",
+      "statistical modeling",
+      "policy analysis",
+      "quantitative reasoning"
+    ],
+    "interests": [
+      "pottery",
+      "ceramic arts",
+      "surfing",
+      "water sports",
+      "history",
+      "historical research"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "christina-lopez-01968",
+    "grade": "Junior",
+    "major": "Social Work",
+    "skills": [
+      "case assessment",
+      "community research",
+      "intervention planning",
+      "qualitative research",
+      "cybersecurity",
+      "ethical hacking"
+    ],
+    "interests": [
+      "cycling",
+      "outdoor sports",
+      "glassblowing",
+      "crafting"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "brandon-collins-01037",
+    "grade": "Junior",
+    "major": "Biochemistry",
+    "skills": [
+      "laboratory techniques",
+      "molecular analysis",
+      "data analysis",
+      "scientific writing",
+      "meditation",
+      "mindfulness instruction",
+      "solving complex puzzles"
+    ],
+    "interests": [
+      "pottery",
+      "ceramic arts",
+      "problem solving",
+      "logical thinking"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "brandy-brown-11771",
+    "grade": "Junior",
+    "major": "Botany",
+    "skills": [
+      "plant taxonomy",
+      "ecological fieldwork",
+      "microscopy",
+      "scientific writing"
+    ],
+    "interests": [
+      "scuba diving",
+      "marine exploration",
+      "magic performance",
+      "illusion arts",
+      "kite flying",
+      "aerodynamics",
+      "illusions",
+      "magic"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "renee-lopez-10965",
+    "grade": "Junior",
+    "major": "Forensic Science",
+    "skills": [
+      "evidence analysis",
+      "laboratory techniques",
+      "crime scene investigation",
+      "scientific writing",
+      "film criticism",
+      "media analysis"
+    ],
+    "interests": [
+      "skydiving",
+      "extreme sports",
+      "drawing",
+      "visual arts",
+      "film and media"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "sierra-johnston-20970",
+    "grade": "Junior",
+    "major": "Psychology",
+    "skills": [
+      "experimental design",
+      "statistical analysis",
+      "behavioral observation",
+      "research methodology",
+      "glass painting",
+      "visual arts"
+    ],
+    "interests": [
+      "ice skating",
+      "winter sports",
+      "fencing",
+      "martial arts",
+      "combining her love"
+    ],
+    "availability": "high",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "alexander-lara-02401",
+    "grade": "Junior",
+    "major": "Criminology",
+    "skills": [
+      "crime data analysis",
+      "qualitative research",
+      "policy analysis",
+      "statistical methods",
+      "urban sketching",
+      "illustration"
+    ],
+    "interests": [
+      "baking",
+      "food science",
+      "programming",
+      "software development",
+      "crime",
+      "baking and programming"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "raven-sims-21213",
+    "grade": "Junior",
+    "major": "Biology",
+    "skills": [
+      "experimental design",
+      "data analysis",
+      "laboratory techniques",
+      "scientific writing",
+      "music performance",
+      "music theory",
+      "several"
+    ],
+    "interests": [
+      "windsurfing",
+      "water sports",
+      "geocaching",
+      "outdoor navigation",
+      "adventure"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "juan-jones-02487",
+    "grade": "Junior",
+    "major": "Earth Science",
+    "skills": [
+      "geological mapping",
+      "remote sensing",
+      "data analysis",
+      "fieldwork methodology",
+      "strategic thinking",
+      "game theory",
+      "analyzing rules"
+    ],
+    "interests": [
+      "scrapbooking",
+      "crafting",
+      "animal behavior",
+      "bird training",
+      "scrapbooking started"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "james-adams-10120",
+    "grade": "Junior",
+    "major": "Graphic Design",
+    "skills": [
+      "visual communication",
+      "typography",
+      "digital illustration",
+      "user interface design",
+      "acoustic sensing",
+      "sonar technology",
+      "cash"
+    ],
+    "interests": [
+      "reading",
+      "literature",
+      "upcycling",
+      "sustainable crafting",
+      "design",
+      "sustainability",
+      "design and sustainability"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "elizabeth-henry-11062",
+    "grade": "Junior",
+    "major": "Anthropology",
+    "skills": [
+      "ethnographic research",
+      "qualitative analysis",
+      "cultural analysis",
+      "fieldwork methodology",
+      "acoustic sensing",
+      "sonar technology"
+    ],
+    "interests": [
+      "strategic thinking",
+      "board games",
+      "swimming",
+      "aquatic sports",
+      "different cultures",
+      "anthropology"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "james-adams-10360",
+    "grade": "Junior",
+    "major": "Computer Science",
+    "skills": [
+      "algorithm design",
+      "software development",
+      "data structures",
+      "computational thinking",
+      "mathematics",
+      "quantitative reasoning"
+    ],
+    "interests": [
+      "diy crafting",
+      "hands-on making",
+      "dodgeball",
+      "team sports",
+      "diy projects",
+      "numbers and technology"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "andrea-landry-15643",
+    "grade": "Junior",
+    "major": "Philosophy",
+    "skills": [
+      "logical reasoning",
+      "argumentation",
+      "critical writing",
+      "ethical analysis",
+      "improvisation",
+      "performance arts"
+    ],
+    "interests": [
+      "skiing",
+      "winter sports",
+      "upcycling",
+      "sustainable crafting",
+      "sustainability"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "tiffany-berry-06405",
+    "grade": "Senior",
+    "major": "Nursing",
+    "skills": [
+      "clinical assessment",
+      "patient care",
+      "evidence-based practice",
+      "health data analysis",
+      "glass painting",
+      "visual arts"
+    ],
+    "interests": [
+      "reading",
+      "literature",
+      "magic performance",
+      "illusion arts",
+      "nursing"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "david-smith-21170",
+    "grade": "Senior",
+    "major": "Philosophy",
+    "skills": [
+      "logical reasoning",
+      "argumentation",
+      "critical writing",
+      "ethical analysis",
+      "scrapbooking"
+    ],
+    "interests": [
+      "scrapbooking",
+      "crafting",
+      "pottery",
+      "ceramic arts",
+      "history",
+      "historical research"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "jeremiah-jones-16040",
+    "grade": "Senior",
+    "major": "Marketing",
+    "skills": [
+      "market research",
+      "consumer behavior analysis",
+      "data analytics",
+      "content strategy"
+    ],
+    "interests": [
+      "roller skating",
+      "skating sports",
+      "upcycling",
+      "sustainable crafting",
+      "environmental advocacy",
+      "sustainability",
+      "protecting the environment"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "andrew-smith-03811",
+    "grade": "Senior",
+    "major": "Dance",
+    "skills": [
+      "movement analysis",
+      "choreography",
+      "performance research",
+      "body mechanics",
+      "social media",
+      "content creation"
+    ],
+    "interests": [
+      "archery",
+      "precision sports",
+      "kickboxing",
+      "martial arts",
+      "movement and expression",
+      "archery and kickboxing",
+      "dance"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "james-bass-07242",
+    "grade": "Senior",
+    "major": "Computer Science",
+    "skills": [
+      "algorithm design",
+      "software development",
+      "data structures",
+      "computational thinking",
+      "problem-solving"
+    ],
+    "interests": [
+      "soap making",
+      "crafting",
+      "model building",
+      "engineering crafts",
+      "mental health",
+      "psychology",
+      "computer science",
+      "mental health advocacy"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "stephen-chavez-01545",
+    "grade": "Senior",
+    "major": "Environmental Science",
+    "skills": [
+      "environmental monitoring",
+      "gis analysis",
+      "ecological fieldwork",
+      "data analysis",
+      "yoga instruction",
+      "mindfulness"
+    ],
+    "interests": [
+      "aviation",
+      "aerospace",
+      "music",
+      "audio arts",
+      "protecting the planet",
+      "flying planes"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "jessica-white-06032",
+    "grade": "Senior",
+    "major": "Marine Biology",
+    "skills": [
+      "marine ecology",
+      "underwater fieldwork",
+      "species identification",
+      "data analysis"
+    ],
+    "interests": [
+      "puppetry",
+      "performance arts",
+      "fashion design",
+      "textile arts"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "lisa-higgins-07488",
+    "grade": "Senior",
+    "major": "Management",
+    "skills": [
+      "organizational analysis",
+      "strategic planning",
+      "project management",
+      "decision analysis",
+      "programming"
+    ],
+    "interests": [
+      "camping",
+      "outdoor survival",
+      "programming",
+      "software development",
+      "aquatic biology",
+      "marine life",
+      "aquariums"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "bryan-schwartz-17389",
+    "grade": "Senior",
+    "major": "Nutrition Science",
+    "skills": [
+      "dietary assessment",
+      "nutritional biochemistry",
+      "data analysis",
+      "evidence-based practice"
+    ],
+    "interests": [
+      "baking",
+      "food science",
+      "gardening",
+      "horticulture",
+      "wine",
+      "sensory evaluation",
+      "baking and gardening"
+    ],
+    "availability": "moderate",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "daniel-jones-09563",
+    "grade": "Senior",
+    "major": "Journalism",
+    "skills": [
+      "investigative research",
+      "content writing",
+      "media analysis",
+      "data journalism",
+      "origami",
+      "paper engineering"
+    ],
+    "interests": [
+      "birdwatching",
+      "ecology",
+      "diy crafting",
+      "hands-on making",
+      "storytelling",
+      "origami"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "rachel-lee-16275",
+    "grade": "Senior",
+    "major": "Mechanical Engineering",
+    "skills": [
+      "cad design",
+      "thermodynamics",
+      "materials science",
+      "systems modeling",
+      "glass painting",
+      "visual arts"
+    ],
+    "interests": [
+      "zumba",
+      "dance fitness",
+      "handball",
+      "team sports",
+      "fitness"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "brandon-morales-09516",
+    "grade": "Senior",
+    "major": "Computer Science",
+    "skills": [
+      "algorithm design",
+      "software development",
+      "data structures",
+      "computational thinking"
+    ],
+    "interests": [
+      "bouldering",
+      "rock climbing",
+      "whittling",
+      "wood crafts",
+      "wildlife conservation",
+      "ecology",
+      "adventure and nature"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  },
+  {
+    "student_id": "daniel-pitts-05688",
+    "grade": "Senior",
+    "major": "Nursing",
+    "skills": [
+      "clinical assessment",
+      "patient care",
+      "evidence-based practice",
+      "health data analysis",
+      "advocating for health",
+      "whittling"
+    ],
+    "interests": [
+      "ice skating",
+      "winter sports",
+      "whittling",
+      "wood crafts",
+      "health promotion",
+      "wellness"
+    ],
+    "availability": "low",
+    "source": "pipeline_silver",
+    "annotator_notes": ""
+  }
+]

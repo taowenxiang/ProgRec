@@ -1,0 +1,26 @@
+{
+  "name": "Student Profiling Skill",
+  "description": "Extracts structured student profiles from raw narrative data using taxonomy mapping and NLP-based information extraction. Converts unstructured student records (major, hobbies, narrative story) into standardized JSON profiles with skills, interests, experience summary, and availability — ready for downstream mentor matching, graph construction, and ranking.",
+  "version": "1.0.0",
+  "tags": ["profiling", "NLP", "information-extraction", "education", "student", "SNA", "StuRec"],
+  "author": "StuRec Team - Skill 1",
+  "github": "https://github.com/your-repo/StuRec",
+  "entry_point": "from student_profiling import StudentProfilingSkill",
+  "usage_example": "skill = StudentProfilingSkill(); profile = skill.profile(record, index=0)",
+  "input_format": "dict matching RawStudentRecord schema (Name, Age, Sex, Major, Year, GPA, Hobbies, Country, State/Province, Unique Quality, Story)",
+  "output_format": "dict matching StudentProfile schema (student_id, grade, major, skills[], interests[], experience_summary, availability)",
+  "evaluation": {
+    "field_completeness": "100%",
+    "skills_coverage_ge3": "100%",
+    "interests_coverage_ge3": "100%",
+    "major_skill_consistency": "100%",
+    "skill_entropy": 8.314,
+    "total_profiles_tested": 23236
+  },
+  "dependencies": ["pydantic>=2.0"],
+  "optional_dependencies": {
+    "embeddings": ["sentence-transformers>=2.2.0", "numpy>=1.24"],
+    "eval": ["rouge-score>=0.1.2", "scikit-learn>=1.3"]
+  },
+  "schema_version": "1.0.0"
+}

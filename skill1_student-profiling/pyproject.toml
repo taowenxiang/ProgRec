@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "student-profiling-skill"
+version = "1.0.0"
+description = "Extracts structured student profiles from raw narrative data using taxonomy mapping and NLP extraction"
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers>=2.2.0", "numpy>=1.24"]
+eval = ["rouge-score>=0.1.2", "scikit-learn>=1.3"]
+dev = ["pytest>=7.0", "pytest-cov>=4.0"]
+all = ["student-profiling-skill[embeddings,eval,dev]"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
