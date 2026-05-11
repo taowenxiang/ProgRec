@@ -30,5 +30,6 @@ env/
 
 # Local agent temp directories
 .progrec_agent_tmp/
+.superpowers/
 
 skill2_handoff/outputs/academic_graph.json
