@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from sturec_agent.models import JsonDict, Mode
+from sturec_agent.models import ConversationTurn, JsonDict, Mode
 
 
 @dataclass
@@ -16,6 +16,12 @@ class AgentSession:
     skill4_result: JsonDict | None = None
     skill5_result: JsonDict | None = None
     temporary_paths: list[Path] = field(default_factory=list)
+    conversation_history: list[ConversationTurn] = field(default_factory=list)
+    agent_profile: JsonDict | None = None
+    latest_plan: JsonDict | None = None
+    active_strategy: JsonDict | None = None
+    decision_trace: list[str] = field(default_factory=list)
+    rerun_count: int = 0
 
     @property
     def has_results(self) -> bool:
@@ -43,6 +49,15 @@ class AgentSession:
         self.skill5_result = skill5_result
         self.temporary_paths = list(temporary_paths)
 
+    def set_agent_profile(self, agent_profile: JsonDict) -> None:
+        self.agent_profile = dict(agent_profile)
+
+    def set_latest_plan(self, latest_plan: JsonDict) -> None:
+        self.latest_plan = dict(latest_plan)
+
+    def set_active_strategy(self, active_strategy: JsonDict) -> None:
+        self.active_strategy = dict(active_strategy)
+
     def reset(self) -> None:
         for path in self.temporary_paths:
             if path.exists():
@@ -54,3 +69,9 @@ class AgentSession:
         self.skill4_result = None
         self.skill5_result = None
         self.temporary_paths = []
+        self.conversation_history = []
+        self.agent_profile = None
+        self.latest_plan = None
+        self.active_strategy = None
+        self.decision_trace = []
+        self.rerun_count = 0

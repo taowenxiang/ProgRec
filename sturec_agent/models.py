@@ -2,10 +2,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, TypedDict
 
 Mode = Literal["dataset_mode", "custom_profile_mode"]
 JsonDict = dict[str, Any]
+
+
+class ConversationTurn(TypedDict):
+    role: str
+    content: str
 
 
 @dataclass
