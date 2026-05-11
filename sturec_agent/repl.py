@@ -67,14 +67,20 @@ def _fallback_plan() -> ExecutionPlan:
 
 
 def run_agent_turn(session: AgentSession, user_text: str, orchestrator: StuRecOrchestrator) -> str:
+    if session.pending_clarification_questions:
+        effective_text = f"{session.pending_goal_text}\nClarification: {user_text}"
+        session.decision_trace.append("Received clarification answer and resumed planning.")
+        session.set_pending_clarification([], "")
+    else:
+        effective_text = user_text
     session.conversation_history.append({"role": "user", "content": user_text})
     llm_client = _build_llm_client_from_env()
     if llm_client is not None:
-        skill_profile, agent_profile = build_profiles_from_text(user_text, llm_client)
+        skill_profile, agent_profile = build_profiles_from_text(effective_text, llm_client)
         plan = build_execution_plan(asdict(agent_profile), llm_client)
         session.decision_trace.append("Profile drafted from natural-language input via LLM.")
     else:
-        skill_profile, agent_profile = _fallback_profiles(user_text)
+        skill_profile, agent_profile = _fallback_profiles(effective_text)
         plan = _fallback_plan()
         session.decision_trace.append("LLM unavailable; used fallback profile drafting.")
 
@@ -92,6 +98,10 @@ def run_agent_turn(session: AgentSession, user_text: str, orchestrator: StuRecOr
     )
 
     if plan.need_clarification and plan.clarification_questions:
+        session.set_pending_clarification(
+            [{"key": item.key, "question": item.question} for item in plan.clarification_questions],
+            agent_profile.goal,
+        )
         session.decision_trace.append("Planner requested clarification before running tools.")
         questions = "\n".join(f"- {item.question}" for item in plan.clarification_questions)
         return f"Before I run recommendations, I need a bit more information:\n{questions}"

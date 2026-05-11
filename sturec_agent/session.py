@@ -22,6 +22,8 @@ class AgentSession:
     active_strategy: JsonDict | None = None
     decision_trace: list[str] = field(default_factory=list)
     rerun_count: int = 0
+    pending_clarification_questions: list[JsonDict] = field(default_factory=list)
+    pending_goal_text: str = ""
 
     @property
     def has_results(self) -> bool:
@@ -58,6 +60,12 @@ class AgentSession:
     def set_active_strategy(self, active_strategy: JsonDict) -> None:
         self.active_strategy = dict(active_strategy)
 
+    def set_pending_clarification(
+        self, pending_clarification_questions: list[JsonDict], pending_goal_text: str
+    ) -> None:
+        self.pending_clarification_questions = [dict(item) for item in pending_clarification_questions]
+        self.pending_goal_text = pending_goal_text
+
     def reset(self) -> None:
         for path in self.temporary_paths:
             if path.exists():
@@ -75,3 +83,5 @@ class AgentSession:
         self.active_strategy = None
         self.decision_trace = []
         self.rerun_count = 0
+        self.pending_clarification_questions = []
+        self.pending_goal_text = ""
