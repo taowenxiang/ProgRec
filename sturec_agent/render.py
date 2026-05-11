@@ -36,3 +36,13 @@ def render_mentor_detail(mentor: dict[str, object], skill4_bundle: dict[str, obj
     for teammate in teammates[:3]:
         lines.append(f"  - {teammate.get('student_id')}: {teammate.get('reason', '')}")
     return "\n".join(lines)
+
+
+def render_agent_summary(result: dict[str, object], decision_trace: list[str], goal: str) -> str:
+    summary = render_summary(result)
+    lines = [f"Goal: {goal}", summary, "Decision Trace:"]
+    if decision_trace:
+        lines.extend(f"  - {line}" for line in decision_trace[:5])
+    else:
+        lines.append("  - No trace available.")
+    return "\n".join(lines)
