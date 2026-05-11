@@ -4,7 +4,13 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from progrec_agent.agent_schema import AgentProfile, ClarificationQuestion, ExecutionPlan
+from progrec_agent.agent_schema import (
+    AgentProfile,
+    ClarificationQuestion,
+    ExecutionPlan,
+    PendingConfirmation,
+    RouterDecision,
+)
 from progrec_agent.session import AgentSession
 
 
@@ -34,6 +40,26 @@ class TestAgentSchema(unittest.TestCase):
             session.rerun_count = 1
             self.assertEqual(session.conversation_history[0]["role"], "user")
             self.assertEqual(session.rerun_count, 1)
+
+    def test_router_decision_defaults(self) -> None:
+        decision = RouterDecision(intent="chat", confidence=0.2, candidate_tools=[])
+        self.assertEqual(decision.intent, "chat")
+        self.assertEqual(decision.candidate_tools, [])
+        self.assertFalse(decision.needs_clarification)
+
+    def test_session_tracks_pending_confirmation(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            session = AgentSession(temp_dir=Path(td))
+            pending = PendingConfirmation(
+                action_id="rebuild-graph-1",
+                tool_name="rebuild_skill2_graph",
+                arguments={"mode": "graph"},
+                prompt="Rebuild graph now?",
+            )
+            session.set_pending_confirmation(pending)
+            self.assertEqual(session.pending_confirmation_action["tool_name"], "rebuild_skill2_graph")
+            session.clear_pending_confirmation()
+            self.assertIsNone(session.pending_confirmation_action)
 
 
 if __name__ == "__main__":

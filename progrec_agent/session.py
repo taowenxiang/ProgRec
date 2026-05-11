@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from progrec_agent.models import ConversationTurn, JsonDict, Mode
@@ -20,6 +20,9 @@ class AgentSession:
     agent_profile: JsonDict | None = None
     latest_plan: JsonDict | None = None
     active_strategy: JsonDict | None = None
+    last_router_decision: JsonDict | None = None
+    last_response_summary: str = ""
+    pending_confirmation_action: JsonDict | None = None
     decision_trace: list[str] = field(default_factory=list)
     rerun_count: int = 0
     pending_clarification_questions: list[JsonDict] = field(default_factory=list)
@@ -60,6 +63,20 @@ class AgentSession:
     def set_active_strategy(self, active_strategy: JsonDict) -> None:
         self.active_strategy = dict(active_strategy)
 
+    def set_last_router_decision(self, decision: object) -> None:
+        self.last_router_decision = asdict(decision) if hasattr(decision, "__dataclass_fields__") else dict(decision)
+
+    def set_last_response_summary(self, summary: str) -> None:
+        self.last_response_summary = summary
+
+    def set_pending_confirmation(self, pending: object) -> None:
+        self.pending_confirmation_action = (
+            asdict(pending) if hasattr(pending, "__dataclass_fields__") else dict(pending)
+        )
+
+    def clear_pending_confirmation(self) -> None:
+        self.pending_confirmation_action = None
+
     def set_pending_clarification(
         self, pending_clarification_questions: list[JsonDict], pending_goal_text: str
     ) -> None:
@@ -81,6 +98,9 @@ class AgentSession:
         self.agent_profile = None
         self.latest_plan = None
         self.active_strategy = None
+        self.last_router_decision = None
+        self.last_response_summary = ""
+        self.pending_confirmation_action = None
         self.decision_trace = []
         self.rerun_count = 0
         self.pending_clarification_questions = []

@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Literal
+
+IntentName = Literal["recommend", "explain", "inspect", "debug", "rebuild", "help", "chat"]
+RiskLevel = Literal["safe", "confirm", "restricted"]
 
 
 @dataclass
@@ -36,3 +39,29 @@ class ExecutionPlan:
     run_skill5: bool = False
     rerun_needed: bool = False
     stop_reason: str = ""
+
+
+@dataclass
+class PendingConfirmation:
+    action_id: str
+    tool_name: str
+    arguments: dict[str, Any]
+    prompt: str
+
+
+@dataclass
+class RouterDecision:
+    intent: IntentName
+    confidence: float
+    candidate_tools: list[str]
+    needs_clarification: bool = False
+    clarification_question: str = ""
+    reasoning_summary: str = ""
+
+
+@dataclass
+class ToolExecutionResult:
+    tool_name: str
+    ok: bool
+    payload: dict[str, Any] = field(default_factory=dict)
+    error: str = ""
