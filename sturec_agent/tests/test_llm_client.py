@@ -20,6 +20,28 @@ class TestLLMClient(unittest.TestCase):
         parsed = client.complete_json("prompt")
         self.assertEqual(parsed["goal"], "nlp")
 
+    @patch("sturec_agent.llm_client.urlopen")
+    def test_parse_json_response_from_output_array(self, mock_urlopen) -> None:
+        body = json.dumps(
+            {
+                "output": [
+                    {
+                        "type": "message",
+                        "content": [
+                            {
+                                "type": "output_text",
+                                "text": "{\"goal\": \"trustworthy ai\"}",
+                            }
+                        ],
+                    }
+                ]
+            }
+        ).encode("utf-8")
+        mock_urlopen.return_value.__enter__.return_value.read.return_value = body
+        client = LLMClient(LLMConfig(model="demo", api_key="test-key", endpoint="https://example.com"))
+        parsed = client.complete_json("prompt")
+        self.assertEqual(parsed["goal"], "trustworthy ai")
+
 
 if __name__ == "__main__":
     unittest.main()
