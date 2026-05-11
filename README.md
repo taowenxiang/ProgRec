@@ -70,10 +70,11 @@ Manual profile runs are labeled `custom_profile_mode`. They still use the existi
 The repository now also includes an AI-agent upgrade path inside `progrec_agent/`.
 This version keeps the existing multi-skill recommendation core, but adds:
 
-- natural-language user input
+- chat-first natural-language requests
 - LLM-based profile drafting when an API key is available
-- planner-driven clarification and execution decisions
-- decision traces and bounded rerun behavior
+- clarification when intent is ambiguous
+- confirmation before graph/profile rebuild actions
+- repository-local debugging and inspection help
 
 Set an API key before running if you want LLM-backed profile drafting:
 

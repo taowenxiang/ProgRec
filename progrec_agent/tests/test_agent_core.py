@@ -25,7 +25,7 @@ class TestAgentCore(unittest.TestCase):
             session = AgentSession(temp_dir=Path(td))
             core = AgentCore(repo_root=Path("."), temp_dir=Path(td), executor=_StubExecutor(), llm_client=None)
             reply = core.handle_message(session, "Find me an NLP mentor")
-            self.assertIn("tool_name", reply)
+            self.assertIn("recommendation pipeline", reply)
 
     def test_rebuild_message_creates_pending_confirmation(self) -> None:
         with tempfile.TemporaryDirectory() as td:

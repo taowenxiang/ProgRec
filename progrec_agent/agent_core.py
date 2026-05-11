@@ -23,6 +23,13 @@ class AgentCore:
         normalized = user_text.strip().lower()
         session.conversation_history.append({"role": "user", "content": user_text})
 
+        if session.pending_confirmation_action and normalized in {"no", "n", "cancel"}:
+            session.clear_pending_confirmation()
+            reply = "Okay, I won't run that rebuild. If you want, I can inspect the current artifacts instead."
+            session.conversation_history.append({"role": "assistant", "content": reply})
+            session.set_last_response_summary(reply)
+            return reply
+
         if session.pending_confirmation_action and normalized in {"yes", "y", "confirm", "continue"}:
             pending = dict(session.pending_confirmation_action)
             session.clear_pending_confirmation()

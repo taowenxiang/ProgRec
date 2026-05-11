@@ -1,20 +1,14 @@
 from __future__ import annotations
 
 import os
-from dataclasses import asdict
 from pathlib import Path
 
 from progrec_agent.adapters.skill1_adapter import normalize_manual_profile
-from progrec_agent.agent_schema import AgentProfile, ExecutionPlan
-from progrec_agent.explainer import build_final_response
+from progrec_agent.agent_core import AgentCore
 from progrec_agent.llm_client import LLMClient, LLMConfig
 from progrec_agent.orchestrator import ProgRecOrchestrator
-from progrec_agent.planner import build_execution_plan
-from progrec_agent.profile_enricher import build_profiles_from_text
 from progrec_agent.render import render_mentor_detail, render_summary
-from progrec_agent.result_judge import judge_results
 from progrec_agent.session import AgentSession
-from progrec_agent.strategy import build_strategy
 
 
 HELP_TEXT = "Commands: recommend, show mentor <id>, show profile, show trace, restart, help, exit"
@@ -40,106 +34,13 @@ def _build_llm_client_from_env() -> LLMClient | None:
     model = (os.getenv("PROGREC_AGENT_MODEL") or "gpt-4.1-mini").strip()
     return LLMClient(LLMConfig(model=model, api_key=api_key))
 
-
-def _fallback_profiles(user_text: str) -> tuple[dict[str, object], AgentProfile]:
-    skill_profile = normalize_manual_profile(
-        {
-            "grade": "",
-            "major": "",
-            "skills": "",
-            "interests": "",
-            "experience_summary": user_text,
-            "availability": "moderate",
-            "resume_text": user_text,
-        }
-    )
-    agent_profile = AgentProfile(goal=user_text, confidence=0.0)
-    return skill_profile, agent_profile
-
-
-def _fallback_plan() -> ExecutionPlan:
-    return ExecutionPlan(
-        need_clarification=False,
-        run_skill3=True,
-        run_skill4=True,
-        run_skill5=True,
-    )
-
-
-def run_agent_turn(session: AgentSession, user_text: str, orchestrator: ProgRecOrchestrator) -> str:
-    if session.pending_clarification_questions:
-        effective_text = f"{session.pending_goal_text}\nClarification: {user_text}"
-        session.decision_trace.append("Received clarification answer and resumed planning.")
-        session.set_pending_clarification([], "")
-    else:
-        effective_text = user_text
-    session.conversation_history.append({"role": "user", "content": user_text})
-    llm_client = _build_llm_client_from_env()
-    if llm_client is not None:
-        skill_profile, agent_profile = build_profiles_from_text(effective_text, llm_client)
-        plan = build_execution_plan(asdict(agent_profile), llm_client)
-        session.decision_trace.append("Profile drafted from natural-language input via LLM.")
-    else:
-        skill_profile, agent_profile = _fallback_profiles(effective_text)
-        plan = _fallback_plan()
-        session.decision_trace.append("LLM unavailable; used fallback profile drafting.")
-
-    session.set_student_profile(skill_profile)
-    session.set_agent_profile(asdict(agent_profile))
-    strategy = build_strategy(asdict(agent_profile))
-    session.set_active_strategy(strategy)
-    session.set_latest_plan(
-        {
-            "need_clarification": plan.need_clarification,
-            "run_skill3": plan.run_skill3,
-            "run_skill4": plan.run_skill4,
-            "run_skill5": plan.run_skill5,
-        }
-    )
-
-    if plan.need_clarification and plan.clarification_questions:
-        session.set_pending_clarification(
-            [{"key": item.key, "question": item.question} for item in plan.clarification_questions],
-            agent_profile.goal,
-        )
-        session.decision_trace.append("Planner requested clarification before running tools.")
-        questions = "\n".join(f"- {item.question}" for item in plan.clarification_questions)
-        return f"Before I run recommendations, I need a bit more information:\n{questions}"
-
-    session.decision_trace.append("Planner selected the full recommendation pipeline.")
-    result = orchestrator.recommend_for_profile(skill_profile, top_k=int(strategy["top_k"]))
-    verdict = judge_results(
-        skill5_result=result["skill5_result"],
-        strategy=strategy,
-        rerun_count=session.rerun_count,
-    )
-    if verdict["rerun_needed"]:
-        session.rerun_count += 1
-        strategy["top_k"] = max(int(strategy["top_k"]), 8)
-        session.set_active_strategy(strategy)
-        session.decision_trace.append(f"Reran with adjusted strategy: {', '.join(verdict['reasons'])}")
-        result = orchestrator.recommend_for_profile(skill_profile, top_k=int(strategy["top_k"]))
-
-    session.set_mode(result["mode"])
-    session.set_resource_context(result["resource_context"])
-    session.set_results(
-        skill3_result=result["skill3_result"],
-        skill4_result=result["skill4_result"],
-        skill5_result=result["skill5_result"],
-        temporary_paths=result["temporary_paths"],
-    )
-    return build_final_response(
-        agent_profile=asdict(agent_profile),
-        skill5_result=result["skill5_result"],
-        decision_trace=session.decision_trace,
-    )
-
-
 def main() -> int:
     repo_root = Path(__file__).resolve().parents[1]
     temp_dir = repo_root / ".progrec_agent_tmp"
     temp_dir.mkdir(exist_ok=True)
     session = AgentSession(temp_dir=temp_dir)
+    llm_client = _build_llm_client_from_env()
+    core = AgentCore(repo_root=repo_root, temp_dir=temp_dir, llm_client=llm_client)
     orchestrator = ProgRecOrchestrator(repo_root=repo_root, temp_dir=temp_dir)
     print("ProgRec Agent CLI")
     print(HELP_TEXT)
@@ -191,7 +92,7 @@ def main() -> int:
             )
             print(render_summary(result))
             continue
-        print(run_agent_turn(session, command, orchestrator))
+        print(core.handle_message(session, command))
 
 
 if __name__ == "__main__":

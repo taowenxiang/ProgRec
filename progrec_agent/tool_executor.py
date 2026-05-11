@@ -27,6 +27,29 @@ class ToolExecutor:
             payload={"student_profile": dict(session.student_profile or {})},
         )
 
+    def _tool_recommend_full_pipeline(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
+        if session.student_profile and session.student_profile.get("student_id"):
+            result = self.orchestrator.recommend_for_profile(dict(session.student_profile), top_k=5)
+        else:
+            student_id = str(arguments.get("student_id") or "")
+            if not student_id:
+                return ToolExecutionResult(
+                    tool_name="recommend_full_pipeline",
+                    ok=False,
+                    error="No active student profile or student_id was provided for recommendation.",
+                )
+            result = self.orchestrator.recommend_for_student_id(student_id, top_k=5)
+        session.set_mode(result["mode"])
+        session.set_student_profile(result["student_profile"])
+        session.set_resource_context(result["resource_context"])
+        session.set_results(
+            skill3_result=result["skill3_result"],
+            skill4_result=result["skill4_result"],
+            skill5_result=result["skill5_result"],
+            temporary_paths=result["temporary_paths"],
+        )
+        return ToolExecutionResult(tool_name="recommend_full_pipeline", ok=True, payload=result)
+
     def _tool_inspect_artifacts(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
         return ToolExecutionResult(
             tool_name="inspect_artifacts",
