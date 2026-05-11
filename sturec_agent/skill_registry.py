@@ -54,7 +54,7 @@ SKILL_REGISTRY: dict[str, dict[str, Any]] = {
         "input_contract": "Paths to Skill 3 JSON, Skill 4 JSON; optional Skill 1 JSONL; --student-id, --top-k",
         "output_contract": "final_recommendation JSON: recommendations.{mentors,projects,teammates}, summary counts",
         "status": "runtime_cli",
-        "notes": "sturec_agent invokes this script via subprocess; duplicate tree under skill5/ is non-canonical.",
+        "notes": "sturec_agent invokes skill5_student-recommendation-ranker/scripts/joint_ranker.py via subprocess.",
     },
 }
 

@@ -64,9 +64,7 @@ The repo already includes a small Python package that orchestrates Skills 3–5 
 | `/academic-graph` | Skill 2 — `skill2_handoff/` (outputs + `regenerate_kit/`) |
 | `/mentor-discovery` | Skill 3 — `skill3_mentor_discovery/` |
 | `/project-teammate-discovery` | Skill 4 — `skill4_handoff/` |
-| `/social-ranking` | Skill 5 — `skill5_student-recommendation-ranker/` (canonical script path used by `sturec_agent`) |
-
-There is also a parallel copy under `skill5/`; **`sturec_agent` uses `skill5_student-recommendation-ranker/scripts/joint_ranker.py`** — treat that as the integration anchor unless the team standardizes on one tree.
+| `/social-ranking` | Skill 5 — canonical tree `skill5_student-recommendation-ranker/`; entrypoint `skill5_student-recommendation-ranker/scripts/joint_ranker.py` (used by `sturec_agent`). |
 
 ---
 
