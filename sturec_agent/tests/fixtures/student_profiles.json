@@ -1,0 +1,23 @@
+{
+  "version": "1.0-test",
+  "students": [
+    {
+      "student_id": "alice-test-00001",
+      "grade": "Senior",
+      "major": "Computer Science",
+      "skills": ["python"],
+      "interests": ["machine learning"],
+      "experience_summary": "Test",
+      "availability": "high"
+    },
+    {
+      "student_id": "bob-test-00002",
+      "grade": "Junior",
+      "major": "Biology",
+      "skills": ["statistics"],
+      "interests": ["ecology"],
+      "experience_summary": "Test",
+      "availability": "moderate"
+    }
+  ]
+}

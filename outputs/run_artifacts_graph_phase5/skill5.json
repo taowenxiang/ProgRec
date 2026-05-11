@@ -1,0 +1,822 @@
+{
+  "student_id": "jamie-taylor-00008",
+  "student_profile": {
+    "student_id": "jamie-taylor-00008",
+    "grade": "Junior",
+    "major": "Computer Science",
+    "skills": [
+      "algorithm design",
+      "software development",
+      "data structures",
+      "computational thinking",
+      "nature interpretation",
+      "ecology",
+      "calligraphy"
+    ],
+    "interests": [
+      "poetry",
+      "creative writing",
+      "calligraphy",
+      "visual arts",
+      "computer science",
+      "nature with others"
+    ],
+    "experience_summary": "Jamie had joined a club on campus that organized nature walks and hikes for students.",
+    "availability": "moderate"
+  },
+  "is_cold_start": false,
+  "recommendations": {
+    "mentors": [
+      {
+        "mentor_id": "m_021",
+        "topic_score": 0.1930952399748631,
+        "graph_score": 1.7158796016777087,
+        "community_id": "community_0",
+        "final_score": 0.4182,
+        "mentor_name": "Hannah Rivera",
+        "activity_score": 0.41125,
+        "centrality_score": 0.7916956080359054,
+        "network_proximity": 0.0,
+        "personalized_proximity": 1.0,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.7916956080359054,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 1.0,
+          "project_path_score": 0.0,
+          "advising_path_score": 4.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in data, structures, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1931,
+          "skill_match": 0.0,
+          "network_distance": 1.0,
+          "community": 0.9375,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.4113,
+          "skill3_final_score": 0.5783,
+          "final_score": 0.4182
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in data, structures, writing.",
+        "diversity_penalty": -0.0,
+        "rank": 1
+      },
+      {
+        "mentor_id": "m_095",
+        "topic_score": 0.18489115182578766,
+        "graph_score": 1.7178420402329557,
+        "community_id": "community_0",
+        "final_score": 0.4159,
+        "mentor_name": "Joshua Bennett",
+        "activity_score": 0.40625,
+        "centrality_score": 0.8040379888865146,
+        "network_proximity": 0.0,
+        "personalized_proximity": 1.0,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.8040379888865146,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 1.0,
+          "project_path_score": 0.0,
+          "advising_path_score": 4.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in data, structures, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1849,
+          "skill_match": 0.0,
+          "network_distance": 1.0,
+          "community": 0.9412,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.4062,
+          "skill3_final_score": 0.4161,
+          "final_score": 0.4159
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in data, structures, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 2
+      },
+      {
+        "mentor_id": "m_142",
+        "topic_score": 0.1921066924543484,
+        "graph_score": 1.3246237243534944,
+        "community_id": "community_0",
+        "final_score": 0.402,
+        "mentor_name": "Brooke Torres",
+        "activity_score": 0.51,
+        "centrality_score": 0.830966819833298,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.75,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.830966819833298,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.75,
+          "project_path_score": 0.0,
+          "advising_path_score": 3.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in data, structures, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1921,
+          "skill_match": 0.0,
+          "network_distance": 0.9116,
+          "community": 0.9493,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.51,
+          "skill3_final_score": 0.5453,
+          "final_score": 0.402
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in data, structures, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 3
+      },
+      {
+        "mentor_id": "m_187",
+        "topic_score": 0.1902094674129705,
+        "graph_score": 1.3177105885338747,
+        "community_id": "community_0",
+        "final_score": 0.396,
+        "mentor_name": "Brooke Peterson",
+        "activity_score": 0.38625,
+        "centrality_score": 0.7874879782004705,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.75,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.7874879782004705,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.75,
+          "project_path_score": 0.0,
+          "advising_path_score": 3.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in data, structures, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1902,
+          "skill_match": 0.0,
+          "network_distance": 0.8951,
+          "community": 0.9362,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.3862,
+          "skill3_final_score": 0.4672,
+          "final_score": 0.396
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in data, structures, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 4
+      },
+      {
+        "mentor_id": "m_058",
+        "topic_score": 0.1956734241402336,
+        "graph_score": 1.6407919026501387,
+        "community_id": "community_0",
+        "final_score": 0.3811,
+        "mentor_name": "Anna Alexander",
+        "activity_score": 0.5525,
+        "centrality_score": 0.31944592861722576,
+        "network_proximity": 0.0,
+        "personalized_proximity": 1.0,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.31944592861722576,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 1.0,
+          "project_path_score": 0.0,
+          "advising_path_score": 4.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in computer, design, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1957,
+          "skill_match": 0.0,
+          "network_distance": 0.9162,
+          "community": 0.7958,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.5525,
+          "skill3_final_score": 0.6657,
+          "final_score": 0.3811
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in computer, design, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 5
+      },
+      {
+        "mentor_id": "m_031",
+        "topic_score": 0.20754015592144565,
+        "graph_score": 0.5480258335114341,
+        "community_id": "community_0",
+        "final_score": 0.3418,
+        "mentor_name": "Olivia Wright",
+        "activity_score": 0.46875,
+        "centrality_score": 0.9467033554178242,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.25,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.9467033554178242,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.25,
+          "project_path_score": 0.0,
+          "advising_path_score": 1.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in design, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.2075,
+          "skill_match": 0.0,
+          "network_distance": 0.558,
+          "community": 0.984,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.4688,
+          "skill3_final_score": 0.744,
+          "final_score": 0.3418
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in design, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 6
+      },
+      {
+        "mentor_id": "m_030",
+        "topic_score": 0.197814911882771,
+        "graph_score": 0.8486580399123743,
+        "community_id": "community_0",
+        "final_score": 0.3045,
+        "mentor_name": "Sofia Lee",
+        "activity_score": 0.67125,
+        "centrality_score": 0.33747194913443035,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.5,
+        "graph_confidence": 0.7949999999999999,
+        "mentor_authority": 0.33747194913443035,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.5,
+          "project_path_score": 0.0,
+          "advising_path_score": 2.0
+        },
+        "top_evidence_paths": [
+          "student -> skill_complementarity -> student -> advising <- mentor"
+        ],
+        "reasons": [
+          "Topic fit is supported by overlap in computer, design, writing.",
+          "Graph evidence is strongest through advising and complementarity path signals.",
+          "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+          "Graph support is high confidence because it includes stronger trust-weighted connections.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1978,
+          "skill_match": 0.0,
+          "network_distance": 0.5256,
+          "community": 0.8012,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.6713,
+          "skill3_final_score": 0.6539,
+          "final_score": 0.3045
+        },
+        "explanation": "Close network proximity or high centrality. Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in computer, design, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 7
+      },
+      {
+        "mentor_id": "m_102",
+        "topic_score": 0.20530129423202936,
+        "graph_score": 0.0,
+        "community_id": "community_0",
+        "final_score": 0.2889,
+        "mentor_name": "Chloe Cooper",
+        "activity_score": 0.48375,
+        "centrality_score": 0.9716686257747381,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.0,
+        "graph_confidence": 0.0,
+        "mentor_authority": 0.9716686257747381,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.0,
+          "project_path_score": 0.0,
+          "advising_path_score": 0.0
+        },
+        "top_evidence_paths": [],
+        "reasons": [
+          "Topic fit is supported by overlap in design, writing.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.2053,
+          "skill_match": 0.0,
+          "network_distance": 0.2915,
+          "community": 0.9915,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.4838,
+          "skill3_final_score": 0.6455,
+          "final_score": 0.2889
+        },
+        "explanation": "Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in design, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 8
+      },
+      {
+        "mentor_id": "m_147",
+        "topic_score": 0.19655060599703392,
+        "graph_score": 0.0,
+        "community_id": "community_0",
+        "final_score": 0.2687,
+        "mentor_name": "Isabella Ward",
+        "activity_score": 0.505,
+        "centrality_score": 0.8082456187219494,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.0,
+        "graph_confidence": 0.0,
+        "mentor_authority": 0.8082456187219494,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.0,
+          "project_path_score": 0.0,
+          "advising_path_score": 0.0
+        },
+        "top_evidence_paths": [],
+        "reasons": [
+          "Topic fit is supported by overlap in data, structures, writing.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1966,
+          "skill_match": 0.0,
+          "network_distance": 0.2425,
+          "community": 0.9425,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.505,
+          "skill3_final_score": 0.4808,
+          "final_score": 0.2687
+        },
+        "explanation": "Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in data, structures, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 9
+      },
+      {
+        "mentor_id": "m_178",
+        "topic_score": 0.19284959739422353,
+        "graph_score": 0.0,
+        "community_id": "community_0",
+        "final_score": 0.2072,
+        "mentor_name": "Amelia Morgan",
+        "activity_score": 0.5125,
+        "centrality_score": 0.2349861081427655,
+        "network_proximity": 0.0,
+        "personalized_proximity": 0.0,
+        "graph_confidence": 0.0,
+        "mentor_authority": 0.2349861081427655,
+        "meta_path_breakdown": {
+          "interest_path_score": 0.0,
+          "complementarity_path_score": 0.0,
+          "project_path_score": 0.0,
+          "advising_path_score": 0.0
+        },
+        "top_evidence_paths": [],
+        "reasons": [
+          "Topic fit is supported by overlap in computer, design, writing.",
+          "This mentor belongs to community_0 in the mentor collaboration graph.",
+          "The mentor shows solid research activity based on profile and graph signals."
+        ],
+        "scores": {
+          "topic_similarity": 0.1928,
+          "skill_match": 0.0,
+          "network_distance": 0.0705,
+          "community": 0.7705,
+          "cold_start_bonus": 0.1,
+          "activity_score": 0.5125,
+          "skill3_final_score": 0.4107,
+          "final_score": 0.2072
+        },
+        "explanation": "Same research community (community_0). Cold-start bonus applied (emerging mentor). Topic fit is supported by overlap in computer, design, writing.",
+        "diversity_penalty": -0.3,
+        "rank": 10
+      }
+    ],
+    "projects": [
+      {
+        "project_id": "proj_0016",
+        "title": "Undergraduate research studio: benchmark for systems workflows",
+        "fit_score": 0.3,
+        "topic_match_score": 0.0,
+        "skill_match_score": 0.0,
+        "difficulty_match_score": 1.0,
+        "matched_interests": [],
+        "matched_skills": [],
+        "missing_skills": [
+          "cuda",
+          "latex",
+          "linear algebra",
+          "systems programming"
+        ],
+        "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in cuda, latex, linear algebra, systems programming.",
+        "mentor_id": "m_031",
+        "scores": {
+          "topic_match": 0.0,
+          "skill_match": 0.0,
+          "difficulty_match": 1.0,
+          "mentor_link": 0.744,
+          "skill4_fit_score": 0.3,
+          "final_score": 0.3488
+        },
+        "final_score": 0.3488,
+        "explanation": "Skill gaps to address: cuda, latex, linear algebra. Appropriate difficulty for student grade",
+        "diversity_penalty": -0.0,
+        "rank": 1
+      },
+      {
+        "project_id": "proj_0025",
+        "title": "Undergraduate research studio: analysis for HCI workflows",
+        "fit_score": 0.3,
+        "topic_match_score": 0.0,
+        "skill_match_score": 0.0,
+        "difficulty_match_score": 1.0,
+        "matched_interests": [],
+        "matched_skills": [],
+        "missing_skills": [
+          "c++",
+          "probability",
+          "rust"
+        ],
+        "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in c++, probability, rust.",
+        "mentor_id": "m_058",
+        "scores": {
+          "topic_match": 0.0,
+          "skill_match": 0.0,
+          "difficulty_match": 1.0,
+          "mentor_link": 0.6657,
+          "skill4_fit_score": 0.3,
+          "final_score": 0.3331
+        },
+        "final_score": 0.3331,
+        "explanation": "Skill gaps to address: c++, probability, rust. Appropriate difficulty for student grade",
+        "diversity_penalty": -0.0,
+        "rank": 2
+      },
+      {
+        "project_id": "proj_0015",
+        "title": "Undergraduate research studio: tooling for security workflows",
+        "fit_score": 0.3,
+        "topic_match_score": 0.0,
+        "skill_match_score": 0.0,
+        "difficulty_match_score": 1.0,
+        "matched_interests": [],
+        "matched_skills": [],
+        "missing_skills": [
+          "hci study methods",
+          "networking",
+          "rust",
+          "systems programming"
+        ],
+        "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in hci study methods, networking, rust, systems programming.",
+        "mentor_id": "m_030",
+        "scores": {
+          "topic_match": 0.0,
+          "skill_match": 0.0,
+          "difficulty_match": 1.0,
+          "mentor_link": 0.6539,
+          "skill4_fit_score": 0.3,
+          "final_score": 0.3308
+        },
+        "final_score": 0.3308,
+        "explanation": "Skill gaps to address: hci study methods, networking, rust. Appropriate difficulty for student grade",
+        "diversity_penalty": -0.0,
+        "rank": 3
+      },
+      {
+        "project_id": "proj_0045",
+        "title": "Undergraduate research studio: analysis for systems workflows",
+        "fit_score": 0.3,
+        "topic_match_score": 0.0,
+        "skill_match_score": 0.0,
+        "difficulty_match_score": 1.0,
+        "matched_interests": [],
+        "matched_skills": [],
+        "missing_skills": [
+          "hci study methods",
+          "linear algebra",
+          "systems programming"
+        ],
+        "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in hci study methods, linear algebra, systems programming.",
+        "mentor_id": "m_102",
+        "scores": {
+          "topic_match": 0.0,
+          "skill_match": 0.0,
+          "difficulty_match": 1.0,
+          "mentor_link": 0.6455,
+          "skill4_fit_score": 0.3,
+          "final_score": 0.3291
+        },
+        "final_score": 0.3291,
+        "explanation": "Skill gaps to address: hci study methods, linear algebra, systems programming. Appropriate difficulty for student grade",
+        "diversity_penalty": -0.0,
+        "rank": 4
+      },
+      {
+        "project_id": "proj_0082",
+        "title": "Undergraduate research studio: prototype for security workflows",
+        "fit_score": 0.3,
+        "topic_match_score": 0.0,
+        "skill_match_score": 0.0,
+        "difficulty_match_score": 1.0,
+        "matched_interests": [],
+        "matched_skills": [],
+        "missing_skills": [
+          "cuda",
+          "networking",
+          "pytorch",
+          "rust"
+        ],
+        "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in cuda, networking, pytorch, rust.",
+        "mentor_id": "m_187",
+        "scores": {
+          "topic_match": 0.0,
+          "skill_match": 0.0,
+          "difficulty_match": 1.0,
+          "mentor_link": 0.4672,
+          "skill4_fit_score": 0.3,
+          "final_score": 0.2934
+        },
+        "final_score": 0.2934,
+        "explanation": "Skill gaps to address: cuda, networking, pytorch. Appropriate difficulty for student grade",
+        "diversity_penalty": -0.0,
+        "rank": 5
+      },
+      {
+        "project_id": "proj_0041",
+        "title": "Undergraduate research studio: benchmark for systems workflows",
+        "fit_score": 0.3,
+        "topic_match_score": 0.0,
+        "skill_match_score": 0.0,
+        "difficulty_match_score": 1.0,
+        "matched_interests": [],
+        "matched_skills": [],
+        "missing_skills": [
+          "linear algebra",
+          "networking",
+          "rust",
+          "systems programming"
+        ],
+        "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in linear algebra, networking, rust, systems programming.",
+        "mentor_id": "m_095",
+        "scores": {
+          "topic_match": 0.0,
+          "skill_match": 0.0,
+          "difficulty_match": 1.0,
+          "mentor_link": 0.4161,
+          "skill4_fit_score": 0.3,
+          "final_score": 0.2832
+        },
+        "final_score": 0.2832,
+        "explanation": "Skill gaps to address: linear algebra, networking, rust. Appropriate difficulty for student grade",
+        "diversity_penalty": -0.0,
+        "rank": 6
+      }
+    ],
+    "teammates": [
+      {
+        "student_id": "tyler-houston-00161",
+        "teammate_score": 0.4775,
+        "shared_interest_score": 0.25,
+        "complementarity_score": 0.4444,
+        "availability_score": 0.7,
+        "graph_relation_score": 0.8222,
+        "shared_interests": [
+          "calligraphy",
+          "visual arts"
+        ],
+        "complementary_skills": [
+          "algorithm design",
+          "computational thinking",
+          "data structures",
+          "software development"
+        ],
+        "availability": "moderate",
+        "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: algorithm design, computational thinking, data structures, software development. The Skill 2 graph also shows: shared_interest, skill_complementarity.",
+        "scores": {
+          "shared_interest": 0.25,
+          "complementarity": 0.4444,
+          "availability": 0.7,
+          "graph_relation": 0.8222,
+          "skill4_teammate_score": 0.4775,
+          "final_score": 0.43
+        },
+        "final_score": 0.43,
+        "explanation": "Shared interests: calligraphy, visual arts. Complementary skills: algorithm design, computational thinking, data structures. Graph-connected (shared interest / skill complementarity edge)",
+        "diversity_penalty": -0.0,
+        "rank": 1
+      },
+      {
+        "student_id": "christopher-lawson-01376",
+        "teammate_score": 0.4579,
+        "shared_interest_score": 0.1818,
+        "complementarity_score": 0.5714,
+        "availability_score": 0.4,
+        "graph_relation_score": 0.7714,
+        "shared_interests": [
+          "creative writing",
+          "poetry"
+        ],
+        "complementary_skills": [
+          "algorithm design",
+          "computational thinking",
+          "data structures",
+          "software development"
+        ],
+        "availability": "low",
+        "reason": "The teammate shares interests such as creative writing, poetry. They can complement missing skills: algorithm design, computational thinking, data structures, software development. The Skill 2 graph also shows: skill_complementarity.",
+        "scores": {
+          "shared_interest": 0.1818,
+          "complementarity": 0.5714,
+          "availability": 0.4,
+          "graph_relation": 0.7714,
+          "skill4_teammate_score": 0.4579,
+          "final_score": 0.4184
+        },
+        "final_score": 0.4184,
+        "explanation": "Shared interests: creative writing, poetry. Complementary skills: algorithm design, computational thinking, data structures. Graph-connected (shared interest / skill complementarity edge)",
+        "diversity_penalty": -0.0,
+        "rank": 2
+      },
+      {
+        "student_id": "william-pineda-00459",
+        "teammate_score": 0.335,
+        "shared_interest_score": 0.1,
+        "complementarity_score": 0.0,
+        "availability_score": 1.0,
+        "graph_relation_score": 1.0,
+        "shared_interests": [
+          "visual arts"
+        ],
+        "complementary_skills": [],
+        "availability": "high",
+        "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity.",
+        "scores": {
+          "shared_interest": 0.1,
+          "complementarity": 0.0,
+          "availability": 1.0,
+          "graph_relation": 1.0,
+          "skill4_teammate_score": 0.335,
+          "final_score": 0.24
+        },
+        "final_score": 0.24,
+        "explanation": "Shared interests: visual arts. Graph-connected (shared interest / skill complementarity edge). High availability",
+        "diversity_penalty": -0.15,
+        "rank": 3
+      },
+      {
+        "student_id": "miranda-jimenez-00184",
+        "teammate_score": 0.4783,
+        "shared_interest_score": 0.1667,
+        "complementarity_score": 0.4444,
+        "availability_score": 1.0,
+        "graph_relation_score": 0.8222,
+        "shared_interests": [
+          "calligraphy",
+          "visual arts"
+        ],
+        "complementary_skills": [
+          "algorithm design",
+          "computational thinking",
+          "data structures",
+          "software development"
+        ],
+        "availability": "high",
+        "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: algorithm design, computational thinking, data structures, software development. The Skill 2 graph also shows: skill_complementarity.",
+        "scores": {
+          "shared_interest": 0.1667,
+          "complementarity": 0.4444,
+          "availability": 1.0,
+          "graph_relation": 0.8222,
+          "skill4_teammate_score": 0.4783,
+          "final_score": 0.4267
+        },
+        "final_score": 0.4267,
+        "explanation": "Shared interests: calligraphy, visual arts. Complementary skills: algorithm design, computational thinking, data structures. Graph-connected (shared interest / skill complementarity edge). High availability",
+        "diversity_penalty": -0.3,
+        "rank": 4
+      },
+      {
+        "student_id": "sherry-moore-01786",
+        "teammate_score": 0.3808,
+        "shared_interest_score": 0.25,
+        "complementarity_score": 0.0,
+        "availability_score": 1.0,
+        "graph_relation_score": 0.9667,
+        "shared_interests": [
+          "calligraphy",
+          "visual arts"
+        ],
+        "complementary_skills": [],
+        "availability": "high",
+        "reason": "The teammate shares interests such as calligraphy, visual arts. The Skill 2 graph also shows: shared_interest, skill_complementarity.",
+        "scores": {
+          "shared_interest": 0.25,
+          "complementarity": 0.0,
+          "availability": 1.0,
+          "graph_relation": 0.9667,
+          "skill4_teammate_score": 0.3808,
+          "final_score": 0.2967
+        },
+        "final_score": 0.2967,
+        "explanation": "Shared interests: calligraphy, visual arts. Graph-connected (shared interest / skill complementarity edge). High availability",
+        "diversity_penalty": -0.3,
+        "rank": 5
+      },
+      {
+        "student_id": "jesse-serrano-00500",
+        "teammate_score": 0.3318,
+        "shared_interest_score": 0.0909,
+        "complementarity_score": 0.0,
+        "availability_score": 1.0,
+        "graph_relation_score": 1.0,
+        "shared_interests": [
+          "visual arts"
+        ],
+        "complementary_skills": [],
+        "availability": "high",
+        "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity.",
+        "scores": {
+          "shared_interest": 0.0909,
+          "complementarity": 0.0,
+          "availability": 1.0,
+          "graph_relation": 1.0,
+          "skill4_teammate_score": 0.3318,
+          "final_score": 0.2364
+        },
+        "final_score": 0.2364,
+        "explanation": "Shared interests: visual arts. Graph-connected (shared interest / skill complementarity edge). High availability",
+        "diversity_penalty": -0.3,
+        "rank": 6
+      }
+    ]
+  },
+  "summary": {
+    "total_mentor_candidates": 10,
+    "total_project_candidates": 6,
+    "total_teammate_candidates": 6,
+    "ranked_mentors": 10,
+    "ranked_projects": 6,
+    "ranked_teammates": 6
+  }
+}

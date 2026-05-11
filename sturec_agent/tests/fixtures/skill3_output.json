@@ -1,0 +1,10 @@
+{
+  "student_id": "alice-test-00001",
+  "mentor_candidates": [
+    {
+      "mentor_id": "m_001",
+      "topic_score": 0.5,
+      "final_score": 0.6
+    }
+  ]
+}

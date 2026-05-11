@@ -1,0 +1,16 @@
+{
+  "student_id": "alice-test-00001",
+  "recommendations": {
+    "mentors": [],
+    "projects": [],
+    "teammates": []
+  },
+  "summary": {
+    "total_mentor_candidates": 1,
+    "total_project_candidates": 1,
+    "total_teammate_candidates": 1,
+    "ranked_mentors": 1,
+    "ranked_projects": 1,
+    "ranked_teammates": 1
+  }
+}

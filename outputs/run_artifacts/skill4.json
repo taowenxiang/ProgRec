@@ -1,0 +1,2108 @@
+{
+  "target_student_id": "jamie-taylor-00008",
+  "target_student_profile": {
+    "grade": "Junior",
+    "major": "Computer Science",
+    "skills": [
+      "algorithm design",
+      "calligraphy",
+      "computational thinking",
+      "data structures",
+      "ecology",
+      "nature interpretation",
+      "software development"
+    ],
+    "interests": [
+      "calligraphy",
+      "computer science",
+      "creative writing",
+      "nature with others",
+      "poetry",
+      "visual arts"
+    ],
+    "availability": "moderate"
+  },
+  "mentor_project_teammate_recommendations": [
+    {
+      "mentor_id": "m_031",
+      "mentor_base_score": 0.744,
+      "topic_score": 0.2075,
+      "graph_score": 0.548,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4688,
+      "centrality_score": 0.9467,
+      "network_proximity": 0.0,
+      "mentor_name": "Olivia Wright",
+      "skill3_rank": 1,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_058",
+      "mentor_base_score": 0.6657,
+      "topic_score": 0.1957,
+      "graph_score": 1.6408,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.5525,
+      "centrality_score": 0.3194,
+      "network_proximity": 0.0,
+      "mentor_name": "Anna Alexander",
+      "skill3_rank": 2,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_030",
+      "mentor_base_score": 0.6539,
+      "topic_score": 0.1978,
+      "graph_score": 0.8487,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.6713,
+      "centrality_score": 0.3375,
+      "network_proximity": 0.0,
+      "mentor_name": "Sofia Lee",
+      "skill3_rank": 3,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_102",
+      "mentor_base_score": 0.6455,
+      "topic_score": 0.2053,
+      "graph_score": 0.0,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4838,
+      "centrality_score": 0.9717,
+      "network_proximity": 0.0,
+      "mentor_name": "Chloe Cooper",
+      "skill3_rank": 4,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in design, writing.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_021",
+      "mentor_base_score": 0.5783,
+      "topic_score": 0.1931,
+      "graph_score": 1.7159,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4113,
+      "centrality_score": 0.7917,
+      "network_proximity": 0.0,
+      "mentor_name": "Hannah Rivera",
+      "skill3_rank": 5,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_142",
+      "mentor_base_score": 0.5453,
+      "topic_score": 0.1921,
+      "graph_score": 1.3246,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.51,
+      "centrality_score": 0.831,
+      "network_proximity": 0.0,
+      "mentor_name": "Brooke Torres",
+      "skill3_rank": 6,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_147",
+      "mentor_base_score": 0.4808,
+      "topic_score": 0.1966,
+      "graph_score": 0.0,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.505,
+      "centrality_score": 0.8082,
+      "network_proximity": 0.0,
+      "mentor_name": "Isabella Ward",
+      "skill3_rank": 7,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_187",
+      "mentor_base_score": 0.4672,
+      "topic_score": 0.1902,
+      "graph_score": 1.3177,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.3862,
+      "centrality_score": 0.7875,
+      "network_proximity": 0.0,
+      "mentor_name": "Brooke Peterson",
+      "skill3_rank": 8,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_095",
+      "mentor_base_score": 0.4161,
+      "topic_score": 0.1849,
+      "graph_score": 1.7178,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4062,
+      "centrality_score": 0.804,
+      "network_proximity": 0.0,
+      "mentor_name": "Joshua Bennett",
+      "skill3_rank": 9,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_178",
+      "mentor_base_score": 0.4107,
+      "topic_score": 0.1928,
+      "graph_score": 0.0,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "lisa-perry-00052",
+          "teammate_score": 0.25,
+          "shared_interest_score": 0.0,
+          "complementarity_score": 0.4,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "They can complement missing skills: algorithm design, computational thinking, data structures, software development."
+        },
+        {
+          "student_id": "erin-clark-00046",
+          "teammate_score": 0.235,
+          "shared_interest_score": 0.2,
+          "complementarity_score": 0.1667,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy, software development."
+        },
+        {
+          "student_id": "barbara-crawford-00118",
+          "teammate_score": 0.2171,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0769,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.0,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "calligraphy"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: calligraphy."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.5125,
+      "centrality_score": 0.235,
+      "network_proximity": 0.0,
+      "mentor_name": "Amelia Morgan",
+      "skill3_rank": 10,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    }
+  ],
+  "data_sources": {
+    "student_profiles": "/Users/chialinchen/Social Network/ProgRec/skill1_handoff/student_profiles_normalized.jsonl",
+    "academic_graph": null,
+    "mentor_candidates": "/var/folders/l5/ph3yyb8x7ql7cyvch8k5mkw40000gn/T/sturec_run__ddzu7u1/skill3.json",
+    "mentor_candidate_source": "skill3_json",
+    "project_source": "none",
+    "target_student_resolution": "resolved_ok",
+    "requested_target_student_id": "jamie-taylor-00008",
+    "effective_target_student_id": "jamie-taylor-00008",
+    "sample_student_ids": [
+      "thomas-ibarra-00000",
+      "timothy-wilson-00001",
+      "nancy-brown-00002",
+      "donna-reyes-00003",
+      "mary-gonzales-00004",
+      "tanner-york-00005",
+      "maria-jones-00006",
+      "jessica-blankenship-00007",
+      "jamie-taylor-00008",
+      "bryan-watson-00009"
+    ],
+    "skill3_target_student_id": "jamie-taylor-00008",
+    "skill3_declared_student_id": "jamie-taylor-00008",
+    "skill3_output_path": "/var/folders/l5/ph3yyb8x7ql7cyvch8k5mkw40000gn/T/sturec_run__ddzu7u1/skill3.json",
+    "skill3_output_in_use": true,
+    "allow_target_fallback_with_skill3": false
+  },
+  "warnings": [],
+  "reason_graphs": [
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_031",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_058",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_030",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_102",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_021",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_142",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_147",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_187",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_095",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_178",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "lisa-perry-00052",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "erin-clark-00046",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 9
+        },
+        {
+          "kind": "teammate",
+          "label": "barbara-crawford-00118",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "calligraphy",
+          "id": 11
+        }
+      ],
+      "links": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 11,
+          "source": 10,
+          "target": 11
+        }
+      ],
+      "format": "networkx_node_link"
+    }
+  ]
+}

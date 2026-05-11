@@ -1,0 +1,19 @@
+topic_id,label
+t_ml_core,Machine learning (core)
+t_deep,Deep learning & representation learning
+t_prob_ml,Probabilistic modeling & Bayesian ML
+t_cv,Computer vision
+t_nlp,Natural language processing
+t_robot,Robotics & embodied AI
+t_sys,Systems & operating systems
+t_dist,Distributed systems & cloud infrastructure
+t_arch,Computer architecture & hardware–software co-design
+t_theory,Algorithms & computational complexity
+t_opt,Discrete optimization & mathematical programming
+t_sec,Security & privacy
+t_crypto,Cryptography (applied & theoretical hooks)
+t_hci,Human–computer interaction
+t_vis,Visualization & visual analytics
+t_db,Databases & data management
+t_edtech,Computing education & HCI for learning
+t_health,Computing for health & biomedicine

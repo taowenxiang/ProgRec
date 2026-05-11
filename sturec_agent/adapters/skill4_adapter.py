@@ -11,6 +11,20 @@ if str(_SKILL4_ROOT) not in sys.path:
 from skill.discovery import discover_projects_and_teammates, run_pipeline_from_cli_config
 from skill.skill2_adapter import load_academic_graph
 
+from sturec_agent.config import ResourceConfig
+
+
+def _first_existing_academic_graph(repo_root: Path) -> str:
+    """Match ``skill4_handoff/main.py`` auto-resolve order so dataset runs see the real graph."""
+    for candidate in (
+        repo_root / "skill2_handoff/outputs/academic_graph.json",
+        repo_root / "skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
+        repo_root / "data/processed/academic_graph.json",
+    ):
+        if candidate.is_file():
+            return str(candidate.resolve())
+    return ""
+
 
 def run_skill4_dataset_mode(
     *,
@@ -18,13 +32,27 @@ def run_skill4_dataset_mode(
     student_id: str,
     skill3_path: Path,
     output_path: Path,
+    bundle: ResourceConfig | None = None,
 ) -> dict[str, object]:
+    if bundle is not None:
+        graph_s = str(bundle.skill2_graph) if bundle.skill2_graph else ""
+        students_s = str(bundle.skill2_students)
+        mentors_s = str(bundle.skill2_mentors)
+        skill1_s = str(bundle.skill1_profiles) if bundle.skill1_profiles else str(
+            repo_root / "skill1_handoff/student_profiles_normalized.jsonl"
+        )
+    else:
+        graph_s = _first_existing_academic_graph(repo_root)
+        students_s = ""
+        mentors_s = ""
+        skill1_s = str(repo_root / "skill1_handoff/student_profiles_normalized.jsonl")
+
     cfg = {
         "target_student_id": student_id,
-        "skill1_profiles_path": str(repo_root / "skill1_handoff/student_profiles_normalized.jsonl"),
-        "skill2_graph_path": "",
-        "skill2_students_path": "",
-        "skill2_mentors_path": "",
+        "skill1_profiles_path": skill1_s,
+        "skill2_graph_path": graph_s,
+        "skill2_students_path": students_s,
+        "skill2_mentors_path": mentors_s,
         "mentor_candidates_path": str(skill3_path),
         "skill3_output_path": str(skill3_path),
         "mock_projects_path": str(repo_root / "skill4_handoff/data/mock_projects.json"),

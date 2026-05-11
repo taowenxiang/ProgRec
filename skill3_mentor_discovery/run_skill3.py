@@ -24,7 +24,22 @@ def _resolve_student(resources, student_id: str) -> dict[str, object]:
     for student in resources.students:
         if student.get("student_id") == student_id:
             return student
-    raise ValueError(f"Unknown student_id: {student_id}")
+    sample = [str(s.get("student_id")) for s in resources.students[:10] if s.get("student_id")]
+    raise ValueError(
+        f"Unknown student_id: {student_id}. First available student_id values (up to 10): {sample}"
+    )
+
+
+def _data_sources(resources) -> dict[str, object]:
+    paths = resources.paths
+    return {
+        "student_profiles": str(paths.student_profiles_path.resolve()),
+        "mentor_profiles": str(paths.mentor_profiles_path.resolve()),
+        "academic_graph": str(resources.graph_source_path.resolve())
+        if resources.graph_source_path
+        else None,
+        "resource_mode": paths.resource_mode,
+    }
 
 
 def main() -> None:
@@ -32,6 +47,24 @@ def main() -> None:
     parser.add_argument("--student-id", help="Student id from standardized student profiles.")
     parser.add_argument("--top-k", type=int, default=5, help="Number of mentor candidates to return.")
     parser.add_argument("--json-indent", type=int, default=2, help="Indentation for JSON output.")
+    parser.add_argument(
+        "--skill2-graph",
+        type=Path,
+        default=None,
+        help="Optional academic_graph.json; must exist if passed (no fallback to outputs/).",
+    )
+    parser.add_argument(
+        "--skill2-students",
+        type=Path,
+        default=None,
+        help="Optional student_profiles_standard.json (must exist if passed).",
+    )
+    parser.add_argument(
+        "--skill2-mentors",
+        type=Path,
+        default=None,
+        help="Optional mentor_profiles_standard.json (must exist if passed).",
+    )
     parser.add_argument(
         "--evaluation-mode",
         choices=("none", "ablation", "perturbation"),
@@ -58,13 +91,30 @@ def main() -> None:
     graph_status = "loaded"
     graph_notice = None
     try:
-        resources = load_standardized_resources(repo_root, rebuild_graph_if_missing=True)
+        resources = load_standardized_resources(
+            repo_root,
+            rebuild_graph_if_missing=True,
+            skill2_graph=args.skill2_graph,
+            skill2_students=args.skill2_students,
+            skill2_mentors=args.skill2_mentors,
+        )
     except (subprocess.CalledProcessError, FileNotFoundError):
-        resources = load_standardized_resources(repo_root, rebuild_graph_if_missing=False)
+        resources = load_standardized_resources(
+            repo_root,
+            rebuild_graph_if_missing=False,
+            skill2_graph=args.skill2_graph,
+            skill2_students=args.skill2_students,
+            skill2_mentors=args.skill2_mentors,
+        )
         graph_status = "unavailable_fallback_to_topic_only"
         graph_notice = "Graph rebuild was unavailable, so Skill 3 used topic-only mentor ranking."
 
-    student = _resolve_student(resources, args.student_id)
+    try:
+        student = _resolve_student(resources, args.student_id)
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        raise SystemExit(2) from exc
+
     if graph_status == "loaded":
         prepared_graph, graph_status, graph_notice = prepare_graph_for_ranking(
             resources.graph,
@@ -81,6 +131,7 @@ def main() -> None:
         "student_id": args.student_id,
         "graph_status": graph_status,
         "mentor_candidates": [candidate.to_dict() for candidate in mentor_candidates],
+        "data_sources": _data_sources(resources),
     }
     if graph_notice is not None:
         payload["graph_notice"] = graph_notice

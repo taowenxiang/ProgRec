@@ -65,6 +65,34 @@ Supported commands:
 
 Manual profile runs are labeled `custom_profile_mode`. They still use the existing Skill 2-5 resources, but the student is treated as a temporary profile instead of a graph-native student node.
 
+## Agent-level execution
+
+See [`AGENTS.md`](AGENTS.md) for the full multi-skill Agent contract, stable skill identifiers, demo vs graph mode, and debugging.
+
+Quick start (non-interactive pipeline):
+
+```bash
+python3 sturec_agent/run_agent.py \
+  --mode demo \
+  --output outputs/final_recommendation_demo.json
+```
+
+Use `--student-id <id>` when the default (first id in the mode’s student bundle) is not what you want. Graph mode requires a built `academic_graph.json` under `skill2_handoff/regenerate_kit/data/processed/` and routes **Skill 3 and Skill 4** through the same processed student, mentor, and graph files (see `AGENTS.md`).
+
+### Verified Agent Run (graph)
+
+Documented example student and frozen outputs: [`outputs/verified_demo/README.md`](outputs/verified_demo/README.md).
+
+```bash
+python3 sturec_agent/run_agent.py \
+  --mode graph \
+  --student-id jamie-taylor-00008 \
+  --top-k 10 \
+  --output outputs/final_recommendation_graph.json \
+  --artifacts-dir outputs/run_artifacts_graph
+python3 sturec_agent/inspect_output.py --output outputs/final_recommendation_graph.json
+```
+
 ## Notes
 
 - The repository already has a GitHub remote configured at `origin`.

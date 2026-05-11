@@ -1,0 +1,87 @@
+project_id,title,mentor_id,topic_ids,required_skills
+proj_0001,Undergraduate research studio: benchmark for HCI workflows,m_004,t_hci,Linear algebra|Rust|CUDA|Statistics
+proj_0002,Undergraduate research studio: prototype for vision workflows,m_007,t_ml_core,C++|Python
+proj_0003,Undergraduate research studio: tooling for systems workflows,m_008,t_ml_core,C++|LaTeX
+proj_0004,Undergraduate research studio: tooling for HCI workflows,m_009,t_cv,Python|CUDA
+proj_0005,Undergraduate research studio: tooling for learning workflows,m_010,t_ml_core,C++|Probability|Linear algebra|Algorithms
+proj_0006,Undergraduate research studio: analysis for HCI workflows,m_011,t_arch,CUDA|Probability
+proj_0007,Undergraduate research studio: tooling for security workflows,m_012,t_sec,CUDA|Python|PyTorch|Probability
+proj_0008,Undergraduate research studio: benchmark for learning workflows,m_014,t_robot,Networking|Algorithms|Statistics
+proj_0009,Undergraduate research studio: prototype for learning workflows,m_015,t_ml_core,PyTorch|Systems programming
+proj_0010,Undergraduate research studio: tooling for learning workflows,m_016,t_opt,LaTeX|Networking|Systems programming
+proj_0011,Undergraduate research studio: tooling for systems workflows,m_017,t_prob_ml,Systems programming|HCI study methods
+proj_0012,Undergraduate research studio: analysis for language workflows,m_018,t_sys,Statistics|Systems programming
+proj_0013,Undergraduate research studio: analysis for security workflows,m_025,t_crypto,Algorithms|C++|Systems programming|Networking
+proj_0014,Undergraduate research studio: prototype for language workflows,m_028,t_arch,Systems programming|HCI study methods
+proj_0015,Undergraduate research studio: tooling for security workflows,m_030,t_edtech,Networking|HCI study methods|Systems programming|Rust
+proj_0016,Undergraduate research studio: benchmark for systems workflows,m_031,t_ml_core,Linear algebra|CUDA|Systems programming|LaTeX
+proj_0017,Undergraduate research studio: prototype for language workflows,m_036,t_cv,HCI study methods|Networking|Systems programming
+proj_0018,Undergraduate research studio: prototype for vision workflows,m_037,t_cv,PyTorch|Systems programming|Python|Networking
+proj_0019,Undergraduate research studio: analysis for systems workflows,m_038,t_hci,Systems programming|LaTeX
+proj_0020,Undergraduate research studio: analysis for vision workflows,m_043,t_ml_core,C++|CUDA|Python
+proj_0021,Undergraduate research studio: tooling for language workflows,m_046,t_robot,PyTorch|HCI study methods
+proj_0022,Undergraduate research studio: benchmark for security workflows,m_049,t_robot,Networking|Rust|C++
+proj_0023,Undergraduate research studio: prototype for vision workflows,m_053,t_ml_core,Systems programming|Probability
+proj_0024,Undergraduate research studio: tooling for learning workflows,m_054,t_opt,CUDA|Networking|C++
+proj_0025,Undergraduate research studio: analysis for HCI workflows,m_058,t_edtech,Probability|Rust|C++
+proj_0026,Undergraduate research studio: prototype for learning workflows,m_059,t_deep,Algorithms|Systems programming
+proj_0027,Undergraduate research studio: benchmark for HCI workflows,m_061,t_ml_core,Python|LaTeX|Networking
+proj_0028,Undergraduate research studio: tooling for language workflows,m_062,t_prob_ml,Linear algebra|LaTeX|Algorithms
+proj_0029,Undergraduate research studio: prototype for security workflows,m_064,t_sec,Probability|PyTorch
+proj_0030,Undergraduate research studio: benchmark for learning workflows,m_065,t_arch,Algorithms|LaTeX|Probability|Python
+proj_0031,Undergraduate research studio: tooling for learning workflows,m_070,t_crypto,PyTorch|Linear algebra|C++|Rust
+proj_0032,Undergraduate research studio: benchmark for language workflows,m_071,t_ml_core,Python|PyTorch|C++
+proj_0033,Undergraduate research studio: tooling for learning workflows,m_075,t_theory,Algorithms|Python|Networking|Rust
+proj_0034,Undergraduate research studio: analysis for vision workflows,m_078,t_ml_core,LaTeX|Python
+proj_0035,Undergraduate research studio: tooling for learning workflows,m_081,t_nlp,Python|HCI study methods
+proj_0036,Undergraduate research studio: analysis for security workflows,m_085,t_opt,LaTeX|Statistics|C++
+proj_0037,Undergraduate research studio: tooling for systems workflows,m_088,t_ml_core,HCI study methods|Networking
+proj_0038,Undergraduate research studio: tooling for HCI workflows,m_092,t_nlp,Probability|HCI study methods|PyTorch|C++
+proj_0039,Undergraduate research studio: analysis for security workflows,m_093,t_ml_core,CUDA|Rust|PyTorch|Linear algebra
+proj_0040,Undergraduate research studio: benchmark for vision workflows,m_094,t_nlp,Probability|Algorithms
+proj_0041,Undergraduate research studio: benchmark for systems workflows,m_095,t_ml_core,Networking|Systems programming|Linear algebra|Rust
+proj_0042,Undergraduate research studio: prototype for language workflows,m_097,t_prob_ml,PyTorch|Probability|CUDA
+proj_0043,Undergraduate research studio: tooling for learning workflows,m_099,t_arch,Systems programming|Probability
+proj_0044,Undergraduate research studio: prototype for security workflows,m_101,t_sys,Linear algebra|LaTeX|Probability|Statistics
+proj_0045,Undergraduate research studio: analysis for systems workflows,m_102,t_ml_core,HCI study methods|Linear algebra|Systems programming
+proj_0046,Undergraduate research studio: tooling for language workflows,m_105,t_nlp,PyTorch|Probability|Python
+proj_0047,Undergraduate research studio: prototype for vision workflows,m_106,t_ml_core,C++|Algorithms|Systems programming
+proj_0048,Undergraduate research studio: tooling for HCI workflows,m_109,t_hci,Algorithms|HCI study methods|C++|Python
+proj_0049,Undergraduate research studio: tooling for learning workflows,m_115,t_theory,PyTorch|CUDA
+proj_0050,Undergraduate research studio: prototype for vision workflows,m_118,t_dist,PyTorch|Statistics|Systems programming|Python
+proj_0051,Undergraduate research studio: benchmark for HCI workflows,m_120,t_prob_ml,Linear algebra|Algorithms|Probability
+proj_0052,Undergraduate research studio: prototype for systems workflows,m_121,t_nlp,Statistics|Rust
+proj_0053,Undergraduate research studio: benchmark for learning workflows,m_125,t_theory,Rust|Systems programming
+proj_0054,Undergraduate research studio: analysis for HCI workflows,m_126,t_dist,LaTeX|Rust
+proj_0055,Undergraduate research studio: benchmark for systems workflows,m_129,t_robot,PyTorch|Probability
+proj_0056,Undergraduate research studio: benchmark for language workflows,m_130,t_ml_core,Linear algebra|Rust|PyTorch|Networking
+proj_0057,Undergraduate research studio: benchmark for learning workflows,m_133,t_nlp,Statistics|C++
+proj_0058,Undergraduate research studio: benchmark for learning workflows,m_135,t_edtech,Linear algebra|Probability|Python|HCI study methods
+proj_0059,Undergraduate research studio: benchmark for security workflows,m_136,t_theory,Linear algebra|Systems programming
+proj_0060,Undergraduate research studio: prototype for HCI workflows,m_139,t_theory,Probability|Statistics|Networking|C++
+proj_0061,Undergraduate research studio: analysis for vision workflows,m_140,t_cv,Algorithms|HCI study methods|Linear algebra|LaTeX
+proj_0062,Undergraduate research studio: tooling for systems workflows,m_141,t_robot,Python|HCI study methods
+proj_0063,Undergraduate research studio: tooling for systems workflows,m_145,t_ml_core,Python|C++|CUDA|Systems programming
+proj_0064,Undergraduate research studio: prototype for HCI workflows,m_146,t_cv,CUDA|Probability|Statistics
+proj_0065,Undergraduate research studio: prototype for learning workflows,m_148,t_ml_core,Probability|HCI study methods|Networking|Algorithms
+proj_0066,Undergraduate research studio: analysis for learning workflows,m_149,t_ml_core,Systems programming|Rust|Algorithms
+proj_0067,Undergraduate research studio: prototype for systems workflows,m_150,t_prob_ml,Python|C++|PyTorch
+proj_0068,Undergraduate research studio: tooling for security workflows,m_151,t_sys,Rust|Probability|C++
+proj_0069,Undergraduate research studio: prototype for vision workflows,m_152,t_arch,Statistics|Rust
+proj_0070,Undergraduate research studio: benchmark for security workflows,m_154,t_cv,Python|LaTeX
+proj_0071,Undergraduate research studio: tooling for security workflows,m_155,t_ml_core,Python|Algorithms|Linear algebra|HCI study methods
+proj_0072,Undergraduate research studio: tooling for systems workflows,m_156,t_nlp,C++|HCI study methods
+proj_0073,Undergraduate research studio: tooling for language workflows,m_157,t_ml_core,Python|Probability|Statistics|Algorithms
+proj_0074,Undergraduate research studio: tooling for language workflows,m_162,t_sys,C++|Rust
+proj_0075,Undergraduate research studio: prototype for learning workflows,m_163,t_ml_core,Linear algebra|Systems programming
+proj_0076,Undergraduate research studio: analysis for systems workflows,m_165,t_ml_core,CUDA|Rust|C++
+proj_0077,Undergraduate research studio: prototype for vision workflows,m_169,t_robot,C++|Algorithms
+proj_0078,Undergraduate research studio: prototype for learning workflows,m_172,t_robot,Rust|C++|Statistics|Networking
+proj_0079,Undergraduate research studio: benchmark for systems workflows,m_173,t_nlp,Networking|PyTorch|Python|Algorithms
+proj_0080,Undergraduate research studio: analysis for security workflows,m_174,t_hci,Systems programming|Linear algebra|CUDA|Algorithms
+proj_0081,Undergraduate research studio: benchmark for language workflows,m_181,t_cv,CUDA|HCI study methods|Python
+proj_0082,Undergraduate research studio: prototype for security workflows,m_187,t_opt,Rust|CUDA|Networking|PyTorch
+proj_0083,Undergraduate research studio: prototype for vision workflows,m_188,t_deep,Statistics|C++
+proj_0084,Undergraduate research studio: prototype for HCI workflows,m_191,t_ml_core,Linear algebra|Networking|Probability|CUDA
+proj_0085,Undergraduate research studio: analysis for language workflows,m_194,t_cv,Probability|C++
+proj_0086,Undergraduate research studio: benchmark for systems workflows,m_196,t_cv,Rust|LaTeX|CUDA|C++

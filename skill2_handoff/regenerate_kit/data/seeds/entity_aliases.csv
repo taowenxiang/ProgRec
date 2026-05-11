@@ -1,0 +1,14 @@
+canonical_type,canonical_id,alias_source,alias_id
+mentor,m_001,openalex,A474393181
+mentor,m_002,openalex,A384012626
+mentor,m_003,openalex,A945597785
+mentor,m_004,openalex,A279163215
+mentor,m_005,openalex,A142433446
+mentor,m_006,openalex,A381283935
+mentor,m_007,openalex,A172821248
+mentor,m_008,openalex,A803525067
+mentor,m_009,openalex,A282950234
+mentor,m_010,openalex,A349799332
+paper,p_00001,doi,10.1000/synth.001
+paper,p_00002,doi,10.1000/synth.002
+paper,p_00003,doi,10.1000/synth.003

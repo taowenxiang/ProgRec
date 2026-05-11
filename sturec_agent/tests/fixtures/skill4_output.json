@@ -1,0 +1,21 @@
+{
+  "target_student_id": "alice-test-00001",
+  "mentor_project_teammate_recommendations": [
+    {
+      "mentor_id": "m_001",
+      "project_recommendations": [
+        {
+          "project_id": "p_001",
+          "title": "Test Project",
+          "fit_score": 0.7
+        }
+      ],
+      "teammate_recommendations": [
+        {
+          "student_id": "bob-test-00002",
+          "teammate_score": 0.5
+        }
+      ]
+    }
+  ]
+}

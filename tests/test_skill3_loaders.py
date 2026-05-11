@@ -302,3 +302,65 @@ class LoaderResolutionTest(unittest.TestCase):
             },
             prepared_graph["edges"],
         )
+
+
+class LoaderExplicitPathsTest(unittest.TestCase):
+    def test_resolve_explicit_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            outputs = root / "skill2_handoff" / "outputs"
+            proc = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            outputs.mkdir(parents=True)
+            proc.mkdir(parents=True)
+            m = proc / "mentor_profiles_standard.json"
+            s = proc / "student_profiles_standard.json"
+            g = proc / "academic_graph.json"
+            m.write_text(json.dumps({"mentors": [{"mentor_id": "m_1", "name": "A"}]}), encoding="utf-8")
+            s.write_text(
+                json.dumps(
+                    {
+                        "students": [
+                            {
+                                "student_id": "s_1",
+                                "grade": "Senior",
+                                "major": "CS",
+                                "skills": [],
+                                "interests": [],
+                                "experience_summary": "",
+                                "availability": "high",
+                            }
+                        ]
+                    }
+                ),
+                encoding="utf-8",
+            )
+            g.write_text(json.dumps({"nodes": {"mentor": [], "student": []}, "edges": []}), encoding="utf-8")
+            resolved = resolve_resource_paths(root, skill2_graph=g, skill2_students=s, skill2_mentors=m)
+            self.assertEqual(resolved.resource_mode, "explicit")
+            self.assertEqual(resolved.mentor_profiles_path.resolve(), m.resolve())
+            self.assertEqual(resolved.student_profiles_path.resolve(), s.resolve())
+            self.assertEqual(resolved.graph_candidates, (g.resolve(),))
+
+    def test_resolve_explicit_missing_graph_raises(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            proc = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            proc.mkdir(parents=True)
+            m = proc / "mentor_profiles_standard.json"
+            s = proc / "student_profiles_standard.json"
+            m.write_text(json.dumps({"mentors": []}), encoding="utf-8")
+            s.write_text(json.dumps({"students": []}), encoding="utf-8")
+            missing = proc / "missing_graph.json"
+            with self.assertRaises(FileNotFoundError):
+                resolve_resource_paths(
+                    root,
+                    skill2_graph=missing,
+                    skill2_students=s,
+                    skill2_mentors=m,
+                )
+
+    def test_load_standardized_resources_default_unchanged(self) -> None:
+        repo_root = Path(__file__).resolve().parents[1]
+        paths = resolve_resource_paths(repo_root)
+        self.assertEqual(paths.resource_mode, "default")
+        self.assertGreaterEqual(len(paths.graph_candidates), 1)

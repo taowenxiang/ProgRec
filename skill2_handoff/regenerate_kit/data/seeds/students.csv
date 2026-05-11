@@ -1,0 +1,141 @@
+student_id,grade,major,skills,interests
+s_001,Year 1,Computer Engineering,C++|Python|Rust,systems|NLP
+s_002,Year 2,Computer Engineering,SQL|probability|TensorFlow|C++,computer vision|robotics|security|theory
+s_003,Year 2,Computer Science,Linux|Java|PyTorch|TensorFlow,HCI|systems
+s_004,Year 4,Computer Engineering,probability|Python|TensorFlow,PL|robotics|theory|graphics
+s_005,Year 4,Data Science,algorithms|Java|Linux|Rust|probability|Python,machine learning|NLP|computer vision|robotics
+s_006,Year 1,Mathematics & Computer Science,PyTorch|algorithms|Python|C++|JavaScript,graphics|robotics|computer vision|HCI
+s_007,Year 1,Data Science,Linux|JavaScript|Java|PyTorch,NLP|PL|computer vision
+s_008,Year 2,Computer Science,SQL|Python|Linux|algorithms|C++|Rust,security|HCI|graphics|robotics
+s_009,Year 1,Mathematics & Computer Science,PyTorch|C++|Java|probability,security|machine learning|systems
+s_010,Year 3,Data Science,probability|Python|SQL|PyTorch|Rust,systems|robotics
+s_011,Year 2,Electrical & Computer Engineering,TensorFlow|Python|JavaScript|PyTorch|Java|Rust,NLP|PL
+s_012,Year 4,Computer Engineering,Java|probability|JavaScript|C++|SQL|algorithms,NLP|security|graphics
+s_013,Year 3,Computer Engineering,probability|Linux|algorithms,machine learning|graphics|theory|systems
+s_014,Year 1,Electrical & Computer Engineering,C++|Rust|JavaScript|Java|TensorFlow|Linux,HCI|systems|robotics|computer vision
+s_015,Year 3,Computer Engineering,JavaScript|SQL|C++|TensorFlow,machine learning|security|robotics|computer vision
+s_016,Year 2,Data Science,Python|Rust|Java|Linux,security|graphics|theory|robotics
+s_017,Year 1,Data Science,TensorFlow|SQL|PyTorch|JavaScript|Rust,theory|HCI|systems
+s_018,Year 3,Computer Engineering,Rust|PyTorch|TensorFlow|SQL|algorithms,HCI|PL|graphics
+s_019,Year 1,Mathematics & Computer Science,JavaScript|C++|Java|algorithms,systems|security|machine learning
+s_020,Year 1,Electrical & Computer Engineering,algorithms|JavaScript|Linux|Java|PyTorch,NLP|HCI|PL
+s_021,Year 3,Data Science,PyTorch|JavaScript|SQL|C++|Python|Java,theory|systems
+s_022,Year 2,Computer Engineering,algorithms|Java|JavaScript|C++|Rust,systems|machine learning
+s_023,Year 3,Electrical & Computer Engineering,Rust|C++|PyTorch|Java,security|systems|robotics
+s_024,Year 1,Mathematics & Computer Science,Rust|SQL|probability|Java|TensorFlow|Python,graphics|computer vision
+s_025,Year 4,Electrical & Computer Engineering,C++|probability|Java|Linux|algorithms,graphics|theory|computer vision|systems
+s_026,Year 3,Data Science,Rust|TensorFlow|JavaScript|C++,graphics|theory|systems
+s_027,Year 3,Mathematics & Computer Science,Java|SQL|Rust,NLP|machine learning|HCI|theory
+s_028,Year 3,Computer Engineering,SQL|probability|algorithms|C++,HCI|PL|security|robotics
+s_029,Year 2,Computer Engineering,Python|Java|JavaScript|probability|TensorFlow|SQL,security|NLP|theory|systems
+s_030,Year 1,Computer Science,TensorFlow|Linux|Python|algorithms|SQL,theory|NLP
+s_031,Year 2,Computer Science,C++|TensorFlow|SQL|Rust|Python,machine learning|systems|robotics
+s_032,Year 1,Computer Engineering,Linux|Java|SQL|C++|Python|algorithms,robotics|HCI
+s_033,Year 3,Data Science,Linux|PyTorch|C++|Python,NLP|theory|robotics|PL
+s_034,Year 2,Data Science,probability|Rust|algorithms|C++|Java,theory|robotics
+s_035,Year 2,Electrical & Computer Engineering,Python|JavaScript|TensorFlow|SQL,robotics|security|PL|computer vision
+s_036,Year 2,Mathematics & Computer Science,Java|Linux|TensorFlow|Python|Rust|PyTorch,machine learning|graphics
+s_037,Year 4,Computer Science,PyTorch|algorithms|SQL|Java,NLP|robotics|HCI|machine learning
+s_038,Year 1,Computer Science,Java|C++|PyTorch|probability|algorithms|TensorFlow,robotics|graphics|NLP|security
+s_039,Year 1,Mathematics & Computer Science,JavaScript|Linux|probability|PyTorch|Rust|Java,theory|systems|NLP
+s_040,Year 2,Computer Engineering,C++|probability|algorithms|Python,computer vision|systems|graphics|PL
+s_041,Year 3,Electrical & Computer Engineering,probability|C++|algorithms|TensorFlow,machine learning|HCI|NLP
+s_042,Year 3,Computer Engineering,probability|Python|PyTorch|Rust|Linux,theory|robotics|computer vision|HCI
+s_043,Year 1,Electrical & Computer Engineering,JavaScript|PyTorch|SQL,computer vision|robotics|machine learning
+s_044,Year 4,Data Science,Linux|JavaScript|Java|TensorFlow,machine learning|computer vision
+s_045,Year 2,Mathematics & Computer Science,PyTorch|Python|Linux|JavaScript,HCI|robotics|theory|security
+s_046,Year 3,Mathematics & Computer Science,TensorFlow|JavaScript|SQL,security|PL
+s_047,Year 3,Electrical & Computer Engineering,C++|Java|TensorFlow,HCI|systems
+s_048,Year 1,Computer Science,TensorFlow|PyTorch|JavaScript|Python|Linux,computer vision|HCI|robotics|systems
+s_049,Year 3,Mathematics & Computer Science,TensorFlow|C++|Python|SQL|PyTorch|Linux,machine learning|systems
+s_050,Year 2,Mathematics & Computer Science,probability|Python|Java|SQL,NLP|computer vision
+s_051,Year 2,Data Science,Rust|algorithms|probability,HCI|PL|theory|systems
+s_052,Year 4,Mathematics & Computer Science,algorithms|Linux|SQL,computer vision|NLP
+s_053,Year 4,Mathematics & Computer Science,Rust|Java|C++|Linux|probability|TensorFlow,machine learning|theory|security
+s_054,Year 4,Electrical & Computer Engineering,TensorFlow|Rust|algorithms|JavaScript|Java|Python,computer vision|HCI|security|NLP
+s_055,Year 2,Computer Science,C++|Rust|Java|probability|Python,computer vision|PL
+s_056,Year 3,Computer Science,SQL|PyTorch|JavaScript|Linux|probability,theory|systems|PL|machine learning
+s_057,Year 1,Computer Science,PyTorch|Linux|SQL|probability,systems|graphics|HCI
+s_058,Year 4,Mathematics & Computer Science,algorithms|SQL|probability|JavaScript|Python,robotics|HCI|security
+s_059,Year 4,Computer Science,TensorFlow|Python|algorithms|PyTorch|Java,security|robotics|theory
+s_060,Year 2,Computer Science,JavaScript|algorithms|PyTorch|C++|Rust|Linux,computer vision|security
+s_061,Year 2,Electrical & Computer Engineering,Rust|TensorFlow|probability|Python|algorithms|C++,theory|machine learning|NLP|PL
+s_062,Year 3,Computer Science,Linux|C++|SQL|PyTorch,robotics|HCI|systems|computer vision
+s_063,Year 1,Data Science,Linux|algorithms|probability|TensorFlow|JavaScript,security|systems|HCI
+s_064,Year 4,Computer Engineering,TensorFlow|JavaScript|algorithms|Rust|C++,systems|computer vision|PL|theory
+s_065,Year 1,Mathematics & Computer Science,algorithms|Rust|JavaScript|Linux,theory|systems|robotics|graphics
+s_066,Year 3,Mathematics & Computer Science,Python|Linux|algorithms|C++|Java,machine learning|security
+s_067,Year 4,Computer Engineering,Rust|algorithms|Linux|JavaScript|Python|Java,computer vision|machine learning
+s_068,Year 4,Computer Engineering,C++|Java|SQL,theory|security
+s_069,Year 3,Electrical & Computer Engineering,Rust|JavaScript|PyTorch|TensorFlow|C++,PL|NLP|graphics
+s_070,Year 1,Computer Engineering,Python|JavaScript|algorithms,HCI|systems|PL|machine learning
+s_071,Year 2,Electrical & Computer Engineering,algorithms|Python|probability|C++,security|computer vision|NLP|HCI
+s_072,Year 1,Computer Engineering,TensorFlow|PyTorch|probability|algorithms|Java|C++,security|theory|machine learning|systems
+s_073,Year 4,Computer Science,Java|JavaScript|TensorFlow|algorithms,systems|security
+s_074,Year 4,Mathematics & Computer Science,Java|probability|Rust|TensorFlow,robotics|systems
+s_075,Year 2,Computer Engineering,C++|probability|Python|Rust|Java|algorithms,systems|NLP|PL
+s_076,Year 4,Computer Engineering,Python|JavaScript|Rust,theory|HCI|graphics|PL
+s_077,Year 1,Computer Science,C++|algorithms|JavaScript|PyTorch|SQL,machine learning|NLP|computer vision|security
+s_078,Year 4,Mathematics & Computer Science,Java|SQL|JavaScript|Rust|Python,robotics|security|machine learning
+s_079,Year 2,Computer Engineering,Python|C++|algorithms|JavaScript|Rust,security|NLP|theory
+s_080,Year 3,Computer Engineering,Rust|C++|Linux|algorithms,robotics|machine learning|NLP|graphics
+s_081,Year 2,Data Science,algorithms|Java|Rust|Linux|Python|probability,robotics|PL
+s_082,Year 3,Mathematics & Computer Science,SQL|Java|algorithms|PyTorch|probability|Rust,machine learning|theory|HCI
+s_083,Year 2,Mathematics & Computer Science,TensorFlow|Rust|Python|C++|SQL,security|robotics|machine learning|theory
+s_084,Year 2,Computer Engineering,SQL|C++|Rust|Python|Java,NLP|machine learning|PL
+s_085,Year 3,Mathematics & Computer Science,algorithms|Python|Java,NLP|PL|graphics
+s_086,Year 3,Computer Science,Python|SQL|PyTorch|JavaScript|TensorFlow,theory|computer vision|PL|security
+s_087,Year 4,Data Science,PyTorch|Java|C++|JavaScript|Python,security|graphics|robotics
+s_088,Year 4,Computer Engineering,probability|C++|TensorFlow|Java|SQL|PyTorch,PL|machine learning|security
+s_089,Year 4,Mathematics & Computer Science,JavaScript|Linux|C++|Rust|SQL,robotics|theory
+s_090,Year 1,Computer Engineering,C++|Java|algorithms,computer vision|graphics
+s_091,Year 4,Electrical & Computer Engineering,Rust|TensorFlow|Linux,PL|machine learning|computer vision
+s_092,Year 4,Computer Science,JavaScript|Python|Rust|C++|SQL|algorithms,PL|systems|security|computer vision
+s_093,Year 3,Computer Science,Java|C++|algorithms|Linux|Rust|PyTorch,systems|robotics|graphics|PL
+s_094,Year 4,Computer Engineering,Python|TensorFlow|JavaScript|C++,computer vision|HCI
+s_095,Year 2,Mathematics & Computer Science,probability|JavaScript|PyTorch|Rust|Java,machine learning|graphics|robotics|computer vision
+s_096,Year 3,Data Science,SQL|Python|JavaScript|probability|Linux,PL|security|machine learning|NLP
+s_097,Year 4,Computer Science,Python|TensorFlow|PyTorch|algorithms,PL|security
+s_098,Year 2,Mathematics & Computer Science,JavaScript|algorithms|C++|PyTorch|Rust|TensorFlow,robotics|NLP|security|PL
+s_099,Year 2,Data Science,SQL|probability|algorithms|TensorFlow,NLP|security
+s_100,Year 2,Computer Science,Java|PyTorch|TensorFlow|probability|SQL|JavaScript,machine learning|security
+s_101,Year 2,Computer Engineering,Java|probability|TensorFlow|PyTorch|algorithms,NLP|security
+s_102,Year 3,Electrical & Computer Engineering,Rust|PyTorch|probability|SQL|TensorFlow|algorithms,HCI|NLP
+s_103,Year 3,Computer Engineering,PyTorch|probability|Java,systems|graphics|machine learning
+s_104,Year 3,Computer Science,Rust|Java|probability|Python,systems|graphics
+s_105,Year 2,Computer Engineering,probability|Java|C++,computer vision|NLP
+s_106,Year 1,Data Science,Linux|Java|TensorFlow|C++|PyTorch,graphics|HCI|theory
+s_107,Year 4,Data Science,Java|algorithms|probability,security|systems|machine learning|robotics
+s_108,Year 3,Data Science,probability|Python|algorithms|PyTorch,PL|graphics
+s_109,Year 4,Mathematics & Computer Science,Rust|TensorFlow|Linux|algorithms|PyTorch|SQL,HCI|systems|PL
+s_110,Year 3,Computer Science,C++|Rust|JavaScript|probability|Python|Linux,HCI|NLP
+s_111,Year 2,Computer Science,C++|Python|JavaScript|Java,systems|NLP
+s_112,Year 3,Electrical & Computer Engineering,Java|JavaScript|SQL|probability,theory|PL
+s_113,Year 2,Mathematics & Computer Science,algorithms|Linux|Java|C++|JavaScript,robotics|computer vision|machine learning|theory
+s_114,Year 2,Mathematics & Computer Science,PyTorch|Python|C++|algorithms|SQL|probability,robotics|NLP|security
+s_115,Year 2,Electrical & Computer Engineering,Rust|Java|Python|TensorFlow|SQL|Linux,NLP|systems|robotics
+s_116,Year 2,Electrical & Computer Engineering,TensorFlow|Linux|C++,PL|NLP|machine learning
+s_117,Year 1,Mathematics & Computer Science,Linux|PyTorch|C++|SQL|algorithms|Rust,robotics|NLP
+s_118,Year 2,Electrical & Computer Engineering,probability|Rust|algorithms|SQL|Linux|TensorFlow,graphics|security
+s_119,Year 1,Electrical & Computer Engineering,C++|PyTorch|SQL|Java|Linux|Rust,systems|computer vision|machine learning|theory
+s_120,Year 2,Computer Engineering,Rust|probability|C++|Java,graphics|PL|robotics|NLP
+s_121,Year 2,Mathematics & Computer Science,Linux|SQL|TensorFlow,machine learning|HCI|theory|robotics
+s_122,Year 4,Computer Science,PyTorch|TensorFlow|C++,graphics|PL
+s_123,Year 1,Data Science,Java|algorithms|C++|SQL,theory|HCI|computer vision|robotics
+s_124,Year 1,Data Science,algorithms|Linux|Rust|JavaScript|C++|TensorFlow,NLP|machine learning|PL
+s_125,Year 4,Mathematics & Computer Science,PyTorch|Linux|probability|C++|JavaScript,PL|computer vision|NLP
+s_126,Year 3,Mathematics & Computer Science,JavaScript|algorithms|Linux|C++,security|robotics|systems
+s_127,Year 4,Computer Science,JavaScript|C++|Python|SQL|algorithms|TensorFlow,NLP|HCI|graphics
+s_128,Year 3,Computer Science,algorithms|probability|PyTorch|SQL|Python|JavaScript,graphics|theory
+s_129,Year 3,Mathematics & Computer Science,Linux|TensorFlow|JavaScript|PyTorch|C++,graphics|robotics
+s_130,Year 3,Computer Science,SQL|Rust|JavaScript|probability|Linux|TensorFlow,robotics|HCI|computer vision
+s_131,Year 4,Data Science,JavaScript|probability|TensorFlow,PL|NLP
+s_132,Year 4,Computer Science,C++|Java|Python|probability|Rust,theory|machine learning
+s_133,Year 4,Mathematics & Computer Science,Linux|algorithms|Python|probability|PyTorch,NLP|systems|graphics|PL
+s_134,Year 1,Computer Engineering,Linux|probability|algorithms,machine learning|security
+s_135,Year 4,Data Science,algorithms|probability|SQL|JavaScript,computer vision|graphics|security|robotics
+s_136,Year 2,Computer Science,SQL|TensorFlow|Python|Linux,robotics|machine learning
+s_137,Year 3,Mathematics & Computer Science,Java|algorithms|TensorFlow|Rust|Python|C++,systems|computer vision|PL
+s_138,Year 2,Mathematics & Computer Science,PyTorch|SQL|Python|algorithms|TensorFlow,computer vision|graphics
+s_139,Year 4,Computer Engineering,probability|Python|algorithms|Java|TensorFlow|SQL,security|computer vision|machine learning
+s_140,Year 2,Data Science,JavaScript|probability|C++|Python|Rust,systems|security|HCI

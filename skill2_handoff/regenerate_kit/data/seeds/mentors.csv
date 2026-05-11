@@ -1,0 +1,201 @@
+mentor_id,name,department,h_index
+m_001,Ryan Cole,Department of Computer Science & Engineering,46
+m_002,Alice Watson,Department of Electrical Engineering & Computer Science,20
+m_003,Jordan King,Department of Computer Science & Engineering,32
+m_004,Thomas Tran,Department of Computing,16
+m_005,David Wilson,Department of Computer Science,46
+m_006,Mei Cook,School of Computer Science,57
+m_007,Jason Bailey,School of Computer Science,54
+m_008,Harper Jenkins,School of Computer Science,42
+m_009,Leah Alexander,College of Computing & Informatics,41
+m_010,Tyler Griffin,Department of Computing,39
+m_011,Charles Hughes,Department of Computer & Information Science,18
+m_012,Matthew Martinez,School of Computer Science,31
+m_013,Benjamin Powell,Department of Computing,64
+m_014,Julia Wright,Department of Computer & Information Science,24
+m_015,Isabella Butler,College of Computing & Informatics,45
+m_016,Yuki Hall,School of Computer Science,26
+m_017,Sophia Adams,Department of Computer Science,38
+m_018,Leah Collins,College of Computing & Informatics,54
+m_019,Michael Campbell,Department of Computing,16
+m_020,Layla Howard,Department of Computing,47
+m_021,Hannah Rivera,Department of Computer Science & Engineering,49
+m_022,Yuki Griffin,Department of Computer & Information Science,14
+m_023,Thomas Griffin,Department of Computer & Information Science,38
+m_024,Christopher Murphy,Department of Computer Science,66
+m_025,Christopher Cooper,Department of Computer Science & Engineering,21
+m_026,Daniel Rogers,Department of Computer & Information Science,21
+m_027,Nina Johnson,Department of Computer Science & Engineering,48
+m_028,Samuel Owens,Department of Computer Science,34
+m_029,Jonathan Ross,Department of Computer & Information Science,32
+m_030,Sofia Lee,School of Computer Science,53
+m_031,Olivia Wright,Department of Electrical Engineering & Computer Science,47
+m_032,Zara Taylor,Department of Computer & Information Science,37
+m_033,Sofia Bailey,Department of Computer Science & Engineering,24
+m_034,Stephen Bryant,Department of Computer Science,29
+m_035,Joshua Watson,Department of Computer Science & Engineering,30
+m_036,Lucas Wright,Department of Computer Science,28
+m_037,Ava Young,Department of Computer Science & Engineering,40
+m_038,Daniel Collins,Department of Computer Science & Engineering,34
+m_039,Justin Walker,College of Computing & Informatics,43
+m_040,Christopher Young,Department of Computer Science,49
+m_041,Charles Murphy,School of Computer Science,20
+m_042,Eric Price,Department of Computer Science & Engineering,19
+m_043,Zara Howard,Department of Computing,26
+m_044,Grace Clark,Department of Electrical Engineering & Computer Science,29
+m_045,Arjun Singh,Department of Electrical Engineering & Computer Science,33
+m_046,Peter Nguyen,Department of Computer Science,62
+m_047,Maria Ward,Department of Computer Science & Engineering,68
+m_048,Alice Hill,College of Computing & Informatics,49
+m_049,Charles Cox,College of Computing & Informatics,48
+m_050,Elena Gupta,Department of Computer Science,40
+m_051,Maria Gonzalez,Department of Electrical Engineering & Computer Science,61
+m_052,Lucas Simmons,School of Computer Science,60
+m_053,Eric Brooks,College of Computing & Informatics,37
+m_054,Ryan Tran,Department of Computer Science,17
+m_055,Thomas Ross,School of Computer Science,23
+m_056,Carlos Chavez,Department of Computing,55
+m_057,Nina Bailey,College of Computing & Informatics,19
+m_058,Anna Alexander,Department of Computer & Information Science,34
+m_059,Matthew Cole,College of Computing & Informatics,63
+m_060,Zara Lee,Department of Computer Science,36
+m_061,William King,Department of Computer Science & Engineering,44
+m_062,Maria Bell,Department of Computer Science,41
+m_063,Aaron Wood,Department of Computing,38
+m_064,Maya Adams,College of Computing & Informatics,41
+m_065,Tyler Allen,Department of Computer & Information Science,50
+m_066,Emily Garcia,School of Computer Science,26
+m_067,Thomas Russell,Department of Electrical Engineering & Computer Science,38
+m_068,Camila Cox,Department of Computer Science & Engineering,34
+m_069,Stephen Park,Department of Computer & Information Science,22
+m_070,Charles King,Department of Computer & Information Science,20
+m_071,Joseph Taylor,College of Computing & Informatics,54
+m_072,Leah Cooper,Department of Computing,39
+m_073,Ryan Simmons,Department of Computer Science,22
+m_074,Claire King,Department of Computer Science,57
+m_075,Anna Cole,College of Computing & Informatics,24
+m_076,Thomas Brown,Department of Computer & Information Science,21
+m_077,Carlos Gonzalez,Department of Computer Science & Engineering,38
+m_078,Tyler Collins,Department of Computer Science & Engineering,53
+m_079,William Russell,Department of Computer & Information Science,44
+m_080,Nadia Cox,Department of Computer Science & Engineering,25
+m_081,Andrew James,School of Computer Science,44
+m_082,Christopher Gonzalez,Department of Computer & Information Science,56
+m_083,Isabella Campbell,Department of Computing,51
+m_084,Brian Singh,Department of Computer Science,23
+m_085,Peter Moore,School of Computer Science,47
+m_086,Daniel Murphy,Department of Computer Science,29
+m_087,James Kelly,Department of Computer Science,28
+m_088,Charles Watson,Department of Computer Science & Engineering,39
+m_089,Emily Jenkins,Department of Computing,36
+m_090,Joseph Foster,Department of Computer Science & Engineering,44
+m_091,Anna Young,School of Computer Science,31
+m_092,Sofia Nelson,Department of Computing,50
+m_093,Peter Murphy,School of Computer Science,58
+m_094,Alice Hall,Department of Computing,21
+m_095,Joshua Bennett,Department of Computer Science,37
+m_096,Diego Howard,College of Computing & Informatics,42
+m_097,Andrew Powell,Department of Electrical Engineering & Computer Science,48
+m_098,Zara Kim,Department of Computer Science & Engineering,28
+m_099,Naomi Cox,Department of Computing,15
+m_100,Sara Bell,Department of Electrical Engineering & Computer Science,29
+m_101,Anna Martinez,Department of Computer Science & Engineering,26
+m_102,Chloe Cooper,Department of Computer Science,47
+m_103,Brandon Gupta,Department of Electrical Engineering & Computer Science,32
+m_104,Elena Scott,School of Computer Science,43
+m_105,Matthew Lewis,College of Computing & Informatics,36
+m_106,Ryan Jenkins,Department of Computing,34
+m_107,Nina West,Department of Computer Science & Engineering,44
+m_108,Christopher Rogers,Department of Computing,20
+m_109,Sofia Long,Department of Computer Science & Engineering,27
+m_110,Thomas Wright,College of Computing & Informatics,46
+m_111,Anna Ramirez,Department of Electrical Engineering & Computer Science,56
+m_112,Brian Lee,College of Computing & Informatics,65
+m_113,Jordan Simmons,Department of Computer & Information Science,25
+m_114,Matthew Jenkins,College of Computing & Informatics,36
+m_115,Jordan Torres,School of Computer Science,39
+m_116,Eric Chavez,Department of Computing,35
+m_117,Zara Gonzalez,Department of Computer & Information Science,13
+m_118,Angela Bryant,Department of Computer Science,38
+m_119,Brooke Lewis,Department of Computer & Information Science,29
+m_120,Maria Wright,Department of Computer Science & Engineering,39
+m_121,Rosa Allen,Department of Computer & Information Science,44
+m_122,Ryan Nelson,Department of Computer & Information Science,52
+m_123,Sophia Scott,School of Computer Science,26
+m_124,David Jenkins,Department of Electrical Engineering & Computer Science,19
+m_125,James Russell,Department of Computer Science & Engineering,47
+m_126,Chloe Johnson,Department of Electrical Engineering & Computer Science,22
+m_127,Rachel Singh,School of Computer Science,48
+m_128,Amelia Baker,College of Computing & Informatics,33
+m_129,Chloe Nguyen,College of Computing & Informatics,31
+m_130,Brian Johnson,College of Computing & Informatics,64
+m_131,Tyler Singh,School of Computer Science,38
+m_132,Brooke James,Department of Computing,30
+m_133,Joseph Hayes,Department of Computing,38
+m_134,Justin Chen,Department of Computer Science & Engineering,48
+m_135,Keiko Sanders,Department of Computer Science & Engineering,44
+m_136,Henry Anderson,Department of Computer Science,46
+m_137,Noah Nguyen,School of Computer Science,54
+m_138,Sofia Wright,School of Computer Science,57
+m_139,Angela Watson,School of Computer Science,33
+m_140,Zara Price,Department of Computer Science & Engineering,40
+m_141,Rosa Murphy,Department of Computing,59
+m_142,Brooke Torres,Department of Computer Science,48
+m_143,Sophia Perry,Department of Computing,12
+m_144,Rosa Hayes,Department of Computer Science,28
+m_145,Diego Allen,Department of Computer Science & Engineering,40
+m_146,Jordan Wright,College of Computing & Informatics,34
+m_147,Isabella Ward,Department of Computer & Information Science,52
+m_148,Harper Hughes,Department of Computer Science,20
+m_149,Jonathan Cole,Department of Computer & Information Science,17
+m_150,Matthew Bailey,Department of Computer Science & Engineering,54
+m_151,Aaron Gibson,Department of Computer Science & Engineering,30
+m_152,Andrew Allen,College of Computing & Informatics,55
+m_153,Joshua Howard,Department of Computer Science & Engineering,32
+m_154,Angela Cole,Department of Computing,31
+m_155,Olivia Murphy,Department of Computer Science & Engineering,46
+m_156,Claire Clark,Department of Electrical Engineering & Computer Science,39
+m_157,Yuki Nelson,College of Computing & Informatics,39
+m_158,Diego Chen,Department of Computer Science,54
+m_159,Rachel Cole,Department of Computer Science & Engineering,33
+m_160,Carlos Brown,School of Computer Science,37
+m_161,Ryan Russell,Department of Computer & Information Science,61
+m_162,Brian King,Department of Computer Science & Engineering,17
+m_163,Rachel Campbell,Department of Computing,34
+m_164,Mei Martinez,College of Computing & Informatics,30
+m_165,Arjun Butler,Department of Computing,35
+m_166,Ryan Owens,Department of Computer & Information Science,52
+m_167,Isabella Brown,Department of Computer Science,35
+m_168,Olivia Wilson,Department of Computer & Information Science,30
+m_169,Hannah Hall,Department of Computer & Information Science,20
+m_170,Gregory Hayes,Department of Computer & Information Science,34
+m_171,Rachel Ward,Department of Computer & Information Science,37
+m_172,Carlos Powell,College of Computing & Informatics,25
+m_173,Justin Gupta,Department of Computer Science & Engineering,39
+m_174,Justin Lewis,Department of Computer & Information Science,58
+m_175,Samuel Hall,Department of Computer Science & Engineering,41
+m_176,Layla Cooper,Department of Electrical Engineering & Computer Science,45
+m_177,Camila Patel,Department of Computer Science,23
+m_178,Amelia Morgan,Department of Computer Science,34
+m_179,Jason Owens,Department of Computer Science,46
+m_180,Hannah Gonzalez,College of Computing & Informatics,15
+m_181,Sara Wilson,Department of Computing,43
+m_182,Isabella Cook,Department of Computing,19
+m_183,Peter Li,Department of Computer Science & Engineering,53
+m_184,Michael Russell,Department of Computer Science & Engineering,24
+m_185,Kevin Hughes,Department of Computer & Information Science,38
+m_186,Peter Brown,Department of Electrical Engineering & Computer Science,40
+m_187,Brooke Peterson,School of Computer Science,41
+m_188,Priya Martinez,College of Computing & Informatics,41
+m_189,Michael Chavez,College of Computing & Informatics,40
+m_190,Nina Perry,Department of Electrical Engineering & Computer Science,71
+m_191,Harper Baker,Department of Computer & Information Science,58
+m_192,David Russell,School of Computer Science,33
+m_193,James Griffin,Department of Computer Science & Engineering,38
+m_194,Arjun Hayes,Department of Computing,31
+m_195,Elena Gibson,Department of Computing,33
+m_196,Yuki Hughes,College of Computing & Informatics,45
+m_197,Amelia Park,Department of Electrical Engineering & Computer Science,42
+m_198,Henry Price,Department of Computer & Information Science,34
+m_199,Justin Butler,Department of Computer Science,35
+m_200,Justin Gonzalez,School of Computer Science,26
