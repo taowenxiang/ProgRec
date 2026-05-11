@@ -16,3 +16,15 @@ Given the current agent profile, return strict JSON with:
 - clarification_questions
 - tool_plan
 """.strip()
+
+
+ROUTER_PROMPT = """
+You are the routing layer for ProgRec.
+Return strict JSON with:
+- intent
+- confidence
+- candidate_tools
+- needs_clarification
+- clarification_question
+- reasoning_summary
+""".strip()
