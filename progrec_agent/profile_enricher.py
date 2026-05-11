@@ -28,3 +28,19 @@ def build_profiles_from_text(user_text: str, llm_client) -> tuple[dict[str, obje
         confidence=float(payload.get("confidence", 0.0)),
     )
     return skill_profile, agent_profile
+
+
+def build_profile_if_needed(user_text: str, llm_client) -> tuple[dict[str, object], AgentProfile]:
+    if llm_client is None:
+        return normalize_manual_profile(
+            {
+                "grade": "",
+                "major": "",
+                "skills": "",
+                "interests": "",
+                "experience_summary": user_text,
+                "availability": "moderate",
+                "resume_text": user_text,
+            }
+        ), AgentProfile(goal=user_text, confidence=0.0)
+    return build_profiles_from_text(user_text, llm_client)
