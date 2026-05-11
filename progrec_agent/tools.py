@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from progrec_agent.adapters.skill3_adapter import run_skill3
+from progrec_agent.tool_executor import ToolExecutor
 
 
 class AgentTools:
