@@ -72,6 +72,18 @@ class TestReplAgentFlow(unittest.TestCase):
         self.assertEqual(client.config.model, "demo-model")
         self.assertEqual(client.config.endpoint, "https://llm.example.com/v1/responses")
 
+    @patch.dict(
+        os.environ,
+        {"PROGREC_AGENT_V2": "1", "PROGREC_AGENT_API_KEY": "prog-key", "PROGREC_AGENT_MODEL": "demo-model"},
+        clear=True,
+    )
+    @patch("builtins.input", side_effect=["quit"])
+    @patch("progrec_agent.repl.AgentCoreV2")
+    def test_repl_uses_v2_core_when_flag_enabled(self, mock_v2, _mock_input) -> None:
+        exit_code = repl.main()
+        self.assertEqual(exit_code, 0)
+        mock_v2.assert_called_once()
+
 
 if __name__ == "__main__":
     unittest.main()
