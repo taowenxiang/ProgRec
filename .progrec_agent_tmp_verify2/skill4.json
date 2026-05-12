@@ -1,0 +1,1277 @@
+{
+  "target_student_id": "jamie-taylor-00008",
+  "target_student_profile": {
+    "grade": "Junior",
+    "major": "Computer Science",
+    "skills": [
+      "algorithm design",
+      "calligraphy",
+      "computational thinking",
+      "data structures",
+      "ecology",
+      "nature interpretation",
+      "software development"
+    ],
+    "interests": [
+      "calligraphy",
+      "computer science",
+      "creative writing",
+      "nature with others",
+      "poetry",
+      "visual arts"
+    ],
+    "availability": "moderate"
+  },
+  "mentor_project_teammate_recommendations": [
+    {
+      "mentor_id": "m_031",
+      "mentor_base_score": 0.744,
+      "topic_score": 0.2075,
+      "graph_score": 0.548,
+      "community_id": "community_0",
+      "project_recommendations": [
+        {
+          "project_id": "proj_0016",
+          "title": "Undergraduate research studio: benchmark for systems workflows",
+          "fit_score": 0.3,
+          "topic_match_score": 0.0,
+          "skill_match_score": 0.0,
+          "difficulty_match_score": 1.0,
+          "matched_interests": [],
+          "matched_skills": [],
+          "missing_skills": [
+            "cuda",
+            "latex",
+            "linear algebra",
+            "systems programming"
+          ],
+          "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in cuda, latex, linear algebra, systems programming."
+        }
+      ],
+      "teammate_recommendations": [
+        {
+          "student_id": "sherry-moore-01786",
+          "teammate_score": 0.3808,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 0.9667,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. The Skill 2 graph also shows: shared_interest, skill_complementarity."
+        },
+        {
+          "student_id": "william-pineda-00459",
+          "teammate_score": 0.335,
+          "shared_interest_score": 0.1,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        },
+        {
+          "student_id": "jesse-serrano-00500",
+          "teammate_score": 0.3318,
+          "shared_interest_score": 0.0909,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        }
+      ],
+      "reason_paths": [
+        [
+          "mentor",
+          "project_leads",
+          "proj_0016"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "cuda",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "latex",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "linear algebra",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "systems programming",
+          "gap_for",
+          "target_student"
+        ]
+      ],
+      "activity_score": 0.4688,
+      "centrality_score": 0.9467,
+      "network_proximity": 0.0,
+      "mentor_name": "Olivia Wright",
+      "skill3_rank": 1,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_058",
+      "mentor_base_score": 0.6657,
+      "topic_score": 0.1957,
+      "graph_score": 1.6408,
+      "community_id": "community_0",
+      "project_recommendations": [
+        {
+          "project_id": "proj_0025",
+          "title": "Undergraduate research studio: analysis for HCI workflows",
+          "fit_score": 0.3,
+          "topic_match_score": 0.0,
+          "skill_match_score": 0.0,
+          "difficulty_match_score": 1.0,
+          "matched_interests": [],
+          "matched_skills": [],
+          "missing_skills": [
+            "c++",
+            "probability",
+            "rust"
+          ],
+          "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in c++, probability, rust."
+        }
+      ],
+      "teammate_recommendations": [
+        {
+          "student_id": "sherry-moore-01786",
+          "teammate_score": 0.3808,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 0.9667,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. The Skill 2 graph also shows: shared_interest, skill_complementarity."
+        },
+        {
+          "student_id": "william-pineda-00459",
+          "teammate_score": 0.335,
+          "shared_interest_score": 0.1,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        },
+        {
+          "student_id": "jesse-serrano-00500",
+          "teammate_score": 0.3318,
+          "shared_interest_score": 0.0909,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        }
+      ],
+      "reason_paths": [
+        [
+          "mentor",
+          "project_leads",
+          "proj_0025"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "c++",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "probability",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "rust",
+          "gap_for",
+          "target_student"
+        ]
+      ],
+      "activity_score": 0.5525,
+      "centrality_score": 0.3194,
+      "network_proximity": 0.0,
+      "mentor_name": "Anna Alexander",
+      "skill3_rank": 2,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_030",
+      "mentor_base_score": 0.6539,
+      "topic_score": 0.1978,
+      "graph_score": 0.8487,
+      "community_id": "community_0",
+      "project_recommendations": [
+        {
+          "project_id": "proj_0015",
+          "title": "Undergraduate research studio: tooling for security workflows",
+          "fit_score": 0.3,
+          "topic_match_score": 0.0,
+          "skill_match_score": 0.0,
+          "difficulty_match_score": 1.0,
+          "matched_interests": [],
+          "matched_skills": [],
+          "missing_skills": [
+            "hci study methods",
+            "networking",
+            "rust",
+            "systems programming"
+          ],
+          "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in hci study methods, networking, rust, systems programming."
+        }
+      ],
+      "teammate_recommendations": [
+        {
+          "student_id": "sherry-moore-01786",
+          "teammate_score": 0.3808,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 0.9667,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. The Skill 2 graph also shows: shared_interest, skill_complementarity."
+        },
+        {
+          "student_id": "william-pineda-00459",
+          "teammate_score": 0.335,
+          "shared_interest_score": 0.1,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        },
+        {
+          "student_id": "jesse-serrano-00500",
+          "teammate_score": 0.3318,
+          "shared_interest_score": 0.0909,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        }
+      ],
+      "reason_paths": [
+        [
+          "mentor",
+          "project_leads",
+          "proj_0015"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "hci study methods",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "networking",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "rust",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "systems programming",
+          "gap_for",
+          "target_student"
+        ]
+      ],
+      "activity_score": 0.6713,
+      "centrality_score": 0.3375,
+      "network_proximity": 0.0,
+      "mentor_name": "Sofia Lee",
+      "skill3_rank": 3,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_102",
+      "mentor_base_score": 0.6455,
+      "topic_score": 0.2053,
+      "graph_score": 0.0,
+      "community_id": "community_0",
+      "project_recommendations": [
+        {
+          "project_id": "proj_0045",
+          "title": "Undergraduate research studio: analysis for systems workflows",
+          "fit_score": 0.3,
+          "topic_match_score": 0.0,
+          "skill_match_score": 0.0,
+          "difficulty_match_score": 1.0,
+          "matched_interests": [],
+          "matched_skills": [],
+          "missing_skills": [
+            "hci study methods",
+            "linear algebra",
+            "systems programming"
+          ],
+          "reason": "The project is connected to the recommended mentor in the academic graph. Topic overlap with the student's interests is limited but the project may still be a useful entry point. They may need support in hci study methods, linear algebra, systems programming."
+        }
+      ],
+      "teammate_recommendations": [
+        {
+          "student_id": "sherry-moore-01786",
+          "teammate_score": 0.3808,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 0.9667,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. The Skill 2 graph also shows: shared_interest, skill_complementarity."
+        },
+        {
+          "student_id": "william-pineda-00459",
+          "teammate_score": 0.335,
+          "shared_interest_score": 0.1,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        },
+        {
+          "student_id": "jesse-serrano-00500",
+          "teammate_score": 0.3318,
+          "shared_interest_score": 0.0909,
+          "complementarity_score": 0.0,
+          "availability_score": 1.0,
+          "graph_relation_score": 1.0,
+          "shared_interests": [
+            "visual arts"
+          ],
+          "complementary_skills": [],
+          "availability": "high",
+          "reason": "The teammate shares interests such as visual arts. The Skill 2 graph also shows: skill_complementarity."
+        }
+      ],
+      "reason_paths": [
+        [
+          "mentor",
+          "project_leads",
+          "proj_0045"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "hci study methods",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "linear algebra",
+          "gap_for",
+          "target_student"
+        ],
+        [
+          "project",
+          "requires_skill",
+          "systems programming",
+          "gap_for",
+          "target_student"
+        ]
+      ],
+      "activity_score": 0.4838,
+      "centrality_score": 0.9717,
+      "network_proximity": 0.0,
+      "mentor_name": "Chloe Cooper",
+      "skill3_rank": 4,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in design, writing.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    },
+    {
+      "mentor_id": "m_021",
+      "mentor_base_score": 0.5783,
+      "topic_score": 0.1931,
+      "graph_score": 1.7159,
+      "community_id": "community_0",
+      "project_recommendations": [],
+      "teammate_recommendations": [
+        {
+          "student_id": "miranda-jimenez-00184",
+          "teammate_score": 0.4783,
+          "shared_interest_score": 0.1667,
+          "complementarity_score": 0.4444,
+          "availability_score": 1.0,
+          "graph_relation_score": 0.8222,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "high",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: algorithm design, computational thinking, data structures, software development. The Skill 2 graph also shows: skill_complementarity."
+        },
+        {
+          "student_id": "tyler-houston-00161",
+          "teammate_score": 0.4775,
+          "shared_interest_score": 0.25,
+          "complementarity_score": 0.4444,
+          "availability_score": 0.7,
+          "graph_relation_score": 0.8222,
+          "shared_interests": [
+            "calligraphy",
+            "visual arts"
+          ],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "moderate",
+          "reason": "The teammate shares interests such as calligraphy, visual arts. They can complement missing skills: algorithm design, computational thinking, data structures, software development. The Skill 2 graph also shows: shared_interest, skill_complementarity."
+        },
+        {
+          "student_id": "christopher-lawson-01376",
+          "teammate_score": 0.4579,
+          "shared_interest_score": 0.1818,
+          "complementarity_score": 0.5714,
+          "availability_score": 0.4,
+          "graph_relation_score": 0.7714,
+          "shared_interests": [
+            "creative writing",
+            "poetry"
+          ],
+          "complementary_skills": [
+            "algorithm design",
+            "computational thinking",
+            "data structures",
+            "software development"
+          ],
+          "availability": "low",
+          "reason": "The teammate shares interests such as creative writing, poetry. They can complement missing skills: algorithm design, computational thinking, data structures, software development. The Skill 2 graph also shows: skill_complementarity."
+        }
+      ],
+      "reason_paths": [],
+      "activity_score": 0.4113,
+      "centrality_score": 0.7917,
+      "network_proximity": 0.0,
+      "mentor_name": "Hannah Rivera",
+      "skill3_rank": 5,
+      "mentor_skill3_reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ]
+    }
+  ],
+  "data_sources": {
+    "student_profiles": "/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json",
+    "academic_graph": "/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
+    "mentor_candidates": "/Users/mount/Desktop/Programming/ProgRec/.progrec_agent_tmp_verify2/skill3.json",
+    "mentor_candidate_source": "skill3_json",
+    "project_source": "skill2_graph",
+    "target_student_resolution": "resolved_ok",
+    "requested_target_student_id": "jamie-taylor-00008",
+    "effective_target_student_id": "jamie-taylor-00008",
+    "sample_student_ids": [
+      "jamie-taylor-00008",
+      "jeffrey-weaver-00044",
+      "lisa-perry-00052",
+      "marvin-walker-00061",
+      "brett-garcia-00082",
+      "brian-brown-00094",
+      "karen-strickland-00096",
+      "richard-fisher-00107",
+      "christopher-pena-00117",
+      "samantha-bryant-00138"
+    ],
+    "skill3_target_student_id": "jamie-taylor-00008",
+    "skill3_declared_student_id": "jamie-taylor-00008",
+    "skill3_output_path": "/Users/mount/Desktop/Programming/ProgRec/.progrec_agent_tmp_verify2/skill3.json",
+    "skill3_output_in_use": true,
+    "allow_target_fallback_with_skill3": false
+  },
+  "warnings": [],
+  "reason_graphs": [
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_031",
+          "id": 1
+        },
+        {
+          "kind": "project",
+          "label": "proj_0016",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "cuda",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "latex",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "linear algebra",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "systems programming",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "sherry-moore-01786",
+          "id": 7
+        },
+        {
+          "kind": "teammate",
+          "label": "william-pineda-00459",
+          "id": 8
+        },
+        {
+          "kind": "teammate",
+          "label": "jesse-serrano-00500",
+          "id": 9
+        }
+      ],
+      "edges": [
+        {
+          "relation": "lacks_skill",
+          "key": 2,
+          "source": 0,
+          "target": 3
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 4,
+          "source": 0,
+          "target": 4
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 6,
+          "source": 0,
+          "target": 5
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 8,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 11,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 13,
+          "source": 0,
+          "target": 8
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 15,
+          "source": 0,
+          "target": 9
+        },
+        {
+          "relation": "project_leads",
+          "key": 0,
+          "source": 1,
+          "target": 2
+        },
+        {
+          "relation": "requires_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "requires_skill",
+          "key": 3,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "requires_skill",
+          "key": 5,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "requires_skill",
+          "key": 7,
+          "source": 2,
+          "target": 6
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_058",
+          "id": 1
+        },
+        {
+          "kind": "project",
+          "label": "proj_0025",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "c++",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "probability",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "rust",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "sherry-moore-01786",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "william-pineda-00459",
+          "id": 7
+        },
+        {
+          "kind": "teammate",
+          "label": "jesse-serrano-00500",
+          "id": 8
+        }
+      ],
+      "edges": [
+        {
+          "relation": "lacks_skill",
+          "key": 2,
+          "source": 0,
+          "target": 3
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 4,
+          "source": 0,
+          "target": 4
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 6,
+          "source": 0,
+          "target": 5
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 11,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 13,
+          "source": 0,
+          "target": 8
+        },
+        {
+          "relation": "project_leads",
+          "key": 0,
+          "source": 1,
+          "target": 2
+        },
+        {
+          "relation": "requires_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "requires_skill",
+          "key": 3,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "requires_skill",
+          "key": 5,
+          "source": 2,
+          "target": 5
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_030",
+          "id": 1
+        },
+        {
+          "kind": "project",
+          "label": "proj_0015",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "hci study methods",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "networking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "rust",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "systems programming",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "sherry-moore-01786",
+          "id": 7
+        },
+        {
+          "kind": "teammate",
+          "label": "william-pineda-00459",
+          "id": 8
+        },
+        {
+          "kind": "teammate",
+          "label": "jesse-serrano-00500",
+          "id": 9
+        }
+      ],
+      "edges": [
+        {
+          "relation": "lacks_skill",
+          "key": 2,
+          "source": 0,
+          "target": 3
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 4,
+          "source": 0,
+          "target": 4
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 6,
+          "source": 0,
+          "target": 5
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 8,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 11,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 13,
+          "source": 0,
+          "target": 8
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 15,
+          "source": 0,
+          "target": 9
+        },
+        {
+          "relation": "project_leads",
+          "key": 0,
+          "source": 1,
+          "target": 2
+        },
+        {
+          "relation": "requires_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "requires_skill",
+          "key": 3,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "requires_skill",
+          "key": 5,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "requires_skill",
+          "key": 7,
+          "source": 2,
+          "target": 6
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_102",
+          "id": 1
+        },
+        {
+          "kind": "project",
+          "label": "proj_0045",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "hci study methods",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "linear algebra",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "systems programming",
+          "id": 5
+        },
+        {
+          "kind": "teammate",
+          "label": "sherry-moore-01786",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "william-pineda-00459",
+          "id": 7
+        },
+        {
+          "kind": "teammate",
+          "label": "jesse-serrano-00500",
+          "id": 8
+        }
+      ],
+      "edges": [
+        {
+          "relation": "lacks_skill",
+          "key": 2,
+          "source": 0,
+          "target": 3
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 4,
+          "source": 0,
+          "target": 4
+        },
+        {
+          "relation": "lacks_skill",
+          "key": 6,
+          "source": 0,
+          "target": 5
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 9,
+          "source": 0,
+          "target": 6
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 11,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 13,
+          "source": 0,
+          "target": 8
+        },
+        {
+          "relation": "project_leads",
+          "key": 0,
+          "source": 1,
+          "target": 2
+        },
+        {
+          "relation": "requires_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "requires_skill",
+          "key": 3,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "requires_skill",
+          "key": 5,
+          "source": 2,
+          "target": 5
+        }
+      ],
+      "format": "networkx_node_link"
+    },
+    {
+      "directed": true,
+      "multigraph": false,
+      "graph": {},
+      "nodes": [
+        {
+          "kind": "student",
+          "label": "jamie-taylor-00008",
+          "id": 0
+        },
+        {
+          "kind": "mentor",
+          "label": "m_021",
+          "id": 1
+        },
+        {
+          "kind": "teammate",
+          "label": "miranda-jimenez-00184",
+          "id": 2
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 3
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 4
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 5
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 6
+        },
+        {
+          "kind": "teammate",
+          "label": "tyler-houston-00161",
+          "id": 7
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 8
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 9
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 10
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 11
+        },
+        {
+          "kind": "teammate",
+          "label": "christopher-lawson-01376",
+          "id": 12
+        },
+        {
+          "kind": "skill",
+          "label": "algorithm design",
+          "id": 13
+        },
+        {
+          "kind": "skill",
+          "label": "computational thinking",
+          "id": 14
+        },
+        {
+          "kind": "skill",
+          "label": "data structures",
+          "id": 15
+        },
+        {
+          "kind": "skill",
+          "label": "software development",
+          "id": 16
+        }
+      ],
+      "edges": [
+        {
+          "relation": "skill_complementarity",
+          "key": 5,
+          "source": 0,
+          "target": 2
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 12,
+          "source": 0,
+          "target": 7
+        },
+        {
+          "relation": "skill_complementarity",
+          "key": 18,
+          "source": 0,
+          "target": 12
+        },
+        {
+          "relation": "has_skill",
+          "key": 1,
+          "source": 2,
+          "target": 3
+        },
+        {
+          "relation": "has_skill",
+          "key": 2,
+          "source": 2,
+          "target": 4
+        },
+        {
+          "relation": "has_skill",
+          "key": 3,
+          "source": 2,
+          "target": 5
+        },
+        {
+          "relation": "has_skill",
+          "key": 4,
+          "source": 2,
+          "target": 6
+        },
+        {
+          "relation": "has_skill",
+          "key": 7,
+          "source": 7,
+          "target": 8
+        },
+        {
+          "relation": "has_skill",
+          "key": 8,
+          "source": 7,
+          "target": 9
+        },
+        {
+          "relation": "has_skill",
+          "key": 9,
+          "source": 7,
+          "target": 10
+        },
+        {
+          "relation": "has_skill",
+          "key": 10,
+          "source": 7,
+          "target": 11
+        },
+        {
+          "relation": "has_skill",
+          "key": 14,
+          "source": 12,
+          "target": 13
+        },
+        {
+          "relation": "has_skill",
+          "key": 15,
+          "source": 12,
+          "target": 14
+        },
+        {
+          "relation": "has_skill",
+          "key": 16,
+          "source": 12,
+          "target": 15
+        },
+        {
+          "relation": "has_skill",
+          "key": 17,
+          "source": 12,
+          "target": 16
+        }
+      ],
+      "format": "networkx_node_link"
+    }
+  ]
+}

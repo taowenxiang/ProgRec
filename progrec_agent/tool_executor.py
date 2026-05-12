@@ -95,17 +95,25 @@ class ToolExecutor:
         )
 
     def _tool_recommend_full_pipeline(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
-        if session.student_profile and session.student_profile.get("student_id"):
+        student_id = str(arguments.get("student_id") or "").strip()
+        mode = str(arguments.get("mode") or "").strip().lower()
+        bundle = None
+        if mode in {"demo", "graph"}:
+            try:
+                bundle = resolve_resource_config(mode, self.repo_root, validate_graph=True)
+            except (FileNotFoundError, ValueError) as exc:
+                return ToolExecutionResult(tool_name="recommend_full_pipeline", ok=False, error=str(exc))
+
+        if student_id:
+            result = self.orchestrator.recommend_for_student_id(student_id, top_k=5, bundle=bundle)
+        elif session.student_profile and session.student_profile.get("student_id"):
             result = self.orchestrator.recommend_for_profile(dict(session.student_profile), top_k=5)
         else:
-            student_id = str(arguments.get("student_id") or "")
-            if not student_id:
-                return ToolExecutionResult(
-                    tool_name="recommend_full_pipeline",
-                    ok=False,
-                    error="No active student profile or student_id was provided for recommendation.",
-                )
-            result = self.orchestrator.recommend_for_student_id(student_id, top_k=5)
+            return ToolExecutionResult(
+                tool_name="recommend_full_pipeline",
+                ok=False,
+                error="No active student profile or student_id was provided for recommendation.",
+            )
         session.set_mode(result["mode"])
         session.set_student_profile(result["student_profile"])
         session.set_resource_context(result["resource_context"])

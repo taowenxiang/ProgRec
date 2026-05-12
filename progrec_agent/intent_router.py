@@ -1,12 +1,42 @@
 from __future__ import annotations
 
+import re
+
 from progrec_agent.agent_schema import RouterDecision
 from progrec_agent.prompts import ROUTER_PROMPT
 from progrec_agent.tool_registry import TOOLS
 
 
-def _route_user_message_local(user_text: str) -> RouterDecision:
+def _route_explicit_pipeline_request(user_text: str) -> RouterDecision | None:
     normalized = user_text.lower().strip()
+    if "student_id" not in normalized:
+        return None
+    if not any(word in normalized for word in ["recommend", "pipeline", "mentor", "project", "teammate"]):
+        return None
+    match = re.search(r"\bstudent_id\s*[:=]?\s*([A-Za-z0-9_-]+)", user_text, flags=re.IGNORECASE)
+    if not match:
+        return None
+    tool_arguments: dict[str, object] = {"student_id": match.group(1)}
+    if "graph-mode" in normalized or "graph mode" in normalized or "mode graph" in normalized:
+        tool_arguments["mode"] = "graph"
+    elif "demo-mode" in normalized or "demo mode" in normalized or "mode demo" in normalized:
+        tool_arguments["mode"] = "demo"
+    return RouterDecision(
+        message_type="domain_task",
+        intent="recommend_mentor",
+        confidence=0.99,
+        candidate_tools=["recommend_full_pipeline"],
+        tool_name="recommend_full_pipeline",
+        tool_arguments=tool_arguments,
+        reasoning_summary="Explicit student_id request for the full recommendation pipeline.",
+    )
+
+
+def _route_deterministic_message_local(user_text: str) -> RouterDecision | None:
+    normalized = user_text.lower().strip()
+    explicit_decision = _route_explicit_pipeline_request(user_text)
+    if explicit_decision is not None:
+        return explicit_decision
     if any(phrase in normalized for phrase in ["which skill", "what tool", "what did you do", "last response"]):
         return RouterDecision(
             message_type="meta_question",
@@ -43,14 +73,6 @@ def _route_user_message_local(user_text: str) -> RouterDecision:
             answer_only=True,
             meta_reply="That question is outside ProgRec's recommendation scope.",
         )
-    if any(word in normalized for word in ["mentor", "recommend", "project", "teammate"]):
-        return RouterDecision(
-            message_type="domain_task",
-            intent="recommend_mentor",
-            confidence=0.8,
-            candidate_tools=["recommend_full_pipeline"],
-            tool_name="recommend_full_pipeline",
-        )
     if "rebuild" in normalized and "graph" in normalized:
         return RouterDecision(
             message_type="domain_task",
@@ -67,6 +89,22 @@ def _route_user_message_local(user_text: str) -> RouterDecision:
             candidate_tools=["debug_graph_mode", "inspect_artifacts"],
             tool_name="debug_graph_mode",
         )
+    return None
+
+
+def _route_user_message_local(user_text: str) -> RouterDecision:
+    deterministic = _route_deterministic_message_local(user_text)
+    if deterministic is not None:
+        return deterministic
+    normalized = user_text.lower().strip()
+    if any(word in normalized for word in ["mentor", "recommend", "project", "teammate"]):
+        return RouterDecision(
+            message_type="domain_task",
+            intent="recommend_mentor",
+            confidence=0.8,
+            candidate_tools=["recommend_full_pipeline"],
+            tool_name="recommend_full_pipeline",
+        )
     return RouterDecision(
         message_type="unsafe_or_blocked",
         intent="out_of_scope_other",
@@ -80,6 +118,9 @@ def _route_user_message_local(user_text: str) -> RouterDecision:
 
 
 def route_user_message(user_text: str, *, llm_client, session) -> RouterDecision:
+    deterministic = _route_deterministic_message_local(user_text)
+    if deterministic is not None:
+        return deterministic
     if llm_client is not None:
         try:
             payload = llm_client.complete_json(f"{ROUTER_PROMPT}\nUser message: {user_text}")

@@ -121,7 +121,11 @@ class AgentCore:
             return pending.prompt
 
         if tool_name:
-            if tool_name == "recommend_full_pipeline" and session.student_profile is None:
+            if (
+                tool_name == "recommend_full_pipeline"
+                and session.student_profile is None
+                and not decision.tool_arguments.get("student_id")
+            ):
                 skill_profile, agent_profile = self._build_profile_with_fallback(session, user_text)
                 session.set_student_profile(skill_profile)
                 session.set_agent_profile(agent_profile.__dict__)

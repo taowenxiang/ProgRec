@@ -1,0 +1,166 @@
+{
+  "student_id": "jamie-taylor-00008",
+  "mentor_candidates": [
+    {
+      "mentor_id": "m_031",
+      "topic_score": 0.20754015592144565,
+      "graph_score": 0.5480258335114341,
+      "community_id": "community_0",
+      "final_score": 0.743973069056583,
+      "mentor_name": "Olivia Wright",
+      "activity_score": 0.46875,
+      "centrality_score": 0.9467033554178242,
+      "network_proximity": 0.0,
+      "personalized_proximity": 0.25,
+      "graph_confidence": 0.7949999999999999,
+      "mentor_authority": 0.9467033554178242,
+      "meta_path_breakdown": {
+        "interest_path_score": 0.0,
+        "complementarity_path_score": 0.25,
+        "project_path_score": 0.0,
+        "advising_path_score": 1.0
+      },
+      "top_evidence_paths": [
+        "student -> skill_complementarity -> student -> advising <- mentor"
+      ],
+      "reasons": [
+        "Topic fit is supported by overlap in design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ],
+      "reason_text": "Topic fit is supported by design, writing. Representative graph path: student -> skill_complementarity -> student -> advising <- mentor. Graph evidence is comparatively strong."
+    },
+    {
+      "mentor_id": "m_058",
+      "topic_score": 0.1956734241402336,
+      "graph_score": 1.6407919026501387,
+      "community_id": "community_0",
+      "final_score": 0.665739542597997,
+      "mentor_name": "Anna Alexander",
+      "activity_score": 0.5525,
+      "centrality_score": 0.3194459286172259,
+      "network_proximity": 0.0,
+      "personalized_proximity": 1.0,
+      "graph_confidence": 0.7949999999999999,
+      "mentor_authority": 0.3194459286172259,
+      "meta_path_breakdown": {
+        "interest_path_score": 0.0,
+        "complementarity_path_score": 1.0,
+        "project_path_score": 0.0,
+        "advising_path_score": 4.0
+      },
+      "top_evidence_paths": [
+        "student -> skill_complementarity -> student -> advising <- mentor"
+      ],
+      "reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ],
+      "reason_text": "Topic fit is supported by computer, design, writing. Representative graph path: student -> skill_complementarity -> student -> advising <- mentor. Graph evidence is comparatively strong."
+    },
+    {
+      "mentor_id": "m_030",
+      "topic_score": 0.197814911882771,
+      "graph_score": 0.8486580399123743,
+      "community_id": "community_0",
+      "final_score": 0.6538702601791332,
+      "mentor_name": "Sofia Lee",
+      "activity_score": 0.67125,
+      "centrality_score": 0.33747194913443046,
+      "network_proximity": 0.0,
+      "personalized_proximity": 0.5,
+      "graph_confidence": 0.7949999999999999,
+      "mentor_authority": 0.33747194913443046,
+      "meta_path_breakdown": {
+        "interest_path_score": 0.0,
+        "complementarity_path_score": 0.5,
+        "project_path_score": 0.0,
+        "advising_path_score": 2.0
+      },
+      "top_evidence_paths": [
+        "student -> skill_complementarity -> student -> advising <- mentor"
+      ],
+      "reasons": [
+        "Topic fit is supported by overlap in computer, design, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ],
+      "reason_text": "Topic fit is supported by computer, design, writing. Representative graph path: student -> skill_complementarity -> student -> advising <- mentor. Graph evidence is comparatively strong."
+    },
+    {
+      "mentor_id": "m_102",
+      "topic_score": 0.20530129423202936,
+      "graph_score": 0.0,
+      "community_id": "community_0",
+      "final_score": 0.6454718139661904,
+      "mentor_name": "Chloe Cooper",
+      "activity_score": 0.48375,
+      "centrality_score": 0.9716686257747381,
+      "network_proximity": 0.0,
+      "personalized_proximity": 0.0,
+      "graph_confidence": 0.0,
+      "mentor_authority": 0.9716686257747381,
+      "meta_path_breakdown": {
+        "interest_path_score": 0.0,
+        "complementarity_path_score": 0.0,
+        "project_path_score": 0.0,
+        "advising_path_score": 0.0
+      },
+      "top_evidence_paths": [],
+      "reasons": [
+        "Topic fit is supported by overlap in design, writing.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ],
+      "reason_text": "Topic fit is supported by design, writing."
+    },
+    {
+      "mentor_id": "m_021",
+      "topic_score": 0.1930952399748631,
+      "graph_score": 1.7158796016777087,
+      "community_id": "community_0",
+      "final_score": 0.5782649651307424,
+      "mentor_name": "Hannah Rivera",
+      "activity_score": 0.41125,
+      "centrality_score": 0.791695608035905,
+      "network_proximity": 0.0,
+      "personalized_proximity": 1.0,
+      "graph_confidence": 0.7949999999999999,
+      "mentor_authority": 0.791695608035905,
+      "meta_path_breakdown": {
+        "interest_path_score": 0.0,
+        "complementarity_path_score": 1.0,
+        "project_path_score": 0.0,
+        "advising_path_score": 4.0
+      },
+      "top_evidence_paths": [
+        "student -> skill_complementarity -> student -> advising <- mentor"
+      ],
+      "reasons": [
+        "Topic fit is supported by overlap in data, structures, writing.",
+        "Graph evidence is strongest through advising and complementarity path signals.",
+        "Representative graph path: student -> skill_complementarity -> student -> advising <- mentor.",
+        "Graph support is high confidence because it includes stronger trust-weighted connections.",
+        "This mentor belongs to community_0 in the mentor collaboration graph.",
+        "The mentor shows solid research activity based on profile and graph signals."
+      ],
+      "reason_text": "Topic fit is supported by data, structures, writing. Representative graph path: student -> skill_complementarity -> student -> advising <- mentor. Graph evidence is comparatively strong."
+    }
+  ],
+  "data_sources": {
+    "student_profiles": "/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json",
+    "mentor_profiles": "/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json",
+    "academic_graph": "/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
+    "resource_mode": "explicit"
+  }
+}

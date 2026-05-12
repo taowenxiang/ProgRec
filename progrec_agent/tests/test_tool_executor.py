@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 import json
+from unittest.mock import patch
 
 from progrec_agent.session import AgentSession
 from progrec_agent.tool_executor import ToolExecutor
@@ -68,6 +69,39 @@ class TestToolExecutor(unittest.TestCase):
             self.assertEqual(result.payload["mentor_profile"]["mentor_id"], "m_101")
             self.assertEqual(result.payload["mentor_profile"]["name"], "Dr. Ada")
             self.assertEqual(result.payload["rank"], 1)
+
+    @patch("progrec_agent.tool_executor.resolve_resource_config")
+    @patch("progrec_agent.tool_executor.ProgRecOrchestrator.recommend_for_student_id")
+    def test_recommend_full_pipeline_uses_explicit_graph_mode_bundle(
+        self,
+        mock_recommend_for_student_id,
+        mock_resolve_resource_config,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            td_path = Path(td)
+            session = AgentSession(temp_dir=td_path)
+            bundle = object()
+            mock_resolve_resource_config.return_value = bundle
+            mock_recommend_for_student_id.return_value = {
+                "mode": "dataset_mode",
+                "student_profile": {"student_id": "jamie-taylor-00008"},
+                "resource_context": {"resource_mode": "graph"},
+                "skill3_result": {},
+                "skill4_result": {},
+                "skill5_result": {"recommendations": {"mentors": [], "projects": [], "teammates": []}},
+                "temporary_paths": [],
+            }
+            executor = ToolExecutor(repo_root=Path("."), temp_dir=td_path)
+
+            result = executor.execute(
+                "recommend_full_pipeline",
+                {"student_id": "jamie-taylor-00008", "mode": "graph"},
+                session=session,
+            )
+
+            self.assertTrue(result.ok)
+            mock_resolve_resource_config.assert_called_once_with("graph", executor.repo_root, validate_graph=True)
+            mock_recommend_for_student_id.assert_called_once_with("jamie-taylor-00008", top_k=5, bundle=bundle)
 
 
 if __name__ == "__main__":

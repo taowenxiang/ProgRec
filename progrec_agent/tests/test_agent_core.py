@@ -3,7 +3,9 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import Mock
+from unittest.mock import patch
 
 from progrec_agent.agent_core import AgentCore
 from progrec_agent.session import AgentSession
@@ -93,6 +95,45 @@ class TestAgentCore(unittest.TestCase):
             self.assertIn("more detail", reply)
             self.assertEqual(executor.calls, [])
 
+    @patch("progrec_agent.agent_core.build_profile_if_needed")
+    def test_explicit_graph_mode_request_bypasses_ambiguous_llm_routing(self, mock_build_profile) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            session = AgentSession(temp_dir=Path(td))
+            llm_client = Mock()
+            llm_client.complete_json.return_value = {
+                "message_type": "domain_task",
+                "intent": "recommend_mentor",
+                "confidence": 0.99,
+                "candidate_tools": ["MentorSearch"],
+                "in_scope": True,
+                "needs_clarification": False,
+                "clarification_question": "",
+                "answer_only": False,
+                "tool_name": "",
+                "tool_arguments": {},
+                "meta_reply": "",
+                "reasoning_summary": "Use a non-existent tool.",
+            }
+            executor = _StubExecutor()
+            core = AgentCore(repo_root=Path("."), temp_dir=Path(td), executor=executor, llm_client=llm_client)
+            mock_build_profile.return_value = (
+                {"student_id": "draft-student"},
+                SimpleNamespace(goal="draft", confidence=0.0),
+            )
+            reply = core.handle_message(
+                session,
+                (
+                    "Recommend mentors, projects, and teammates for student_id jamie-taylor-00008. "
+                    "Use the existing graph-mode artifacts and run the full pipeline now."
+                ),
+            )
+            self.assertIn("recommendation pipeline", reply)
+            self.assertEqual(
+                executor.calls,
+                [("recommend_full_pipeline", {"student_id": "jamie-taylor-00008", "mode": "graph"})],
+            )
+            mock_build_profile.assert_not_called()
+
     def test_meta_question_is_answered_without_tool_execution(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             session = AgentSession(temp_dir=Path(td))
@@ -122,6 +163,35 @@ class TestAgentCore(unittest.TestCase):
             reply = core.handle_message(session, "Which skill did you use just now?")
             self.assertIn("clarification question", reply)
             self.assertEqual(executor.calls, [])
+
+    def test_top_mentor_profile_request_bypasses_llm_clarification(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            session = AgentSession(temp_dir=Path(td))
+            session.skill5_result = {
+                "recommendations": {
+                    "mentors": [{"mentor_id": "m_101", "mentor_name": "Dr. Ada", "final_score": 0.97, "rank": 1}]
+                }
+            }
+            llm = Mock()
+            llm.complete_json.return_value = {
+                "message_type": "domain_task",
+                "intent": "recommend_mentor",
+                "confidence": 0.4,
+                "candidate_tools": [],
+                "in_scope": True,
+                "needs_clarification": True,
+                "clarification_question": "Could you specify the programming language or area of expertise?",
+                "answer_only": False,
+                "tool_name": "",
+                "tool_arguments": {},
+                "meta_reply": "",
+                "reasoning_summary": "Need more detail.",
+            }
+            executor = _StubExecutor()
+            core = AgentCore(repo_root=Path("."), temp_dir=Path(td), executor=executor, llm_client=llm)
+            reply = core.handle_message(session, "Show me the current profile of the top mentor you recommend.")
+            self.assertIn("Mentor profile:", reply)
+            self.assertEqual(executor.calls, [("show_recommended_mentor_profile", {})])
 
     def test_out_of_scope_question_is_refused_without_tool_execution(self) -> None:
         with tempfile.TemporaryDirectory() as td:
