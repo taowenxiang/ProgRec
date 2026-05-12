@@ -19,6 +19,12 @@ def choose_next_question(state):
             question="Your last two instructions conflict. Which one should I follow?",
             expected_answer_shape="free_text",
         )
+    if state.task == "recommendation_request" and "profile_source" not in state.resolved_slots:
+        return PendingQuestion(
+            slot_name="profile_source",
+            question=QUESTION_BANK["profile_source"],
+            expected_answer_shape="free_text",
+        )
     for slot_name in state.missing_slots:
         return PendingQuestion(
             slot_name=slot_name,
