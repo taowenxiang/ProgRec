@@ -1,0 +1,14 @@
+{
+  "name": "followup_top_mentor",
+  "turns": [
+    {
+      "speaker": "user",
+      "text": "Show me the top mentor profile."
+    }
+  ],
+  "expected_clarification_sequence": [],
+  "expected_plan_action": "inspect_ranked_entity",
+  "expected_reply_contains": [
+    "Mentor profile:"
+  ]
+}

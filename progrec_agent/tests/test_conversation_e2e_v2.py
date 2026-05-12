@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -40,6 +41,12 @@ class TestConversationE2EV2(unittest.TestCase):
             )
             self.assertIn("recommendation pipeline", reply)
             runtime.run_recommendation_for_student_id.assert_called_once()
+
+    def test_existing_graph_fixture_declares_expected_clarification_sequence(self) -> None:
+        path = Path("progrec_agent/tests/fixtures/conversations/existing_graph_recommendation.json")
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        self.assertEqual(payload["expected_plan_action"], "run_existing_profile_recommendation")
+        self.assertEqual(payload["turns"][0]["speaker"], "user")
 
 
 if __name__ == "__main__":

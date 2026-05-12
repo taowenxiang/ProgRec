@@ -1,0 +1,17 @@
+{
+  "name": "existing_graph_recommendation",
+  "turns": [
+    {
+      "speaker": "user",
+      "text": "Recommend mentors, projects, and teammates for student_id jamie-taylor-00008 using graph mode."
+    }
+  ],
+  "expected_clarification_sequence": [],
+  "expected_plan_action": "run_existing_profile_recommendation",
+  "expected_reply_contains": [
+    "recommendation pipeline",
+    "Mentors:",
+    "Projects:",
+    "Teammates:"
+  ]
+}

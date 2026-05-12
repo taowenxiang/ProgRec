@@ -1,0 +1,27 @@
+{
+  "name": "temporary_profile_recommendation",
+  "turns": [
+    {
+      "speaker": "user",
+      "text": "I want a trustworthy AI undergraduate research mentor."
+    },
+    {
+      "speaker": "agent",
+      "text": "Should I use an existing student profile from the dataset, or build a temporary profile from your description?"
+    },
+    {
+      "speaker": "user",
+      "text": "Build a temporary profile."
+    }
+  ],
+  "expected_clarification_sequence": [
+    "profile_source",
+    "research_topic",
+    "program_type",
+    "experience_level"
+  ],
+  "expected_plan_action": "run_temporary_profile_recommendation",
+  "expected_reply_contains": [
+    "I still need"
+  ]
+}

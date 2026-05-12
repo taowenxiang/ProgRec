@@ -1,0 +1,20 @@
+{
+  "name": "conflicting_profile_source",
+  "turns": [
+    {
+      "speaker": "user",
+      "text": "Use an existing student profile."
+    },
+    {
+      "speaker": "user",
+      "text": "Actually build a temporary profile."
+    }
+  ],
+  "expected_clarification_sequence": [
+    "profile_source"
+  ],
+  "expected_plan_action": "await_clarification",
+  "expected_reply_contains": [
+    "existing student profile"
+  ]
+}

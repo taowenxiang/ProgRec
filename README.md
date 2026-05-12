@@ -82,6 +82,22 @@ Example prompts:
 
 If you ask a question outside the recommendation workflow, the agent says so clearly instead of guessing.
 
+## Conversational Agent V2
+
+Set `PROGREC_AGENT_V2=1` to enable the redesigned clarification-first agent:
+
+```bash
+export PROGREC_AGENT_V2=1
+python3 -m progrec_agent.repl
+```
+
+The V2 agent:
+
+- parses natural language into structured semantic frames
+- collects required slots before execution
+- prefers session follow-up context over prompt-only re-interpretation
+- stays behind a feature flag until the golden conversation fixtures are stable
+
 ## Agent-level execution
 
 See [`AGENTS.md`](AGENTS.md) for the full multi-skill Agent contract, stable skill identifiers, demo vs graph mode, and debugging.

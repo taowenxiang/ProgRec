@@ -1,0 +1,16 @@
+{
+  "name": "ambiguous_show_profile",
+  "turns": [
+    {
+      "speaker": "user",
+      "text": "Show the profile."
+    }
+  ],
+  "expected_clarification_sequence": [
+    "conflict_resolution"
+  ],
+  "expected_plan_action": "await_clarification",
+  "expected_reply_contains": [
+    "Which one should I follow?"
+  ]
+}
