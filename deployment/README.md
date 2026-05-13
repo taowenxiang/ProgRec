@@ -2,6 +2,8 @@
 
 This directory contains the first production scaffolding for the public ProgRec web platform.
 
+For the full Linux and Vercel deployment procedure, see `PRODUCTION_RUNBOOK.md`.
+
 ## Services
 
 - `reverse-proxy`: Caddy for `https://progrec-api.wenxiangtao.com`

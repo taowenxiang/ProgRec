@@ -4,4 +4,6 @@ set -euo pipefail
 mkdir -p /opt/progrec/data/postgres
 mkdir -p /opt/progrec/data/redis
 mkdir -p /opt/progrec/data/artifacts
+mkdir -p /opt/progrec/data/caddy
+mkdir -p /opt/progrec/data/caddy-config
 mkdir -p /opt/progrec/logs

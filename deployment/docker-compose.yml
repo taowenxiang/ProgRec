@@ -6,8 +6,8 @@ services:
       - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
+      - ${PROGREC_HOST_ROOT}/data/caddy:/data
+      - ${PROGREC_HOST_ROOT}/data/caddy-config:/config
     depends_on:
       - progrec-api
 
@@ -18,13 +18,13 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ${PROGREC_HOST_ROOT}/data/postgres:/var/lib/postgresql/data
 
   redis:
     image: redis:8
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
-      - redis_data:/data
+      - ${PROGREC_HOST_ROOT}/data/redis:/data
 
   progrec-api:
     build:
@@ -36,8 +36,9 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
     volumes:
-      - ../:/srv/app
-      - artifacts_data:/srv/artifacts
+      - ../:/srv/app:ro
+      - ${PROGREC_HOST_ROOT}/data/artifacts:/srv/artifacts
+      - ${PROGREC_HOST_ROOT}/logs:/srv/logs
     depends_on:
       - postgres
       - redis
@@ -52,15 +53,9 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
     volumes:
-      - ../:/srv/app
-      - artifacts_data:/srv/artifacts
+      - ../:/srv/app:ro
+      - ${PROGREC_HOST_ROOT}/data/artifacts:/srv/artifacts
+      - ${PROGREC_HOST_ROOT}/logs:/srv/logs
     depends_on:
       - postgres
       - redis
-
-volumes:
-  postgres_data:
-  redis_data:
-  artifacts_data:
-  caddy_data:
-  caddy_config:
