@@ -29,6 +29,7 @@ from student_profiling.taxonomy.mappings import (
     get_skills_from_major,
     get_terms_from_uq,
 )
+from student_profiling.postprocess import clean_terms_with_sources
 
 
 class StudentProfilingSkill:
@@ -151,6 +152,17 @@ class StudentProfilingSkill:
         # Deduplicate (already deduped above, but normalize)
         skills, skill_sources_per_term = _dedup_with_sources(skills, skill_sources_per_term)
         interests, interest_sources_per_term = _dedup_with_sources(interests, interest_sources_per_term)
+
+        skills, skill_sources_per_term = clean_terms_with_sources(
+            skills,
+            skill_sources_per_term,
+            kind="skill",
+        )
+        interests, interest_sources_per_term = clean_terms_with_sources(
+            interests,
+            interest_sources_per_term,
+            kind="interest",
+        )
 
         if not skills:
             skills = [major.lower()]

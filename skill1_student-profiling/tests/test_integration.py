@@ -172,6 +172,87 @@ class TestTaxonomyMapping:
         assert len(result["skills"]) >= 3
 
 
+class TestTermCleanup:
+    def test_generic_skill_terms_are_removed_from_story_extraction(self):
+        from student_profiling.extractors.narrative import extract_skills_from_story
+
+        story = (
+            "She was skilled in research and proficient in data analysis, "
+            "and she was trained in laboratory techniques."
+        )
+        skills, _ = extract_skills_from_story(story)
+        assert "research" not in skills
+        assert "data analysis" in skills
+        assert "laboratory techniques" in skills
+
+    def test_uq_cleanup_removes_generic_terms_but_keeps_specific_ones(self, skill):
+        result = skill.profile(
+            {
+                "Name": "Ava Stone",
+                "Age": 21,
+                "Sex": "Female",
+                "Major": "Computer Science",
+                "Year": "Junior",
+                "GPA": 3.7,
+                "Hobbies": ["photography", "table tennis"],
+                "Country": "USA",
+                "State/Province": "Ohio",
+                "Unique Quality": "Tech wizard",
+                "Story": "She was trained in laboratory techniques and created a design portfolio.",
+            },
+            index=99,
+        )
+        assert "laboratory techniques" in result["skills"]
+        assert "software development" in result["skills"]
+        assert "technology" not in result["skills"]
+
+    def test_interest_cleanup_removes_generic_uq_interest_terms(self, skill):
+        result = skill.profile(
+            {
+                "Name": "Lena Hart",
+                "Age": 20,
+                "Sex": "Female",
+                "Major": "Physics",
+                "Year": "Sophomore",
+                "GPA": 3.6,
+                "Hobbies": ["bird watching", "photography"],
+                "Country": "USA",
+                "State/Province": "Oregon",
+                "Unique Quality": "Science enthusiast",
+                "Story": "She was fascinated by astrophysics and spent weekends documenting birds.",
+            },
+            index=100,
+        )
+        assert "scientific inquiry" in result["interests"]
+        assert "science" not in result["interests"]
+
+    def test_narrative_cleanup_removes_award_quantifier_noise(self, skill):
+        result = skill.profile(SAMPLE_RECORDS[0] | {
+            "Name": "Jessica Blankenship",
+            "Major": "Music",
+            "Year": "Freshman",
+            "Unique Quality": "Creative writer",
+            "Story": (
+                "She had a passion for skateboarding, woodworking, and creative writing. "
+                "Her writing won several awards and was published in a renowned literary magazine."
+            ),
+        }, index=101)
+        assert "several" not in result["skills"]
+
+    def test_narrative_cleanup_stops_interest_phrase_before_with_others(self, skill):
+        result = skill.profile(SAMPLE_RECORDS[0] | {
+            "Name": "Jamie Taylor",
+            "Major": "Computer Science",
+            "Year": "Junior",
+            "Unique Quality": "Nature guide",
+            "Story": (
+                "She had a talent for calligraphy and a love for nature with others. "
+                "She also had a passion for poetry."
+            ),
+        }, index=102)
+        assert "nature with others" not in result["interests"]
+
+
 class TestBatchProfile:
     def test_batch_returns_correct_count(self, skill):
         results = skill.batch_profile(SAMPLE_RECORDS)

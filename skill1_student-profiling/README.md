@@ -2,7 +2,7 @@
 
 **StuRec Agent — Skill 1**
 
-Extracts structured student profiles from raw narrative data using taxonomy mapping and NLP-based information extraction. Converts unstructured student records into standardized JSON profiles ready for downstream mentor matching, graph construction, and ranking.
+Extracts structured student profiles from raw narrative data using taxonomy mapping and NLP-based information extraction. Converts unstructured student records into standardized JSON profiles ready for downstream mentor matching, graph construction, and ranking, with source-aware confidence metadata and cleanup for generic terms.
 
 ---
 
@@ -15,8 +15,9 @@ Raw student data contains narrative "Story" fields (2000–3300 chars) with no e
 3. Infers availability from year + story signals
 4. Generates experience summaries from action sentences
 5. Produces a standardized `StudentProfile` JSON for all downstream skills
+6. Cleans generic or visually weak terms before final export
 
-**Dataset**: 23,236 student profiles — 100% field completeness, avg 5.57 skills, avg 5.70 interests per profile.
+**Dataset**: 23,236 student profiles — 100% field completeness, avg 5.52 skills, avg 5.74 interests per profile.
 
 ---
 
@@ -170,9 +171,15 @@ python evaluation/evaluate.py \
 | Interests coverage (≥3) | 100% | 95%+ |
 | Experience non-empty | 100% | 90%+ |
 | Major-skill consistency | 100% | 100% |
-| Skill entropy | 8.31 | >4.0 |
-| Unique skill terms | 2,677 | — |
-| Unique interest terms | 6,436 | — |
+| Skill entropy | 8.21 | >4.0 |
+| Unique skill terms | 1,468 | — |
+| Unique interest terms | 6,932 | — |
+
+### Current Upgrade Notes
+
+- Generic UQ terms such as `technology` and `science` are now filtered when stronger paired terms are available.
+- Narrative cleanup removes noisy outputs such as `several` and malformed phrases such as `nature with others`.
+- The main report-facing ablation now uses the progression `baseline -> taxonomy -> UQ -> full pipeline`.
 
 ---
 
@@ -182,7 +189,7 @@ python evaluation/evaluate.py \
 pytest tests/ -v
 ```
 
-23 tests covering: schema validation, field completeness, taxonomy mapping, availability inference, batch processing, student ID generation.
+29 tests covering: schema validation, field completeness, taxonomy mapping, availability inference, batch processing, student ID generation, and targeted cleanup behavior.
 
 ---
 

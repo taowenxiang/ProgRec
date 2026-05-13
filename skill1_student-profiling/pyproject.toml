@@ -20,5 +20,8 @@ all = ["student-profiling-skill[embeddings,eval,dev]"]
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+student_profiling = ["taxonomy/data/*.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -21,9 +21,9 @@ _SKILL_PATTERNS = [
 # Each capture group is bounded to stop at punctuation/conjunctions
 _INTEREST_PATTERNS = [
     # "passion for X" / "fascinated by X" — stop at comma/period/conjunction
-    r"(?:passion for|passionate about|fascinated by|fascination with|love for)\s+([a-z][a-z\-]{2,20}(?:\s+[a-z][a-z\-]{2,20}){0,2})(?=[,\.;!?\n]|\s+(?:and|or|but|which|that|who|when|where|as|since|because|although|though|while|after|before|until|so|yet|for|nor|led|has|had|was|is|are|have|helped|made|gave|brought|caught|took|got|put|set|let|kept|left|came|went|saw|knew|thought|felt|found|told|asked|seemed|became|showed|turned|looked|used|tried|started|ended|moved|lived|played|ran|walked|talked|read|stood|heard|let|met|led|grew|spent|cut|set|learned)\b)",
+    r"(?:passion for|passionate about|fascinated by|fascination with|love for)\s+([a-z][a-z\-]{2,20}(?:\s+[a-z][a-z\-]{2,20}){0,2})(?=[,\.;!?\n]|\s+(?:and|or|but|which|that|who|when|where|as|since|because|although|though|while|after|before|until|so|yet|for|nor|with|by|from|led|has|had|was|is|are|have|helped|made|gave|brought|caught|took|got|put|set|let|kept|left|came|went|saw|knew|thought|felt|found|told|asked|seemed|became|showed|turned|looked|used|tried|started|ended|moved|lived|played|ran|walked|talked|read|stood|heard|let|met|led|grew|spent|cut|set|learned)\b)",
     # "interest in X"
-    r"(?:interest in|interested in|keen interest in|deep interest in)\s+([a-z][a-z\-]{2,20}(?:\s+[a-z][a-z\-]{2,20}){0,2})(?=[,\.;!?\n]|\s+(?:and|or|but|which|that|who|when|where|as|since|because|although|though|while|after|before|until|so|yet|for|nor|led|has|had|was|is|are|have|helped|made|gave|brought|caught|took|got|put|set|let|kept|left|came|went|saw|knew|thought|felt|found|told|asked|seemed|became|showed|turned|looked|used|tried|started|ended|moved|lived|played|ran|walked|talked|read|stood|heard|let|met|led|grew|spent|cut|set|learned)\b)",
+    r"(?:interest in|interested in|keen interest in|deep interest in)\s+([a-z][a-z\-]{2,20}(?:\s+[a-z][a-z\-]{2,20}){0,2})(?=[,\.;!?\n]|\s+(?:and|or|but|which|that|who|when|where|as|since|because|although|though|while|after|before|until|so|yet|for|nor|with|by|from|led|has|had|was|is|are|have|helped|made|gave|brought|caught|took|got|put|set|let|kept|left|came|went|saw|knew|thought|felt|found|told|asked|seemed|became|showed|turned|looked|used|tried|started|ended|moved|lived|played|ran|walked|talked|read|stood|heard|let|met|led|grew|spent|cut|set|learned)\b)",
     # "dedicated to X"
     r"(?:dedicated to|committed to|devoted to)\s+([a-z][a-z\-]{2,20}(?:\s+[a-z][a-z\-]{2,20}){0,2})(?=[,\.;!?\n]|\s+(?:and|or|but|which|that|who)\b)",
 ]
@@ -78,6 +78,7 @@ _GENERIC_SINGLE_WORDS = {
     "kites", "kite", "birds", "plants", "animals", "stars", "rocks",
     "food", "water", "fire", "earth", "air", "space", "time", "energy",
     "people", "world", "things", "ideas", "skills", "talents", "abilities",
+    "several",
 }
 
 # Multi-word phrases that are too generic or clearly noise
@@ -88,6 +89,7 @@ _GENERIC_PHRASES = {
     "new things", "new skills", "new ideas",
     "his own music", "her own music", "their own music",
     "his own", "her own", "their own",
+    "nature with others",
 }
 
 

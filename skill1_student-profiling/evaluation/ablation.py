@@ -24,6 +24,7 @@ from metrics import (
     major_skill_consistency,
     vocabulary_stats,
 )
+from student_profiling.evaluation_helpers import build_ablation_payload
 
 
 def load_records(path: str) -> list[dict]:
@@ -169,7 +170,7 @@ def main() -> None:
 
     if args.output:
         with open(args.output, "w") as f:
-            json.dump(results, f, indent=2)
+            json.dump(build_ablation_payload(results, n_records=len(records)), f, indent=2)
         print(f"Results saved to {args.output}")
 
 

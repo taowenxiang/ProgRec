@@ -1,7 +1,7 @@
 # Skill 1 — Student Profiling Skill: Handoff Package
 
 **Author:** Yueran (Skill 1)
-**Date:** 2026-05-07
+**Date:** 2026-05-13
 **For:** ProgRec Agent teammates (Skill 2, 3, 4, 5)
 
 ---
@@ -10,7 +10,7 @@
 
 Skill 1 takes raw student records (the original `student_profiles.jsonl` dataset) and converts each one into a **normalized, structured student profile** with extracted skills, interests, availability, and experience summary.
 
-Raw input has no explicit research-relevant fields — everything is buried in a 2,000–3,300 character narrative (`Story` field) or needs to be inferred from `Major`, `Hobbies`, and `Unique Quality`. Skill 1 extracts and normalizes all of this.
+Raw input has no explicit research-relevant fields — everything is buried in a 2,000–3,300 character narrative (`Story` field) or needs to be inferred from `Major`, `Hobbies`, and `Unique Quality`. Skill 1 extracts and normalizes all of this, then applies a cleanup pass to remove generic or visually weak terms before handoff.
 
 ---
 
@@ -148,14 +148,20 @@ profile = skill.profile(raw_record, index=0)
 | Metric | Value |
 |--------|-------|
 | Total profiles | 23,236 |
-| Avg skills per profile | 5.55 |
-| Avg interests per profile | 5.70 |
-| Unique skill terms | 1,470 |
-| Unique interest terms | 6,436 |
+| Avg skills per profile | 5.52 |
+| Avg interests per profile | 5.74 |
+| Unique skill terms | 1,468 |
+| Unique interest terms | 6,932 |
 | Field completeness | 100% (all 7 fields) |
 | Availability: high | 26.5% |
 | Availability: moderate | 39.2% |
 | Availability: low | 34.2% |
+
+### Upgrade Notes
+
+- Generic UQ-derived terms such as `technology` and `science` are filtered when a stronger paired term is available.
+- Narrative cleanup removes noisy outputs such as `several` and malformed phrases such as `nature with others`.
+- This handoff package now reflects the same cleaned outputs used in the refreshed ablation and report materials.
 
 ---
 
