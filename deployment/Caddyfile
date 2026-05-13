@@ -1,0 +1,4 @@
+progrec-api.wenxiangtao.com {
+  encode zstd gzip
+  reverse_proxy progrec-api:8000
+}
