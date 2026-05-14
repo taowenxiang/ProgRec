@@ -41,6 +41,36 @@ Run tests:
 python3 -m unittest discover -s tests -v
 ```
 
+## ProgRec Backend Service
+
+The repository also includes `progrec_service/`, a FastAPI backend that wraps the recommendation runtime for web use.
+
+Key routes:
+
+- `POST /runtime-profiles/test`
+- `POST /runtime-profiles`
+- `POST /agent/sessions`
+- `POST /agent/sessions/{id}/messages` with `text/event-stream`
+- `GET /agent/sessions/{id}/messages`
+- `POST /pipeline/jobs`
+- `GET /pipeline/jobs/{id}`
+- `GET /pipeline/jobs/{id}/result`
+- `POST /pipeline/jobs/{id}/retry`
+
+Run the backend locally from the repository root:
+
+```bash
+python3 deployment/scripts/migrate.py
+python3 -m uvicorn progrec_service.app:create_app --factory --host 0.0.0.0 --port 8000
+```
+
+Run the worker locally:
+
+```bash
+python3 deployment/scripts/migrate.py
+python3 -m progrec_service.worker
+```
+
 ## ProgRec Conversational Agent CLI
 
 The repository includes a chat-first agent inside `progrec_agent/`.

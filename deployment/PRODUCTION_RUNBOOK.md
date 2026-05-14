@@ -9,22 +9,15 @@ This runbook deploys the public web platform with:
 
 ## Current Readiness
 
-The repository currently provides the deployable foundation:
+The repository now provides:
 
-- FastAPI service skeleton
-- Runtime profile test endpoint
-- Agent session endpoint
-- Pipeline job endpoint
+- FastAPI system, runtime profile, agent session, and pipeline routes
+- Runtime profile probing against OpenAI-compatible `/models`
+- Session and message persistence in PostgreSQL
+- Pipeline job persistence, result persistence, and retry replacement jobs
+- Redis-backed queue enqueue/dequeue and worker consumption
+- In-process pipeline execution with CLI fallback
 - Docker Compose, Cloudflare Tunnel, optional Caddy, Postgres, Redis, API, and worker containers
-- Vercel BFF routes in `progrec-web`
-
-Before claiming the product is fully usable, the next backend implementation milestone must wire:
-
-- `POST /agent/sessions/{id}/messages` to `ProgRec` V2
-- `GET /pipeline/jobs/{id}` and `GET /pipeline/jobs/{id}/result`
-- Redis queue consumption in `progrec-worker`
-- Persistent PostgreSQL storage for sessions, messages, jobs, and results
-- Real pipeline execution through `progrec_agent/run_agent.py` or `ProgRecOrchestrator`
 
 ## Linux Host Prerequisites
 
@@ -74,6 +67,7 @@ Edit `deployment/.env`:
 ```bash
 POSTGRES_PASSWORD=<strong-password>
 DATABASE_URL=postgresql://progrec:<strong-password>@postgres:5432/progrec
+PROGREC_REPO_ROOT=/srv/app
 ENCRYPTION_KEY=<32-or-more-random-characters>
 CORS_ALLOWED_ORIGINS=https://demo.wenxiangtao.com
 CLOUDFLARE_TUNNEL_TOKEN=<token-from-cloudflare-dashboard>
@@ -109,6 +103,8 @@ docker compose --env-file deployment/.env -f deployment/docker-compose.yml ps
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/models/recommended
 curl https://progrec-api.wenxiangtao.com/health
+curl http://127.0.0.1:8000/pipeline/jobs/<job_id>
+curl http://127.0.0.1:8000/pipeline/jobs/<job_id>/result
 ```
 
 Expected health response:
@@ -186,8 +182,9 @@ End-to-end:
 3. Test connection
 4. Open chat
 5. Create an agent session
-6. Submit a pipeline job
-7. Confirm job status and result pages update
+6. Post a message to `POST /agent/sessions/{id}/messages` and confirm SSE events arrive
+7. Submit a pipeline job
+8. Confirm `GET /pipeline/jobs/{id}` and `GET /pipeline/jobs/{id}/result` update
 
 ## Updates
 
