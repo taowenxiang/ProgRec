@@ -1,13 +1,33 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
+from pathlib import Path
 
 
-@dataclass
+@dataclass(frozen=True)
 class Settings:
-    recommended_model_base_url: str = os.getenv("RECOMMENDED_MODEL_BASE_URL", "https://api.openai.com/v1")
-    recommended_model_name: str = os.getenv("RECOMMENDED_MODEL_NAME", "gpt-4.1-mini")
+    app_env: str
+    database_url: str
+    redis_url: str
+    encryption_key: str
+    progrec_repo_root: Path
+    progrec_artifact_root: Path
+    recommended_model_base_url: str
+    recommended_model_name: str
 
 
-settings = Settings()
+def load_settings() -> Settings:
+    return Settings(
+        app_env=os.getenv("APP_ENV", "development"),
+        database_url=os.getenv("DATABASE_URL", "sqlite+pysqlite:///:memory:"),
+        redis_url=os.getenv("REDIS_URL", "redis://localhost:6379/0"),
+        encryption_key=os.getenv("ENCRYPTION_KEY", "0123456789abcdef0123456789abcdef"),
+        progrec_repo_root=Path(os.getenv("PROGREC_REPO_ROOT", ".")).resolve(),
+        progrec_artifact_root=Path(os.getenv("PROGREC_ARTIFACT_ROOT", "./artifacts")).resolve(),
+        recommended_model_base_url=os.getenv("RECOMMENDED_MODEL_BASE_URL", "https://api.openai.com/v1"),
+        recommended_model_name=os.getenv("RECOMMENDED_MODEL_NAME", "gpt-4.1-mini"),
+    )
+
+
+settings = load_settings()
