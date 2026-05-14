@@ -566,24 +566,276 @@ def to_csv_rows(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
-def to_markdown(results: list[dict[str, Any]]) -> str:
+def _score_bar(value: float, width: int = 20) -> str:
+    """Render a Unicode progress bar for a 0-1 score."""
+    filled = int(round(value * width))
+    filled = max(0, min(width, filled))
+    bar = "█" * filled + "░" * (width - filled)
+    pct = f"{value * 100:.1f}%"
+    return f"`{bar}` {pct}"
+
+
+def _score_stars(value: float, max_stars: int = 5) -> str:
+    """Render star rating from 0-1 score."""
+    stars = int(round(value * max_stars))
+    return "★" * stars + "☆" * (max_stars - stars)
+
+
+def _medal(rank: int) -> str:
+    medals = {1: "🥇", 2: "🥈", 3: "🥉"}
+    return medals.get(rank, f"#{rank}")
+
+
+def _score_label(value: float) -> str:
+    if value >= 0.8:
+        return "🟢 Excellent"
+    elif value >= 0.6:
+        return "🔵 Good"
+    elif value >= 0.4:
+        return "🟡 Fair"
+    else:
+        return "🔴 Low"
+
+
+def _mini_radar(scores: dict[str, float], keys: list[str]) -> str:
+    """ASCII mini radar/dimension breakdown table."""
     lines: list[str] = []
+    lines.append("| Dimension | Score | Bar |")
+    lines.append("|-----------|-------|-----|")
+    for k in keys:
+        v = scores.get(k, 0.0)
+        if isinstance(v, float):
+            lines.append(f"| `{k}` | `{v:.4f}` | {_score_bar(v, 12)} |")
+    return "\n".join(lines)
+
+
+def _section_header(title: str, emoji: str, count: int) -> str:
+    return f"\n### {emoji} {title} &nbsp;&nbsp; <sub>({count} recommendations)</sub>\n"
+
+
+def _render_mentor_card(item: dict[str, Any], rank: int) -> list[str]:
+    lines: list[str] = []
+    cid = item.get("mentor_id") or item.get("student_id") or ""
+    name = item.get("mentor_name") or item.get("name") or ""
+    final = float(item.get("final_score", 0.0))
+    scores = item.get("scores") or {}
+    explanation = item.get("explanation", "")
+    topics = item.get("matched_topics") or []
+    community = item.get("community_id") or ""
+    diversity_pen = item.get("diversity_penalty", 0.0)
+    cs_bonus = scores.get("cold_start_bonus", 0.0)
+
+    heading_name = f" — {name}" if name else ""
+    lines.append(f"\n#### {_medal(rank)} Rank {rank}: `{cid}`{heading_name}\n")
+    lines.append(f"**Overall Score:** {_score_bar(final, 24)} &nbsp; {_score_stars(final)} &nbsp; {_score_label(final)}\n")
+
+    # Dimension breakdown
+    lines.append("<details><summary>📊 Score Breakdown</summary>\n")
+    dim_keys = ["topic_similarity", "skill_match", "network_distance", "community", "cold_start_bonus"]
+    lines.append(_mini_radar(scores, dim_keys))
+    lines.append("")
+    if diversity_pen < 0:
+        lines.append(f"> ⚠️ **Diversity Penalty:** `{diversity_pen:.4f}` (topic overlap with higher-ranked results)")
+    if cs_bonus > 0:
+        lines.append(f"> 💡 **Cold-Start Bonus Applied:** `+{cs_bonus:.4f}`")
+    lines.append("\n</details>\n")
+
+    # Tags
+    if topics:
+        tag_str = " ".join(f"`{t}`" for t in topics[:6])
+        lines.append(f"**Topics:** {tag_str}\n")
+    if community:
+        lines.append(f"**Community:** `{community}`\n")
+
+    lines.append(f"**Explanation:** {explanation}\n")
+    lines.append("---")
+    return lines
+
+
+def _render_project_card(item: dict[str, Any], rank: int) -> list[str]:
+    lines: list[str] = []
+    pid = item.get("project_id") or ""
+    title = item.get("project_title") or item.get("title") or ""
+    mentor_id = item.get("mentor_id") or ""
+    final = float(item.get("final_score", 0.0))
+    scores = item.get("scores") or {}
+    explanation = item.get("explanation", "")
+    matched_interests = item.get("matched_interests") or []
+    matched_skills = item.get("matched_skills") or []
+    missing_skills = item.get("missing_skills") or []
+    difficulty = item.get("difficulty") or item.get("difficulty_level") or ""
+    diversity_pen = item.get("diversity_penalty", 0.0)
+
+    heading_title = f" — {title}" if title else ""
+    lines.append(f"\n#### {_medal(rank)} Rank {rank}: `{pid}`{heading_title}\n")
+    lines.append(f"**Overall Score:** {_score_bar(final, 24)} &nbsp; {_score_stars(final)} &nbsp; {_score_label(final)}\n")
+    if mentor_id:
+        lines.append(f"**Mentor:** `{mentor_id}`\n")
+    if difficulty:
+        lines.append(f"**Difficulty:** `{difficulty}`\n")
+
+    # Dimension breakdown
+    lines.append("<details><summary>📊 Score Breakdown</summary>\n")
+    dim_keys = ["topic_match", "skill_match", "difficulty_match", "mentor_link"]
+    lines.append(_mini_radar(scores, dim_keys))
+    if diversity_pen < 0:
+        lines.append(f"\n> ⚠️ **Diversity Penalty:** `{diversity_pen:.4f}`")
+    lines.append("\n</details>\n")
+
+    if matched_interests:
+        lines.append("**Matched Interests:** " + " ".join(f"`{x}`" for x in matched_interests[:5]) + "\n")
+    if matched_skills:
+        lines.append("**Matched Skills:** " + " ".join(f"`{x}`" for x in matched_skills[:5]) + "\n")
+    if missing_skills:
+        lines.append("**Skill Gaps:** " + " ".join(f"`{x}`" for x in missing_skills[:3]) + "\n")
+
+    lines.append(f"**Explanation:** {explanation}\n")
+    lines.append("---")
+    return lines
+
+
+def _render_teammate_card(item: dict[str, Any], rank: int) -> list[str]:
+    lines: list[str] = []
+    tid = item.get("student_id") or ""
+    name = item.get("name") or item.get("student_name") or ""
+    final = float(item.get("final_score", 0.0))
+    scores = item.get("scores") or {}
+    explanation = item.get("explanation", "")
+    shared_interests = item.get("shared_interests") or []
+    comp_skills = item.get("complementary_skills") or []
+    has_graph = scores.get("graph_relation", 0.0) > 0
+    diversity_pen = item.get("diversity_penalty", 0.0)
+
+    heading_name = f" — {name}" if name else ""
+    lines.append(f"\n#### {_medal(rank)} Rank {rank}: `{tid}`{heading_name}\n")
+    lines.append(f"**Overall Score:** {_score_bar(final, 24)} &nbsp; {_score_stars(final)} &nbsp; {_score_label(final)}\n")
+    if has_graph:
+        lines.append("> 🔗 Graph-connected teammate\n")
+
+    lines.append("<details><summary>📊 Score Breakdown</summary>\n")
+    dim_keys = ["shared_interest", "complementarity", "availability", "graph_relation"]
+    lines.append(_mini_radar(scores, dim_keys))
+    if diversity_pen < 0:
+        lines.append(f"\n> ⚠️ **Diversity Penalty:** `{diversity_pen:.4f}`")
+    lines.append("\n</details>\n")
+
+    if shared_interests:
+        lines.append("**Shared Interests:** " + " ".join(f"`{x}`" for x in shared_interests[:5]) + "\n")
+    if comp_skills:
+        lines.append("**Complementary Skills:** " + " ".join(f"`{x}`" for x in comp_skills[:5]) + "\n")
+
+    lines.append(f"**Explanation:** {explanation}\n")
+    lines.append("---")
+    return lines
+
+
+def to_markdown(results: list[dict[str, Any]]) -> str:
+    """
+    Generate a richly visualized Markdown report from ranking results.
+    Includes progress bars, score breakdowns, medal ranks, tags, and
+    collapsible detail sections for each recommendation.
+    """
+    lines: list[str] = []
+
+    # Document header
+    lines.append("# 🎓 Student Recommendation Report")
+    lines.append("")
+    lines.append("> Generated by **Skill 5 — Multi-Objective Joint Ranker**  ")
+    lines.append("> Scoring dimensions: topic similarity · skill match · network distance · community · cold-start · MMR diversity")
+    lines.append("")
+    lines.append("---")
+
     for r in results:
         sid = r["student_id"]
-        lines.append(f"\n## Student: {sid}\n")
-        for rtype in ("mentors", "projects", "teammates"):
-            items = r["recommendations"][rtype]
+        profile = r.get("student_profile") or {}
+        is_cold = r.get("is_cold_start", False)
+        summary = r.get("summary") or {}
+        rec = r.get("recommendations") or {}
+
+        # Student header
+        lines.append(f"\n## 👤 Student: `{sid}`\n")
+
+        # Profile summary
+        major = profile.get("major") or "N/A"
+        grade = profile.get("grade") or "N/A"
+        skills = profile.get("skills") or []
+        interests = profile.get("interests") or []
+        lines.append(f"| Field | Value |")
+        lines.append(f"|-------|-------|")
+        lines.append(f"| **Major** | {major} |")
+        lines.append(f"| **Grade** | {grade} |")
+        lines.append(f"| **Skills** | {', '.join(str(s) for s in skills[:6]) or 'N/A'} |")
+        lines.append(f"| **Interests** | {', '.join(str(i) for i in interests[:6]) or 'N/A'} |")
+        lines.append(f"| **Cold-Start Mode** | {'⚠️ Yes — diversity boosting applied' if is_cold else '✅ No'} |")
+        lines.append("")
+
+        # Summary statistics
+        lines.append("### 📈 Ranking Summary\n")
+        lines.append("| Category | Candidates | Ranked Top-K |")
+        lines.append("|----------|-----------|-------------|")
+        lines.append(f"| 🧑‍🏫 Mentors | {summary.get('total_mentor_candidates', '—')} | {summary.get('ranked_mentors', '—')} |")
+        lines.append(f"| 📁 Projects | {summary.get('total_project_candidates', '—')} | {summary.get('ranked_projects', '—')} |")
+        lines.append(f"| 🤝 Teammates | {summary.get('total_teammate_candidates', '—')} | {summary.get('ranked_teammates', '—')} |")
+        lines.append("")
+
+        # Quick overview table per category
+        for rtype, emoji, id_key in [
+            ("mentors",   "🧑‍🏫", "mentor_id"),
+            ("projects",  "📁", "project_id"),
+            ("teammates", "🤝", "student_id"),
+        ]:
+            items = rec.get(rtype) or []
             if not items:
                 continue
-            lines.append(f"### {rtype.capitalize()}\n")
-            lines.append("| Rank | ID | Final Score | Explanation |")
-            lines.append("|------|----|-------------|-------------|")
+
+            lines.append(_section_header(rtype.capitalize(), emoji, len(items)))
+
+            # Compact overview table
+            lines.append("| Rank | ID | Score | ★ | Label | Top Dimension |")
+            lines.append("|------|----|-------|---|-------|---------------|")
             for item in items:
-                cid = item.get("mentor_id") or item.get("project_id") or item.get("student_id") or ""
+                cid = item.get(id_key) or item.get("mentor_id") or item.get("project_id") or item.get("student_id") or ""
+                final = float(item.get("final_score", 0.0))
+                scores = item.get("scores") or {}
+                # Find dominant dimension (exclude meta keys)
+                skip = {"final_score", "skill3_final_score", "skill4_fit_score", "skill4_teammate_score"}
+                dim_scores = {k: v for k, v in scores.items() if k not in skip and isinstance(v, float)}
+                top_dim = max(dim_scores, key=dim_scores.get) if dim_scores else "—"
                 lines.append(
-                    f"| {item.get('rank','')} | {cid} | {item.get('final_score','')} "
-                    f"| {item.get('explanation','')[:80]} |"
+                    f"| {_medal(item.get('rank', 0))} | `{cid}` | `{final:.4f}` "
+                    f"| {_score_stars(final, 5)} | {_score_label(final)} | `{top_dim}` |"
                 )
+            lines.append("")
+
+            # Detailed cards
+            lines.append("<details><summary>🔍 Detailed Cards (click to expand)</summary>\n")
+            for item in items:
+                rank = item.get("rank", 0)
+                if rtype == "mentors":
+                    lines.extend(_render_mentor_card(item, rank))
+                elif rtype == "projects":
+                    lines.extend(_render_project_card(item, rank))
+                else:
+                    lines.extend(_render_teammate_card(item, rank))
+            lines.append("\n</details>\n")
+
+        lines.append("\n---\n")
+
+    # Legend
+    lines.append("## 📖 Legend\n")
+    lines.append("| Symbol | Meaning |")
+    lines.append("|--------|---------|")
+    lines.append("| 🟢 Excellent | Score ≥ 0.80 |")
+    lines.append("| 🔵 Good | Score 0.60–0.79 |")
+    lines.append("| 🟡 Fair | Score 0.40–0.59 |")
+    lines.append("| 🔴 Low | Score < 0.40 |")
+    lines.append("| ⚠️ Diversity Penalty | Topic overlap with higher-ranked results (MMR) |")
+    lines.append("| 💡 Cold-Start Bonus | Emerging mentor with sparse history |")
+    lines.append("| 🔗 Graph-connected | Teammate linked via interest/skill graph |")
+    lines.append("")
+    lines.append("**Score bars** (`█░`) represent normalized 0–1 scores. "
+                 "**Stars** (★☆) show the same on a 5-point scale.\n")
+
     return "\n".join(lines)
 
 # ---------------------------------------------------------------------------
@@ -692,6 +944,11 @@ def main() -> int:
     if args.format == "json":
         payload = all_results[0] if len(all_results) == 1 else all_results
         out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[Skill5] Wrote JSON to {out_path}")
+        # Auto-generate companion Markdown visualization report
+        md_path = out_path.with_suffix(".md")
+        md_path.write_text(to_markdown(all_results), encoding="utf-8")
+        print(f"[Skill5] Wrote Markdown report to {md_path}")
 
     elif args.format == "csv":
         rows = to_csv_rows(all_results)
@@ -700,11 +957,14 @@ def main() -> int:
                 writer = csv.DictWriter(f, fieldnames=rows[0].keys())
                 writer.writeheader()
                 writer.writerows(rows)
+        print(f"[Skill5] Wrote CSV to {out_path}")
 
     elif args.format == "markdown":
+        # Ensure .md extension
+        if out_path.suffix.lower() != ".md":
+            out_path = out_path.with_suffix(".md")
         out_path.write_text(to_markdown(all_results), encoding="utf-8")
-
-    print(f"[Skill5] Wrote final_recommendation to {out_path}")
+        print(f"[Skill5] Wrote Markdown report to {out_path}")
     if all_results:
         r = all_results[0]
         rec = r["recommendations"]
