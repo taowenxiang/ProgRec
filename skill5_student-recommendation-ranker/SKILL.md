@@ -9,6 +9,10 @@ description: >
   topic similarity, network distance, community membership, skill matching,
   cold-start compensation, and MMR result diversity. Outputs final_recommendation.json
   with ranked lists, per-dimension scores, and explanation features.
+  Additionally produces a richly visualized final_recommendation.md alongside the JSON,
+  featuring Unicode progress bars, star ratings, score-label badges, per-dimension
+  breakdown tables, collapsible detail cards, medal ranks, and a legend — all rendered
+  in standard GitHub-Flavored Markdown.
   This skill should be used when a user needs to combine Skill 3 and Skill 4 outputs
   into a final unified recommendation, or when multi-criteria re-ranking with explainability
   is needed for mentors, projects, and teammates.
@@ -20,13 +24,23 @@ agent_created: true
 ## Purpose
 
 Consume **Skill 3** (mentor candidates) and **Skill 4** (project + teammate bundles) outputs
-and produce a **final_recommendation.json** with:
+and produce a **final_recommendation.json** (+ companion **final_recommendation.md**) with:
 
 - Per-student ranked lists for **mentors**, **projects**, **teammates**
 - Per-dimension sub-scores (`topic_similarity`, `skill_match`, `network_distance`,
   `community`, `cold_start_bonus`, `diversity_penalty`)
 - MMR diversity re-ranking to avoid topic-redundant results
 - Explanation feature strings per recommendation
+- **Richly visualized Markdown report** (auto-generated alongside JSON) featuring:
+  - Unicode progress bars `█░` for all scores
+  - Star ratings ★☆ (5-point scale)
+  - Colored score labels: 🟢 Excellent / 🔵 Good / 🟡 Fair / 🔴 Low
+  - Medal rankings 🥇 🥈 🥉 for top-3
+  - Per-dimension breakdown tables in collapsible `<details>` blocks
+  - Tags for topics, matched skills/interests, skill gaps
+  - Cold-start ⚠️ and graph-link 🔗 indicators
+  - Student profile card and summary statistics table
+  - Full legend at document end
 
 ## Input Files
 
@@ -108,7 +122,9 @@ python scripts/joint_ranker.py \
 
 ### Step 3 — Interpret Output
 
-The script writes `final_recommendation.json` with structure:
+The script writes two output files:
+
+**`final_recommendation.json`** — machine-readable, structure:
 
 ```json
 {
@@ -123,12 +139,27 @@ The script writes `final_recommendation.json` with structure:
 }
 ```
 
+**`final_recommendation.md`** — auto-generated rich visual report (same base name as `--output`), containing:
+
+| Section | What You See |
+|---------|-------------|
+| Student profile card | Major, grade, skills, interests, cold-start flag |
+| Ranking summary table | Candidate counts and top-K per category |
+| Overview table (per category) | Rank medal, ID, score, stars, label, top dimension |
+| Detailed cards (collapsible) | Progress bar, per-dimension breakdown, tags, explanation |
+| Legend | Score bands, symbol glossary |
+
+> **Note:** When `--format markdown` is used, only the `.md` file is written (no JSON).  
+> When `--format json` (default), **both** files are written automatically.
+
 ### Step 4 — Present Results
 
+- The auto-generated **`.md` report** renders directly in GitHub, VS Code Preview, Obsidian, and any GFM viewer
 - Display a summary table for each category (mentor / project / teammate)
-- Show top-K entries with rank, final score, dominant scoring dimension, and explanation
-- If `is_cold_start: true`, note that diversity-boosting was applied
-- If `diversity_penalty` values are large (< -0.15), note that many candidates shared similar topics
+- Progress bars `█░` and stars ★☆ give instant visual comparison of scores
+- Collapsible `<details>` per-dimension cards keep the document scannable at top level
+- If `is_cold_start: true`, the student profile card flags it and diversity-boosting note appears
+- If `diversity_penalty` values are large (< -0.15), a ⚠️ warning appears next to that item
 
 ## Scoring Dimensions
 
