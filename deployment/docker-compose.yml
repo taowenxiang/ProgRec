@@ -1,6 +1,9 @@
 services:
   reverse-proxy:
     image: caddy:2
+    restart: unless-stopped
+    profiles:
+      - direct-exposure
     ports:
       - "80:80"
       - "443:443"
@@ -13,6 +16,7 @@ services:
 
   postgres:
     image: postgres:17
+    restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
@@ -22,6 +26,7 @@ services:
 
   redis:
     image: redis:8
+    restart: unless-stopped
     command: ["redis-server", "--appendonly", "yes"]
     volumes:
       - ${PROGREC_HOST_ROOT}/data/redis:/data
@@ -32,9 +37,12 @@ services:
       dockerfile: deployment/backend.Dockerfile
     env_file:
       - .env
+    restart: unless-stopped
     environment:
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
+    ports:
+      - "127.0.0.1:${API_PORT}:8000"
     volumes:
       - ../:/srv/app:ro
       - ${PROGREC_HOST_ROOT}/data/artifacts:/srv/artifacts
@@ -49,6 +57,7 @@ services:
       dockerfile: deployment/worker.Dockerfile
     env_file:
       - .env
+    restart: unless-stopped
     environment:
       DATABASE_URL: ${DATABASE_URL}
       REDIS_URL: ${REDIS_URL}
@@ -59,3 +68,17 @@ services:
     depends_on:
       - postgres
       - redis
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    profiles:
+      - cloudflare-tunnel
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token
+      - ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - progrec-api

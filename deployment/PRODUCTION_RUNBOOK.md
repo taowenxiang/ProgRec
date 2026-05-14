@@ -5,7 +5,7 @@ This runbook deploys the public web platform with:
 - Frontend: Vercel project for `progrec-web`
 - Frontend public path: `https://demo.wenxiangtao.com/progrec`
 - Backend API: `https://progrec-api.wenxiangtao.com`
-- Linux host: Docker Compose running Caddy, FastAPI, worker, PostgreSQL, and Redis
+- Linux host: Docker Compose running FastAPI, worker, PostgreSQL, Redis, and Cloudflare Tunnel
 
 ## Current Readiness
 
@@ -15,7 +15,7 @@ The repository currently provides the deployable foundation:
 - Runtime profile test endpoint
 - Agent session endpoint
 - Pipeline job endpoint
-- Docker Compose, Caddy, Postgres, Redis, API, and worker containers
+- Docker Compose, Cloudflare Tunnel, optional Caddy, Postgres, Redis, API, and worker containers
 - Vercel BFF routes in `progrec-web`
 
 Before claiming the product is fully usable, the next backend implementation milestone must wire:
@@ -35,22 +35,22 @@ Install:
 - Git
 - A shell user with access to `/opt/progrec`
 
-Open inbound ports:
-
-- `80/tcp`
-- `443/tcp`
-
 Do not expose:
 
 - PostgreSQL
 - Redis
 - FastAPI container port directly
 
+Recommended for a home server:
+
+- Do not open inbound `80/tcp` or `443/tcp` on the router
+- Use Cloudflare Tunnel as the public entrypoint
+
 ## DNS
 
 Create DNS records:
 
-- `progrec-api.wenxiangtao.com` -> Linux host public IP
+- `progrec-api.wenxiangtao.com` -> Cloudflare Tunnel public hostname
 - `demo.wenxiangtao.com` -> existing demo router
 
 The demo router should forward `/progrec/*` to the Vercel deployment.
@@ -76,20 +76,39 @@ POSTGRES_PASSWORD=<strong-password>
 DATABASE_URL=postgresql://progrec:<strong-password>@postgres:5432/progrec
 ENCRYPTION_KEY=<32-or-more-random-characters>
 CORS_ALLOWED_ORIGINS=https://demo.wenxiangtao.com
+CLOUDFLARE_TUNNEL_TOKEN=<token-from-cloudflare-dashboard>
 ```
+
+Cloudflare setup:
+
+1. In the Cloudflare dashboard, create a Tunnel.
+2. Create a public hostname:
+
+   ```text
+   Dockerized cloudflared: progrec-api.wenxiangtao.com -> http://progrec-api:8000
+   Host-installed cloudflared: progrec-api.wenxiangtao.com -> http://127.0.0.1:8000
+   ```
+
+3. Copy the tunnel token into `deployment/.env`.
+4. If you run `cloudflared` as a user-level systemd service on the Linux host, enable linger once so the service also starts after host reboot before interactive login:
+
+   ```bash
+   loginctl enable-linger mount
+   ```
 
 Start:
 
 ```bash
-docker compose --env-file deployment/.env -f deployment/docker-compose.yml up -d --build
+docker compose --env-file deployment/.env -f deployment/docker-compose.yml --profile cloudflare-tunnel up -d --build
 ```
 
 Check:
 
 ```bash
 docker compose --env-file deployment/.env -f deployment/docker-compose.yml ps
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/models/recommended
 curl https://progrec-api.wenxiangtao.com/health
-curl https://progrec-api.wenxiangtao.com/models/recommended
 ```
 
 Expected health response:
@@ -143,6 +162,8 @@ It must preserve:
 Backend:
 
 ```bash
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/models/recommended
 curl https://progrec-api.wenxiangtao.com/health
 curl https://progrec-api.wenxiangtao.com/models/recommended
 curl -X POST https://progrec-api.wenxiangtao.com/runtime-profiles/test \
@@ -175,7 +196,7 @@ Pull and redeploy backend:
 ```bash
 cd /opt/progrec/ProgRec
 git pull
-docker compose --env-file deployment/.env -f deployment/docker-compose.yml up -d --build
+docker compose --env-file deployment/.env -f deployment/docker-compose.yml --profile cloudflare-tunnel up -d --build
 ```
 
 View logs:
@@ -183,7 +204,7 @@ View logs:
 ```bash
 docker compose --env-file deployment/.env -f deployment/docker-compose.yml logs -f progrec-api
 docker compose --env-file deployment/.env -f deployment/docker-compose.yml logs -f progrec-worker
-docker compose --env-file deployment/.env -f deployment/docker-compose.yml logs -f reverse-proxy
+docker compose --env-file deployment/.env -f deployment/docker-compose.yml logs -f cloudflared
 ```
 
 Stop:
@@ -191,3 +212,17 @@ Stop:
 ```bash
 docker compose --env-file deployment/.env -f deployment/docker-compose.yml down
 ```
+
+## Optional Direct Exposure
+
+If you later move this stack to a VPS or a network where inbound `80/443` is intentionally reachable, you can still use the previous Caddy-based edge:
+
+```bash
+docker compose --env-file deployment/.env -f deployment/docker-compose.yml --profile direct-exposure up -d --build
+```
+
+That mode expects:
+
+- `progrec-api.wenxiangtao.com` resolves to the host public IP
+- inbound `80/tcp` and `443/tcp` reach the Linux host
+- Let's Encrypt can reach the host for ACME validation
