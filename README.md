@@ -2,8 +2,8 @@
 
 Course project repository for the recommendation pipeline handoff, including:
 
-- `skill1_handoff/`: normalized student profile artifacts
-- `skill2_handoff/`: graph-building outputs and the regenerate kit
+- `skill1_student_profiling/`: Skill 1 source code plus `outputs/` for normalized student profile artifacts
+- `skill2_academic_graph_builder/`: graph-building outputs and the regenerate kit
 - `skill3_mentor_discovery/`: mentor retrieval and ranking logic
 - `tests/`: unit tests for the Skill 3 pipeline
 
@@ -11,8 +11,9 @@ Course project repository for the recommendation pipeline handoff, including:
 
 ```text
 ProgRec/
-├── skill1_handoff/
-├── skill2_handoff/
+├── skill1_student_profiling/
+│   └── outputs/
+├── skill2_academic_graph_builder/
 │   ├── outputs/
 │   └── regenerate_kit/
 ├── skill3_mentor_discovery/
@@ -140,7 +141,7 @@ python3 progrec_agent/run_agent.py \
   --output outputs/final_recommendation_demo.json
 ```
 
-Use `--student-id <id>` when the default (first id in the mode’s student bundle) is not what you want. Graph mode requires a built `academic_graph.json` under `skill2_handoff/regenerate_kit/data/processed/` and routes **Skill 3 and Skill 4** through the same processed student, mentor, and graph files (see `AGENTS.md`).
+Use `--student-id <id>` when the default (first id in the mode’s student bundle) is not what you want. Graph mode requires a built `academic_graph.json` under `skill2_academic_graph_builder/regenerate_kit/data/processed/` and routes **Skill 3 and Skill 4** through the same processed student, mentor, and graph files (see `AGENTS.md`).
 
 ### Verified Agent Run (graph)
 

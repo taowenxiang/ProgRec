@@ -1,6 +1,6 @@
 """Bridge Skill 1 normalized student profiles ↔ Skill 2 graph student nodes.
 
-Schema matches ``skill1_handoff/SKILL1_README.md`` (2026-05-07):
+Schema matches the normalized outputs under ``skill1_student_profiling/outputs/``:
 ``student_id``, ``grade``, ``major``, ``skills``, ``interests``,
 ``experience_summary``, ``availability``.
 

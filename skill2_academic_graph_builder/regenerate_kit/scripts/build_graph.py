@@ -24,6 +24,7 @@ from skills.academic_graph_builder.skill1_embeddings import export_aligned_stude
 from skills.academic_graph_builder.student_skill1 import save_student_standard_bundle
 
 _COURSE_ROOT = course_repo_root(_BUNDLE_ROOT)
+_SKILL1_OUTPUTS = _COURSE_ROOT / "skill1_student_profiling" / "outputs"
 
 
 def main() -> None:
@@ -57,7 +58,7 @@ def main() -> None:
         type=Path,
         default=None,
         help="Skill 1 handoff: student_profiles_normalized.jsonl (overrides students.csv nodes). "
-        f"Typical: {_COURSE_ROOT / 'skill1_handoff' / 'student_profiles_normalized.jsonl'}",
+        f"Typical: {_SKILL1_OUTPUTS / 'student_profiles_normalized.jsonl'}",
     )
     parser.add_argument(
         "--skill1-max-students",
@@ -79,13 +80,13 @@ def main() -> None:
     parser.add_argument(
         "--skill1-embeddings",
         type=Path,
-        default=_COURSE_ROOT / "skill1_handoff" / "embeddings.npy",
+        default=_SKILL1_OUTPUTS / "embeddings.npy",
         help="Skill 1 embeddings.npy (full corpus, row-aligned with student_ids.json)",
     )
     parser.add_argument(
         "--skill1-student-ids-json",
         type=Path,
-        default=_COURSE_ROOT / "skill1_handoff" / "student_ids.json",
+        default=_SKILL1_OUTPUTS / "student_ids.json",
         help="Skill 1 student_ids.json (same order as embeddings.npy rows)",
     )
     parser.add_argument(
@@ -159,7 +160,8 @@ def main() -> None:
         else:
             student_meta["embedding_alignment_warning"] = (
                 "Could not export aligned embeddings. "
-                f"Expected Skill 1 files under skill1_handoff/ (or pass --skill1-embeddings / --skill1-student-ids-json). "
+                f"Expected Skill 1 files under skill1_student_profiling/outputs/ "
+                f"(or pass --skill1-embeddings / --skill1-student-ids-json). "
                 f"Missing: embeddings={not emb_path.is_file()}, student_ids_json={not sid_path.is_file()} "
                 f"(looked at {emb_path} and {sid_path})."
             )

@@ -5,53 +5,53 @@
     {
       "name": "mentor_profiles_standard.json",
       "path_in_repo": "data/processed/mentor_profiles_standard.json",
-      "exported_to": "skill2_handoff/outputs/mentor_profiles_standard.json",
+      "exported_to": "skill2_academic_graph_builder/outputs/mentor_profiles_standard.json",
       "bytes": 956289,
       "sha256": "3e49de63c6c1020b8a6fb421c49c88947e2ae8bf3df71d5f1ad4e3138a27e216"
     },
     {
       "name": "student_profiles_standard.json",
       "path_in_repo": "data/processed/student_profiles_standard.json",
-      "exported_to": "skill2_handoff/outputs/student_profiles_standard.json",
+      "exported_to": "skill2_academic_graph_builder/outputs/student_profiles_standard.json",
       "bytes": 1841107,
       "sha256": "d2b97664e30b8abf67345c6384580a155eb79230a6fb6ef05d9bcd0b902cfde4"
     },
     {
       "name": "student_embeddings_aligned.npy",
       "path_in_repo": "data/processed/student_embeddings_aligned.npy",
-      "exported_to": "skill2_handoff/outputs/student_embeddings_aligned.npy",
+      "exported_to": "skill2_academic_graph_builder/outputs/student_embeddings_aligned.npy",
       "bytes": 2502272,
       "sha256": "f5248e60de41b7d7e453765084f9650d0488004bdddea8dc522423e1f53bbfc7"
     },
     {
       "name": "student_ids_aligned.json",
       "path_in_repo": "data/processed/student_ids_aligned.json",
-      "exported_to": "skill2_handoff/outputs/student_ids_aligned.json",
+      "exported_to": "skill2_academic_graph_builder/outputs/student_ids_aligned.json",
       "bytes": 40864,
       "sha256": "7ccb046882deca2628b54e83c173541e663ab567bfd266e2bf6a5114fbcc76e3"
     },
     {
       "name": "graph_metrics.json",
       "path_in_repo": "data/processed/graph_metrics.json",
-      "exported_to": "skill2_handoff/outputs/graph_metrics.json",
+      "exported_to": "skill2_academic_graph_builder/outputs/graph_metrics.json",
       "bytes": 1965,
       "sha256": "5b101c4d72b4784c7aa209d9d4bcbed11922cce633cf5008118445300eefa940"
     },
     {
       "name": "academic_graph.json",
       "path_in_repo": "data/processed/academic_graph.json",
-      "exported_to": "skill2_handoff/outputs/academic_graph.json",
+      "exported_to": "skill2_academic_graph_builder/outputs/academic_graph.json",
       "bytes": 850022348,
       "sha256": "9ae5695639b4bafd4b042280ee88e3d2170f6b7c6004e006c6f1a1381441a67c"
     },
     {
       "name": "SKILL2_README.md",
-      "path_in_repo": "skill2_handoff/SKILL2_README.md",
-      "exported_to": "skill2_handoff/outputs/SKILL2_README.md",
+      "path_in_repo": "skill2_academic_graph_builder/SKILL2_README.md",
+      "exported_to": "skill2_academic_graph_builder/outputs/SKILL2_README.md",
       "bytes": 8375,
       "sha256": "5df6c4b57975c18c377daedd25c0418e1d46595c9b0c1e6c87b13197b7fce83d"
     }
   ],
-  "regenerate_kit": "skill2_handoff/regenerate_kit (refreshed)",
+  "regenerate_kit": "skill2_academic_graph_builder/regenerate_kit (refreshed)",
   "note": "Large academic_graph.json omitted unless --full-graph. Code to regenerate data: regenerate_kit/."
 }

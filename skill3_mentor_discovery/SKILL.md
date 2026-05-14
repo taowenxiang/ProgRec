@@ -13,7 +13,7 @@ It owns the mentor stage only:
 
 - Input: one standardized student profile plus Skill 2 student, mentor, and graph artifacts
 - Output: JSON with `student_id`, `graph_status`, `data_sources`, and `mentor_candidates[]`
-- Downstream consumers: `skill4_handoff`, `progrec_agent`, or manual inspection
+- Downstream consumers: `skill4_program_teammate_discovery`, `progrec_agent`, or manual inspection
 
 The ranking pipeline has two stages:
 
@@ -56,11 +56,11 @@ Skill 3 expects one student record in the standardized schema used across Skills
 
 By default, Skill 3 resolves:
 
-- `skill2_handoff/outputs/student_profiles_standard.json`
-- `skill2_handoff/outputs/mentor_profiles_standard.json`
+- `skill2_academic_graph_builder/outputs/student_profiles_standard.json`
+- `skill2_academic_graph_builder/outputs/mentor_profiles_standard.json`
 - graph candidates in this order:
-  `skill2_handoff/outputs/academic_graph.json`
-  then `skill2_handoff/regenerate_kit/data/processed/academic_graph.json`
+  `skill2_academic_graph_builder/outputs/academic_graph.json`
+  then `skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json`
 
 You can also pass explicit Skill 2 paths:
 
@@ -148,9 +148,9 @@ Use this when you want Skill 3 to consume the same processed bundle as graph-mod
 python3 skill3_mentor_discovery/run_skill3.py \
   --student-id jamie-taylor-00008 \
   --top-k 5 \
-  --skill2-graph skill2_handoff/regenerate_kit/data/processed/academic_graph.json \
-  --skill2-students skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json \
-  --skill2-mentors skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json \
+  --skill2-graph skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json \
+  --skill2-students skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json \
+  --skill2-mentors skill2_academic_graph_builder/regenerate_kit/data/processed/mentor_profiles_standard.json \
   > /tmp/skill3_graph.json
 ```
 
@@ -209,7 +209,7 @@ Triggered when no explicit `--skill2-*` paths are passed.
 
 Behavior:
 
-- student and mentor bundles come from `skill2_handoff/outputs/`
+- student and mentor bundles come from `skill2_academic_graph_builder/outputs/`
 - graph is searched in `outputs/` first, then processed graph under `regenerate_kit/data/processed/`
 - if a graph candidate exists but contains invalid JSON, Skill 3 looks for another `academic_graph*.json` in the same directory
 - if no usable graph exists, Skill 3 may try rebuilding via Skill 2's regenerate kit
@@ -279,13 +279,13 @@ python3 -m unittest \
 Check whether a student exists in the bundle you are actually using:
 
 ```bash
-python3 -c "import json; p='skill2_handoff/outputs/student_profiles_standard.json'; d=json.load(open(p)); ids={s['student_id'] for s in d.get('students',[])}; print('jamie-taylor-00008' in ids); print(len(ids))"
+python3 -c "import json; p='skill2_academic_graph_builder/outputs/student_profiles_standard.json'; d=json.load(open(p)); ids={s['student_id'] for s in d.get('students',[])}; print('jamie-taylor-00008' in ids); print(len(ids))"
 ```
 
 Check processed graph JSON validity:
 
 ```bash
-python3 -c "import json,sys; p=sys.argv[1]; json.load(open(p)); print('OK', p)" skill2_handoff/regenerate_kit/data/processed/academic_graph.json
+python3 -c "import json,sys; p=sys.argv[1]; json.load(open(p)); print('OK', p)" skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json
 ```
 
 Inspect the declared data sources from a saved Skill 3 artifact:

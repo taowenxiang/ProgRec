@@ -76,8 +76,8 @@
 - `progrec_agent/orchestrator.py`
 - `progrec_agent/run_agent.py`
 - `skill3_mentor_discovery/`
-- `skill4_handoff/`
-- `skill5_student-recommendation-ranker/`
+- `skill4_program_teammate_discovery/`
+- `skill5_student_recommendation_ranker/`
 
 These should only receive changes if the runtime wrapper reveals a real integration gap.
 

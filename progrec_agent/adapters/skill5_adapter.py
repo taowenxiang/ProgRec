@@ -5,6 +5,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from progrec_agent.config import skill1_profiles_path
+
 
 def run_skill5(
     *,
@@ -15,7 +17,7 @@ def run_skill5(
     student_id: str,
     top_k: int,
 ) -> dict[str, object]:
-    script = repo_root / "skill5_student-recommendation-ranker/scripts/joint_ranker.py"
+    script = repo_root / "skill5_student_recommendation_ranker/scripts/joint_ranker.py"
     cmd = [
         sys.executable,
         str(script),
@@ -30,7 +32,7 @@ def run_skill5(
         "--top-k",
         str(top_k),
         "--students",
-        str(repo_root / "skill1_handoff/student_profiles_normalized.jsonl"),
+        str(skill1_profiles_path(repo_root)),
     ]
     subprocess.run(cmd, check=True, capture_output=True, text=True)
     return json.loads(output_path.read_text(encoding="utf-8"))

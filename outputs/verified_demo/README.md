@@ -4,14 +4,14 @@ This folder documents a **known-good graph-mode** ProgRec Agent run (Skills **3 
 
 ## Student ID
 
-- **`jamie-taylor-00008`** (present in `skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json`)
+- **`jamie-taylor-00008`** (present in `skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json`)
 
 ## Mode
 
 - **`graph`** — `progrec_agent/config.py` resolves:
-  - `skill2_handoff/regenerate_kit/data/processed/academic_graph.json`
-  - `skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json`
-  - `skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json`
+  - `skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json`
+  - `skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json`
+  - `skill2_academic_graph_builder/regenerate_kit/data/processed/mentor_profiles_standard.json`
 - Skill 3 uses the same three paths as Skill 4 (`data_sources.resource_mode` = `explicit` on Skill 3 when wired through the Agent).
 
 ## Pipeline

@@ -154,8 +154,8 @@ Skill 3 and Skill 4 **must** use the same `student_id` namespace:
 
 | Mode | Student IDs | Bundle |
 |------|-------------|--------|
-| Demo | `s_001`, `s_002`, ... | `skill2_handoff/outputs/student_profiles_standard.json` |
-| Regenerated | `jamie-taylor-00008`, ... | `skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json` |
+| Demo | `s_001`, `s_002`, ... | `skill2_academic_graph_builder/outputs/student_profiles_standard.json` |
+| Regenerated | `jamie-taylor-00008`, ... | `skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json` |
 
 Mixing demo and regenerated IDs will cause mismatches. Skill 5 will log a warning and
 continue but results may be incomplete.

@@ -44,9 +44,9 @@ Skill 3 expects one student profile in the standardized Skill 1 / Skill 2 schema
 
 It reads:
 
-- `skill2_handoff/outputs/mentor_profiles_standard.json`
-- `skill2_handoff/outputs/student_profiles_standard.json`
-- `skill2_handoff/outputs/academic_graph.json` when available
+- `skill2_academic_graph_builder/outputs/mentor_profiles_standard.json`
+- `skill2_academic_graph_builder/outputs/student_profiles_standard.json`
+- `skill2_academic_graph_builder/outputs/academic_graph.json` when available
 
 If the graph export is missing, Skill 3 can attempt a rebuild and otherwise falls back gracefully.
 

@@ -7,15 +7,15 @@ def resolve_skill2_resources(repo_root: Path) -> dict[str, object]:
     candidates = [
         (
             "outputs_bundle",
-            repo_root / "skill2_handoff/outputs/student_profiles_standard.json",
-            repo_root / "skill2_handoff/outputs/mentor_profiles_standard.json",
-            repo_root / "skill2_handoff/outputs/academic_graph.json",
+            repo_root / "skill2_academic_graph_builder/outputs/student_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/outputs/mentor_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/outputs/academic_graph.json",
         ),
         (
             "regenerate_bundle",
-            repo_root / "skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json",
-            repo_root / "skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json",
-            repo_root / "skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
+            repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/mentor_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json",
         ),
         (
             "processed_bundle",

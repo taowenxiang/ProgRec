@@ -32,4 +32,4 @@ env/
 .progrec_agent_tmp/
 .superpowers/
 
-skill2_handoff/outputs/academic_graph.json
+skill2_academic_graph_builder/outputs/academic_graph.json

@@ -77,8 +77,8 @@ class TestOrchestratorGraphSkill3(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            (root / "skill1_handoff").mkdir(parents=True)
-            proc = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            (root / "skill1_student_profiling" / "outputs").mkdir(parents=True)
+            proc = root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed"
             proc.mkdir(parents=True)
             sp = proc / "student_profiles_standard.json"
             mp = proc / "mentor_profiles_standard.json"
@@ -117,8 +117,8 @@ class TestOrchestratorGraphSkill3(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as td:
             root = Path(td) / "repo"
-            (root / "skill1_handoff").mkdir(parents=True)
-            out = root / "skill2_handoff" / "outputs"
+            (root / "skill1_student_profiling" / "outputs").mkdir(parents=True)
+            out = root / "skill2_academic_graph_builder" / "outputs"
             out.mkdir(parents=True)
             sp = out / "student_profiles_standard.json"
             mp = out / "mentor_profiles_standard.json"

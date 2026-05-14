@@ -1,109 +1,109 @@
 {
-  "generated_by": "scripts/export_skill2_handoff.py",
+  "generated_by": "scripts/export_skill2_academic_graph_builder.py",
   "course_repo_root": "/Users/yiminwang/Desktop/4641",
   "artifacts": [
     {
       "name": "generate_mentor_pool.py",
       "path_in_repo": "scripts/generate_mentor_pool.py",
-      "exported_to": "skill2_handoff/regenerate_kit/scripts/generate_mentor_pool.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/scripts/generate_mentor_pool.py",
       "bytes": 44503,
       "sha256": "149a379482160063124c5a289d2171c3d64f3e4a64bcfddcfb0741ebd528a6e4"
     },
     {
       "name": "build_graph.py",
       "path_in_repo": "scripts/build_graph.py",
-      "exported_to": "skill2_handoff/regenerate_kit/scripts/build_graph.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/scripts/build_graph.py",
       "bytes": 6618,
       "sha256": "6dc9bb125e68427fecdb83f5aaafa62fda5f054f14c5ffc3d89d9dbc9d73863d"
     },
     {
       "name": "inspect_graph.py",
       "path_in_repo": "scripts/inspect_graph.py",
-      "exported_to": "skill2_handoff/regenerate_kit/scripts/inspect_graph.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/scripts/inspect_graph.py",
       "bytes": 6100,
       "sha256": "f6ef20a01848df9ef7ffda603ab15d951e50f838de2364861e7303c21b54a8d1"
     },
     {
       "name": "__init__.py",
       "path_in_repo": "skills/__init__.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/__init__.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/__init__.py",
       "bytes": 36,
       "sha256": "0a00d5f852ccc9c17ce2b7a5866d41f2196084d981fd9f349c74cd4265d0f530"
     },
     {
       "name": "__init__.py",
       "path_in_repo": "skills/academic_graph_builder/__init__.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/__init__.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/__init__.py",
       "bytes": 1119,
       "sha256": "52dc2259b2aa24e62ea332002b559cf29e535b8dd53db9508b3810b0ad7e2570"
     },
     {
       "name": "builder.py",
       "path_in_repo": "skills/academic_graph_builder/builder.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/builder.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/builder.py",
       "bytes": 15926,
       "sha256": "2a18e8816546f7e1f03b7241f82f858cdf9de8dd3d6b5f30b735cf482cc302cb"
     },
     {
       "name": "evaluate.py",
       "path_in_repo": "skills/academic_graph_builder/evaluate.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/evaluate.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/evaluate.py",
       "bytes": 4571,
       "sha256": "306e461b34f8589dcb5188c362b2dd0d9297fbfbcd16de756d40abbdbe6ce141"
     },
     {
       "name": "index.py",
       "path_in_repo": "skills/academic_graph_builder/index.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/index.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/index.py",
       "bytes": 6866,
       "sha256": "fc9a0126a2d756df508b12fc852474bcbdb099c85bacef474465fc8122ff77dd"
     },
     {
       "name": "mentor_profiles.py",
       "path_in_repo": "skills/academic_graph_builder/mentor_profiles.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/mentor_profiles.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/mentor_profiles.py",
       "bytes": 4441,
       "sha256": "10ed84605b0a070153492923b268999bcf70760d504ea357f58ec00e11cc7966"
     },
     {
       "name": "runtime_paths.py",
       "path_in_repo": "skills/academic_graph_builder/runtime_paths.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/runtime_paths.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/runtime_paths.py",
       "bytes": 607,
       "sha256": "a7ae352e9e3ffcbe1e073bf38b1a1eb98c107fffdf9b466cf94c0f0d0624729b"
     },
     {
       "name": "schema.py",
       "path_in_repo": "skills/academic_graph_builder/schema.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/schema.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/schema.py",
       "bytes": 1711,
       "sha256": "fae87cc943e4213a61219fa8d0ae7323d9779881d5e019b6d422d2d5b1b970d0"
     },
     {
       "name": "skill1_embeddings.py",
       "path_in_repo": "skills/academic_graph_builder/skill1_embeddings.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/skill1_embeddings.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/skill1_embeddings.py",
       "bytes": 2232,
       "sha256": "3bad24798e56cefb7ca8903a049efa87ea6e41911507a9576007ec4ad287e538"
     },
     {
       "name": "student_skill1.py",
       "path_in_repo": "skills/academic_graph_builder/student_skill1.py",
-      "exported_to": "skill2_handoff/regenerate_kit/skills/academic_graph_builder/student_skill1.py",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/skills/academic_graph_builder/student_skill1.py",
       "bytes": 3144,
       "sha256": "fae872776539c655063426fa8e7e0a0854bb17c3a7626f8f1601f4a08edd948a"
     },
     {
       "name": "requirements.txt",
       "path_in_repo": "requirements.txt",
-      "exported_to": "skill2_handoff/regenerate_kit/requirements.txt",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/requirements.txt",
       "bytes": 51,
       "sha256": "942e216ba9f946348c1defff5505475a2dd587937ee35866aa161d7ad0a24299"
     },
     {
       "name": "README.md",
-      "path_in_repo": "skill2_handoff/regenerate_kit_README.md",
-      "exported_to": "skill2_handoff/regenerate_kit/README.md",
+      "path_in_repo": "skill2_academic_graph_builder/regenerate_kit_README.md",
+      "exported_to": "skill2_academic_graph_builder/regenerate_kit/README.md",
       "bytes": 2181,
       "sha256": "23ad4676719461cf357a552699f7dda033a3efb3194ce113d0f071ce49177f3c"
     }

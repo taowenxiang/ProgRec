@@ -7,7 +7,7 @@
 Skill 2 **fuses**:
 
 1. **Synthetic mentor / paper / topic / project seeds** (`data/seeds/*.csv`, `mentor_profiles.json`) — reproducible CS faculty-style corpus.  
-2. **Optional Skill 1 student layer** — `skill1_handoff/student_profiles_normalized.jsonl` (+ `embeddings.npy` + `student_ids.json`).
+2. **Optional Skill 1 student layer** — `skill1_student_profiling/outputs/student_profiles_normalized.jsonl` (+ `embeddings.npy` + `student_ids.json`).
 
 …and builds:
 
@@ -39,8 +39,8 @@ When Skill 1 files are missing, Skill 2 falls back to `data/seeds/students.csv` 
 | `data/seeds/` | CSV + `mentor_profiles.json` (+ optional regeneration via `scripts/generate_mentor_pool.py`) |
 | `scripts/build_graph.py` | **Main CLI** — graph + mentor bundle + student bundle + aligned embeddings |
 | `scripts/inspect_graph.py` | Summary stats + ego PNG / GraphML export |
-| `scripts/export_skill2_handoff.py` | Copies deliverables into `skill2_handoff/outputs/` + refreshes **`regenerate_kit/`** |
-| `skill2_handoff/regenerate_kit/` | **Portable mini-repo**: generator + builder + `skills/academic_graph_builder/` + `requirements.txt` (see `README.md` inside) |
+| `scripts/export_skill2_academic_graph_builder.py` | Copies deliverables into `skill2_academic_graph_builder/outputs/` + refreshes **`regenerate_kit/`** |
+| `skill2_academic_graph_builder/regenerate_kit/` | **Portable mini-repo**: generator + builder + `skills/academic_graph_builder/` + `requirements.txt` (see `README.md` inside) |
 
 ---
 
@@ -68,7 +68,7 @@ They use the **same vector width** (384-dim `float32` per student). The size gap
 
 Skill 2 does **not** re-train embeddings; it **indexes into** Skill 1’s full matrix using `student_ids.json`. To get a Skill-2 export nearly as large as Skill 1’s, you must raise caps / relax filters — and expect heavier graph build (student–student edges are disabled above ~2800 students for performance).
 
-**Large file note:** `academic_graph.json` can be tens of MB. Use `scripts/export_skill2_handoff.py` with `--full-graph` only when you intentionally bundle it.
+**Large file note:** `academic_graph.json` can be tens of MB. Use `scripts/export_skill2_academic_graph_builder.py` with `--full-graph` only when you intentionally bundle it.
 
 ---
 
@@ -90,10 +90,10 @@ python3 scripts/build_graph.py
 
 ```bash
 python3 scripts/build_graph.py \
-  --skill1-jsonl skill1_handoff/student_profiles_normalized.jsonl \
+  --skill1-jsonl skill1_student_profiling/outputs/student_profiles_normalized.jsonl \
   --skill1-max-students 1800 \
-  --skill1-embeddings skill1_handoff/embeddings.npy \
-  --skill1-student-ids-json skill1_handoff/student_ids.json \
+  --skill1-embeddings skill1_student_profiling/outputs/embeddings.npy \
+  --skill1-student-ids-json skill1_student_profiling/outputs/student_ids.json \
   --embedding-out data/processed/student_embeddings_aligned.npy \
   --embedding-ids-out data/processed/student_ids_aligned.json \
   --eval-json data/processed/graph_metrics.json
@@ -107,9 +107,9 @@ Options:
 
 ---
 
-## Regenerate kit (`skill2_handoff/regenerate_kit/`)
+## Regenerate kit (`skill2_academic_graph_builder/regenerate_kit/`)
 
-Updated automatically whenever you run `scripts/export_skill2_handoff.py` (unless `--skip-regenerate-kit`).
+Updated automatically whenever you run `scripts/export_skill2_academic_graph_builder.py` (unless `--skip-regenerate-kit`).
 
 Contains everything needed to **re-generate synthetic mentor/seeds** and **rebuild** the graph in a small folder layout:
 
@@ -117,7 +117,7 @@ Contains everything needed to **re-generate synthetic mentor/seeds** and **rebui
 2. `python3 scripts/generate_mentor_pool.py` → writes `data/seeds/`
 3. `python3 scripts/build_graph.py` (+ optional Skill 1 flags)
 
-Skill 1 paths resolve relative to the **course repo root** (ancestor with `skill1_handoff/`). Details: `regenerate_kit/README.md`.
+Skill 1 paths resolve relative to the **course repo root** (ancestor with `skill1_student_profiling/`). Details: `regenerate_kit/README.md`.
 
 ---
 
@@ -126,19 +126,19 @@ Skill 1 paths resolve relative to the **course repo root** (ancestor with `skill
 After (or before) building, export copies + checksums:
 
 ```bash
-python3 scripts/export_skill2_handoff.py --run-build
+python3 scripts/export_skill2_academic_graph_builder.py --run-build
 # or, without rebuilding:
-python3 scripts/export_skill2_handoff.py
+python3 scripts/export_skill2_academic_graph_builder.py
 # include the full graph JSON (large):
-python3 scripts/export_skill2_handoff.py --full-graph
+python3 scripts/export_skill2_academic_graph_builder.py --full-graph
 # omit refreshing code bundle (not recommended):
-python3 scripts/export_skill2_handoff.py --skip-regenerate-kit
+python3 scripts/export_skill2_academic_graph_builder.py --skip-regenerate-kit
 ```
 
 Deliverables:
 
-- **`skill2_handoff/outputs/`** — processed JSON/NPY (+ `outputs/MANIFEST.json`: SHA256 for each file). Includes a copy of this README for one-folder zips.
-- **`skill2_handoff/regenerate_kit/`** — code to regenerate data (`regenerate_kit/MANIFEST.json` lists bundled files).
+- **`skill2_academic_graph_builder/outputs/`** — processed JSON/NPY (+ `outputs/MANIFEST.json`: SHA256 for each file). Includes a copy of this README for one-folder zips.
+- **`skill2_academic_graph_builder/regenerate_kit/`** — code to regenerate data (`regenerate_kit/MANIFEST.json` lists bundled files).
 
 ---
 
@@ -150,7 +150,7 @@ from skills.academic_graph_builder import GraphIndex, build_graph_from_seeds
 
 payload = build_graph_from_seeds(
     Path("data/seeds"),
-    skill1_jsonl=Path("skill1_handoff/student_profiles_normalized.jsonl"),
+    skill1_jsonl=Path("skill1_student_profiling/outputs/student_profiles_normalized.jsonl"),
     skill1_max_students=800,
 )
 idx = GraphIndex(payload)
@@ -175,7 +175,7 @@ Common causes:
 2. **Wrong path** — Skill 3 must point at the same `academic_graph.json` you just built (repo `data/processed/` vs `regenerate_kit/data/processed/`).
 3. **Strict parsers** — RFC 8259 JSON does not allow `NaN`. If you ever fork `save_graph_json`, keep `allow_nan=False` or downstream JS may reject the file.
 
-Refresh **`regenerate_kit/`** after Skill 2 fixes: `python3 scripts/export_skill2_handoff.py`.
+Refresh **`regenerate_kit/`** after Skill 2 fixes: `python3 scripts/export_skill2_academic_graph_builder.py`.
 
 ---
 

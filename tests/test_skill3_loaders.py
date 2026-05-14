@@ -24,7 +24,7 @@ class LoaderResolutionTest(unittest.TestCase):
 
     def test_rebuild_commands_include_seed_generation_when_missing(self):
         repo_root = Path(__file__).resolve().parents[1]
-        kit_root = repo_root / "skill2_handoff" / "regenerate_kit"
+        kit_root = repo_root / "skill2_academic_graph_builder" / "regenerate_kit"
         commands = rebuild_commands(kit_root)
         self.assertEqual(commands[-1], ["python3", "scripts/build_graph.py"])
         if not (kit_root / "data" / "seeds").is_dir():
@@ -33,8 +33,8 @@ class LoaderResolutionTest(unittest.TestCase):
     def test_loading_resources_tolerates_invalid_graph_json(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            outputs = root / "skill2_handoff" / "outputs"
-            processed = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            outputs = root / "skill2_academic_graph_builder" / "outputs"
+            processed = root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed"
             outputs.mkdir(parents=True)
             processed.mkdir(parents=True)
             (outputs / "mentor_profiles_standard.json").write_text(
@@ -52,8 +52,8 @@ class LoaderResolutionTest(unittest.TestCase):
     def test_loading_resources_uses_valid_fallback_graph_candidate(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            outputs = root / "skill2_handoff" / "outputs"
-            processed = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            outputs = root / "skill2_academic_graph_builder" / "outputs"
+            processed = root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed"
             outputs.mkdir(parents=True)
             processed.mkdir(parents=True)
             (outputs / "mentor_profiles_standard.json").write_text(
@@ -75,8 +75,8 @@ class LoaderResolutionTest(unittest.TestCase):
     def test_loading_resources_prefers_outputs_graph_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            outputs = root / "skill2_handoff" / "outputs"
-            processed = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            outputs = root / "skill2_academic_graph_builder" / "outputs"
+            processed = root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed"
             outputs.mkdir(parents=True)
             processed.mkdir(parents=True)
             (outputs / "mentor_profiles_standard.json").write_text(
@@ -308,8 +308,8 @@ class LoaderExplicitPathsTest(unittest.TestCase):
     def test_resolve_explicit_paths(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            outputs = root / "skill2_handoff" / "outputs"
-            proc = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            outputs = root / "skill2_academic_graph_builder" / "outputs"
+            proc = root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed"
             outputs.mkdir(parents=True)
             proc.mkdir(parents=True)
             m = proc / "mentor_profiles_standard.json"
@@ -344,7 +344,7 @@ class LoaderExplicitPathsTest(unittest.TestCase):
     def test_resolve_explicit_missing_graph_raises(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            proc = root / "skill2_handoff" / "regenerate_kit" / "data" / "processed"
+            proc = root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed"
             proc.mkdir(parents=True)
             m = proc / "mentor_profiles_standard.json"
             s = proc / "student_profiles_standard.json"

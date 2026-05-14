@@ -273,8 +273,8 @@ The new agent behavior should be introduced inside `progrec_agent/` without dest
 The following should be changed minimally in the first version:
 
 - `skill3_mentor_discovery/`
-- `skill4_handoff/`
-- `skill5_student-recommendation-ranker/`
+- `skill4_program_teammate_discovery/`
+- `skill5_student_recommendation_ranker/`
 - `progrec_agent/config.py`
 - `progrec_agent/schemas.py`
 

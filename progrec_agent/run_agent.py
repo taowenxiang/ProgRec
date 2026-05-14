@@ -104,7 +104,7 @@ def _parse_args(argv: list[str] | None) -> argparse.Namespace:
         "--repo-root",
         type=Path,
         default=None,
-        help="Override repository root (default: ancestor of progrec_agent/ with skill1_handoff/).",
+        help="Override repository root (default: ancestor of progrec_agent/ with skill1_student_profiling/).",
     )
     return p.parse_args(argv)
 

@@ -56,8 +56,8 @@ For full field definitions, load `references/skill3_skill4_schemas.md`.
 
 Skill 3 and Skill 4 **must** use the same `student_id` namespace:
 
-- **Demo mode** (`s_001`, `s_002`, ...): both tools read from `skill2_handoff/outputs/student_profiles_standard.json`
-- **Regenerated mode** (`jamie-taylor-00008`, ...): both read from `skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json`
+- **Demo mode** (`s_001`, `s_002`, ...): both tools read from `skill2_academic_graph_builder/outputs/student_profiles_standard.json`
+- **Regenerated mode** (`jamie-taylor-00008`, ...): both read from `skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json`
 
 Mixing namespaces causes mismatched student IDs and empty or wrong recommendations.
 
@@ -107,7 +107,7 @@ python skill3_mentor_discovery/run_skill3.py \
   --student-id s_002 --top-k 10 > /tmp/skill3_s002.json
 
 # Step 2: Run Skill 4 with Skill 3 output
-python skill4_handoff/main.py \
+python skill4_program_teammate_discovery/main.py \
   --target-student-id s_002 \
   --skill3-output /tmp/skill3_s002.json \
   --output /tmp/skill4_s002.json

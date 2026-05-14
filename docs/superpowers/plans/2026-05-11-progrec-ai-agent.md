@@ -44,8 +44,8 @@
 ### Existing files to leave mostly unchanged
 
 - Keep stable: `skill3_mentor_discovery/`
-- Keep stable: `skill4_handoff/`
-- Keep stable: `skill5_student-recommendation-ranker/`
+- Keep stable: `skill4_program_teammate_discovery/`
+- Keep stable: `skill5_student_recommendation_ranker/`
 - Keep stable: `progrec_agent/config.py`
 - Keep stable: `progrec_agent/schemas.py`
 

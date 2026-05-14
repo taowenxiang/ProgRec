@@ -70,7 +70,7 @@ class Skill3CliTest(unittest.TestCase):
     def test_cli_prints_enriched_trust_aware_candidates(self):
         repo_root = Path(__file__).resolve().parents[1]
         student_bundle = json.loads(
-            (repo_root / "skill2_handoff" / "outputs" / "student_profiles_standard.json").read_text()
+            (repo_root / "skill2_academic_graph_builder" / "outputs" / "student_profiles_standard.json").read_text()
         )
         student_id = student_bundle["students"][0]["student_id"]
         cmd = [

@@ -7,6 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+SKILL1_DIRNAME = "skill1_student_profiling"
+SKILL1_OUTPUTS_DIRNAME = "outputs"
+
 
 @dataclass
 class ResourceConfig:
@@ -21,18 +24,26 @@ class ResourceConfig:
     default_student_id: str | None = None
 
 
+def skill1_outputs_dir(repo_root: Path) -> Path:
+    return repo_root / SKILL1_DIRNAME / SKILL1_OUTPUTS_DIRNAME
+
+
+def skill1_profiles_path(repo_root: Path) -> Path:
+    return skill1_outputs_dir(repo_root) / "student_profiles_normalized.jsonl"
+
+
 def resolve_repo_root(repo_root: str | Path | None = None) -> Path:
-    """Repository root (directory containing ``skill1_handoff/``)."""
+    """Repository root (directory containing ``skill1_student_profiling/``)."""
     if repo_root is not None:
         root = Path(repo_root).resolve()
-        if not (root / "skill1_handoff").is_dir():
-            raise FileNotFoundError(f"Not a ProgRec repo root (missing skill1_handoff/): {root}")
+        if not (root / SKILL1_DIRNAME).is_dir():
+            raise FileNotFoundError(f"Not a ProgRec repo root (missing {SKILL1_DIRNAME}/): {root}")
         return root
     here = Path(__file__).resolve().parent
     for anc in [here.parent, *here.parents]:
-        if (anc / "skill1_handoff").is_dir():
+        if (anc / SKILL1_DIRNAME).is_dir():
             return anc
-    raise FileNotFoundError("Could not locate repository root (no ancestor with skill1_handoff/).")
+    raise FileNotFoundError(f"Could not locate repository root (no ancestor with {SKILL1_DIRNAME}/).")
 
 
 def _first_student_id(students_path: Path) -> str | None:
@@ -54,8 +65,8 @@ def _validate_graph_bundle_strict(graph_path: Path) -> None:
     if not graph_path.is_file():
         raise FileNotFoundError(
             f"Graph mode requires academic_graph.json at {graph_path}. "
-            "Build it with skill2_handoff/regenerate_kit/scripts/generate_mentor_pool.py "
-            "then scripts/build_graph.py (see skill2_handoff/SKILL2_README.md)."
+            "Build it with skill2_academic_graph_builder/regenerate_kit/scripts/generate_mentor_pool.py "
+            "then scripts/build_graph.py (see skill2_academic_graph_builder/SKILL2_README.md)."
         )
     try:
         raw: dict[str, Any] = json.loads(graph_path.read_text(encoding="utf-8"))
@@ -97,12 +108,12 @@ def resolve_resource_config(mode: str, repo_root: Path, *, validate_graph: bool 
     if mode_l not in ("demo", "graph"):
         raise ValueError(f"Unknown mode {mode!r}; expected 'demo' or 'graph'.")
 
-    skill1 = repo_root / "skill1_handoff" / "student_profiles_normalized.jsonl"
+    skill1 = skill1_profiles_path(repo_root)
 
     if mode_l == "demo":
-        students = repo_root / "skill2_handoff" / "outputs" / "student_profiles_standard.json"
-        mentors = repo_root / "skill2_handoff" / "outputs" / "mentor_profiles_standard.json"
-        mock = repo_root / "skill4_handoff" / "data" / "mock_academic_graph.json"
+        students = repo_root / "skill2_academic_graph_builder" / "outputs" / "student_profiles_standard.json"
+        mentors = repo_root / "skill2_academic_graph_builder" / "outputs" / "mentor_profiles_standard.json"
+        mock = repo_root / "skill4_program_teammate_discovery" / "data" / "mock_academic_graph.json"
         if not students.is_file():
             raise FileNotFoundError(f"Demo mode: missing student bundle: {students}")
         if not mentors.is_file():
@@ -121,9 +132,9 @@ def resolve_resource_config(mode: str, repo_root: Path, *, validate_graph: bool 
         )
 
     # graph mode
-    graph = repo_root / "skill2_handoff" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
-    students = repo_root / "skill2_handoff" / "regenerate_kit" / "data" / "processed" / "student_profiles_standard.json"
-    mentors = repo_root / "skill2_handoff" / "regenerate_kit" / "data" / "processed" / "mentor_profiles_standard.json"
+    graph = repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
+    students = repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed" / "student_profiles_standard.json"
+    mentors = repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed" / "mentor_profiles_standard.json"
     if not students.is_file():
         raise FileNotFoundError(f"Graph mode: missing student bundle: {students}")
     if not mentors.is_file():

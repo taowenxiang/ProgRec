@@ -154,7 +154,7 @@ class ToolExecutor:
         )
 
     def _tool_rebuild_skill2_graph(self, arguments: dict[str, object], *, session) -> ToolExecutionResult:
-        script = self.repo_root / "skill2_handoff" / "regenerate_kit" / "scripts" / "build_graph.py"
+        script = self.repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "scripts" / "build_graph.py"
         completed = subprocess.run(
             ["python3", str(script)],
             cwd=self.repo_root,

@@ -1,6 +1,6 @@
 # Skill 2 — Regenerate kit (mini layout)
 
-This folder is a **self-contained slice** of the course repo: scripts + `skills/academic_graph_builder` + `requirements.txt`. Use it if teammates only receive `skill2_handoff/` but still need to **re-roll synthetic mentors/seeds** or **rebuild** the graph.
+This folder is a **self-contained slice** of the course repo: scripts + `skills/academic_graph_builder` + `requirements.txt`. Use it if teammates only receive `skill2_academic_graph_builder/` but still need to **re-roll synthetic mentors/seeds** or **rebuild** the graph.
 
 ## Layout
 
@@ -16,7 +16,7 @@ regenerate_kit/
       ...
 ```
 
-`generate_mentor_pool.py` and `build_graph.py` assume this folder is the **bundle root** (parent of `scripts/`). Skill 1 paths (`skill1_handoff/…`) are resolved by walking up to the **course repo root** (first ancestor that contains `skill1_handoff/`).
+`generate_mentor_pool.py` and `build_graph.py` assume this folder is the **bundle root** (parent of `scripts/`). Skill 1 paths (`skill1_student_profiling/outputs/…`) are resolved by walking up to the **course repo root** (first ancestor that contains `skill1_student_profiling/`).
 
 ## Typical workflow (course repo on disk)
 
@@ -36,7 +36,7 @@ ln -sf ../../../data/seeds data/seeds
 python3 scripts/build_graph.py
 ```
 
-(`../../../` reaches the course repo root from `skill2_handoff/regenerate_kit/data/`.)
+(`../../../` reaches the course repo root from `skill2_academic_graph_builder/regenerate_kit/data/`.)
 
 CSV-only students (no Skill 1):
 
@@ -44,11 +44,11 @@ CSV-only students (no Skill 1):
 python3 scripts/build_graph.py
 ```
 
-With Skill 1 integration (paths default to `../../skill1_handoff/` when the full repo is checked out next to `skill2_handoff/`):
+With Skill 1 integration (paths default to `../../skill1_student_profiling/outputs/` when the full repo is checked out next to `skill2_academic_graph_builder/`):
 
 ```bash
 python3 scripts/build_graph.py \
-  --skill1-jsonl ../../skill1_handoff/student_profiles_normalized.jsonl \
+  --skill1-jsonl ../../skill1_student_profiling/outputs/student_profiles_normalized.jsonl \
   --skill1-max-students 1800
 ```
 
@@ -64,7 +64,7 @@ Adjust `--skill1-jsonl` / embeddings paths if your folder layout differs.
 From the full repository root:
 
 ```bash
-python3 scripts/export_skill2_handoff.py
+python3 scripts/export_skill2_academic_graph_builder.py
 ```
 
-Refreshes `skill2_handoff/regenerate_kit/` and `skill2_handoff/outputs/`.
+Refreshes `skill2_academic_graph_builder/regenerate_kit/` and `skill2_academic_graph_builder/outputs/`.

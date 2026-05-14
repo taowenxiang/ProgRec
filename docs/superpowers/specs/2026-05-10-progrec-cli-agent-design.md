@@ -193,8 +193,8 @@ For dataset mode, using an existing normalized student profile counts as reusing
 The agent should read existing Skill 2 outputs rather than rebuild the graph by default.
 
 The Skill 2 adapter should resolve resources from these preferred locations:
-1. `skill2_handoff/outputs/...`
-2. `skill2_handoff/regenerate_kit/data/processed/...`
+1. `skill2_academic_graph_builder/outputs/...`
+2. `skill2_academic_graph_builder/regenerate_kit/data/processed/...`
 3. `data/processed/...`
 
 It should return:

@@ -278,15 +278,15 @@ def resolve_skill2_resources(repo_root: Path) -> dict[str, object]:
     candidates = [
         (
             "outputs_bundle",
-            repo_root / "skill2_handoff/outputs/student_profiles_standard.json",
-            repo_root / "skill2_handoff/outputs/mentor_profiles_standard.json",
-            repo_root / "skill2_handoff/outputs/academic_graph.json",
+            repo_root / "skill2_academic_graph_builder/outputs/student_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/outputs/mentor_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/outputs/academic_graph.json",
         ),
         (
             "regenerate_bundle",
-            repo_root / "skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json",
-            repo_root / "skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json",
-            repo_root / "skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
+            repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/mentor_profiles_standard.json",
+            repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json",
         ),
         (
             "processed_bundle",
@@ -387,7 +387,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from skill4_handoff.skill.discovery import run_pipeline_from_cli_config
+from skill4_program_teammate_discovery.skill.discovery import run_pipeline_from_cli_config
 
 
 def run_skill4_dataset_mode(
@@ -405,8 +405,8 @@ def run_skill4_dataset_mode(
         "skill2_mentors_path": "",
         "mentor_candidates_path": str(skill3_path),
         "skill3_output_path": str(skill3_path),
-        "mock_projects_path": str(repo_root / "skill4_handoff/data/mock_projects.json"),
-        "mock_mentor_candidates_path": str(repo_root / "skill4_handoff/data/mock_mentor_candidates.json"),
+        "mock_projects_path": str(repo_root / "skill4_program_teammate_discovery/data/mock_projects.json"),
+        "mock_mentor_candidates_path": str(repo_root / "skill4_program_teammate_discovery/data/mock_mentor_candidates.json"),
         "output_path": str(output_path),
         "top_n_projects": 3,
         "top_n_teammates": 3,
@@ -438,7 +438,7 @@ def run_skill5(
     student_id: str,
     top_k: int,
 ) -> dict[str, object]:
-    script = repo_root / "skill5_student-recommendation-ranker/scripts/joint_ranker.py"
+    script = repo_root / "skill5_student_recommendation_ranker/scripts/joint_ranker.py"
     cmd = [
         sys.executable,
         str(script),
@@ -582,8 +582,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from skill4_handoff.skill.discovery import discover_projects_and_teammates
-from skill4_handoff.skill.skill2_adapter import load_academic_graph
+from skill4_program_teammate_discovery.skill.discovery import discover_projects_and_teammates
+from skill4_program_teammate_discovery.skill.skill2_adapter import load_academic_graph
 
 
 def run_skill4_custom_mode(
@@ -594,10 +594,10 @@ def run_skill4_custom_mode(
     output_path: Path,
 ) -> dict[str, object]:
     students_payload = json.loads(
-        (repo_root / "skill2_handoff/outputs/student_profiles_standard.json").read_text(encoding="utf-8")
+        (repo_root / "skill2_academic_graph_builder/outputs/student_profiles_standard.json").read_text(encoding="utf-8")
     )
     all_students = list(students_payload.get("students") or [])
-    graph_path = repo_root / "skill2_handoff/regenerate_kit/data/processed/academic_graph.json"
+    graph_path = repo_root / "skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json"
     graph = load_academic_graph(graph_path) if graph_path.is_file() else None
     result = discover_projects_and_teammates(
         target_student_id=str(student_profile["student_id"]),
@@ -605,7 +605,7 @@ def run_skill4_custom_mode(
         all_student_profiles=all_students,
         mentor_candidates=list(skill3_result.get("mentor_candidates") or []),
         graph=graph,
-        mock_projects_path=repo_root / "skill4_handoff/data/mock_projects.json",
+        mock_projects_path=repo_root / "skill4_program_teammate_discovery/data/mock_projects.json",
         top_n_projects=3,
         top_n_teammates=3,
         max_candidate_teammates=120,
@@ -940,7 +940,7 @@ Run: `python3 -m pytest tests/test_progrec_agent_session.py tests/test_progrec_a
 
 Expected: PASS
 
-Run: `python3 -m pytest tests/test_skill3_cli.py skill4_handoff/tests/test_pipeline.py -q`
+Run: `python3 -m pytest tests/test_skill3_cli.py skill4_program_teammate_discovery/tests/test_pipeline.py -q`
 
 Expected: PASS
 

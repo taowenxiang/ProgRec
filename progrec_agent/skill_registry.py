@@ -8,18 +8,18 @@ from typing import Any
 SKILL_REGISTRY: dict[str, dict[str, Any]] = {
     "/student-profiling": {
         "name": "Student Profiling Skill",
-        "directory": "skill1_handoff",
-        "entrypoint": "skill1_handoff/SKILL1_README.md (handoff + optional external package)",
+        "directory": "skill1_student_profiling",
+        "entrypoint": "skill1_student_profiling/README.md (+ outputs/ for normalized artifacts)",
         "function": "Normalize raw student narratives into structured profiles and optional embeddings.",
         "input_contract": "Raw student records or handoff: student_profiles_normalized.jsonl, embeddings.npy, student_ids.json",
         "output_contract": "JSONL profiles with student_id, grade, major, skills[], interests[], experience_summary, availability",
-        "status": "artifact_handoff",
-        "notes": "No in-repo batch CLI; Skill 2 consumes JSONL + NPY for graph builds.",
+        "status": "source_plus_outputs",
+        "notes": "Normalized artifacts now live under skill1_student_profiling/outputs/ for downstream graph builds.",
     },
     "/academic-graph": {
         "name": "Academic Graph Builder Skill",
-        "directory": "skill2_handoff",
-        "entrypoint": "skill2_handoff/regenerate_kit/scripts/build_graph.py",
+        "directory": "skill2_academic_graph_builder",
+        "entrypoint": "skill2_academic_graph_builder/regenerate_kit/scripts/build_graph.py",
         "function": "Fuse seeds and optional Skill 1 students into heterogeneous academic_graph.json plus standardized bundles.",
         "input_contract": "CSV seeds under regenerate_kit/data/seeds/; optional Skill 1 JSONL + embeddings + student_ids JSON",
         "output_contract": "academic_graph.json, mentor_profiles_standard.json, student_profiles_standard.json, optional aligned NPY/JSON",
@@ -38,8 +38,8 @@ SKILL_REGISTRY: dict[str, dict[str, Any]] = {
     },
     "/project-teammate-discovery": {
         "name": "Project & Teammate Discovery Skill",
-        "directory": "skill4_handoff",
-        "entrypoint": "skill4_handoff/main.py",
+        "directory": "skill4_program_teammate_discovery",
+        "entrypoint": "skill4_program_teammate_discovery/main.py",
         "function": "Expands mentor candidates into projects, skill gaps, and teammate recommendations with reason_paths.",
         "input_contract": "Skill 1 JSONL; Skill 2 graph + student + mentor paths (or auto-resolve); optional Skill 3 JSON; mock_projects fallback",
         "output_contract": "JSON: target_student_id, data_sources, mentor_project_teammate_recommendations[] with project_recommendations and teammate_recommendations",
@@ -48,13 +48,13 @@ SKILL_REGISTRY: dict[str, dict[str, Any]] = {
     },
     "/social-ranking": {
         "name": "Social Ranking / Joint Ranker Skill",
-        "directory": "skill5_student-recommendation-ranker",
-        "entrypoint": "skill5_student-recommendation-ranker/scripts/joint_ranker.py",
+        "directory": "skill5_student_recommendation_ranker",
+        "entrypoint": "skill5_student_recommendation_ranker/scripts/joint_ranker.py",
         "function": "Joint multi-objective re-ranking of mentors, projects, and teammates with MMR and explanations.",
         "input_contract": "Paths to Skill 3 JSON, Skill 4 JSON; optional Skill 1 JSONL; --student-id, --top-k",
         "output_contract": "final_recommendation JSON: recommendations.{mentors,projects,teammates}, summary counts",
         "status": "runtime_cli",
-        "notes": "progrec_agent invokes skill5_student-recommendation-ranker/scripts/joint_ranker.py via subprocess.",
+        "notes": "progrec_agent invokes skill5_student_recommendation_ranker/scripts/joint_ranker.py via subprocess.",
     },
 }
 

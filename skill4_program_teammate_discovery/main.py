@@ -17,7 +17,7 @@ from skill.discovery import run_pipeline_from_cli_config, try_load_embedding_con
 
 
 def _repo_root() -> Path:
-    """Course repo root: parent of ``skill4_handoff``."""
+    """Course repo root: parent of ``skill4_program_teammate_discovery``."""
     return _PTD.parent
 
 
@@ -34,7 +34,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("--target-student-id", default="", help="Target student_id (default: first in bundle)")
     p.add_argument(
         "--skill1-profiles",
-        default=str(root / "skill1_handoff/student_profiles_normalized.jsonl"),
+        default=str(root / "skill1_student_profiling/outputs/student_profiles_normalized.jsonl"),
         help="Skill 1 JSONL",
     )
     p.add_argument(
@@ -54,12 +54,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--skill2-embeddings",
-        default=str(root / "skill2_handoff/outputs/student_embeddings_aligned.npy"),
+        default=str(root / "skill2_academic_graph_builder/outputs/student_embeddings_aligned.npy"),
         help="Optional aligned embeddings (missing = keyword-only)",
     )
     p.add_argument(
         "--skill2-student-ids",
-        default=str(root / "skill2_handoff/outputs/student_ids_aligned.json"),
+        default=str(root / "skill2_academic_graph_builder/outputs/student_ids_aligned.json"),
         help="IDs aligned with embeddings rows",
     )
     p.add_argument(
@@ -108,22 +108,22 @@ def resolve_paths(args: argparse.Namespace) -> dict[str, object]:
     root = _repo_root()
     graph = args.skill2_graph or _first_existing(
         [
-            root / "skill2_handoff/outputs/academic_graph.json",
-            root / "skill2_handoff/regenerate_kit/data/processed/academic_graph.json",
+            root / "skill2_academic_graph_builder/outputs/academic_graph.json",
+            root / "skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json",
             root / "data/processed/academic_graph.json",
         ]
     )
     students = args.skill2_students or _first_existing(
         [
-            root / "skill2_handoff/outputs/student_profiles_standard.json",
-            root / "skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json",
+            root / "skill2_academic_graph_builder/outputs/student_profiles_standard.json",
+            root / "skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json",
             root / "data/processed/student_profiles_standard.json",
         ]
     )
     mentors = args.skill2_mentors or _first_existing(
         [
-            root / "skill2_handoff/outputs/mentor_profiles_standard.json",
-            root / "skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json",
+            root / "skill2_academic_graph_builder/outputs/mentor_profiles_standard.json",
+            root / "skill2_academic_graph_builder/regenerate_kit/data/processed/mentor_profiles_standard.json",
             root / "data/processed/mentor_profiles_standard.json",
         ]
     )

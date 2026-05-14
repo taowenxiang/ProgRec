@@ -147,8 +147,8 @@ class ResourcePaths:
 
 
 def resolve_resource_paths(repo_root: Path) -> ResourcePaths:
-    outputs = repo_root / "skill2_handoff" / "outputs"
-    graph_path = repo_root / "skill2_handoff" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
+    outputs = repo_root / "skill2_academic_graph_builder" / "outputs"
+    graph_path = repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
     return ResourcePaths(
         mentor_profiles_path=outputs / "mentor_profiles_standard.json",
         student_profiles_path=outputs / "student_profiles_standard.json",
@@ -166,7 +166,7 @@ import subprocess
 def ensure_graph_available(repo_root: Path, resources: ResourcePaths) -> Path:
     if resources.graph_path.is_file():
         return resources.graph_path
-    kit_root = repo_root / "skill2_handoff" / "regenerate_kit"
+    kit_root = repo_root / "skill2_academic_graph_builder" / "regenerate_kit"
     subprocess.run(
         ["python3", "scripts/build_graph.py"],
         cwd=kit_root,
@@ -399,8 +399,8 @@ Expected: PASS for all Skill 3 tests.
 
 **Files:**
 - Modify: `/Users/mount/Desktop/Programming/ProgRec/skill3_mentor_discovery/run_skill3.py`
-- Verify: `/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/outputs/mentor_profiles_standard.json`
-- Verify: `/Users/mount/Desktop/Programming/ProgRec/skill2_handoff/outputs/student_profiles_standard.json`
+- Verify: `/Users/mount/Desktop/Programming/ProgRec/skill2_academic_graph_builder/outputs/mentor_profiles_standard.json`
+- Verify: `/Users/mount/Desktop/Programming/ProgRec/skill2_academic_graph_builder/outputs/student_profiles_standard.json`
 
 - [ ] **Step 1: Run the real CLI flow for one seed student**
 

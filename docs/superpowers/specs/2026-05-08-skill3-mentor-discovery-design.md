@@ -28,8 +28,8 @@ Skill 3 is responsible for mentor candidate generation only. It does not produce
 
 ### In scope
 
-- Reading standardized outputs from `skill2_handoff/outputs/`
-- Falling back to `skill2_handoff/regenerate_kit/` when a complete graph is missing
+- Reading standardized outputs from `skill2_academic_graph_builder/outputs/`
+- Falling back to `skill2_academic_graph_builder/regenerate_kit/` when a complete graph is missing
 - Accepting a `student_profile` directly or resolving one by `student_id`
 - Computing topic/semantic mentor relevance
 - Computing mentor-network features including community membership and centrality
@@ -73,14 +73,14 @@ Expected profile schema:
 
 Skill 3 expects these resources:
 
-- `skill2_handoff/outputs/mentor_profiles_standard.json`
-- `skill2_handoff/outputs/student_profiles_standard.json`
+- `skill2_academic_graph_builder/outputs/mentor_profiles_standard.json`
+- `skill2_academic_graph_builder/outputs/student_profiles_standard.json`
 - `academic_graph.json` if already available
 - optionally `student_embeddings_aligned.npy` and `student_ids_aligned.json`
 
 If `academic_graph.json` is not already available in usable form, Skill 3 must invoke the rebuild flow through:
 
-- `skill2_handoff/regenerate_kit/scripts/build_graph.py`
+- `skill2_academic_graph_builder/regenerate_kit/scripts/build_graph.py`
 
 This matches the chosen operating mode: prefer existing outputs, but rebuild required resources automatically when they are incomplete.
 

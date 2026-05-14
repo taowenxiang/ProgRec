@@ -11,8 +11,8 @@ def bundle_root_from_script(script_file: Path) -> Path:
 
 
 def course_repo_root(bundle_root: Path) -> Path:
-    """Ancestor that contains ``skill1_handoff/`` (full team repo); else ``bundle_root``."""
+    """Ancestor that contains ``skill1_student_profiling/`` (full team repo); else ``bundle_root``."""
     for anc in [bundle_root, *bundle_root.parents]:
-        if (anc / "skill1_handoff").is_dir():
+        if (anc / "skill1_student_profiling").is_dir():
             return anc
     return bundle_root

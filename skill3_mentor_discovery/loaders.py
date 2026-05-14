@@ -59,11 +59,11 @@ def resolve_resource_paths(
     are required to exist (``FileNotFoundError`` if missing). Explicit graph mode does **not**
     fall back to ``outputs/`` when the given file is missing or invalid JSON.
     """
-    outputs = repo_root / "skill2_handoff" / "outputs"
+    outputs = repo_root / "skill2_academic_graph_builder" / "outputs"
     default_mentor = outputs / "mentor_profiles_standard.json"
     default_student = outputs / "student_profiles_standard.json"
     default_outputs_graph = outputs / "academic_graph.json"
-    default_regen_graph = repo_root / "skill2_handoff" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
+    default_regen_graph = repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
 
     mentor_path = Path(skill2_mentors).resolve() if skill2_mentors is not None else default_mentor
     student_path = Path(skill2_students).resolve() if skill2_students is not None else default_student
@@ -99,10 +99,10 @@ def resolve_resource_paths(
 
 
 def ensure_graph_available(repo_root: Path, resources: ResourcePaths) -> Path:
-    kit_graph = repo_root / "skill2_handoff" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
+    kit_graph = repo_root / "skill2_academic_graph_builder" / "regenerate_kit" / "data" / "processed" / "academic_graph.json"
     if kit_graph.is_file():
         return kit_graph
-    kit_root = repo_root / "skill2_handoff" / "regenerate_kit"
+    kit_root = repo_root / "skill2_academic_graph_builder" / "regenerate_kit"
     kit_graph.parent.mkdir(parents=True, exist_ok=True)
     for command in rebuild_commands(kit_root):
         subprocess.run(

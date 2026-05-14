@@ -31,10 +31,10 @@ This repository currently ships **two** Skill 2 student profile bundles. Their *
 
 | Mode | Student profiles path | Rough size | `student_id` examples | Typical graph |
 |------|-------------------------|------------|-------------------------|----------------|
-| **Demo / original handoff** | `skill2_handoff/outputs/student_profiles_standard.json` | ~140 students | `s_001`, `s_002`, `s_003`, … | Often **no** `skill2_handoff/outputs/academic_graph.json`; use Skill 4’s **mock** graph or another small graph fallback |
-| **Regenerated graph** | `skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json` | ~300 students | Skill 1–style IDs, e.g. `jamie-taylor-00008`, `jeffrey-weaver-00044`, `lisa-perry-00052` | `skill2_handoff/regenerate_kit/data/processed/academic_graph.json` (large but `json.load`-able; on the order of ~200 mentors, ~300 students, ~57k edges) |
+| **Demo / original handoff** | `skill2_academic_graph_builder/outputs/student_profiles_standard.json` | ~140 students | `s_001`, `s_002`, `s_003`, … | Often **no** `skill2_academic_graph_builder/outputs/academic_graph.json`; use Skill 4’s **mock** graph or another small graph fallback |
+| **Regenerated graph** | `skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json` | ~300 students | Skill 1–style IDs, e.g. `jamie-taylor-00008`, `jeffrey-weaver-00044`, `lisa-perry-00052` | `skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json` (large but `json.load`-able; on the order of ~200 mentors, ~300 students, ~57k edges) |
 
-Default **Skill 3** (`skill3_mentor_discovery/run_skill3.py`) loads students from **`skill2_handoff/outputs/student_profiles_standard.json`**, so **`s_002`** and friends work out of the box for **demo** runs. The **regenerated** bundle uses **different** IDs; Skill 3 will raise **Unknown student_id** for `jamie-taylor-00008` until its resource paths are pointed at the **same** `student_profiles_standard.json` (and graph) you use for Skill 4 (see `skill3_mentor_discovery/loaders.py` and the Skill 3 README).
+Default **Skill 3** (`skill3_mentor_discovery/run_skill3.py`) loads students from **`skill2_academic_graph_builder/outputs/student_profiles_standard.json`**, so **`s_002`** and friends work out of the box for **demo** runs. The **regenerated** bundle uses **different** IDs; Skill 3 will raise **Unknown student_id** for `jamie-taylor-00008` until its resource paths are pointed at the **same** `student_profiles_standard.json` (and graph) you use for Skill 4 (see `skill3_mentor_discovery/loaders.py` and the Skill 3 README).
 
 ### 1. Why `student_id` mismatch happens
 
@@ -48,7 +48,7 @@ Default **Skill 3** (`skill3_mentor_discovery/run_skill3.py`) loads students fro
 
 ### 2. Demo mode: quick Skill 3 → Skill 4 smoke test (`s_*` space)
 
-Use **demo** students + a **small** graph (Skill 4 mock or your own slice). Example: generate Skill 3 JSON for `s_002`, then run Skill 4 with the **same** `--target-student-id` and **`skill2_handoff/outputs/student_profiles_standard.json`**.
+Use **demo** students + a **small** graph (Skill 4 mock or your own slice). Example: generate Skill 3 JSON for `s_002`, then run Skill 4 with the **same** `--target-student-id` and **`skill2_academic_graph_builder/outputs/student_profiles_standard.json`**.
 
 ```bash
 # From repo root — Skill 3 (writes JSON to stdout)
@@ -57,15 +57,15 @@ python3 skill3_mentor_discovery/run_skill3.py \
   --top-k 10 > /tmp/skill3_s002.json
 
 # Skill 4 — same student_id space as Skill 3; demo graph often absent, so point at mock graph explicitly
-python3 skill4_handoff/main.py \
+python3 skill4_program_teammate_discovery/main.py \
   --target-student-id s_002 \
   --skill3-output /tmp/skill3_s002.json \
-  --skill2-students skill2_handoff/outputs/student_profiles_standard.json \
-  --skill2-mentors skill2_handoff/outputs/mentor_profiles_standard.json \
-  --skill2-graph skill4_handoff/data/mock_academic_graph.json \
-  --skill1-profiles skill1_handoff/student_profiles_normalized.jsonl \
-  --projects skill4_handoff/data/mock_projects.json \
-  --output skill4_handoff/outputs/skill4_output_with_skill3_demo.json
+  --skill2-students skill2_academic_graph_builder/outputs/student_profiles_standard.json \
+  --skill2-mentors skill2_academic_graph_builder/outputs/mentor_profiles_standard.json \
+  --skill2-graph skill4_program_teammate_discovery/data/mock_academic_graph.json \
+  --skill1-profiles skill1_student_profiling/outputs/student_profiles_normalized.jsonl \
+  --projects skill4_program_teammate_discovery/data/mock_projects.json \
+  --output skill4_program_teammate_discovery/outputs/skill4_output_with_skill3_demo.json
 ```
 
 ### 3. Regenerated graph mode (Skill 1–style IDs)
@@ -80,15 +80,15 @@ python3 skill3_mentor_discovery/run_skill3.py \
   --student-id "$STUDENT_ID" \
   --top-k 10 > /tmp/skill3_regen.json
 
-python3 skill4_handoff/main.py \
+python3 skill4_program_teammate_discovery/main.py \
   --target-student-id "$STUDENT_ID" \
   --skill3-output /tmp/skill3_regen.json \
-  --skill2-students skill2_handoff/regenerate_kit/data/processed/student_profiles_standard.json \
-  --skill2-graph skill2_handoff/regenerate_kit/data/processed/academic_graph.json \
-  --skill2-mentors skill2_handoff/regenerate_kit/data/processed/mentor_profiles_standard.json \
-  --skill1-profiles skill1_handoff/student_profiles_normalized.jsonl \
-  --projects skill4_handoff/data/mock_projects.json \
-  --output skill4_handoff/outputs/skill4_output_with_skill3.json
+  --skill2-students skill2_academic_graph_builder/regenerate_kit/data/processed/student_profiles_standard.json \
+  --skill2-graph skill2_academic_graph_builder/regenerate_kit/data/processed/academic_graph.json \
+  --skill2-mentors skill2_academic_graph_builder/regenerate_kit/data/processed/mentor_profiles_standard.json \
+  --skill1-profiles skill1_student_profiling/outputs/student_profiles_normalized.jsonl \
+  --projects skill4_program_teammate_discovery/data/mock_projects.json \
+  --output skill4_program_teammate_discovery/outputs/skill4_output_with_skill3.json
 ```
 
 If `run_skill3.py` still loads only **`outputs/`** students, fix **Skill 3** paths first (or symlink) so `--student-id "$STUDENT_ID"` resolves; otherwise Skill 3 will fail before Skill 4 runs.
@@ -119,31 +119,31 @@ Downstream **Skill 5 (Social Ranking)** can consume `mentor_project_teammate_rec
 
 **Skill 3 + Skill 4:** use the same `student_id` and the same Skill 2 bundle as in the section [Important: use the same student ID space across Skill 3 and Skill 4](#important-use-the-same-student-id-space-across-skill-3-and-skill-4).
 
-From the **course repo root** (the directory that contains `skill1_handoff/` and `skill4_handoff/`):
+From the **course repo root** (the directory that contains `skill1_student_profiling/` and `skill4_program_teammate_discovery/`):
 
 ```bash
-python3 skill4_handoff/main.py \
+python3 skill4_program_teammate_discovery/main.py \
   --target-student-id s_002 \
-  --skill1-profiles ./skill1_handoff/student_profiles_normalized.jsonl \
-  --skill2-graph ./skill2_handoff/outputs/academic_graph.json \
-  --skill2-students ./skill2_handoff/outputs/student_profiles_standard.json \
-  --skill2-mentors ./skill2_handoff/outputs/mentor_profiles_standard.json \
-  --mentor-candidates ./skill4_handoff/data/mock_mentor_candidates.json \
-  --projects ./skill4_handoff/data/mock_projects.json \
-  --output ./skill4_handoff/outputs/skill4_output.json
+  --skill1-profiles ./skill1_student_profiling/outputs/student_profiles_normalized.jsonl \
+  --skill2-graph ./skill2_academic_graph_builder/outputs/academic_graph.json \
+  --skill2-students ./skill2_academic_graph_builder/outputs/student_profiles_standard.json \
+  --skill2-mentors ./skill2_academic_graph_builder/outputs/mentor_profiles_standard.json \
+  --mentor-candidates ./skill4_program_teammate_discovery/data/mock_mentor_candidates.json \
+  --projects ./skill4_program_teammate_discovery/data/mock_projects.json \
+  --output ./skill4_program_teammate_discovery/outputs/skill4_output.json
 ```
 
 Omit `--target-student-id` only when **not** using `--skill3-output` (then the first student in the Skill 2 bundle is used, or Skill 1 order if Skill 2 students are missing).
 
 Auto-resolve (leave `--skill2-graph` / `--skill2-students` empty) picks, in order:
 
-- `skill2_handoff/outputs/…`, then `skill2_handoff/regenerate_kit/data/processed/…`, then `data/processed/…`
+- `skill2_academic_graph_builder/outputs/…`, then `skill2_academic_graph_builder/regenerate_kit/data/processed/…`, then `data/processed/…`
 
 ## How to test
 
 ```bash
-pip install -r skill4_handoff/requirements.txt
-pytest skill4_handoff/tests -q
+pip install -r skill4_program_teammate_discovery/requirements.txt
+pytest skill4_program_teammate_discovery/tests -q
 ```
 
 ## Current limitations
