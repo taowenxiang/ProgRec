@@ -18,6 +18,10 @@ class AgentSessionRepository:
     def get_session(self, session_id: str) -> AgentSession | None:
         return self.session.get(AgentSession, session_id)
 
+    def list_sessions(self, *, limit: int = 50) -> list[AgentSession]:
+        stmt = select(AgentSession).order_by(AgentSession.updated_at.desc()).limit(limit)
+        return list(self.session.scalars(stmt))
+
     def add_message(self, model: AgentMessage) -> AgentMessage:
         self.session.add(model)
         self.session.flush()

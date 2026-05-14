@@ -103,6 +103,8 @@ docker compose --env-file deployment/.env -f deployment/docker-compose.yml ps
 curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/models/recommended
 curl https://progrec-api.wenxiangtao.com/health
+curl http://127.0.0.1:8000/agent/sessions
+curl http://127.0.0.1:8000/pipeline/jobs
 curl http://127.0.0.1:8000/pipeline/jobs/<job_id>
 curl http://127.0.0.1:8000/pipeline/jobs/<job_id>/result
 ```
@@ -182,9 +184,13 @@ End-to-end:
 3. Test connection
 4. Open chat
 5. Create an agent session
-6. Post a message to `POST /agent/sessions/{id}/messages` and confirm SSE events arrive
-7. Submit a pipeline job
-8. Confirm `GET /pipeline/jobs/{id}` and `GET /pipeline/jobs/{id}/result` update
+6. Confirm `GET /agent/sessions` lists the new session
+7. Post a message to `POST /agent/sessions/{id}/messages` and confirm `message.accepted`, `agent.stage`, `agent.delta`, `agent.skill`, `agent.result`, and `done` SSE events arrive
+8. Confirm `GET /agent/sessions/{id}/messages` restores the conversation and persisted `skill_usage`
+9. Submit a pipeline job
+10. Confirm `GET /pipeline/jobs` lists running and historical jobs
+11. Confirm `GET /pipeline/jobs/{id}` exposes progress, failure, and retry metadata
+12. Confirm `GET /pipeline/jobs/{id}/result` returns `result.mentors`, `result.projects`, and `result.teammates` after completion
 
 ## Updates
 

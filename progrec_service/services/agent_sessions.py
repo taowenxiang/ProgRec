@@ -4,7 +4,7 @@ import uuid
 from dataclasses import asdict
 
 from progrec_agent.dialog.state import DialogState
-from progrec_service.db.models import AgentMessage, AgentSession
+from progrec_service.db.models import AgentMessage, AgentSession, utcnow
 from progrec_service.db.repositories.agent_sessions import AgentSessionRepository
 from progrec_service.db.session import SessionLocal
 
@@ -50,6 +50,39 @@ def list_session_messages(session_id: str) -> list[dict[str, object]]:
     ]
 
 
+def _preview(text: str, *, limit: int = 80) -> str:
+    stripped = " ".join(text.split())
+    if len(stripped) <= limit:
+        return stripped
+    return stripped[: limit - 3].rstrip() + "..."
+
+
+def list_sessions(*, limit: int = 50) -> list[dict[str, object]]:
+    with SessionLocal() as session:
+        repo = AgentSessionRepository(session)
+        records = repo.list_sessions(limit=limit)
+        payloads: list[dict[str, object]] = []
+        for record in records:
+            messages = repo.list_messages(record.id)
+            latest = messages[-1] if messages else None
+            latest_user = next((message for message in reversed(messages) if message.role == "user"), None)
+            label = _preview(latest_user.content_text) if latest_user is not None else record.session_mode
+            latest_preview = _preview(latest.content_text) if latest is not None else ""
+            payloads.append(
+                {
+                    "session_id": record.id,
+                    "status": record.status,
+                    "created_at": record.created_at.isoformat(),
+                    "updated_at": record.updated_at.isoformat(),
+                    "runtime_profile_id": record.runtime_profile_id,
+                    "label": label,
+                    "summary": label,
+                    "latest_message_preview": latest_preview,
+                }
+            )
+        return payloads
+
+
 def get_session_dialog_state(session_id: str) -> dict[str, object]:
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
@@ -70,6 +103,9 @@ def persist_user_message(session_id: str, content_text: str) -> None:
     )
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
+        record = repo.get_session(session_id)
+        if record is not None:
+            record.updated_at = utcnow()
         repo.add_message(message)
         session.commit()
 
@@ -88,6 +124,7 @@ def persist_assistant_turn(
             raise ValueError(f"session {session_id} not found")
         record.dialog_state_payload = dialog_state_payload
         record.last_result_handle = str(structured_payload.get("last_result_handle") or "")
+        record.updated_at = utcnow()
         assistant_message = AgentMessage(
             id=f"msg_{uuid.uuid4().hex[:12]}",
             session_id=session_id,

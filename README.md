@@ -51,12 +51,16 @@ Key routes:
 - `POST /runtime-profiles/test`
 - `POST /runtime-profiles`
 - `POST /agent/sessions`
+- `GET /agent/sessions`
 - `POST /agent/sessions/{id}/messages` with `text/event-stream`
 - `GET /agent/sessions/{id}/messages`
 - `POST /pipeline/jobs`
+- `GET /pipeline/jobs`
 - `GET /pipeline/jobs/{id}`
 - `GET /pipeline/jobs/{id}/result`
 - `POST /pipeline/jobs/{id}/retry`
+
+Chat streams include stable `message.accepted`, `agent.stage`, `agent.delta`, `agent.skill`, `agent.result`, and `done` SSE events. Pipeline result responses normalize frontend sections under `result.mentors`, `result.projects`, and `result.teammates`, while keeping the raw runtime payload under `raw_result`.
 
 Run the backend locally from the repository root:
 

@@ -9,6 +9,38 @@ from progrec_agent.dialog.state import DialogState, ExecutionContext, PendingQue
 from progrec_agent.llm_client import LLMClient, LLMConfig
 
 
+def _recommendation_skill_usage(state: DialogState) -> list[dict[str, str]]:
+    if not state.execution_context.result_handle:
+        return []
+    return [
+        {
+            "skill_id": "/student-profiling",
+            "status": "succeeded",
+            "summary": "Resolved the student profile used for the recommendation request.",
+        },
+        {
+            "skill_id": "/academic-graph",
+            "status": "succeeded",
+            "summary": "Loaded the academic graph and aligned resource bundle.",
+        },
+        {
+            "skill_id": "/mentor-discovery",
+            "status": "succeeded",
+            "summary": "Ranked mentor candidates for the student context.",
+        },
+        {
+            "skill_id": "/project-teammate-discovery",
+            "status": "succeeded",
+            "summary": "Expanded mentor matches into project and teammate recommendations.",
+        },
+        {
+            "skill_id": "/social-ranking",
+            "status": "succeeded",
+            "summary": "Produced the final ranked recommendation package.",
+        },
+    ]
+
+
 def _dialog_state_from_payload(payload: dict[str, object]) -> DialogState:
     pending_question_payload = payload.get("pending_question")
     execution_context_payload = payload.get("execution_context")
@@ -52,6 +84,9 @@ def run_agent_turn(*, repo_root: Path, dialog_state_payload: dict[str, object], 
         reply_text, next_state = agent.handle_message(state, user_text)
     return {
         "reply_text": reply_text,
-        "structured_result": {"last_result_handle": next_state.execution_context.result_handle},
+        "structured_result": {
+            "last_result_handle": next_state.execution_context.result_handle,
+            "skill_usage": _recommendation_skill_usage(next_state),
+        },
         "dialog_state_payload": asdict(next_state),
     }

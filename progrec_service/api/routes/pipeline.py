@@ -6,7 +6,9 @@ import progrec_service.queue as pipeline_queue
 from progrec_service.services.pipeline_jobs import (
     create_pipeline_job,
     get_pipeline_job,
+    get_pipeline_job_detail,
     get_pipeline_result,
+    list_pipeline_jobs,
     retry_pipeline_job,
 )
 
@@ -20,18 +22,17 @@ def create_job(payload: dict[str, object]) -> dict[str, object]:
     return {"job_id": record.id, "status": record.status}
 
 
+@router.get("/jobs")
+def list_jobs() -> dict[str, object]:
+    return {"jobs": list_pipeline_jobs()}
+
+
 @router.get("/jobs/{job_id}")
 def get_job(job_id: str) -> dict[str, object]:
-    record = get_pipeline_job(job_id)
-    if record is None:
+    detail = get_pipeline_job_detail(job_id)
+    if detail is None:
         raise HTTPException(status_code=404, detail="job not found")
-    return {
-        "job_id": record.id,
-        "status": record.status,
-        "progress_stage": record.progress_stage,
-        "progress_message": record.progress_message,
-        "attempt_count": record.attempt_count,
-    }
+    return detail
 
 
 @router.get("/jobs/{job_id}/result")

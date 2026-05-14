@@ -10,6 +10,7 @@ from progrec_service.runtime import agent_v2_runner
 from progrec_service.services.agent_sessions import (
     create_session as create_session_entry,
     get_session_dialog_state,
+    list_sessions as list_session_entries,
     list_session_messages,
     persist_assistant_turn,
     persist_user_message,
@@ -27,6 +28,11 @@ def create_session(payload: dict[str, object]) -> dict[str, object]:
         session_mode=str(payload.get("session_mode", "chat")),
     )
     return {"session_id": record.id, "status": record.status}
+
+
+@router.get("/sessions")
+def list_sessions() -> dict[str, object]:
+    return {"sessions": list_session_entries()}
 
 
 @router.get("/sessions/{session_id}/messages")
