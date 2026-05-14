@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from progrec_service.config import settings
+from progrec_service.db.models import Base
 
 
 def build_engine(database_url: str) -> Engine:
@@ -26,6 +27,7 @@ def build_session_factory(engine: Engine) -> sessionmaker[Session]:
 
 
 engine = build_engine(settings.database_url)
+Base.metadata.create_all(engine)
 SessionLocal = build_session_factory(engine)
 
 

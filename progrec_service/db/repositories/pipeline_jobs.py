@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from sqlalchemy.orm import Session
 
+from sqlalchemy import select
+
 from progrec_service.db.models import PipelineJob, PipelineResult, WorkerEvent
 
 
@@ -21,6 +23,10 @@ class PipelineJobRepository:
         self.session.add(model)
         self.session.flush()
         return model
+
+    def get_result(self, job_id: str) -> PipelineResult | None:
+        stmt = select(PipelineResult).where(PipelineResult.job_id == job_id)
+        return self.session.scalar(stmt)
 
     def add_event(self, model: WorkerEvent) -> WorkerEvent:
         self.session.add(model)

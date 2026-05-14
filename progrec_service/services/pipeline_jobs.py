@@ -37,3 +37,39 @@ def get_pipeline_job(job_id: str) -> PipelineJob | None:
     with SessionLocal() as session:
         repo = PipelineJobRepository(session)
         return repo.get_job(job_id)
+
+
+def retry_pipeline_job(job_id: str) -> PipelineJob:
+    with SessionLocal() as session:
+        repo = PipelineJobRepository(session)
+        original = repo.get_job(job_id)
+        if original is None:
+            raise ValueError(f"job {job_id} not found")
+        replacement = PipelineJob(
+            id=create_job_id(),
+            supersedes_job_id=original.id,
+            job_type=original.job_type,
+            runtime_profile_id=original.runtime_profile_id,
+            request_payload=dict(original.request_payload),
+            status="queued",
+            progress_stage="validating_input",
+            progress_message="Replacement job accepted and queued.",
+            attempt_count=original.attempt_count + 1,
+        )
+        repo.add_job(replacement)
+        session.commit()
+    return replacement
+
+
+def get_pipeline_result(job_id: str) -> dict[str, object] | None:
+    with SessionLocal() as session:
+        repo = PipelineJobRepository(session)
+        result = repo.get_result(job_id)
+    if result is None:
+        return None
+    return {
+        "job_id": result.job_id,
+        "result": result.result_payload,
+        "summary": result.summary_payload,
+        "artifacts": result.artifacts_payload,
+    }

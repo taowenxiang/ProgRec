@@ -27,3 +27,11 @@ def encode_job_message(job_id: str) -> str:
 
 def enqueue_job(job_id: str) -> None:
     redis_client().rpush(queue_name(), encode_job_message(job_id))
+
+
+def dequeue_job_message(timeout_seconds: int = 1) -> dict[str, object] | None:
+    item = redis_client().blpop(queue_name(), timeout=timeout_seconds)
+    if item is None:
+        return None
+    _, payload = item
+    return dict(json.loads(payload))

@@ -3,7 +3,12 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException
 
 import progrec_service.queue as pipeline_queue
-from progrec_service.services.pipeline_jobs import create_pipeline_job, get_pipeline_job
+from progrec_service.services.pipeline_jobs import (
+    create_pipeline_job,
+    get_pipeline_job,
+    get_pipeline_result,
+    retry_pipeline_job,
+)
 
 router = APIRouter(prefix="/pipeline", tags=["pipeline"])
 
@@ -34,4 +39,17 @@ def get_job_result(job_id: str) -> dict[str, object]:
     record = get_pipeline_job(job_id)
     if record is None or record.status != "succeeded":
         raise HTTPException(status_code=409, detail="job result is not ready")
-    return {"job_id": record.id, "status": record.status}
+    result = get_pipeline_result(job_id)
+    if result is None:
+        raise HTTPException(status_code=409, detail="job result is not ready")
+    return result
+
+
+@router.post("/jobs/{job_id}/retry", status_code=201)
+def retry_job(job_id: str) -> dict[str, object]:
+    try:
+        replacement = retry_pipeline_job(job_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    pipeline_queue.enqueue_job(replacement.id)
+    return {"job_id": replacement.id, "status": replacement.status}

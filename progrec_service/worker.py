@@ -4,7 +4,8 @@ import logging
 import signal
 from threading import Event
 
-from progrec_service.queue import queue_name
+from progrec_service.queue import dequeue_job_message, queue_name
+from progrec_service.worker_loop import process_one_job
 
 logger = logging.getLogger(__name__)
 stop_event = Event()
@@ -30,12 +31,17 @@ def main(poll_interval_seconds: float = 30.0) -> int:
     signal.signal(signal.SIGINT, _handle_stop_signal)
 
     logger.info(
-        "Worker started for queue %s. Queue consumption is not implemented yet; keeping the process alive for deployment stability.",
+        "Worker started for queue %s. Queue consumption is implemented in worker_loop; waiting for jobs.",
         queue_name(),
     )
 
     while not stop_event.wait(timeout=poll_interval_seconds):
-        logger.info("Worker heartbeat queue=%s status=idle", queue_name())
+        message = dequeue_job_message(timeout_seconds=max(1, int(poll_interval_seconds)))
+        if message is None:
+            logger.info("Worker heartbeat queue=%s status=idle", queue_name())
+            continue
+        logger.info("Worker processing job_id=%s queue=%s", message.get("job_id"), queue_name())
+        process_one_job(message)
 
     logger.info("Worker stopped")
     return 0
