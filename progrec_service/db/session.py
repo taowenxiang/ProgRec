@@ -1,13 +1,30 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from collections.abc import Iterator
 
-from progrec_service.db.models import RuntimeProfileRecord
+from sqlalchemy import create_engine
+from sqlalchemy.engine import Engine
+from sqlalchemy.orm import Session, sessionmaker
+
+from progrec_service.config import settings
 
 
-@dataclass
-class InMemoryDatabase:
-    runtime_profiles: dict[str, RuntimeProfileRecord] = field(default_factory=dict)
+def build_engine(database_url: str) -> Engine:
+    connect_args = {"check_same_thread": False} if database_url.startswith("sqlite") else {}
+    return create_engine(database_url, future=True, connect_args=connect_args)
 
 
-db = InMemoryDatabase()
+def build_session_factory(engine: Engine) -> sessionmaker[Session]:
+    return sessionmaker(bind=engine, autoflush=False, expire_on_commit=False, future=True)
+
+
+engine = build_engine(settings.database_url)
+SessionLocal = build_session_factory(engine)
+
+
+def get_db_session() -> Iterator[Session]:
+    session = SessionLocal()
+    try:
+        yield session
+    finally:
+        session.close()
