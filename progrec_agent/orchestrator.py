@@ -139,3 +139,34 @@ class ProgRecOrchestrator:
             "skill3_result": skill3_result,
             "temporary_paths": [skill3_path],
         }
+
+    def expand_projects_and_teammates_for_profile(
+        self,
+        student_profile: dict[str, object],
+        top_k: int = 5,
+        *,
+        skill3_result: dict[str, object] | None = None,
+    ) -> dict[str, object]:
+        skill3_path = self.temp_dir / "skill3.json"
+        skill4_path = self.temp_dir / "skill4.json"
+        resolved_skill3 = skill3_result or run_skill3(self.repo_root, student_profile, top_k)
+        skill3_path.write_text(json.dumps(resolved_skill3, ensure_ascii=False, indent=2), encoding="utf-8")
+        skill4_result = run_skill4_custom_mode(
+            repo_root=self.repo_root,
+            student_profile=student_profile,
+            skill3_result=resolved_skill3,
+            output_path=skill4_path,
+        )
+        assert_agent_student_alignment(
+            expected_student_id=str(student_profile["student_id"]),
+            skill3_path=skill3_path,
+            skill4_path=skill4_path,
+        )
+        return {
+            "mode": "custom_profile_project_teammate_only",
+            "student_profile": student_profile,
+            "resource_context": {"resource_mode": "custom_profile_project_teammate_only"},
+            "skill3_result": resolved_skill3,
+            "skill4_result": skill4_result,
+            "temporary_paths": [skill3_path, skill4_path],
+        }

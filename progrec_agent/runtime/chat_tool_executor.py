@@ -73,4 +73,36 @@ class ChatToolExecutor:
                 payload=dict(payload),
             )
 
+        if tool_name == "/project-teammate-discovery.recommend_projects":
+            payload = self.recommendation_runtime.run_project_recommendations_for_profile(
+                repo_root=self.repo_root,
+                temp_dir=self.temp_dir,
+                profile=dict(arguments["profile"]),
+                mentor_result=arguments.get("mentor_result") if isinstance(arguments.get("mentor_result"), dict) else None,
+                top_k=int(arguments.get("top_k") or 5),
+            )
+            return ToolExecutionResult(
+                tool_name=tool_name,
+                skill_id=tool.skill_id,
+                status="succeeded",
+                summary="Recommended projects for the current student profile.",
+                payload=dict(payload),
+            )
+
+        if tool_name == "/project-teammate-discovery.recommend_teammates":
+            payload = self.recommendation_runtime.run_teammate_recommendations_for_profile(
+                repo_root=self.repo_root,
+                temp_dir=self.temp_dir,
+                profile=dict(arguments["profile"]),
+                mentor_result=arguments.get("mentor_result") if isinstance(arguments.get("mentor_result"), dict) else None,
+                top_k=int(arguments.get("top_k") or 5),
+            )
+            return ToolExecutionResult(
+                tool_name=tool_name,
+                skill_id=tool.skill_id,
+                status="succeeded",
+                summary="Recommended teammates for the current student profile.",
+                payload=dict(payload),
+            )
+
         raise ValueError(f"Tool {tool_name!r} is registered but has no executor implementation yet.")

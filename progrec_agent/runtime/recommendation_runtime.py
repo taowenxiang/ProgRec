@@ -23,3 +23,56 @@ def run_mentor_recommendation_for_profile(*, repo_root, temp_dir, profile: dict[
     standardized = dict(profile) if required.issubset(profile) else standardize_temporary_profile(profile)
     orchestrator = ProgRecOrchestrator(repo_root=repo_root, temp_dir=temp_dir)
     return orchestrator.rank_mentors_for_profile(standardized, top_k=top_k)
+
+
+def _extract_skill4_items(skill4_result: dict[str, object], key: str) -> list[dict[str, object]]:
+    items: list[dict[str, object]] = []
+    for bundle in list(skill4_result.get("mentor_project_teammate_recommendations") or []):
+        if not isinstance(bundle, dict):
+            continue
+        for item in list(bundle.get(key) or []):
+            if isinstance(item, dict):
+                items.append(item)
+    return items
+
+
+def run_project_recommendations_for_profile(
+    *,
+    repo_root,
+    temp_dir,
+    profile: dict[str, object],
+    top_k: int,
+    mentor_result: dict[str, object] | None = None,
+):
+    required = {"student_id", "grade", "major", "skills", "interests", "experience_summary", "availability"}
+    standardized = dict(profile) if required.issubset(profile) else standardize_temporary_profile(profile)
+    orchestrator = ProgRecOrchestrator(repo_root=repo_root, temp_dir=temp_dir)
+    payload = orchestrator.expand_projects_and_teammates_for_profile(
+        standardized,
+        top_k=top_k,
+        skill3_result=mentor_result,
+    )
+    skill4_result = dict(payload.get("skill4_result") or {})
+    payload["projects"] = _extract_skill4_items(skill4_result, "project_recommendations")
+    return payload
+
+
+def run_teammate_recommendations_for_profile(
+    *,
+    repo_root,
+    temp_dir,
+    profile: dict[str, object],
+    top_k: int,
+    mentor_result: dict[str, object] | None = None,
+):
+    required = {"student_id", "grade", "major", "skills", "interests", "experience_summary", "availability"}
+    standardized = dict(profile) if required.issubset(profile) else standardize_temporary_profile(profile)
+    orchestrator = ProgRecOrchestrator(repo_root=repo_root, temp_dir=temp_dir)
+    payload = orchestrator.expand_projects_and_teammates_for_profile(
+        standardized,
+        top_k=top_k,
+        skill3_result=mentor_result,
+    )
+    skill4_result = dict(payload.get("skill4_result") or {})
+    payload["teammates"] = _extract_skill4_items(skill4_result, "teammate_recommendations")
+    return payload
