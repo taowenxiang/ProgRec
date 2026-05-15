@@ -210,6 +210,85 @@ class TestAgentStream(unittest.TestCase):
         self.assertIn('"skill_id": "/progrec-agent"', body)
         self.assertIn("Reading local Skill.md documents", body)
 
+    def test_message_route_persists_pending_question_across_turns(self) -> None:
+        client = TestClient(create_app())
+        create_response = client.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+        captured_states: list[dict[str, object]] = []
+
+        def fake_runner(*, dialog_state_payload, **kwargs):
+            captured_states.append(dict(dialog_state_payload))
+            if len(captured_states) == 1:
+                return {
+                    "reply_text": "Tell me about your background and research interests.",
+                    "structured_result": {
+                        "turn_type": "clarification",
+                        "next_question": "Tell me about your background and research interests.",
+                        "skill_usage": [],
+                    },
+                    "dialog_state_payload": {
+                        "pending_question": {
+                            "slot_name": "profile_context",
+                            "question": "Tell me about your background and research interests.",
+                            "expected_answer_shape": "free_text_profile",
+                        },
+                        "execution_context": {
+                            "last_turn_type": "clarification",
+                            "next_question": "Tell me about your background and research interests.",
+                        },
+                    },
+                }
+            return {
+                "reply_text": "What kind of mentorship are you looking for?",
+                "structured_result": {
+                    "turn_type": "clarification",
+                    "next_question": "What kind of mentorship are you looking for?",
+                    "skill_usage": [],
+                },
+                "dialog_state_payload": {
+                    "execution_context": {
+                        "last_turn_type": "clarification",
+                        "next_question": "What kind of mentorship are you looking for?",
+                    },
+                },
+            }
+
+        with patch("progrec_service.runtime.agent_v2_runner.run_agent_turn", side_effect=fake_runner):
+            with client.stream(
+                "POST",
+                f"/agent/sessions/{session_id}/messages",
+                json={
+                    "message": "Help me find a mentor for NLP.",
+                    "runtime": {
+                        "mode": "ephemeral",
+                        "base_url": "https://api.openai.com/v1",
+                        "model": "gpt-4.1-mini",
+                        "api_key": "sk-test",
+                    },
+                },
+            ) as response:
+                self.assertEqual(response.status_code, 200)
+                list(response.iter_text())
+
+            with client.stream(
+                "POST",
+                f"/agent/sessions/{session_id}/messages",
+                json={
+                    "message": "I am an ug and I am interested in object detection",
+                    "runtime": {
+                        "mode": "ephemeral",
+                        "base_url": "https://api.openai.com/v1",
+                        "model": "gpt-4.1-mini",
+                        "api_key": "sk-test",
+                    },
+                },
+            ) as response:
+                self.assertEqual(response.status_code, 200)
+                list(response.iter_text())
+
+        self.assertIsNone(captured_states[0].get("pending_question"))
+        self.assertEqual(captured_states[1]["pending_question"]["slot_name"], "profile_context")
+
     def test_agent_skill_event_payload_is_json_decodable(self) -> None:
         client = TestClient(create_app())
         create_response = client.post("/agent/sessions", json={"session_mode": "chat"})

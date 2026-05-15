@@ -52,6 +52,16 @@ class TestLLMClient(unittest.TestCase):
         self.assertEqual(parsed["goal"], "nlp")
 
     @patch("progrec_agent.llm_client.urlopen")
+    def test_post_json_uses_request_timeout(self, mock_urlopen) -> None:
+        body = json.dumps({"output_text": "{\"goal\": \"nlp\"}"}).encode("utf-8")
+        mock_urlopen.return_value.__enter__.return_value.read.return_value = body
+        client = LLMClient(LLMConfig(model="demo", api_key="test-key", endpoint="https://example.com"))
+
+        client.complete_json("prompt")
+
+        self.assertEqual(mock_urlopen.call_args.kwargs["timeout"], 20.0)
+
+    @patch("progrec_agent.llm_client.urlopen")
     def test_parse_json_response_from_output_array(self, mock_urlopen) -> None:
         body = json.dumps(
             {

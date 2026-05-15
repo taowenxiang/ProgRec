@@ -2,6 +2,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from progrec_agent.contracts.registry import (
+    allowed_capability_ids,
+    get_capability,
+    list_capabilities,
+    planner_capability_context,
+)
+
 
 @dataclass(frozen=True)
 class ChatTool:
@@ -14,7 +21,7 @@ class ChatTool:
     planner_notes: str = ""
 
 
-CHAT_TOOLS: dict[str, ChatTool] = {
+_LEGACY_CHAT_TOOLS: dict[str, ChatTool] = {
     "/student-profiling.build_temporary_profile": ChatTool(
         name="/student-profiling.build_temporary_profile",
         skill_id="/student-profiling",
@@ -73,33 +80,40 @@ CHAT_TOOLS: dict[str, ChatTool] = {
 
 
 def list_chat_tools() -> list[ChatTool]:
-    return list(CHAT_TOOLS.values())
+    tools: list[ChatTool] = []
+    for contract in list_capabilities():
+        required_arguments = [item.name for item in contract.requires if item.required]
+        optional_arguments = [item.name for item in contract.requires if not item.required]
+        tools.append(
+            ChatTool(
+                name=contract.capability_id,
+                skill_id=contract.owner_skill,
+                description=contract.when_to_use,
+                required_arguments=required_arguments,
+                optional_arguments=optional_arguments,
+                planner_notes=f"kind={contract.kind}; returns={contract.returns}",
+            )
+        )
+    return tools
 
 
 def get_chat_tool(name: str) -> ChatTool:
-    if name not in CHAT_TOOLS:
-        raise KeyError(f"Unknown chat tool {name!r}. Known tools: {sorted(CHAT_TOOLS)}")
-    return CHAT_TOOLS[name]
+    if name in _LEGACY_CHAT_TOOLS:
+        return _LEGACY_CHAT_TOOLS[name]
+    contract = get_capability(name)
+    return ChatTool(
+        name=name,
+        skill_id=contract.owner_skill,
+        description=contract.when_to_use,
+        required_arguments=[item.name for item in contract.requires if item.required],
+        optional_arguments=[item.name for item in contract.requires if not item.required],
+        planner_notes=f"kind={contract.kind}; returns={contract.returns}",
+    )
 
 
 def allowed_tool_names() -> set[str]:
-    return set(CHAT_TOOLS)
+    return set(_LEGACY_CHAT_TOOLS) | allowed_capability_ids()
 
 
 def planner_tool_context() -> str:
-    lines: list[str] = []
-    for tool in list_chat_tools():
-        lines.append(
-            "\n".join(
-                [
-                    f"tool: {tool.name}",
-                    f"skill_id: {tool.skill_id}",
-                    f"description: {tool.description}",
-                    f"required_arguments: {', '.join(tool.required_arguments)}",
-                    f"optional_arguments: {', '.join(tool.optional_arguments) or 'none'}",
-                    f"allowed_targets: {', '.join(tool.allowed_targets) or 'any'}",
-                    f"notes: {tool.planner_notes}",
-                ]
-            )
-        )
-    return "\n\n".join(lines)
+    return planner_capability_context()

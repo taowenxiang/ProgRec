@@ -18,6 +18,10 @@ class ExecutionContext:
     last_result: dict[str, object] = field(default_factory=dict)
     last_turn_type: str = ""
     next_question: str = ""
+    latest_result_refs: dict[str, str] = field(default_factory=dict)
+    active_result_ref: str = ""
+    last_shown_entities: dict[str, str] = field(default_factory=dict)
+    result_ref_payloads: dict[str, dict[str, object]] = field(default_factory=dict)
 
 
 @dataclass

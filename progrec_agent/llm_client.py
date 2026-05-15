@@ -36,6 +36,8 @@ class LLMConfig:
     api_key: str
     endpoint: str = "https://api.openai.com/v1/responses"
     temperature: float = 0.1
+    timeout_seconds: float = 20.0
+    max_output_tokens: int = 500
 
     def __post_init__(self) -> None:
         if not self.api_key.strip():
@@ -96,7 +98,7 @@ class LLMClient:
             },
             method="POST",
         )
-        with urlopen(request) as response:
+        with urlopen(request, timeout=self.config.timeout_seconds) as response:
             return json.loads(response.read().decode("utf-8"))
 
     def complete_json(self, prompt: str) -> dict[str, object]:
@@ -104,6 +106,7 @@ class LLMClient:
             "model": self.config.model,
             "input": prompt,
             "temperature": self.config.temperature,
+            "max_output_tokens": self.config.max_output_tokens,
         }
         try:
             raw = self._post_json(self.config.endpoint, responses_payload)
@@ -121,6 +124,7 @@ class LLMClient:
             "model": self.config.model,
             "messages": [{"role": "user", "content": prompt}],
             "temperature": self.config.temperature,
+            "max_tokens": self.config.max_output_tokens,
         }
         chat_endpoint = resolve_chat_completions_endpoint(self.config.endpoint)
         raw = self._post_json(chat_endpoint, chat_payload)

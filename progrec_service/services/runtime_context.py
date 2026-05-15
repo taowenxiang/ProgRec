@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 from progrec_service.config import settings
 from progrec_service.db.repositories.runtime_profiles import RuntimeProfileRepository
@@ -16,6 +17,25 @@ class RuntimeContext:
     source: str
 
 
+def _allow_env_file_fallback(app_env: str) -> bool:
+    return app_env.strip().lower() in {"development", "dev", "test", "testing", "local"}
+
+
+def _runtime_context_from_env_file(env_path: Path) -> RuntimeContext | None:
+    if not env_path.exists():
+        return None
+    lines = [line.strip() for line in env_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    if len(lines) < 3:
+        raise ValueError(f"runtime env file {env_path} must contain api key, model, and base url on separate lines")
+    api_key, model, base_url = lines[:3]
+    return RuntimeContext(
+        base_url=base_url,
+        model=model,
+        api_key=api_key,
+        source="env_file",
+    )
+
+
 def resolve_runtime_context(
     *,
     ephemeral_runtime: dict[str, str] | None,
@@ -29,6 +49,13 @@ def resolve_runtime_context(
             source="ephemeral",
         )
     if runtime_profile_id is None:
+        if _allow_env_file_fallback(settings.app_env):
+            env_context = _runtime_context_from_env_file(settings.runtime_env_file)
+            if env_context is not None:
+                return env_context
+            raise ValueError(
+                "runtime context requires either ephemeral runtime, runtime_profile_id, or a valid env.txt file"
+            )
         raise ValueError("runtime context requires either ephemeral runtime or runtime_profile_id")
     with SessionLocal() as session:
         repo = RuntimeProfileRepository(session)

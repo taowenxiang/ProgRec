@@ -21,6 +21,8 @@ class PlannerAction:
     arguments: dict[str, Any] = field(default_factory=dict)
     suggested_next_actions: list[dict[str, Any]] = field(default_factory=list)
     reasoning_summary: str = ""
+    pending_slot: str = ""
+    expected_answer_shape: str = ""
 
 
 def parse_planner_action(payload: dict[str, Any], *, allowed_tools: set[str]) -> PlannerAction:
@@ -47,4 +49,6 @@ def parse_planner_action(payload: dict[str, Any], *, allowed_tools: set[str]) ->
         arguments=dict(raw_arguments),
         suggested_next_actions=[item for item in raw_suggestions if isinstance(item, dict)],
         reasoning_summary=str(payload.get("reasoning_summary") or "").strip(),
+        pending_slot=str(payload.get("pending_slot") or "").strip(),
+        expected_answer_shape=str(payload.get("expected_answer_shape") or "").strip(),
     )

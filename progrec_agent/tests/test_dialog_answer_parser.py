@@ -59,6 +59,23 @@ class TestDialogMerge(unittest.TestCase):
 
         self.assertEqual(updated.resolved_slots["profile_source"], "existing_profile")
 
+    def test_profile_context_enriches_common_student_slots(self) -> None:
+        state = DialogState(
+            task="recommendation_request",
+            pending_question=PendingQuestion(
+                slot_name="profile_context",
+                question="Tell me about your background and research interests.",
+                expected_answer_shape="free_text_profile",
+            ),
+        )
+
+        updated = apply_pending_answer(state, "I am an ug and I am interested in object detection")
+
+        self.assertEqual(updated.profile_context["raw_profile_text"], "I am an ug and I am interested in object detection")
+        self.assertEqual(updated.profile_context["program_type"], "undergraduate")
+        self.assertEqual(updated.profile_context["research_topic"], "object detection")
+        self.assertIsNone(updated.pending_question)
+
     def test_merge_skill_frame_promotes_explicit_slots(self) -> None:
         from progrec_agent.dialog.merge import merge_skill_frame
         from progrec_agent.nlu.skill_frame import SkillAwareFrame
