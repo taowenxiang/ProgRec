@@ -31,6 +31,7 @@ class AgentSession(Base):
     __tablename__ = "agent_sessions"
 
     id: Mapped[str] = mapped_column(String, primary_key=True)
+    owner_token: Mapped[str | None] = mapped_column(String, nullable=True, index=True)
     runtime_profile_id: Mapped[str | None] = mapped_column(ForeignKey("runtime_profiles.id"), nullable=True)
     session_mode: Mapped[str] = mapped_column(String, nullable=False)
     status: Mapped[str] = mapped_column(String, nullable=False)

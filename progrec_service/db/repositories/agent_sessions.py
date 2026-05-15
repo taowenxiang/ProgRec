@@ -15,11 +15,19 @@ class AgentSessionRepository:
         self.session.flush()
         return model
 
-    def get_session(self, session_id: str) -> AgentSession | None:
-        return self.session.get(AgentSession, session_id)
+    def get_session(self, session_id: str, *, owner_token: str | None = None) -> AgentSession | None:
+        if owner_token is None:
+            return self.session.get(AgentSession, session_id)
+        stmt = select(AgentSession).where(
+            AgentSession.id == session_id,
+            AgentSession.owner_token == owner_token,
+        )
+        return self.session.scalar(stmt)
 
-    def list_sessions(self, *, limit: int = 50) -> list[AgentSession]:
+    def list_sessions(self, *, limit: int = 50, owner_token: str | None = None) -> list[AgentSession]:
         stmt = select(AgentSession).order_by(AgentSession.updated_at.desc()).limit(limit)
+        if owner_token is not None:
+            stmt = stmt.where(AgentSession.owner_token == owner_token)
         return list(self.session.scalars(stmt))
 
     def add_message(self, model: AgentMessage) -> AgentMessage:

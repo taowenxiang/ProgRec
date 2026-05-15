@@ -371,7 +371,22 @@ class TestAgentStream(unittest.TestCase):
             "progrec_agent.runtime.recommendation_runtime.run_mentor_recommendation_for_profile",
             return_value={
                 "student_profile": {"student_id": "chat-temp-1"},
-                "skill3_result": {"mentor_candidates": [{"mentor_id": "m1"}, {"mentor_id": "m2"}]},
+                "skill3_result": {
+                    "mentor_candidates": [
+                        {
+                            "mentor_id": "m1",
+                            "mentor_name": "Prof Ada",
+                            "final_score": 0.91,
+                            "reasons": ["Strong NLP overlap."],
+                        },
+                        {
+                            "mentor_id": "m2",
+                            "mentor_name": "Prof Turing",
+                            "final_score": 0.84,
+                            "reason": "Strong project-path evidence.",
+                        },
+                    ]
+                },
             },
         ), patch(
             "progrec_agent.runtime.recommendation_runtime.run_project_recommendations_for_profile",
@@ -424,6 +439,8 @@ class TestAgentStream(unittest.TestCase):
 
         self.assertIn("background and research interests", body1)
         self.assertIn("found 2 mentor matches", body2)
+        self.assertIn("Prof Ada", body2)
+        self.assertIn("Strong NLP overlap", body2)
         self.assertIn("related projects", body3)
 
         messages_response = client.get(f"/agent/sessions/{session_id}/messages")

@@ -6,8 +6,10 @@ import json
 from progrec_agent.contracts.registry import get_capability
 from progrec_agent.dialog.state import PendingQuestion
 from progrec_agent.nlu.domain_guard import extract_research_topic
-from progrec_agent.response.composer import compose_fallback_reply
+from progrec_agent.response.composer import compose_fallback_reply, compose_mentor_matches_reply
 from progrec_agent.target_policy import is_tool_allowed_for_state
+
+_MENTOR_RECOMMENDATION_TOOL = "/mentor-discovery.recommend_mentors"
 
 
 @dataclass
@@ -147,20 +149,12 @@ def handle_call_tool_action(
 def handle_terminal_action(*, state, action) -> TurnExecutionOutcome:
     if action.action == "suggest_next_steps":
         state.suggested_next_actions = list(action.suggested_next_actions)
-        reply_text = action.message or compose_fallback_reply(
-            turn_type=state.execution_context.last_turn_type or "recommendation_result",
-            tool_results_summary=state.tool_results_summary,
-            suggested_next_actions=state.suggested_next_actions,
-        )
+        reply_text = compose_terminal_reply(state=state, action=action)
         state.last_agent_turn = reply_text
         return TurnExecutionOutcome(handled=True, reply_text=reply_text)
 
     if action.action == "answer_from_context":
-        reply_text = action.message or compose_fallback_reply(
-            turn_type=state.execution_context.last_turn_type,
-            tool_results_summary=state.tool_results_summary,
-            suggested_next_actions=state.suggested_next_actions,
-        )
+        reply_text = compose_terminal_reply(state=state, action=action)
         state.last_agent_turn = reply_text
         return TurnExecutionOutcome(handled=True, reply_text=reply_text)
 
@@ -187,9 +181,14 @@ def compose_auto_continued_reply(state) -> str:
 
     if state.active_goal == "mentor":
         mentor_count = int(state.tool_results_summary.get("mentor_count") or 0)
-        return (
+        preamble = (
             f"Thanks, that gives me enough to work with. I used your {background} context to start the mentor search "
-            f"and found {mentor_count} mentor matches. If you want, I can next expand this into related projects or teammates."
+            f"and found {mentor_count} mentor matches."
+        )
+        return compose_mentor_matches_reply(
+            preamble=preamble,
+            mentor_result_payload=dict(state.execution_context.last_result.get("payload") or {}),
+            suggested_next_actions=state.suggested_next_actions,
         )
     if state.active_goal == "project":
         project_count = int(state.tool_results_summary.get("project_count") or 0)
@@ -218,3 +217,35 @@ def compose_initial_profile_question(user_text: str, active_goal: str) -> str:
         "To make the matches useful, could you tell me your degree level, relevant skills or project experience, "
         "and what kind of opportunity or guidance you want?"
     )
+
+
+def compose_terminal_reply(*, state, action) -> str:
+    if _should_expand_mentor_recommendation_reply(state):
+        mentor_count = int(state.tool_results_summary.get("mentor_count") or 0)
+        return compose_mentor_matches_reply(
+            preamble=f"I found {mentor_count} mentor recommendations for you.",
+            mentor_result_payload=dict(state.execution_context.last_result.get("payload") or {}),
+            suggested_next_actions=state.suggested_next_actions,
+        )
+    return action.message or compose_fallback_reply(
+        turn_type=state.execution_context.last_turn_type or "recommendation_result",
+        tool_results_summary=state.tool_results_summary,
+        suggested_next_actions=state.suggested_next_actions,
+        next_question=state.execution_context.next_question,
+    )
+
+
+def _should_expand_mentor_recommendation_reply(state) -> bool:
+    if state.active_goal != "mentor":
+        return False
+    if str(state.execution_context.last_result.get("result_type") or "") != "mentor_result":
+        return False
+    if len(state.planner_actions) < 2:
+        return False
+    previous_action = dict(state.planner_actions[-2] or {})
+    if str(previous_action.get("action") or "") != "call_tool":
+        return False
+    tool_name = str(previous_action.get("tool_name") or "").strip()
+    if not tool_name:
+        return False
+    return get_capability(tool_name).capability_id == _MENTOR_RECOMMENDATION_TOOL

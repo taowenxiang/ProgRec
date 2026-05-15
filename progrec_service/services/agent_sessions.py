@@ -14,9 +14,10 @@ def create_session_id() -> str:
     return f"as_{uuid.uuid4().hex[:12]}"
 
 
-def create_session_record(*, runtime_profile_id: str | None, session_mode: str) -> AgentSession:
+def create_session_record(*, runtime_profile_id: str | None, session_mode: str, owner_token: str | None = None) -> AgentSession:
     return AgentSession(
         id=create_session_id(),
+        owner_token=owner_token,
         runtime_profile_id=runtime_profile_id,
         session_mode=session_mode,
         status="active",
@@ -25,8 +26,12 @@ def create_session_record(*, runtime_profile_id: str | None, session_mode: str) 
     )
 
 
-def create_session(*, runtime_profile_id: str | None, session_mode: str) -> AgentSession:
-    record = create_session_record(runtime_profile_id=runtime_profile_id, session_mode=session_mode)
+def create_session(*, runtime_profile_id: str | None, session_mode: str, owner_token: str | None = None) -> AgentSession:
+    record = create_session_record(
+        runtime_profile_id=runtime_profile_id,
+        session_mode=session_mode,
+        owner_token=owner_token,
+    )
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
         repo.add_session(record)
@@ -34,9 +39,12 @@ def create_session(*, runtime_profile_id: str | None, session_mode: str) -> Agen
     return record
 
 
-def list_session_messages(session_id: str) -> list[dict[str, object]]:
+def list_session_messages(session_id: str, *, owner_token: str | None = None) -> list[dict[str, object]]:
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
+        record = repo.get_session(session_id, owner_token=owner_token)
+        if record is None:
+            raise ValueError(f"session {session_id} not found")
         messages = repo.list_messages(session_id)
     return [
         {
@@ -58,10 +66,10 @@ def _preview(text: str, *, limit: int = 80) -> str:
     return stripped[: limit - 3].rstrip() + "..."
 
 
-def list_sessions(*, limit: int = 50) -> list[dict[str, object]]:
+def list_sessions(*, limit: int = 50, owner_token: str | None = None) -> list[dict[str, object]]:
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
-        records = repo.list_sessions(limit=limit)
+        records = repo.list_sessions(limit=limit, owner_token=owner_token)
         payloads: list[dict[str, object]] = []
         for record in records:
             messages = repo.list_messages(record.id)
@@ -84,16 +92,16 @@ def list_sessions(*, limit: int = 50) -> list[dict[str, object]]:
         return payloads
 
 
-def get_session_dialog_state(session_id: str) -> dict[str, object]:
+def get_session_dialog_state(session_id: str, *, owner_token: str | None = None) -> dict[str, object]:
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
-        record = repo.get_session(session_id)
+        record = repo.get_session(session_id, owner_token=owner_token)
     if record is None:
         raise ValueError(f"session {session_id} not found")
     return dict(record.dialog_state_payload or {})
 
 
-def persist_user_message(session_id: str, content_text: str) -> None:
+def persist_user_message(session_id: str, content_text: str, *, owner_token: str | None = None) -> None:
     message = AgentMessage(
         id=f"msg_{uuid.uuid4().hex[:12]}",
         session_id=session_id,
@@ -104,9 +112,11 @@ def persist_user_message(session_id: str, content_text: str) -> None:
     )
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
-        record = repo.get_session(session_id)
+        record = repo.get_session(session_id, owner_token=owner_token)
         if record is not None:
             record.updated_at = utcnow()
+        else:
+            raise ValueError(f"session {session_id} not found")
         repo.add_message(message)
         session.commit()
 
@@ -117,10 +127,11 @@ def persist_assistant_turn(
     content_text: str,
     structured_payload: dict[str, object],
     dialog_state_payload: dict[str, object],
+    owner_token: str | None = None,
 ) -> None:
     with SessionLocal() as session:
         repo = AgentSessionRepository(session)
-        record = repo.get_session(session_id)
+        record = repo.get_session(session_id, owner_token=owner_token)
         if record is None:
             raise ValueError(f"session {session_id} not found")
         record.dialog_state_payload = dialog_state_payload

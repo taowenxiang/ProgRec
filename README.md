@@ -1,168 +1,31 @@
-# ProgRec
+# ProgRec Agent + Skills & Web Backend
 
-Course project repository for the recommendation pipeline handoff, including:
+ProgRec 是一个面向本科生科研推荐场景的仓库，组织为 `1 个 Agent + 5 个 Skill`。它既可以被现在常见的 AI agent 直接调用，也可以通过我们做的网页 demo 体验完整流程。
 
-- `skill1_student_profiling/`: Skill 1 source code plus `outputs/` for normalized student profile artifacts
-- `skill2_academic_graph_builder/`: graph-building outputs and the regenerate kit
-- `skill3_mentor_discovery/`: mentor retrieval and ranking logic
-- `tests/`: unit tests for the Skill 3 pipeline
+- AI agent 直接体验：如下图，我们的agent和skills的逻辑可以被codex等AI agent直接参考使用
+- 网页 demo：<https://demo.wenxiangtao.com/progrec>
+- 说明：网页端是我们尝试做的展示层，尚有很多不完善之处，望谅解0.0
 
-## Repository Structure
+![ProgRec agent demo](docs/assets/view.png)
 
-```text
-ProgRec/
-├── skill1_student_profiling/
-│   └── outputs/
-├── skill2_academic_graph_builder/
-│   ├── outputs/
-│   └── regenerate_kit/
-├── skill3_mentor_discovery/
-├── tests/
-├── PLAN.md
-└── FinalProjectGuidance.pdf
-```
+## 我们的 Agent 在做什么
 
-## Quick Start
+`ProgRec Agent` 的目标，是把学生一句自然语言需求变成一条可执行、可解释的科研推荐链路。它不会只给一个“导师名字”，而是会先理解学生画像，再串起多步 skill，最终输出：
 
-Run mentor discovery from the repository root:
+- 适合优先联系的导师
+- 可以切入的项目方向
+- 可以补足技能缺口的潜在队友
+- 每一步推荐背后的理由与中间证据
 
-```bash
-python3 skill3_mentor_discovery/run_skill3.py --student-id <student_id> --top-k 5
-```
 
-Run the evaluation script:
+## 五个 Skill 分别做什么
 
-```bash
-python3 -m skill3_mentor_discovery.evaluate
-```
+| Skill | 稳定标识 | 作用 |
+| --- | --- | --- |
+| Skill 1 | `/student-profiling` | 把学生的文本描述、简历或背景信息标准化成结构化学生画像，包括 `major`、`skills`、`interests`、`experience_summary`、`availability` 等字段。 |
+| Skill 2 | `/academic-graph` | 构建并维护异构学术图谱，把导师、论文、主题、项目、学生这些实体连起来，给后续检索和推理提供统一数据底座。 |
+| Skill 3 | `/mentor-discovery` | 基于学生画像和 Skill 2 的资源做导师召回与排序，核心产出是“为什么这些导师值得优先看”的候选列表。 |
+| Skill 4 | `/project-teammate-discovery` | 围绕已召回导师，进一步扩展出适合切入的项目和潜在合作队友，让推荐结果从“知道找谁”变成“知道怎么开始做”。 |
+| Skill 5 | `/social-ranking` | 把导师、项目、队友三类结果联合重排，输出最终推荐包，兼顾匹配度、可解释性和结果多样性。 |
 
-Run tests:
-
-```bash
-python3 -m unittest discover -s tests -v
-```
-
-## ProgRec Backend Service
-
-The repository also includes `progrec_service/`, a FastAPI backend that wraps the recommendation runtime for web use.
-
-Key routes:
-
-- `POST /runtime-profiles/test`
-- `POST /runtime-profiles`
-- `POST /agent/sessions`
-- `GET /agent/sessions`
-- `POST /agent/sessions/{id}/messages` with `text/event-stream`
-- `GET /agent/sessions/{id}/messages`
-- `POST /pipeline/jobs`
-- `GET /pipeline/jobs`
-- `GET /pipeline/jobs/{id}`
-- `GET /pipeline/jobs/{id}/result`
-- `POST /pipeline/jobs/{id}/retry`
-
-Chat streams include stable `message.accepted`, `agent.stage`, `agent.delta`, `agent.skill`, `agent.result`, and `done` SSE events. Pipeline result responses normalize frontend sections under `result.mentors`, `result.projects`, and `result.teammates`, while keeping the raw runtime payload under `raw_result`.
-
-Run the backend locally from the repository root:
-
-```bash
-python3 deployment/scripts/migrate.py
-python3 -m uvicorn progrec_service.app:create_app --factory --host 0.0.0.0 --port 8000
-```
-
-Run the worker locally:
-
-```bash
-python3 deployment/scripts/migrate.py
-python3 -m progrec_service.worker
-```
-
-## ProgRec Conversational Agent CLI
-
-The repository includes a chat-first agent inside `progrec_agent/`.
-It keeps the existing multi-skill recommendation core, but adds:
-
-- chat-first natural-language requests
-- LLM-first routing and bounded conversation handling
-- clarification when intent is ambiguous
-- confirmation before graph/profile rebuild actions
-- repository-local debugging and inspection help
-
-Set the model configuration before running:
-
-```bash
-export OPENAI_API_KEY=your_key_here
-export OPENAI_BASE_URL=https://api.openai.com
-export OPENAI_MODEL=gpt-4.1-mini
-python3 -m progrec_agent.repl
-```
-
-You can also use the ProgRec-specific names instead:
-
-```bash
-export PROGREC_AGENT_API_KEY=your_key_here
-export PROGREC_AGENT_BASE_URL=https://your-compatible-endpoint
-export PROGREC_AGENT_MODEL=gpt-4.1-mini
-python3 -m progrec_agent.repl
-```
-
-The conversational REPL requires an LLM API key. Without one, startup stops with a configuration error instead of falling back to pretend-smart local routing.
-
-Example prompts:
-
-- `Find me an NLP mentor.`
-- `I'm interested in trustworthy AI and only have 4 hours per week.`
-- `Show me the current profile of the top mentor.`
-- `Why did you recommend this mentor?`
-- `Check whether my graph-mode artifacts are valid.`
-
-If you ask a question outside the recommendation workflow, the agent says so clearly instead of guessing.
-
-## Conversational Agent V2
-
-Set `PROGREC_AGENT_V2=1` to enable the redesigned clarification-first agent:
-
-```bash
-export PROGREC_AGENT_V2=1
-python3 -m progrec_agent.repl
-```
-
-The V2 agent:
-
-- parses natural language into structured semantic frames
-- collects required slots before execution
-- prefers session follow-up context over prompt-only re-interpretation
-- stays behind a feature flag until the golden conversation fixtures are stable
-
-## Agent-level execution
-
-See [`AGENTS.md`](AGENTS.md) for the full multi-skill Agent contract, stable skill identifiers, demo vs graph mode, and debugging.
-
-Quick start (non-interactive pipeline):
-
-```bash
-python3 progrec_agent/run_agent.py \
-  --mode demo \
-  --output outputs/final_recommendation_demo.json
-```
-
-Use `--student-id <id>` when the default (first id in the mode’s student bundle) is not what you want. Graph mode requires a built `academic_graph.json` under `skill2_academic_graph_builder/regenerate_kit/data/processed/` and routes **Skill 3 and Skill 4** through the same processed student, mentor, and graph files (see `AGENTS.md`).
-
-### Verified Agent Run (graph)
-
-Documented example student and frozen outputs: [`outputs/verified_demo/README.md`](outputs/verified_demo/README.md).
-
-```bash
-python3 progrec_agent/run_agent.py \
-  --mode graph \
-  --student-id jamie-taylor-00008 \
-  --top-k 10 \
-  --output outputs/final_recommendation_graph.json \
-  --artifacts-dir outputs/run_artifacts_graph
-python3 progrec_agent/inspect_output.py --output outputs/final_recommendation_graph.json
-```
-
-## Notes
-
-- The repository already has a GitHub remote configured at `origin`.
-- Local cache files and editor/system artifacts are ignored via `.gitignore`.
-- Historical project outputs such as JSON, NPY, ZIP, and PDF files are kept as tracked artifacts unless you decide to move them out of version control later.
+更完整的 skill 契约、输入输出边界和模式说明见 [AGENTS.md](AGENTS.md)。

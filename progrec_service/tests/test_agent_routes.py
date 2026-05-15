@@ -56,3 +56,35 @@ class TestAgentRoutes(unittest.TestCase):
         self.assertIn("latest_message_preview", item)
         self.assertIn("created_at", item)
         self.assertIn("updated_at", item)
+
+    def test_agent_session_history_is_scoped_to_browser_owner(self) -> None:
+        owner_a = TestClient(create_app())
+        owner_b = TestClient(create_app())
+
+        create_response = owner_a.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+        persist_user_message(session_id, "Find mentors for computer vision", owner_token=owner_a.cookies.get("progrec_session_owner"))
+
+        owner_a_history = owner_a.get("/agent/sessions")
+        owner_b_history = owner_b.get("/agent/sessions")
+
+        owner_a_ids = [item["session_id"] for item in owner_a_history.json()["sessions"]]
+        owner_b_ids = [item["session_id"] for item in owner_b_history.json()["sessions"]]
+
+        self.assertIn(session_id, owner_a_ids)
+        self.assertNotIn(session_id, owner_b_ids)
+
+    def test_agent_messages_are_not_visible_to_different_browser_owner(self) -> None:
+        owner_a = TestClient(create_app())
+        owner_b = TestClient(create_app())
+
+        create_response = owner_a.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+        persist_user_message(session_id, "Find mentors for NLP", owner_token=owner_a.cookies.get("progrec_session_owner"))
+        owner_b.get("/agent/sessions")
+
+        allowed = owner_a.get(f"/agent/sessions/{session_id}/messages")
+        blocked = owner_b.get(f"/agent/sessions/{session_id}/messages")
+
+        self.assertEqual(allowed.status_code, 200)
+        self.assertEqual(blocked.status_code, 404)

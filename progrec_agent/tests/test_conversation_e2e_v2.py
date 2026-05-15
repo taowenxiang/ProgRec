@@ -160,6 +160,54 @@ class TestConversationE2EV2(unittest.TestCase):
         self.assertEqual(updated.active_goal, "project")
         self.assertEqual(updated.tool_results_summary["project_count"], 2)
 
+    def test_auto_continued_mentor_reply_includes_scores_and_reasons(self) -> None:
+        llm = Mock()
+        llm.complete_json.side_effect = [
+            {
+                "action": "ask_user",
+                "message": "Tell me about your background and research interests.",
+                "pending_slot": "profile_context",
+                "expected_answer_shape": "free_text_profile",
+            },
+            {
+                "action": "ask_user",
+                "message": "Could you clarify your goal and share a little more profile context so I can choose the right recommendation skill?",
+                "reasoning_summary": "Planner action was invalid or unavailable.",
+            },
+        ]
+        runtime = Mock()
+        runtime.run_mentor_recommendation_for_profile.return_value = {
+            "student_profile": {"student_id": "chat-temp-1"},
+            "skill3_result": {
+                "mentor_candidates": [
+                    {
+                        "mentor_id": "m1",
+                        "mentor_name": "Prof Ada",
+                        "final_score": 0.91,
+                        "reasons": ["Strong NLP overlap."],
+                    },
+                    {
+                        "mentor_id": "m2",
+                        "mentor_name": "Prof Turing",
+                        "final_score": 0.84,
+                        "reason": "Strong project-path evidence.",
+                    },
+                ]
+            },
+        }
+        with tempfile.TemporaryDirectory() as td:
+            core = AgentCoreV2(repo_root=Path("."), temp_dir=Path(td), llm_client=llm, recommendation_runtime=runtime)
+            _, state = core.handle_message(DialogState(), "Help me find an NLP mentor.")
+            reply, _ = core.handle_message(
+                state,
+                "I am an undergraduate CS student with Python and some NLP project experience.",
+            )
+
+        self.assertIn("Prof Ada", reply)
+        self.assertIn("0.91", reply)
+        self.assertIn("Strong NLP overlap.", reply)
+        self.assertIn("projects or teammates", reply)
+
 
 if __name__ == "__main__":
     unittest.main()
