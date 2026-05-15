@@ -136,4 +136,6 @@ def parse_skill_aware_user_message(
         if looks_like_domain_request(user_text):
             return _domain_fallback_skill_frame(user_text, reason="llm_parse_error_skill_fallback")
         return safe_out_of_scope(["llm_parse_error"], reasoning_summary="LLM parse failure.")
+    if frame.task == "out_of_scope" and looks_like_domain_request(user_text):
+        return _domain_fallback_skill_frame(user_text, reason="llm_skill_domain_override")
     return frame

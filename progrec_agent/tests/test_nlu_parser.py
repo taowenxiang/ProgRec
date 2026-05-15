@@ -121,6 +121,36 @@ class TestNLUParser(unittest.TestCase):
         self.assertEqual(frame.task, "out_of_scope")
         self.assertIn("llm_parse_error", frame.validation_errors)
 
+    def test_skill_aware_parser_overrides_llm_out_of_scope_for_domain_request(self) -> None:
+        from pathlib import Path
+
+        from progrec_agent.nlu.parser import parse_skill_aware_user_message
+        from progrec_agent.skill_catalog import build_skill_catalog
+
+        llm = Mock()
+        llm.complete_json.return_value = {
+            "turn_type": "out_of_scope",
+            "task": "out_of_scope",
+            "target_types": [],
+            "slots": {},
+            "candidate_skills": [],
+            "candidate_tools": [],
+            "missing_information": [],
+            "confidence": 0.96,
+            "reasoning_summary": "Incorrectly classified as unrelated.",
+        }
+
+        frame = parse_skill_aware_user_message(
+            "Help me find a mentor for NLP and trustworthy AI.",
+            dialog_state=None,
+            llm_client=llm,
+            skill_catalog=build_skill_catalog(Path(".")),
+        )
+
+        self.assertEqual(frame.task, "recommend_temporary_profile")
+        self.assertEqual(frame.slots["research_topic"].value, "NLP and trustworthy AI")
+        self.assertIn("/mentor-discovery", frame.candidate_skills)
+
 
 if __name__ == "__main__":
     unittest.main()
