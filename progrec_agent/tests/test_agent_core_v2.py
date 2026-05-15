@@ -74,6 +74,23 @@ class TestAgentCoreV2(unittest.TestCase):
         self.assertIn("/mentor-discovery", [entry["skill_id"] for entry in state.skill_trace])
         self.assertNotIn("/project-teammate-discovery", [entry["skill_id"] for entry in state.skill_trace])
 
+    def test_malformed_tool_arguments_return_clarification_instead_of_crashing(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            llm = Mock()
+            llm.complete_json.return_value = {
+                "action": "call_tool",
+                "tool_name": "/student-profiling.build_temporary_profile",
+                "arguments": {"profile_context": "Computer vision"},
+                "reasoning_summary": "Malformed profile context.",
+            }
+            core = AgentCoreV2(repo_root=Path("."), temp_dir=Path(td), llm_client=llm)
+
+            reply, state = core.handle_message(DialogState(), "help me find a mentor in Computer vision")
+
+        self.assertIn("more profile context", reply)
+        self.assertEqual(state.execution_context.last_turn_type, "clarification")
+        self.assertEqual(state.execution_context.next_question, reply)
+
 
 if __name__ == "__main__":
     unittest.main()

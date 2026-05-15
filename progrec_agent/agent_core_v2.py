@@ -83,7 +83,25 @@ class AgentCoreV2:
                     working.execution_context.next_question = reply_text
                     working.last_agent_turn = reply_text
                     return reply_text, working
-                result = self.executor.execute(action.tool_name, action.arguments)
+                try:
+                    result = self.executor.execute(action.tool_name, action.arguments)
+                except ValueError as exc:
+                    reply_text = (
+                        "I need a little more profile context before I can run that skill. "
+                        "Could you share your background, experience level, and what kind of research opportunity you want?"
+                    )
+                    working.skill_trace.append(
+                        {
+                            "skill_id": action.tool_name.split(".", 1)[0],
+                            "tool_name": action.tool_name,
+                            "status": "failed",
+                            "summary": str(exc),
+                        }
+                    )
+                    working.execution_context.last_turn_type = "clarification"
+                    working.execution_context.next_question = reply_text
+                    working.last_agent_turn = reply_text
+                    return reply_text, working
                 self._record_tool_result(working, result)
                 if action.tool_name in {
                     "/mentor-discovery.rank_mentors",
