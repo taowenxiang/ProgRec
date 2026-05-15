@@ -24,6 +24,12 @@ class ExecutionContext:
 class DialogState:
     task: str = ""
     goal: str = ""
+    active_goal: str = ""
+    goal_targets: list[str] = field(default_factory=list)
+    profile_context: dict[str, object] = field(default_factory=dict)
+    planner_actions: list[dict[str, object]] = field(default_factory=list)
+    suggested_next_actions: list[dict[str, object]] = field(default_factory=list)
+    tool_results_summary: dict[str, object] = field(default_factory=dict)
     resolved_slots: dict[str, object] = field(default_factory=dict)
     candidate_slots: dict[str, object] = field(default_factory=dict)
     required_slots: list[str] = field(default_factory=list)
