@@ -24,7 +24,7 @@ class AgentCore:
         try:
             return route_user_message(user_text, llm_client=self.llm_client, session=session)
         except Exception as exc:
-            session.decision_trace.append(f"LLM routing failed; returned safe blocked response. Error: {exc}")
+            session.decision_trace.append(f"LLM routing failed; returned clarification response. Error: {exc}")
             return route_user_message(user_text, llm_client=None, session=session)
 
     def _build_profile_with_fallback(self, session, user_text: str):

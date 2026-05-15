@@ -26,6 +26,16 @@ class TestSkillCatalog(unittest.TestCase):
         self.assertIn("recommend_full_pipeline", prompt_context)
         self.assertLess(len(prompt_context), 9000)
 
+    def test_full_prompt_context_includes_complete_skill_docs(self) -> None:
+        catalog = build_skill_catalog(Path("."))
+        prompt_context = catalog.to_full_prompt_context()
+
+        self.assertIn("skill_id: /mentor-discovery", prompt_context)
+        self.assertIn("# Mentor Discovery (Skill 3)", prompt_context)
+        self.assertIn("# Skill 4", prompt_context)
+        self.assertIn("# Student Recommendation Ranker", prompt_context)
+        self.assertIn("Critical: Student ID Alignment", prompt_context)
+
 
 if __name__ == "__main__":
     unittest.main()

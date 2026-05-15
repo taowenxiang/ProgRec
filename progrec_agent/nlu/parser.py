@@ -6,28 +6,29 @@ from progrec_agent.nlu.domain_guard import (
     should_override_frame,
 )
 from progrec_agent.nlu.schema import IntentFrame
-from progrec_agent.nlu.skill_frame import SkillAwareFrame, safe_out_of_scope, validate_skill_frame_payload
+from progrec_agent.nlu.skill_frame import SkillAwareFrame, safe_recommendation_fallback, validate_skill_frame_payload
 from progrec_agent.nlu.validators import build_safe_fallback_frame, validate_parse_payload
 from progrec_agent.skill_catalog import SkillCatalog
 
 SEMANTIC_PARSE_PROMPT = """
-You are the bounded NLU layer for ProgRec, an academic recommendation assistant.
+You are the NLU layer for ProgRec, a skill-driven academic recommendation assistant.
 Return strict JSON describing the user's request.
 Do not choose tools.
 Do not ask clarification questions.
 Do not invent facts.
-Classify requests about mentors, advisors, projects, teammates, student fit, research topics, ranking, or ProgRec resources as in scope.
+Classify requests about mentors, advisors, projects, teammates, student fit, research topics, ranking, or ProgRec resources as recommendation-related.
 Use intent "recommendation_request" when the user wants mentor, project, or teammate recommendations.
-Use intent "out_of_scope" only when the request is unrelated to ProgRec recommendations.
+When no recommendation intent is obvious, preserve the turn as a recommendation_request with low confidence and uncertain_fields.
 Use these top-level JSON keys exactly: intent, target_types, entities, constraints, preferences, references, confidence, uncertain_fields, possible_conflicts.
 Each slot map value must be an object with "value" and "provenance" where provenance is explicit, inferred, or unknown.
 """.strip()
 
 SKILL_AWARE_PARSE_PROMPT = """
-You are the skill-aware NLU layer for ProgRec, a bounded academic recommendation assistant.
-Use the skill catalog to classify the user turn and propose candidate skills/tools.
+You are the skill-aware NLU layer for ProgRec, a skill-driven academic recommendation assistant.
+Read the complete local Skill.md documents before classifying the user turn.
+Behave like Codex skill selection: decide which documented skills apply, then propose the safest registered tools.
 Return strict JSON with keys:
-turn_type, task, target_types, slots, candidate_skills, candidate_tools, missing_information, confidence, reasoning_summary.
+turn_type, task, target_types, slots, selected_skills, selected_tools, missing_information, confidence, reasoning_summary.
 Do not execute tools.
 Do not invent student ids.
 Use task "recommend_temporary_profile" when the user wants recommendations from a described profile.
@@ -35,8 +36,8 @@ Use task "recommend_existing_student" only when a dataset student_id is explicit
 Use task "inspect_recommendation" or "explain_recommendation" for follow-ups about previous ranked results.
 Use task "validate_resources" for graph/demo resource checks.
 Use task "answer_meta_question" for questions about what skills or tools were used.
-Use task "out_of_scope" only when the request is unrelated to ProgRec recommendations.
-Only propose candidate_skills and candidate_tools that appear in the skill catalog.
+Use task "recommendation_request" when the turn needs more context before selecting a concrete recommendation task.
+Only propose selected_skills and selected_tools that appear in the local validation catalog.
 Each slot value must be an object with "value" and "provenance".
 """.strip()
 
@@ -85,9 +86,9 @@ def _frame_from_legacy_intent(frame: IntentFrame) -> SkillAwareFrame:
     elif frame.intent == "validate_resources":
         task = "validate_resources"
     else:
-        task = "out_of_scope"
+        task = "recommendation_request"
     return SkillAwareFrame(
-        turn_type="domain_task" if task != "out_of_scope" else "out_of_scope",
+        turn_type="domain_task",
         task=task,
         target_types=list(frame.target_types),
         slots=slots,
@@ -102,8 +103,6 @@ def _frame_from_legacy_intent(frame: IntentFrame) -> SkillAwareFrame:
 
 def _domain_fallback_skill_frame(user_text: str, *, reason: str) -> SkillAwareFrame:
     fallback = build_domain_fallback_frame(user_text, reason=reason)
-    if fallback.intent != "recommendation_request":
-        return safe_out_of_scope([reason], reasoning_summary="Local domain fallback.")
     return _frame_from_legacy_intent(fallback)
 
 
@@ -115,13 +114,13 @@ def parse_skill_aware_user_message(
     skill_catalog: SkillCatalog,
 ) -> SkillAwareFrame:
     if llm_client is None:
-        if looks_like_domain_request(user_text):
-            return _domain_fallback_skill_frame(user_text, reason="missing_llm_skill_fallback")
-        return safe_out_of_scope(["missing_llm"], reasoning_summary="No LLM client configured.")
+        return _domain_fallback_skill_frame(user_text, reason="missing_llm_skill_fallback")
     try:
+        full_skill_context = skill_catalog.to_full_prompt_context()
         payload = llm_client.complete_json(
             f"{SKILL_AWARE_PARSE_PROMPT}\n"
-            f"Skill catalog:\n{skill_catalog.to_prompt_context()}\n"
+            f"Local validation catalog:\n{skill_catalog.to_prompt_context()}\n"
+            f"Complete local Skill.md documents:\n{full_skill_context}\n"
             f"Dialog state: {dialog_state}\n"
             f"User message: {user_text}"
         )
@@ -132,10 +131,10 @@ def parse_skill_aware_user_message(
                 return _domain_fallback_skill_frame(user_text, reason="llm_domain_override")
             return _frame_from_legacy_intent(legacy)
         frame = validate_skill_frame_payload(payload_dict, skill_catalog)
+        if frame.validation_errors and looks_like_domain_request(user_text):
+            return _domain_fallback_skill_frame(user_text, reason="llm_domain_override")
     except Exception:
         if looks_like_domain_request(user_text):
             return _domain_fallback_skill_frame(user_text, reason="llm_parse_error_skill_fallback")
-        return safe_out_of_scope(["llm_parse_error"], reasoning_summary="LLM parse failure.")
-    if frame.task == "out_of_scope" and looks_like_domain_request(user_text):
-        return _domain_fallback_skill_frame(user_text, reason="llm_skill_domain_override")
+        return safe_recommendation_fallback(["llm_parse_error"], reasoning_summary="LLM parse failure.")
     return frame

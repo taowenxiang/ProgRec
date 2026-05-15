@@ -15,9 +15,8 @@ IntentName = Literal[
     "rebuild_graph",
     "ask_last_action",
     "ask_capabilities",
-    "out_of_scope_other",
 ]
-MessageType = Literal["domain_task", "meta_question", "out_of_scope", "startup_help", "unsafe_or_blocked"]
+MessageType = Literal["domain_task", "meta_question", "startup_help"]
 RiskLevel = Literal["safe", "confirm", "restricted"]
 
 
@@ -69,7 +68,6 @@ class RouterDecision:
     intent: IntentName
     confidence: float
     candidate_tools: list[str]
-    in_scope: bool = True
     needs_clarification: bool = False
     clarification_question: str = ""
     answer_only: bool = False

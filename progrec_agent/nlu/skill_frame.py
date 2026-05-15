@@ -13,16 +13,15 @@ ALLOWED_TURN_TYPES = {
     "inspect_previous_result",
     "resource_validation",
     "meta_question",
-    "out_of_scope",
 }
 ALLOWED_TASKS = {
+    "recommendation_request",
     "recommend_existing_student",
     "recommend_temporary_profile",
     "inspect_recommendation",
     "explain_recommendation",
     "validate_resources",
     "answer_meta_question",
-    "out_of_scope",
 }
 ALLOWED_PROVENANCE = {"explicit", "inferred", "unknown"}
 ALLOWED_MODES = {"demo", "graph"}
@@ -50,10 +49,13 @@ def _coerce_slot_value(raw: Any) -> SlotValue:
     return SlotValue(value=row.get("value"), provenance=provenance)
 
 
-def safe_out_of_scope(errors: list[str], *, reasoning_summary: str = "") -> SkillAwareFrame:
+def safe_recommendation_fallback(errors: list[str], *, reasoning_summary: str = "") -> SkillAwareFrame:
     return SkillAwareFrame(
-        turn_type="out_of_scope",
-        task="out_of_scope",
+        turn_type="domain_task",
+        task="recommendation_request",
+        target_types=["mentor"],
+        candidate_tools=["recommend_full_pipeline"],
+        missing_information=["profile_source"],
         confidence=0.0,
         reasoning_summary=reasoning_summary,
         validation_errors=errors,
@@ -77,8 +79,14 @@ def validate_skill_frame_payload(payload: dict[str, object], catalog: SkillCatal
     if mode is not None and str(mode.value).strip().lower() not in ALLOWED_MODES:
         errors.append(f"invalid_mode:{mode.value}")
 
-    candidate_skills = [str(item) for item in list(payload.get("candidate_skills") or [])]
-    candidate_tools = [str(item) for item in list(payload.get("candidate_tools") or [])]
+    raw_skills = payload.get("candidate_skills")
+    if raw_skills is None:
+        raw_skills = payload.get("selected_skills")
+    raw_tools = payload.get("candidate_tools")
+    if raw_tools is None:
+        raw_tools = payload.get("selected_tools")
+    candidate_skills = [str(item) for item in list(raw_skills or [])]
+    candidate_tools = [str(item) for item in list(raw_tools or [])]
     for skill_id in candidate_skills:
         if skill_id not in catalog.allowed_skill_ids:
             errors.append(f"unknown_skill:{skill_id}")
@@ -88,7 +96,7 @@ def validate_skill_frame_payload(payload: dict[str, object], catalog: SkillCatal
 
     reasoning_summary = str(payload.get("reasoning_summary") or "")
     if errors:
-        return safe_out_of_scope(errors, reasoning_summary=reasoning_summary)
+        return safe_recommendation_fallback(errors, reasoning_summary=reasoning_summary)
 
     return SkillAwareFrame(
         turn_type=turn_type,

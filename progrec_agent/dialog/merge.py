@@ -33,10 +33,8 @@ def merge_intent_frame(state: DialogState, frame) -> DialogState:
 
 def merge_skill_frame(state: DialogState, frame) -> DialogState:
     updated = deepcopy(state)
-    if frame.task and frame.task != "out_of_scope":
+    if frame.task:
         updated.task = frame.task
-    elif frame.task == "out_of_scope":
-        updated.task = "out_of_scope"
     for key, slot in frame.slots.items():
         if getattr(slot, "provenance", "unknown") == "explicit":
             updated.resolved_slots[key] = slot.value

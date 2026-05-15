@@ -68,7 +68,7 @@ class TestAgentCore(unittest.TestCase):
             executor = _StubExecutor()
             core = AgentCore(repo_root=Path("."), temp_dir=Path(td), executor=executor, llm_client=llm_client)
             reply = core.handle_message(session, "Find me an NLP mentor")
-            self.assertIn("couldn't safely classify", reply)
+            self.assertIn("recommendation workflow", reply)
             self.assertEqual(executor.calls, [])
 
     def test_unknown_llm_tool_name_does_not_crash(self) -> None:
@@ -80,7 +80,6 @@ class TestAgentCore(unittest.TestCase):
                 "intent": "recommend_mentor",
                 "confidence": 0.99,
                 "candidate_tools": ["MentorSearch"],
-                "in_scope": True,
                 "needs_clarification": False,
                 "clarification_question": "",
                 "answer_only": False,
@@ -105,7 +104,6 @@ class TestAgentCore(unittest.TestCase):
                 "intent": "recommend_mentor",
                 "confidence": 0.99,
                 "candidate_tools": ["MentorSearch"],
-                "in_scope": True,
                 "needs_clarification": False,
                 "clarification_question": "",
                 "answer_only": False,
@@ -149,7 +147,6 @@ class TestAgentCore(unittest.TestCase):
                 "intent": "ask_last_action",
                 "confidence": 0.97,
                 "candidate_tools": [],
-                "in_scope": True,
                 "needs_clarification": False,
                 "clarification_question": "",
                 "answer_only": True,
@@ -178,7 +175,6 @@ class TestAgentCore(unittest.TestCase):
                 "intent": "recommend_mentor",
                 "confidence": 0.4,
                 "candidate_tools": [],
-                "in_scope": True,
                 "needs_clarification": True,
                 "clarification_question": "Could you specify the programming language or area of expertise?",
                 "answer_only": False,
@@ -193,28 +189,27 @@ class TestAgentCore(unittest.TestCase):
             self.assertIn("Mentor profile:", reply)
             self.assertEqual(executor.calls, [("show_recommended_mentor_profile", {})])
 
-    def test_out_of_scope_question_is_refused_without_tool_execution(self) -> None:
+    def test_invalid_router_payload_becomes_clarification_without_tool_execution(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             session = AgentSession(temp_dir=Path(td))
             llm = Mock()
             llm.complete_json.return_value = {
-                "message_type": "out_of_scope",
-                "intent": "out_of_scope_other",
+                "message_type": "unsupported",
+                "intent": "unsupported",
                 "confidence": 0.99,
                 "candidate_tools": [],
-                "in_scope": False,
                 "needs_clarification": False,
                 "clarification_question": "",
                 "answer_only": True,
                 "tool_name": "",
                 "tool_arguments": {},
-                "meta_reply": "That question is outside ProgRec's recommendation scope.",
-                "reasoning_summary": "Out of scope.",
+                "meta_reply": "",
+                "reasoning_summary": "No registered skill was selected.",
             }
             executor = _StubExecutor()
             core = AgentCore(repo_root=Path("."), temp_dir=Path(td), executor=executor, llm_client=llm)
             reply = core.handle_message(session, "What is the weather today?")
-            self.assertIn("outside ProgRec", reply)
+            self.assertIn("recommendation", reply)
             self.assertEqual(executor.calls, [])
 
 

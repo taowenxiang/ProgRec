@@ -48,10 +48,3 @@ def render_meta_answer(state) -> str:
         return "I have not run any ProgRec skills in this chat yet."
     summaries = [f"{entry.get('skill_id')}: {entry.get('summary')}" for entry in trace]
     return "I used these ProgRec skills: " + " ".join(summaries)
-
-
-def render_scope_refusal() -> str:
-    return (
-        "That is outside ProgRec's recommendation scope. "
-        "I can help with mentor, project, teammate, ranking explanation, or resource validation questions."
-    )

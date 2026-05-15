@@ -7,6 +7,24 @@ from progrec_agent.prompts import ROUTER_PROMPT
 from progrec_agent.tool_registry import TOOLS
 
 
+RECOMMENDATION_CLARIFICATION = (
+    "I can help turn this into a recommendation workflow. "
+    "Should I use an existing student profile, or build a temporary profile from your interests?"
+)
+
+
+def _clarify_recommendation_request(*, confidence: float = 0.35, reasoning_summary: str = "") -> RouterDecision:
+    return RouterDecision(
+        message_type="domain_task",
+        intent="recommend_mentor",
+        confidence=confidence,
+        candidate_tools=["recommend_full_pipeline"],
+        needs_clarification=True,
+        clarification_question=RECOMMENDATION_CLARIFICATION,
+        reasoning_summary=reasoning_summary,
+    )
+
+
 def _route_explicit_pipeline_request(user_text: str) -> RouterDecision | None:
     normalized = user_text.lower().strip()
     if "student_id" not in normalized:
@@ -63,16 +81,6 @@ def _route_deterministic_message_local(user_text: str) -> RouterDecision | None:
             candidate_tools=[tool_name],
             tool_name=tool_name,
         )
-    if any(word in normalized for word in ["weather", "temperature", "forecast"]):
-        return RouterDecision(
-            message_type="out_of_scope",
-            intent="out_of_scope_other",
-            confidence=0.95,
-            candidate_tools=[],
-            in_scope=False,
-            answer_only=True,
-            meta_reply="That question is outside ProgRec's recommendation scope.",
-        )
     if "rebuild" in normalized and "graph" in normalized:
         return RouterDecision(
             message_type="domain_task",
@@ -105,16 +113,7 @@ def _route_user_message_local(user_text: str) -> RouterDecision:
             candidate_tools=["recommend_full_pipeline"],
             tool_name="recommend_full_pipeline",
         )
-    return RouterDecision(
-        message_type="unsafe_or_blocked",
-        intent="out_of_scope_other",
-        confidence=0.0,
-        candidate_tools=[],
-        in_scope=False,
-        answer_only=True,
-        meta_reply="I couldn't safely classify that request inside ProgRec's scope.",
-        reasoning_summary="Local safeguard could not confidently classify the request.",
-    )
+    return _clarify_recommendation_request(reasoning_summary="Local routing needs more recommendation context.")
 
 
 def route_user_message(user_text: str, *, llm_client, session) -> RouterDecision:
@@ -125,11 +124,10 @@ def route_user_message(user_text: str, *, llm_client, session) -> RouterDecision
         try:
             payload = llm_client.complete_json(f"{ROUTER_PROMPT}\nUser message: {user_text}")
             decision = RouterDecision(
-                message_type=str(payload.get("message_type", "unsafe_or_blocked")),
-                intent=str(payload.get("intent", "out_of_scope_other")),
+                message_type=str(payload.get("message_type", "domain_task")),
+                intent=str(payload.get("intent", "recommend_mentor")),
                 confidence=float(payload.get("confidence", 0.0)),
                 candidate_tools=[str(item) for item in payload.get("candidate_tools", [])],
-                in_scope=bool(payload.get("in_scope", True)),
                 needs_clarification=bool(payload.get("needs_clarification")),
                 clarification_question=str(payload.get("clarification_question", "")),
                 answer_only=bool(payload.get("answer_only", False)),
@@ -138,19 +136,15 @@ def route_user_message(user_text: str, *, llm_client, session) -> RouterDecision
                 meta_reply=str(payload.get("meta_reply", "")),
                 reasoning_summary=str(payload.get("reasoning_summary", "")),
             )
+            if decision.message_type not in {"domain_task", "meta_question", "startup_help"}:
+                return _clarify_recommendation_request(
+                    confidence=decision.confidence,
+                    reasoning_summary=decision.reasoning_summary,
+                )
             decision.candidate_tools = [tool_name for tool_name in decision.candidate_tools if tool_name in TOOLS]
             if decision.tool_name and decision.tool_name not in TOOLS:
                 decision.tool_name = ""
             return decision
         except Exception:
-            return RouterDecision(
-                message_type="unsafe_or_blocked",
-                intent="out_of_scope_other",
-                confidence=0.0,
-                candidate_tools=[],
-                in_scope=False,
-                answer_only=True,
-                meta_reply="I hit a routing failure and couldn't safely classify that request.",
-                reasoning_summary="LLM routing failed.",
-            )
+            return _clarify_recommendation_request(reasoning_summary="LLM routing failed.")
     return _route_user_message_local(user_text)

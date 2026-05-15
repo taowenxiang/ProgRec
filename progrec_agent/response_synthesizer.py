@@ -18,12 +18,6 @@ def synthesize_reply(*, session, user_text: str, decision, result) -> str:
                 return decision.meta_reply
             return "I have not run a repository tool in this session yet."
 
-    if decision is not None and decision.message_type == "out_of_scope":
-        return (
-            "That question is outside ProgRec's recommendation scope. "
-            "I can still help with mentor, project, teammate, or graph-debug questions."
-        )
-
     if decision is not None and decision.message_type == "startup_help":
         return decision.meta_reply or "I can help with mentor, project, teammate, and graph-debug questions."
 

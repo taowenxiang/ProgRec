@@ -43,12 +43,12 @@ class TestAgentSchema(unittest.TestCase):
 
     def test_router_decision_defaults(self) -> None:
         decision = RouterDecision(
-            message_type="unsafe_or_blocked",
-            intent="out_of_scope_other",
+            message_type="domain_task",
+            intent="recommend_mentor",
             confidence=0.2,
             candidate_tools=[],
         )
-        self.assertEqual(decision.intent, "out_of_scope_other")
+        self.assertEqual(decision.intent, "recommend_mentor")
         self.assertEqual(decision.candidate_tools, [])
         self.assertFalse(decision.needs_clarification)
 

@@ -14,7 +14,7 @@ class TestAgentCoreV2(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             llm = Mock()
             llm.complete_json.return_value = {
-                "intent": "out_of_scope",
+                "intent": "unsupported",
                 "target_types": [],
                 "entities": {},
                 "constraints": {},
@@ -153,7 +153,7 @@ class TestAgentCoreV2(unittest.TestCase):
             self.assertIn("student_id", reply)
             self.assertEqual(updated.resolved_slots["mode"], "graph")
 
-    def test_full_temporary_profile_answer_does_not_refuse_after_profile_source_question(self) -> None:
+    def test_full_temporary_profile_answer_continues_after_profile_source_question(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             llm = Mock()
             llm.complete_json.return_value = {
@@ -243,28 +243,28 @@ class TestAgentCoreV2(unittest.TestCase):
             self.assertIn("/mentor-discovery", reply)
             self.assertEqual(updated.execution_context.last_turn_type, "meta_answer")
 
-    def test_weather_question_refuses_without_running_runtime(self) -> None:
+    def test_weather_question_stays_in_agent_loop_without_running_runtime(self) -> None:
         with tempfile.TemporaryDirectory() as td:
             runtime = Mock()
             llm = Mock()
             llm.complete_json.return_value = {
-                "turn_type": "out_of_scope",
-                "task": "out_of_scope",
+                "turn_type": "unsupported",
+                "task": "unsupported",
                 "target_types": [],
                 "slots": {},
                 "candidate_skills": [],
                 "candidate_tools": [],
                 "missing_information": [],
                 "confidence": 0.99,
-                "reasoning_summary": "Weather is outside ProgRec.",
+                "reasoning_summary": "No registered skill was selected.",
             }
             core = AgentCoreV2(repo_root=Path("."), temp_dir=Path(td), llm_client=llm, recommendation_runtime=runtime)
 
             reply, updated = core.handle_message(DialogState(), "What is the weather today?")
 
-            self.assertIn("outside ProgRec", reply)
+            self.assertIn("existing student profile", reply)
             runtime.run_recommendation_for_profile.assert_not_called()
-            self.assertEqual(updated.execution_context.last_turn_type, "refusal")
+            self.assertEqual(updated.execution_context.last_turn_type, "clarification")
 
     def test_validate_resources_records_graph_skill_trace(self) -> None:
         with tempfile.TemporaryDirectory() as td:

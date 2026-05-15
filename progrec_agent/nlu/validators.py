@@ -9,7 +9,6 @@ ALLOWED_INTENTS = {
     "inspect_recommendation",
     "explain_recommendation",
     "validate_resources",
-    "out_of_scope",
 }
 ALLOWED_MODES = {"demo", "graph"}
 ALLOWED_PROVENANCE = {"explicit", "inferred", "unknown"}
@@ -17,9 +16,10 @@ ALLOWED_PROVENANCE = {"explicit", "inferred", "unknown"}
 
 def build_safe_fallback_frame(reason: str, *, uncertain_fields: list[str] | None = None) -> IntentFrame:
     return IntentFrame(
-        intent="out_of_scope",
+        intent="recommendation_request",
+        target_types=["mentor"],
         confidence=0.0,
-        uncertain_fields=list(uncertain_fields or []),
+        uncertain_fields=list(uncertain_fields or ["profile_source"]),
         possible_conflicts=[reason],
     )
 

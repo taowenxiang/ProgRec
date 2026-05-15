@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from fastapi import APIRouter
+import httpx
+from fastapi import APIRouter, HTTPException
 
 from progrec_service.services.runtime_profiles import (
     RuntimeProfileCreate,
@@ -14,7 +15,19 @@ router = APIRouter(prefix="/runtime-profiles", tags=["runtime-profiles"])
 
 @router.post("/test")
 def test_profile(payload: RuntimeProfileCreate) -> dict[str, object]:
-    return probe_runtime_profile(payload)
+    try:
+        return probe_runtime_profile(payload)
+    except httpx.HTTPStatusError as exc:
+        upstream_status = exc.response.status_code
+        raise HTTPException(
+            status_code=400,
+            detail=f"Runtime probe failed: provider returned HTTP {upstream_status}. Check the API key, base URL, and model.",
+        ) from exc
+    except httpx.RequestError as exc:
+        raise HTTPException(
+            status_code=502,
+            detail="Runtime probe failed: could not reach the configured provider.",
+        ) from exc
 
 
 @router.post("", status_code=201)

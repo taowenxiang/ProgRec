@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from progrec_agent.dialog.answer_parser import apply_pending_answer
 from progrec_agent.dialog.merge import merge_skill_frame
+from progrec_agent.dialog.slots import TASK_REQUIRED_SLOTS
 from progrec_agent.dialog.state import DialogState, PendingQuestion
 from progrec_agent.nlu.parser import parse_skill_aware_user_message
 from progrec_agent.planning.planner_v2 import build_execution_plan
@@ -13,7 +14,6 @@ from progrec_agent.response.replies import (
     render_meta_answer,
     render_ranked_entity,
     render_recommendation_summary,
-    render_scope_refusal,
 )
 from progrec_agent.runtime import inspection_runtime as inspection_runtime_module
 from progrec_agent.runtime import recommendation_runtime as recommendation_runtime_module
@@ -81,8 +81,8 @@ class AgentCoreV2:
             working = merge_skill_frame(working, frame)
         if working.task in {"recommendation_request", "recommend_temporary_profile", "recommend_existing_student"}:
             working = self._normalize_recommendation_state(working)
-        if not working.task:
-            working.task = "recommend_temporary_profile"
+        if not working.task or working.task not in TASK_REQUIRED_SLOTS:
+            working.task = "recommendation_request"
         working.last_user_turn = user_text
         working = compute_readiness(working)
         next_question = choose_next_question(working)
@@ -188,8 +188,8 @@ class AgentCoreV2:
             working.execution_context.next_question = ""
             working.last_agent_turn = message
             return message, working
-        message = render_scope_refusal()
-        working.execution_context.last_turn_type = "refusal"
-        working.execution_context.next_question = ""
+        message = "I need a bit more recommendation context before I can choose the right ProgRec skill."
+        working.execution_context.last_turn_type = "clarification"
+        working.execution_context.next_question = message
         working.last_agent_turn = message
         return message, working

@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from deployment.scripts.migrate import discover_migrations
+from deployment.scripts.migrate import discover_migrations, normalize_database_url
 from progrec_service.config import Settings, load_settings
 from progrec_service.db.models import AgentSession, Base, PipelineJob, RuntimeProfile
 from progrec_service.db.session import build_engine, build_session_factory
@@ -29,6 +29,17 @@ class TestSettingsAndMigrations(unittest.TestCase):
         paths = discover_migrations(Path("progrec_service/db/migrations"))
         self.assertTrue(paths, "expected at least one SQL migration")
         self.assertEqual(paths[0].suffix, ".sql")
+
+    def test_normalize_database_url_uses_installed_psycopg_driver(self) -> None:
+        self.assertEqual(
+            normalize_database_url("postgresql://progrec:secret@postgres:5432/progrec"),
+            "postgresql+psycopg://progrec:secret@postgres:5432/progrec",
+        )
+        self.assertEqual(
+            normalize_database_url("postgresql+psycopg://progrec:secret@postgres:5432/progrec"),
+            "postgresql+psycopg://progrec:secret@postgres:5432/progrec",
+        )
+        self.assertEqual(normalize_database_url("sqlite+pysqlite:///:memory:"), "sqlite+pysqlite:///:memory:")
 
 
 class TestDatabaseModels(unittest.TestCase):

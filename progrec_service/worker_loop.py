@@ -149,6 +149,7 @@ def process_one_job(message: dict[str, object]) -> dict[str, object]:
                 return _mark_failed(job_id, fallback_error)
 
     summary = result_mapper.summarize_pipeline_result(result)
+    result_payload = result_mapper.make_json_safe(result)
 
     with SessionLocal() as session:
         repo = PipelineJobRepository(session)
@@ -168,9 +169,9 @@ def process_one_job(message: dict[str, object]) -> dict[str, object]:
                 PipelineResult(
                     id=f"res_{uuid.uuid4().hex[:12]}",
                     job_id=job_id,
-                    result_payload=result,
+                    result_payload=result_payload,
                     summary_payload=summary,
-                    artifacts_payload={"temporary_paths": [str(path) for path in result.get("temporary_paths", [])]},
+                    artifacts_payload={"temporary_paths": list(result_payload.get("temporary_paths", []))},
                 )
             )
             repo.add_event(

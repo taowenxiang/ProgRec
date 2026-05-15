@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import unittest
 import uuid
+from pathlib import Path
 from unittest.mock import patch
 
 from progrec_service.db.models import PipelineJob
@@ -73,6 +74,26 @@ class TestWorkerExecution(unittest.TestCase):
         self.assertIn("running_skill4", stages)
         self.assertIn("running_skill5", stages)
         self.assertIn("writing_artifacts", stages)
+
+    def test_process_one_job_persists_json_safe_result_payloads(self) -> None:
+        job_id = self._create_job()
+        with patch(
+            "progrec_service.runtime.pipeline_runner.run_pipeline_job",
+            return_value={
+                "skill5_result": {
+                    "recommendations": {"mentors": [], "projects": [], "teammates": []}
+                },
+                "temporary_paths": [Path("/tmp/skill3.json")],
+            },
+        ):
+            outcome = process_one_job({"job_id": job_id})
+
+        self.assertEqual(outcome["status"], "succeeded")
+        with SessionLocal() as session:
+            repo = PipelineJobRepository(session)
+            result = repo.get_result(job_id)
+            self.assertEqual(result.result_payload["temporary_paths"], ["/tmp/skill3.json"])
+            self.assertEqual(result.artifacts_payload["temporary_paths"], ["/tmp/skill3.json"])
 
     def test_process_one_job_falls_back_to_cli_when_primary_runner_raises(self) -> None:
         with patch("progrec_service.runtime.pipeline_runner.run_pipeline_job", side_effect=RuntimeError("primary failed")):

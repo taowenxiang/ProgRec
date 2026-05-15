@@ -13,7 +13,25 @@ def create_job_id() -> str:
     return f"job_{uuid.uuid4().hex[:12]}"
 
 
+def validate_pipeline_job_payload(payload: dict[str, object]) -> None:
+    job_type = payload.get("job_type")
+    if job_type not in {"recommend_existing_student", "recommend_for_profile", "recommend_temporary_profile"}:
+        raise ValueError("job_type must be recommend_existing_student, recommend_for_profile, or recommend_temporary_profile")
+
+    if job_type == "recommend_existing_student":
+        if not str(payload.get("student_id") or "").strip():
+            raise ValueError("student_id is required for recommend_existing_student jobs")
+        return
+
+    profile = payload.get("student_profile")
+    if not isinstance(profile, dict):
+        raise ValueError("student_profile is required for profile recommendation jobs")
+    if not str(profile.get("student_id") or "").strip():
+        raise ValueError("student_profile.student_id is required for profile recommendation jobs")
+
+
 def create_job_record(payload: dict[str, object]) -> PipelineJob:
+    validate_pipeline_job_payload(payload)
     return PipelineJob(
         id=create_job_id(),
         job_type=str(payload["job_type"]),
@@ -39,12 +57,20 @@ def _iso(value: datetime | None) -> str | None:
     return value.isoformat() if value is not None else None
 
 
+def _summary_topic(value: object) -> str:
+    if isinstance(value, list):
+        return ", ".join(str(item).strip() for item in value if str(item).strip())
+    return str(value).strip() if value is not None else ""
+
+
 def _request_summary(payload: dict[str, object]) -> str:
     if payload.get("student_id"):
         return f"Recommendations for student {payload['student_id']}"
     profile = dict(payload.get("student_profile") or {})
     name = profile.get("name") or profile.get("student_id")
-    topic = profile.get("research_topic") or profile.get("research_direction") or profile.get("interests")
+    topic = _summary_topic(
+        profile.get("research_topic") or profile.get("research_direction") or profile.get("interests")
+    )
     if name and topic:
         return f"Recommendations for {name}: {topic}"
     if name:

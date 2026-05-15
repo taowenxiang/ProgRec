@@ -75,8 +75,6 @@ def build_domain_fallback_frame(user_text: str, *, reason: str = "domain_fallbac
 def should_override_frame(frame: IntentFrame, user_text: str) -> bool:
     if not looks_like_domain_request(user_text):
         return False
-    if frame.intent == "out_of_scope":
-        return True
     return frame.intent == "recommendation_request" and frame.confidence < 0.35
 
 

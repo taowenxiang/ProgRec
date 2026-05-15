@@ -19,8 +19,8 @@ class TestExecutionPolicy(unittest.TestCase):
 
     def test_low_confidence_routes_to_clarification(self) -> None:
         decision = RouterDecision(
-            message_type="unsafe_or_blocked",
-            intent="out_of_scope_other",
+            message_type="domain_task",
+            intent="recommend_mentor",
             confidence=0.3,
             candidate_tools=[],
             needs_clarification=True,

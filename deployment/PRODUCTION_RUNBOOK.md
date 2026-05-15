@@ -83,8 +83,12 @@ Cloudflare setup:
    Host-installed cloudflared: progrec-api.wenxiangtao.com -> http://127.0.0.1:8000
    ```
 
-3. Copy the tunnel token into `deployment/.env`.
-4. If you run `cloudflared` as a user-level systemd service on the Linux host, enable linger once so the service also starts after host reboot before interactive login:
+3. Choose exactly one connector location for a given tunnel token. Do not run the Dockerized
+   `cloudflared` service and the host-installed `progrec-cloudflared.service` at the same time:
+   Cloudflare may route requests to either connector, and the host-installed connector cannot
+   resolve the Docker-only `progrec-api` hostname.
+4. Copy the tunnel token into `deployment/.env`.
+5. If you run `cloudflared` as a user-level systemd service on the Linux host, enable linger once so the service also starts after host reboot before interactive login:
 
    ```bash
    loginctl enable-linger mount

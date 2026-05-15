@@ -8,7 +8,6 @@ IntentName = Literal[
     "inspect_recommendation",
     "explain_recommendation",
     "validate_resources",
-    "out_of_scope",
 ]
 Provenance = Literal["explicit", "inferred", "unknown"]
 

@@ -4,8 +4,6 @@ from progrec_agent.planning.actions import ExecutionPlanV2
 
 
 def build_execution_plan(state) -> ExecutionPlanV2:
-    if state.task == "out_of_scope":
-        return ExecutionPlanV2(action="refuse_out_of_scope")
     if state.task == "answer_meta_question":
         return ExecutionPlanV2(action="answer_meta_question")
     if (
@@ -49,4 +47,4 @@ def build_execution_plan(state) -> ExecutionPlanV2:
         )
     if state.task == "validate_resources":
         return ExecutionPlanV2(action="validate_resources", arguments={"mode": state.resolved_slots["mode"]})
-    return ExecutionPlanV2(action="refuse_out_of_scope")
+    return ExecutionPlanV2(action="await_clarification")

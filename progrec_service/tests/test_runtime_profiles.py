@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
+import httpx
 from fastapi.testclient import TestClient
 
 from progrec_service.app import create_app
@@ -31,6 +32,27 @@ class TestRuntimeProfileRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json()["ok"])
         self.assertEqual(response.json()["model"], "gpt-4.1-mini")
+
+    def test_runtime_profile_test_route_returns_json_error_for_bad_upstream_credentials(self) -> None:
+        client = TestClient(create_app(), raise_server_exceptions=False)
+        request = httpx.Request("GET", "https://api.openai.com/v1/models")
+        upstream_response = httpx.Response(401, request=request, json={"error": {"message": "invalid api key"}})
+        with patch(
+            "progrec_service.services.runtime_profiles.fetch_available_models",
+            side_effect=httpx.HTTPStatusError("unauthorized", request=request, response=upstream_response),
+        ):
+            response = client.post(
+                "/runtime-profiles/test",
+                json={
+                    "base_url": "https://api.openai.com/v1",
+                    "model": "gpt-4.1-mini",
+                    "api_key": "sk-test",
+                },
+            )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.headers["content-type"], "application/json")
+        self.assertIn("Runtime probe failed", response.json()["detail"])
 
     def test_runtime_profile_create_persists_masked_record(self) -> None:
         client = TestClient(create_app())

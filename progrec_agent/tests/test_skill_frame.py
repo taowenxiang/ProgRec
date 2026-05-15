@@ -50,7 +50,7 @@ class TestSkillAwareFrame(unittest.TestCase):
             self.catalog,
         )
 
-        self.assertEqual(frame.task, "out_of_scope")
+        self.assertEqual(frame.task, "recommendation_request")
         self.assertIn("unknown_skill:/made-up-skill", frame.validation_errors)
         self.assertIn("unknown_tool:delete_everything", frame.validation_errors)
 
@@ -70,7 +70,7 @@ class TestSkillAwareFrame(unittest.TestCase):
             self.catalog,
         )
 
-        self.assertEqual(frame.task, "out_of_scope")
+        self.assertEqual(frame.task, "recommendation_request")
         self.assertIn("invalid_mode:production", frame.validation_errors)
 
 

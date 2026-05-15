@@ -10,8 +10,14 @@ def discover_migrations(migrations_dir: Path) -> list[Path]:
     return sorted(path for path in migrations_dir.glob("*.sql") if path.is_file())
 
 
+def normalize_database_url(database_url: str) -> str:
+    if database_url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + database_url.removeprefix("postgresql://")
+    return database_url
+
+
 def main() -> None:
-    database_url = os.getenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+    database_url = normalize_database_url(os.getenv("DATABASE_URL", "sqlite+pysqlite:///:memory:"))
     engine = create_engine(database_url, future=True)
     migrations = discover_migrations(Path("progrec_service/db/migrations"))
     with engine.begin() as connection:

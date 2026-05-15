@@ -7,7 +7,6 @@ TASK_REQUIRED_SLOTS = {
     "explain_recommendation": [],
     "validate_resources": ["mode"],
     "answer_meta_question": [],
-    "out_of_scope": [],
 }
 
 LOW_RISK_DEFAULTS = {

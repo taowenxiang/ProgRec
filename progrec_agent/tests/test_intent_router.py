@@ -33,7 +33,6 @@ class TestIntentRouter(unittest.TestCase):
             "intent": "ask_last_action",
             "confidence": 0.96,
             "candidate_tools": [],
-            "in_scope": True,
             "needs_clarification": False,
             "clarification_question": "",
             "answer_only": True,
@@ -46,25 +45,24 @@ class TestIntentRouter(unittest.TestCase):
         self.assertEqual(decision.message_type, "meta_question")
         self.assertTrue(decision.answer_only)
 
-    def test_llm_out_of_scope_routes_without_tool(self) -> None:
+    def test_llm_invalid_route_is_coerced_to_clarification(self) -> None:
         llm = Mock()
         llm.complete_json.return_value = {
-            "message_type": "out_of_scope",
-            "intent": "out_of_scope_other",
+            "message_type": "unsupported",
+            "intent": "unsupported",
             "confidence": 0.99,
             "candidate_tools": [],
-            "in_scope": False,
             "needs_clarification": False,
             "clarification_question": "",
             "answer_only": True,
             "tool_name": "",
             "tool_arguments": {},
-            "meta_reply": "That question is outside ProgRec's recommendation scope.",
+            "meta_reply": "",
             "reasoning_summary": "The user asked about weather.",
         }
         decision = route_user_message("How is the weather today?", llm_client=llm, session=None)
-        self.assertEqual(decision.message_type, "out_of_scope")
-        self.assertFalse(decision.in_scope)
+        self.assertEqual(decision.message_type, "domain_task")
+        self.assertTrue(decision.needs_clarification)
 
 
 if __name__ == "__main__":

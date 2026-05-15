@@ -49,9 +49,9 @@ Out-of-scope requests such as weather questions should be refused clearly and sh
 
 ## Chosen Approach
 
-Use a skill-aware planner.
+Use a Codex-style skill-aware planner.
 
-The LLM receives compact skill cards derived from the local skill registry and `SKILL.md` files. It returns a semantic proposal: task, slots, candidate skills, candidate tools, missing information, confidence, and a short routing rationale.
+The LLM receives the complete local `SKILL.md` documents for the five ProgRec skills on each parse turn. This is intentionally closer to Codex's behavior: the model reads the available skill descriptions, decides which skills apply to the user's intent, and proposes the skill/tool chain in structured JSON. The compact skill catalog remains as the local validation table, not the primary reasoning context.
 
 Local code remains the authority for:
 
@@ -66,6 +66,8 @@ Local code remains the authority for:
 - final refusal decisions
 
 The model suggests. The planner decides. The executor runs only registered ProgRec tools.
+
+If the model returns `out_of_scope` for a request that still looks related to ProgRec recommendations, the parser must not immediately refuse. It should run a stricter skill-applicability review using the same full skill documents. Only requests that remain unrelated after skill review should become true scope refusals.
 
 ## Architecture
 
@@ -85,7 +87,7 @@ User message
 
 ### SkillCatalog
 
-`SkillCatalog` loads local capability metadata and creates compact skill cards for the LLM.
+`SkillCatalog` loads local capability metadata, compact validation cards, and complete local skill documents.
 
 Inputs:
 
@@ -97,7 +99,7 @@ Inputs:
   - Skill 4 and Skill 5 docs if present in the repository
 - `progrec_agent/tool_registry.py`
 
-Output shape:
+Compact validation card shape:
 
 ```json
 {
@@ -112,6 +114,8 @@ Output shape:
 ```
 
 The cards must be compact. The LLM does not need the full text of every `SKILL.md` on every turn.
+
+For the Codex-style parser, `SkillCatalog` must also expose a full prompt context that includes each complete `SKILL.md` body under its stable skill id. This full context is the source the model uses to decide `selected_skills` and `selected_tools`.
 
 ### SkillAwareFrame
 
@@ -128,13 +132,15 @@ Suggested schema:
     "profile_source": {"value": "temporary_profile", "provenance": "explicit"},
     "research_topic": {"value": "NLP and trustworthy AI", "provenance": "explicit"}
   },
-  "candidate_skills": ["/student-profiling", "/mentor-discovery", "/social-ranking"],
-  "candidate_tools": ["recommend_full_pipeline"],
+  "selected_skills": ["/student-profiling", "/mentor-discovery", "/social-ranking"],
+  "selected_tools": ["recommend_full_pipeline"],
   "missing_information": ["program_type", "experience_level"],
   "confidence": 0.91,
   "reasoning_summary": "The user wants mentor recommendations and supplied a topic, but the temporary profile is incomplete."
 }
 ```
+
+The validator should accept both the older `candidate_skills` / `candidate_tools` field names and the Codex-style `selected_skills` / `selected_tools` aliases. Internally, `DialogState.last_skill_plan` can continue to store `candidate_skills` and `candidate_tools` to minimize downstream churn.
 
 Allowed `turn_type` values:
 

@@ -11,7 +11,14 @@ from progrec_service.config import settings
 from progrec_service.db.models import Base
 
 
+def normalize_database_url(database_url: str) -> str:
+    if database_url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + database_url.removeprefix("postgresql://")
+    return database_url
+
+
 def build_engine(database_url: str) -> Engine:
+    database_url = normalize_database_url(database_url)
     if database_url.startswith("sqlite"):
         return create_engine(
             database_url,

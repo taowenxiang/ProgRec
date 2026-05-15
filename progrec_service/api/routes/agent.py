@@ -16,7 +16,7 @@ from progrec_service.services.agent_sessions import (
     persist_user_message,
 )
 from progrec_service.services.runtime_context import resolve_runtime_context
-from progrec_service.services.sse import emit_chat_stream
+from progrec_service.services.sse import emit_chat_prelude, emit_chat_stream
 
 router = APIRouter(prefix="/agent", tags=["agent"])
 
@@ -48,17 +48,19 @@ def create_message(session_id: str, payload: dict[str, object]) -> StreamingResp
         ephemeral_runtime=payload.get("runtime"),
         runtime_profile_id=payload.get("runtime_profile_id"),
     )
-    result = agent_v2_runner.run_agent_turn(
-        repo_root=settings.progrec_repo_root,
-        dialog_state_payload=dialog_state_payload,
-        runtime_context=runtime_context,
-        user_text=str(payload["message"]),
-    )
 
     def event_stream() -> Iterator[str]:
+        yield from emit_chat_prelude()
+        result = agent_v2_runner.run_agent_turn(
+            repo_root=settings.progrec_repo_root,
+            dialog_state_payload=dialog_state_payload,
+            runtime_context=runtime_context,
+            user_text=str(payload["message"]),
+        )
         for event in emit_chat_stream(
             reply_text=result["reply_text"],
             structured_result=result["structured_result"],
+            include_prelude=False,
         ):
             yield event
         persist_assistant_turn(

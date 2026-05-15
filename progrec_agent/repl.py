@@ -19,8 +19,6 @@ You can talk to me naturally. For example:
 - Show me the current profile of the top mentor.
 - Why did you recommend this mentor?
 - Check whether my graph-mode artifacts are valid.
-
-If your question is outside the recommendation workflow, I'll tell you clearly instead of guessing.
 """
 
 

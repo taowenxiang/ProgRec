@@ -42,6 +42,7 @@ class SkillCard:
     produces: list[str]
     allowed_tools: list[str]
     cannot_do: list[str]
+    full_document: str = ""
 
     def to_prompt_block(self) -> str:
         return (
@@ -54,6 +55,15 @@ class SkillCard:
             f"  cannot_do: {', '.join(self.cannot_do)}"
         )
 
+    def to_full_prompt_block(self) -> str:
+        return (
+            f"skill_id: {self.skill_id}\n"
+            f"name: {self.name}\n"
+            f"allowed_tools: {', '.join(self.allowed_tools)}\n"
+            "complete_skill_doc:\n"
+            f"{self.full_document.strip()}"
+        )
+
 
 @dataclass(frozen=True)
 class SkillCatalog:
@@ -63,6 +73,9 @@ class SkillCatalog:
 
     def to_prompt_context(self) -> str:
         return "\n".join(card.to_prompt_block() for card in self.cards)
+
+    def to_full_prompt_context(self) -> str:
+        return "\n\n---\n\n".join(card.to_full_prompt_block() for card in self.cards)
 
 
 def _split_contract(value: Any) -> list[str]:
@@ -84,6 +97,13 @@ def _first_doc_description(repo_root: Path, skill_id: str) -> str:
     return ""
 
 
+def _read_skill_doc(repo_root: Path, skill_id: str) -> str:
+    doc_path = repo_root / _SKILL_DOC_PATHS.get(skill_id, "")
+    if not doc_path.is_file():
+        return ""
+    return doc_path.read_text(encoding="utf-8")
+
+
 def _card_from_registry(repo_root: Path, skill_id: str, meta: dict[str, Any]) -> SkillCard:
     doc_description = _first_doc_description(repo_root, skill_id)
     when_to_use = doc_description or str(meta.get("function") or "")
@@ -96,6 +116,7 @@ def _card_from_registry(repo_root: Path, skill_id: str, meta: dict[str, Any]) ->
         produces=_split_contract(meta.get("output_contract")),
         allowed_tools=allowed_tools,
         cannot_do=list(_CANNOT_DO.get(skill_id, [])),
+        full_document=_read_skill_doc(repo_root, skill_id),
     )
 
 

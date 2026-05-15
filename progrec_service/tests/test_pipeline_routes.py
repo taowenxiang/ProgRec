@@ -37,6 +37,18 @@ class TestPipelineRoutes(unittest.TestCase):
         self.assertEqual(response.json()["status"], "queued")
         self.assertIn("job_id", response.json())
 
+    def test_create_pipeline_job_rejects_invalid_payload_without_enqueuing(self) -> None:
+        client = TestClient(create_app())
+        with patch("progrec_service.queue.enqueue_job", return_value=None) as enqueue_mock:
+            response = client.post(
+                "/pipeline/jobs",
+                json={"job_type": "recommend_for_profile", "top_k": 5},
+            )
+
+        self.assertEqual(response.status_code, 422)
+        self.assertIn("student_profile", response.json()["detail"])
+        enqueue_mock.assert_not_called()
+
     def test_list_pipeline_jobs_returns_frontend_card_contract(self) -> None:
         job_id = self._job_id("list")
         with SessionLocal() as session:
@@ -124,6 +136,40 @@ class TestPipelineRoutes(unittest.TestCase):
             "supersedes_job_id",
         ]:
             self.assertIn(field, body)
+
+    def test_profile_request_summary_joins_interest_lists(self) -> None:
+        job_id = self._job_id("summary")
+        with SessionLocal() as session:
+            repo = PipelineJobRepository(session)
+            repo.add_job(
+                PipelineJob(
+                    id=job_id,
+                    job_type="recommend_for_profile",
+                    runtime_profile_id=None,
+                    request_payload={
+                        "job_type": "recommend_for_profile",
+                        "student_profile": {
+                            "student_id": "alex-chen-demo",
+                            "name": "Alex Chen",
+                            "interests": ["social computing", "mentor matching"],
+                        },
+                    },
+                    status="queued",
+                    progress_stage="validating_input",
+                    progress_message="Queued",
+                    attempt_count=1,
+                )
+            )
+            session.commit()
+
+        client = TestClient(create_app())
+        response = client.get(f"/pipeline/jobs/{job_id}")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.json()["request_summary"],
+            "Recommendations for Alex Chen: social computing, mentor matching",
+        )
 
     def test_get_pipeline_job_result_returns_409_until_completed(self) -> None:
         client = TestClient(create_app())

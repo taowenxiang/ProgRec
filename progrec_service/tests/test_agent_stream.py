@@ -147,6 +147,47 @@ class TestAgentStream(unittest.TestCase):
             "/mentor-discovery",
         )
 
+    def test_message_route_streams_skill_reading_progress_before_final_reply(self) -> None:
+        client = TestClient(create_app())
+        create_response = client.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+
+        with patch(
+            "progrec_service.runtime.agent_v2_runner.run_agent_turn",
+            return_value={
+                "reply_text": "What kind of program are you targeting?",
+                "structured_result": {
+                    "turn_type": "clarification",
+                    "intent": "recommend_temporary_profile",
+                    "missing_slots": ["program_type", "experience_level"],
+                    "next_question": "What kind of program are you targeting?",
+                    "skill_usage": [],
+                },
+                "dialog_state_payload": {"task": "recommend_temporary_profile"},
+            },
+        ):
+            with client.stream(
+                "POST",
+                f"/agent/sessions/{session_id}/messages",
+                json={
+                    "message": "Help me find a mentor for NLP and trustworthy AI.",
+                    "runtime": {
+                        "mode": "ephemeral",
+                        "base_url": "https://api.openai.com/v1",
+                        "model": "gpt-5.4",
+                        "api_key": "sk-test",
+                    },
+                },
+            ) as response:
+                body = "".join(response.iter_text())
+
+        self.assertEqual(response.status_code, 200)
+        reading_stage_index = body.index('"stage": "reading_skill_documents"')
+        reply_index = body.index("What kind of program are you targeting?")
+        self.assertLess(reading_stage_index, reply_index)
+        self.assertIn('"skill_id": "/progrec-agent"', body)
+        self.assertIn("Reading local Skill.md documents", body)
+
     def test_agent_skill_event_payload_is_json_decodable(self) -> None:
         client = TestClient(create_app())
         create_response = client.post("/agent/sessions", json={"session_mode": "chat"})
@@ -181,8 +222,15 @@ class TestAgentStream(unittest.TestCase):
             ) as response:
                 body = "".join(response.iter_text())
 
-        skill_line = next(line for line in body.splitlines() if line.startswith("data: {") and "skill_id" in line)
-        self.assertEqual(json.loads(skill_line.removeprefix("data: "))["skill_id"], "/project-teammate-discovery")
+        skill_ids = []
+        for line in body.splitlines():
+            if not line.startswith("data: {") or "skill_id" not in line:
+                continue
+            payload = json.loads(line.removeprefix("data: "))
+            if "skill_id" in payload:
+                skill_ids.append(payload["skill_id"])
+        self.assertIn("/progrec-agent", skill_ids)
+        self.assertIn("/project-teammate-discovery", skill_ids)
 
 
 if __name__ == "__main__":

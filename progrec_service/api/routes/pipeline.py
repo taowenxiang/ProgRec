@@ -17,7 +17,10 @@ router = APIRouter(prefix="/pipeline", tags=["pipeline"])
 
 @router.post("/jobs", status_code=201)
 def create_job(payload: dict[str, object]) -> dict[str, object]:
-    record = create_pipeline_job(payload)
+    try:
+        record = create_pipeline_job(payload)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     pipeline_queue.enqueue_job(record.id)
     return {"job_id": record.id, "status": record.status}
 

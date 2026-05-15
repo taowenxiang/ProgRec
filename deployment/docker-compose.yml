@@ -85,6 +85,8 @@ services:
     command:
       - tunnel
       - --no-autoupdate
+      - --protocol
+      - http2
       - run
       - --token
       - ${CLOUDFLARE_TUNNEL_TOKEN}

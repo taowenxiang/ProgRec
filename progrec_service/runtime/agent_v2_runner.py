@@ -75,7 +75,9 @@ def _dialog_state_from_payload(payload: dict[str, object]) -> DialogState:
 
 
 def _structured_result_from_state(state: DialogState) -> dict[str, object]:
-    turn_type = state.execution_context.last_turn_type or ("recommendation_result" if state.execution_context.result_handle else "refusal")
+    turn_type = state.execution_context.last_turn_type or (
+        "recommendation_result" if state.execution_context.result_handle else "clarification"
+    )
     structured: dict[str, object] = {
         "turn_type": turn_type,
         "intent": state.task,

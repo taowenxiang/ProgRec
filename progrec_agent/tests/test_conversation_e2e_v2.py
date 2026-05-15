@@ -41,6 +41,27 @@ class TestConversationE2EV2(unittest.TestCase):
             )
             self.assertIn("recommendation pipeline", reply)
             runtime.run_recommendation_for_student_id.assert_called_once()
+            self.assertEqual(_state.execution_context.last_turn_type, "recommendation_result")
+
+    def test_clarification_turn_records_structured_turn_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            llm = Mock()
+            llm.complete_json.return_value = {
+                "intent": "recommendation_request",
+                "target_types": ["mentor"],
+                "entities": {"profile_source": {"value": "temporary_profile", "provenance": "explicit"}},
+                "constraints": {"research_topic": {"value": "NLP", "provenance": "explicit"}},
+                "preferences": {},
+                "references": {},
+                "confidence": 0.9,
+                "uncertain_fields": [],
+                "possible_conflicts": [],
+            }
+            core = AgentCoreV2(repo_root=Path("."), temp_dir=Path(td), llm_client=llm)
+            reply, state = core.handle_message(DialogState(), "Find an NLP mentor.")
+            self.assertIn("program", reply.lower())
+            self.assertEqual(state.execution_context.last_turn_type, "clarification")
+            self.assertEqual(state.execution_context.next_question, reply)
 
     def test_existing_graph_fixture_declares_expected_clarification_sequence(self) -> None:
         path = Path("progrec_agent/tests/fixtures/conversations/existing_graph_recommendation.json")

@@ -26,12 +26,12 @@ class TestPlannerV2(unittest.TestCase):
         plan = build_execution_plan(state)
         self.assertEqual(plan.action, "inspect_ranked_entity")
 
-    def test_out_of_scope_plan_refuses(self) -> None:
-        state = DialogState(task="out_of_scope", missing_slots=[])
+    def test_unknown_plan_asks_for_clarification(self) -> None:
+        state = DialogState(task="unsupported", missing_slots=[])
 
         plan = build_execution_plan(state)
 
-        self.assertEqual(plan.action, "refuse_out_of_scope")
+        self.assertEqual(plan.action, "await_clarification")
 
     def test_meta_question_plan_answers_without_recommendation_runtime(self) -> None:
         state = DialogState(
