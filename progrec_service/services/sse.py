@@ -15,6 +15,7 @@ def _stage_for_turn(structured_result: dict[str, object]) -> str:
         "inspection": "inspecting_result",
         "recommendation_result": "running_recommendation",
         "resource_validation": "validating_resources",
+        "agent_update": "selecting_skills",
     }.get(turn_type, "running_recommendation")
 
 

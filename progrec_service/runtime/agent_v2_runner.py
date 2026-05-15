@@ -86,16 +86,25 @@ def _structured_result_from_state(state: DialogState) -> dict[str, object]:
     )
     structured: dict[str, object] = {
         "turn_type": turn_type,
-        "intent": state.task,
+        "intent": state.active_goal or state.task,
+        "active_goal": state.active_goal,
+        "goal_targets": list(state.goal_targets),
         "missing_slots": list(state.missing_slots),
         "next_question": state.execution_context.next_question,
         "last_result_handle": state.execution_context.result_handle,
         "skill_usage": list(state.skill_trace or []),
+        "planner_actions": list(state.planner_actions or []),
+        "suggested_next_actions": list(state.suggested_next_actions or []),
+        "tool_results_summary": dict(state.tool_results_summary or {}),
     }
     if turn_type == "recommendation_result" and state.execution_context.last_result:
         last_result = dict(state.execution_context.last_result)
-        structured["summary"] = summarize_pipeline_result(last_result)
-        structured["recommendation_result"] = normalize_result_package(last_result)
+        if "skill5_result" in last_result:
+            structured["summary"] = summarize_pipeline_result(last_result)
+            structured["recommendation_result"] = normalize_result_package(last_result)
+        else:
+            structured["summary"] = dict(state.tool_results_summary)
+            structured["recommendation_result"] = make_json_safe(last_result)
     return make_json_safe(structured)
 
 

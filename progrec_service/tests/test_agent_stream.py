@@ -31,7 +31,7 @@ class TestAgentStream(unittest.TestCase):
         self.assertEqual(state.suggested_next_actions[0]["target"], "project")
         self.assertEqual(state.tool_results_summary["mentor_count"], 5)
 
-    def test_runner_returns_clarification_turn_contract(self) -> None:
+    def test_runner_returns_semi_autonomous_clarification_contract(self) -> None:
         class _RuntimeContext:
             model = "demo-model"
             api_key = "sk-test"
@@ -39,15 +39,9 @@ class TestAgentStream(unittest.TestCase):
 
         with patch("progrec_service.runtime.agent_v2_runner.LLMClient") as llm_client:
             llm_client.return_value.complete_json.return_value = {
-                "intent": "recommendation_request",
-                "target_types": ["mentor"],
-                "entities": {"profile_source": {"value": "temporary_profile", "provenance": "explicit"}},
-                "constraints": {"research_topic": {"value": "NLP", "provenance": "explicit"}},
-                "preferences": {},
-                "references": {},
-                "confidence": 0.9,
-                "uncertain_fields": [],
-                "possible_conflicts": [],
+                "action": "ask_user",
+                "message": "Tell me about your background and target research opportunity.",
+                "reasoning_summary": "Need profile context.",
             }
             result = agent_v2_runner.run_agent_turn(
                 repo_root=__import__("pathlib").Path("."),
@@ -57,42 +51,47 @@ class TestAgentStream(unittest.TestCase):
             )
 
         self.assertEqual(result["structured_result"]["turn_type"], "clarification")
-        self.assertEqual(result["structured_result"]["intent"], "recommend_temporary_profile")
-        self.assertIn("program_type", result["structured_result"]["missing_slots"])
-        self.assertIn("program", result["structured_result"]["next_question"].lower())
+        self.assertEqual(
+            result["structured_result"]["next_question"],
+            "Tell me about your background and target research opportunity.",
+        )
+        self.assertEqual(result["structured_result"]["planner_actions"][0]["action"], "ask_user")
+        self.assertNotIn("program_type", result["structured_result"]["missing_slots"])
 
-    def test_runner_uses_state_skill_trace_in_structured_result(self) -> None:
+    def test_runner_returns_mentor_only_skill_usage(self) -> None:
         class _RuntimeContext:
             model = "demo-model"
             api_key = "sk-test"
             base_url = "https://api.openai.com/v1"
 
         with patch("progrec_service.runtime.agent_v2_runner.LLMClient") as llm_client:
-            llm_client.return_value.complete_json.return_value = {
-                "turn_type": "domain_task",
-                "task": "recommend_temporary_profile",
-                "target_types": ["mentor"],
-                "slots": {
-                    "profile_source": {"value": "temporary_profile", "provenance": "explicit"},
-                    "research_topic": {"value": "NLP", "provenance": "explicit"},
-                    "program_type": {"value": "undergraduate research", "provenance": "explicit"},
-                    "experience_level": {"value": "intermediate", "provenance": "explicit"},
+            llm_client.return_value.complete_json.side_effect = [
+                {
+                    "action": "call_tool",
+                    "tool_name": "/student-profiling.build_temporary_profile",
+                    "arguments": {
+                        "profile_context": {
+                            "research_topic": "NLP",
+                            "program_type": "undergraduate research",
+                            "experience_level": "medium",
+                        }
+                    },
                 },
-                "candidate_skills": ["/student-profiling", "/mentor-discovery", "/social-ranking"],
-                "candidate_tools": ["recommend_full_pipeline"],
-                "missing_information": [],
-                "confidence": 0.96,
-                "reasoning_summary": "Complete temporary request.",
-            }
+                {
+                    "action": "call_tool",
+                    "tool_name": "/mentor-discovery.rank_mentors",
+                    "arguments": {"profile": {"student_id": "chat-temp-1"}, "top_k": 5},
+                },
+                {
+                    "action": "answer_from_context",
+                    "message": "I found mentor recommendations. Want projects next?",
+                },
+            ]
             with patch(
-                "progrec_agent.runtime.recommendation_runtime.run_recommendation_for_profile",
+                "progrec_agent.runtime.recommendation_runtime.run_mentor_recommendation_for_profile",
                 return_value={
                     "student_profile": {"student_id": "chat-temp-1"},
-                    "skill3_result": {"student_id": "chat-temp-1", "mentor_candidates": [{"mentor_id": "m1"}]},
-                    "skill4_result": {"target_student_id": "chat-temp-1"},
-                    "skill5_result": {
-                        "recommendations": {"mentors": [{"rank": 1}], "projects": [], "teammates": []}
-                    },
+                    "skill3_result": {"mentor_candidates": [{"mentor_id": "m1"}]},
                 },
             ):
                 result = agent_v2_runner.run_agent_turn(
@@ -102,9 +101,10 @@ class TestAgentStream(unittest.TestCase):
                     user_text="Find an NLP mentor.",
                 )
 
-        skill_usage = result["structured_result"]["skill_usage"]
-        self.assertTrue(skill_usage)
-        self.assertIn("/mentor-discovery", [entry["skill_id"] for entry in skill_usage])
+        skill_ids = [entry["skill_id"] for entry in result["structured_result"]["skill_usage"]]
+        self.assertIn("/student-profiling", skill_ids)
+        self.assertIn("/mentor-discovery", skill_ids)
+        self.assertNotIn("/project-teammate-discovery", skill_ids)
 
     def test_clarification_stream_uses_collecting_context_stage(self) -> None:
         body = "".join(
