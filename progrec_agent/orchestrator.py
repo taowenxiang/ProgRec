@@ -127,3 +127,15 @@ class ProgRecOrchestrator:
             "skill5_result": skill5_result,
             "temporary_paths": [skill3_path, skill4_path, skill5_path],
         }
+
+    def rank_mentors_for_profile(self, student_profile: dict[str, object], top_k: int = 5) -> dict[str, object]:
+        skill3_path = self.temp_dir / "skill3.json"
+        skill3_result = run_skill3(self.repo_root, student_profile, top_k)
+        skill3_path.write_text(json.dumps(skill3_result, ensure_ascii=False, indent=2), encoding="utf-8")
+        return {
+            "mode": "custom_profile_mentor_only",
+            "student_profile": student_profile,
+            "resource_context": {"resource_mode": "custom_profile_mentor_only"},
+            "skill3_result": skill3_result,
+            "temporary_paths": [skill3_path],
+        }

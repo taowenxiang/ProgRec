@@ -16,3 +16,10 @@ def run_recommendation_for_profile(*, repo_root, temp_dir, profile: dict[str, ob
     standardized = dict(profile) if required.issubset(profile) else standardize_temporary_profile(profile)
     orchestrator = ProgRecOrchestrator(repo_root=repo_root, temp_dir=temp_dir)
     return orchestrator.recommend_for_profile(standardized, top_k=top_k)
+
+
+def run_mentor_recommendation_for_profile(*, repo_root, temp_dir, profile: dict[str, object], top_k: int):
+    required = {"student_id", "grade", "major", "skills", "interests", "experience_summary", "availability"}
+    standardized = dict(profile) if required.issubset(profile) else standardize_temporary_profile(profile)
+    orchestrator = ProgRecOrchestrator(repo_root=repo_root, temp_dir=temp_dir)
+    return orchestrator.rank_mentors_for_profile(standardized, top_k=top_k)
