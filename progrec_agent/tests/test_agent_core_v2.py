@@ -233,6 +233,43 @@ class TestAgentCoreV2(unittest.TestCase):
         self.assertIn("first mentor", reply)
         self.assertEqual(updated.execution_context.last_shown_entities["mentor"], "m1")
 
+    def test_followup_inspect_can_use_latest_result_without_explicit_ref_argument(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            llm = Mock()
+            llm.complete_json.side_effect = [
+                {
+                    "action": "call_tool",
+                    "tool_name": "/mentor-discovery.get_mentor_by_rank",
+                    "arguments": {"rank": 1},
+                    "reasoning_summary": "User asked to inspect the first mentor from the active result.",
+                },
+                {
+                    "action": "answer_from_context",
+                    "message": "Here is the first mentor from your active result.",
+                    "reasoning_summary": "The inspection result already answered the user.",
+                },
+            ]
+            core = AgentCoreV2(repo_root=Path("."), temp_dir=Path(td), llm_client=llm)
+            state = DialogState()
+            state.execution_context.latest_result_refs = {"mentor_result": "rr_mentor_001"}
+            state.execution_context.active_result_ref = "rr_mentor_001"
+            state.execution_context.result_ref_payloads = {
+                "rr_mentor_001": {
+                    "result_ref": "rr_mentor_001",
+                    "result_type": "mentor_result",
+                    "payload": {
+                        "skill3_result": {
+                            "mentor_candidates": [{"mentor_id": "m1", "mentor_name": "Prof A"}]
+                        }
+                    },
+                }
+            }
+
+            reply, updated = core.handle_message(state, "Show me the first mentor.")
+
+        self.assertIn("first mentor", reply)
+        self.assertEqual(updated.execution_context.last_shown_entities["mentor"], "m1")
+
 
 if __name__ == "__main__":
     unittest.main()

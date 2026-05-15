@@ -8,6 +8,7 @@ from pathlib import Path
 from progrec_agent.agent_core_v2 import AgentCoreV2
 from progrec_agent.dialog.state import DialogState, ExecutionContext, PendingQuestion
 from progrec_agent.llm_client import LLMClient, LLMConfig
+from progrec_agent.runtime.result_state import result_state_snapshot
 from progrec_service.runtime.result_mapper import make_json_safe, normalize_result_package, summarize_pipeline_result
 
 
@@ -91,15 +92,12 @@ def _structured_result_from_state(state: DialogState) -> dict[str, object]:
         "goal_targets": list(state.goal_targets),
         "missing_slots": list(state.missing_slots),
         "next_question": state.execution_context.next_question,
-        "last_result_handle": state.execution_context.result_handle,
-        "latest_result_refs": dict(state.execution_context.latest_result_refs),
-        "active_result_ref": state.execution_context.active_result_ref,
-        "last_shown_entities": dict(state.execution_context.last_shown_entities),
         "skill_usage": list(state.skill_trace or []),
         "planner_actions": list(state.planner_actions or []),
         "suggested_next_actions": list(state.suggested_next_actions or []),
         "tool_results_summary": dict(state.tool_results_summary or {}),
     }
+    structured.update(result_state_snapshot(state.execution_context))
     if turn_type == "recommendation_result" and state.execution_context.last_result:
         last_result = dict(state.execution_context.last_result)
         if "skill5_result" in last_result:

@@ -4,6 +4,7 @@ import uuid
 from dataclasses import asdict
 
 from progrec_agent.dialog.state import DialogState
+from progrec_agent.runtime.result_state import result_handle_from_payload
 from progrec_service.db.models import AgentMessage, AgentSession, utcnow
 from progrec_service.db.repositories.agent_sessions import AgentSessionRepository
 from progrec_service.db.session import SessionLocal
@@ -123,7 +124,10 @@ def persist_assistant_turn(
         if record is None:
             raise ValueError(f"session {session_id} not found")
         record.dialog_state_payload = dialog_state_payload
-        record.last_result_handle = str(structured_payload.get("last_result_handle") or "")
+        record.last_result_handle = result_handle_from_payload(
+            structured_payload=structured_payload,
+            dialog_state_payload=dialog_state_payload,
+        )
         record.updated_at = utcnow()
         assistant_message = AgentMessage(
             id=f"msg_{uuid.uuid4().hex[:12]}",

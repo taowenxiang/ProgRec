@@ -87,6 +87,77 @@ class TestChatToolExecutor(unittest.TestCase):
         self.assertEqual(result.payload["result_type"], "mentor_result")
         self.assertIn("skill3_result", result.payload)
 
+    def test_explain_mentor_match_returns_summary_card(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            executor = ChatToolExecutor(repo_root=Path("."), temp_dir=Path(td), recommendation_runtime=Mock())
+            result = executor.execute(
+                "/mentor-discovery.explain_mentor_match",
+                {
+                    "mentor_result_ref": {
+                        "result_ref": "rr_mentor_001",
+                        "result_type": "mentor_result",
+                        "payload": {
+                            "skill3_result": {
+                                "mentor_candidates": [
+                                    {"mentor_id": "m1", "reason": "Strong NLP alignment."}
+                                ]
+                            }
+                        },
+                    },
+                    "rank": 1,
+                },
+            )
+
+        self.assertEqual(result.skill_id, "/mentor-discovery")
+        self.assertEqual(result.payload["mentor_id"], "m1")
+        self.assertEqual(result.payload["summary"], "Strong NLP alignment.")
+
+    def test_explain_project_match_returns_summary_card(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            executor = ChatToolExecutor(repo_root=Path("."), temp_dir=Path(td), recommendation_runtime=Mock())
+            result = executor.execute(
+                "/project-teammate-discovery.explain_project_match",
+                {
+                    "project_result_ref": {
+                        "result_ref": "rr_project_001",
+                        "result_type": "project_result",
+                        "payload": {
+                            "projects": [
+                                {"project_id": "p1", "reason": "Fits your CV and Python background."}
+                            ]
+                        },
+                    },
+                    "rank": 1,
+                },
+            )
+
+        self.assertEqual(result.skill_id, "/project-teammate-discovery")
+        self.assertEqual(result.payload["project_id"], "p1")
+        self.assertEqual(result.payload["summary"], "Fits your CV and Python background.")
+
+    def test_explain_teammate_match_returns_summary_card(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            executor = ChatToolExecutor(repo_root=Path("."), temp_dir=Path(td), recommendation_runtime=Mock())
+            result = executor.execute(
+                "/project-teammate-discovery.explain_teammate_match",
+                {
+                    "teammate_result_ref": {
+                        "result_ref": "rr_teammate_001",
+                        "result_type": "teammate_result",
+                        "payload": {
+                            "teammates": [
+                                {"student_id": "s1", "reason": "Strong complementary systems skills."}
+                            ]
+                        },
+                    },
+                    "rank": 1,
+                },
+            )
+
+        self.assertEqual(result.skill_id, "/project-teammate-discovery")
+        self.assertEqual(result.payload["student_id"], "s1")
+        self.assertEqual(result.payload["summary"], "Strong complementary systems skills.")
+
 
 if __name__ == "__main__":
     unittest.main()

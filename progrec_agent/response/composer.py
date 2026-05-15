@@ -13,8 +13,14 @@ def compose_fallback_reply(
 
     if turn_type == "recommendation_result":
         mentor_count = int(tool_results_summary.get("mentor_count") or 0)
+        project_count = int(tool_results_summary.get("project_count") or 0)
+        teammate_count = int(tool_results_summary.get("teammate_count") or 0)
         if mentor_count:
             reply = f"I found {mentor_count} mentor recommendations for you."
+        elif project_count:
+            reply = f"I found {project_count} project recommendations for you."
+        elif teammate_count:
+            reply = f"I found {teammate_count} teammate recommendations for you."
         else:
             reply = "I finished the recommendation step."
         targets = [str(item.get("target") or "") for item in suggested_next_actions]

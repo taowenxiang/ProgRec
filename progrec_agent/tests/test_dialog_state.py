@@ -11,6 +11,8 @@ class TestDialogStateObjects(unittest.TestCase):
         self.assertIsNone(ctx.result_handle)
         self.assertIsNone(ctx.selected_entity_type)
         self.assertIsNone(ctx.selected_entity_id)
+        self.assertEqual(ctx.latest_result_refs, {})
+        self.assertEqual(ctx.last_shown_entities, {})
 
     def test_dialog_state_defaults_are_safe(self) -> None:
         state = DialogState()

@@ -26,6 +26,16 @@ class TestResponseComposer(unittest.TestCase):
 
         self.assertEqual(reply, "What background should I use for your profile?")
 
+    def test_composes_project_result_reply(self) -> None:
+        reply = compose_fallback_reply(
+            turn_type="recommendation_result",
+            tool_results_summary={"project_count": 3},
+            suggested_next_actions=[{"target": "teammate", "label": "Find teammates"}],
+        )
+
+        self.assertIn("3 project", reply)
+        self.assertIn("teammates", reply.lower())
+
 
 if __name__ == "__main__":
     unittest.main()

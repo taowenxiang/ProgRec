@@ -116,6 +116,50 @@ class TestConversationE2EV2(unittest.TestCase):
         self.assertIn("projects", reply.lower())
         self.assertEqual(updated.tool_results_summary["project_count"], 2)
 
+    def test_affirmative_followup_uses_suggested_project_target(self) -> None:
+        llm = Mock()
+        llm.complete_json.side_effect = [
+            {
+                "action": "call_tool",
+                "tool_name": "/project-teammate-discovery.recommend_projects",
+                "arguments": {"top_k": 5},
+                "reasoning_summary": "The user accepted the suggested project follow-up.",
+            },
+            {
+                "action": "suggest_next_steps",
+                "message": "I found related projects. Want teammate matches too?",
+                "suggested_next_actions": [{"target": "teammate", "label": "Find teammates"}],
+                "reasoning_summary": "Projects are now available.",
+            },
+        ]
+        runtime = Mock()
+        runtime.run_project_recommendations_for_profile.return_value = {
+            "projects": [{"project_id": "p1"}, {"project_id": "p2"}],
+        }
+        with tempfile.TemporaryDirectory() as td:
+            core = AgentCoreV2(repo_root=Path("."), temp_dir=Path(td), llm_client=llm, recommendation_runtime=runtime)
+            state = DialogState()
+            state.goal_targets = ["mentor"]
+            state.active_goal = "mentor"
+            state.suggested_next_actions = [
+                {"target": "project", "label": "Find related projects"},
+                {"target": "teammate", "label": "Find teammates"},
+            ]
+            state.execution_context.latest_result_refs = {
+                "student_profile": "sp_001",
+                "mentor_result": "rr_mentor_001",
+            }
+            state.execution_context.result_ref_payloads = {
+                "sp_001": {"result_ref": "sp_001", "payload": {"profile": {"student_id": "chat-temp-1"}}},
+                "rr_mentor_001": {"result_ref": "rr_mentor_001", "payload": {"skill3_result": {"mentor_candidates": []}}},
+            }
+
+            reply, updated = core.handle_message(state, "yes please")
+
+        self.assertIn("projects", reply.lower())
+        self.assertEqual(updated.active_goal, "project")
+        self.assertEqual(updated.tool_results_summary["project_count"], 2)
+
 
 if __name__ == "__main__":
     unittest.main()

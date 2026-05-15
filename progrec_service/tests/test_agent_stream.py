@@ -333,6 +333,344 @@ class TestAgentStream(unittest.TestCase):
         self.assertIn("/progrec-agent", skill_ids)
         self.assertIn("/project-teammate-discovery", skill_ids)
 
+    def test_message_route_supports_three_turn_closed_loop_followup(self) -> None:
+        client = TestClient(create_app())
+        create_response = client.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+
+        llm_instance = patch("progrec_service.runtime.agent_v2_runner.LLMClient").start().return_value
+        self.addCleanup(patch.stopall)
+        llm_instance.complete_json.side_effect = [
+            {
+                "action": "ask_user",
+                "message": "Tell me about your background and research interests.",
+                "pending_slot": "profile_context",
+                "expected_answer_shape": "free_text_profile",
+                "reasoning_summary": "Need profile details.",
+            },
+            {
+                "action": "ask_user",
+                "message": "Could you clarify your goal and share a little more profile context so I can choose the right recommendation skill?",
+                "reasoning_summary": "Planner action was invalid or unavailable.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/project-teammate-discovery.recommend_projects",
+                "arguments": {"top_k": 5},
+                "reasoning_summary": "The user accepted the suggested project follow-up.",
+            },
+            {
+                "action": "suggest_next_steps",
+                "message": "I found related projects. Want teammate matches too?",
+                "suggested_next_actions": [{"target": "teammate", "label": "Find teammates"}],
+                "reasoning_summary": "Projects are now available.",
+            },
+        ]
+
+        with patch(
+            "progrec_agent.runtime.recommendation_runtime.run_mentor_recommendation_for_profile",
+            return_value={
+                "student_profile": {"student_id": "chat-temp-1"},
+                "skill3_result": {"mentor_candidates": [{"mentor_id": "m1"}, {"mentor_id": "m2"}]},
+            },
+        ), patch(
+            "progrec_agent.runtime.recommendation_runtime.run_project_recommendations_for_profile",
+            return_value={
+                "projects": [{"project_id": "p1"}, {"project_id": "p2"}],
+            },
+        ):
+            with client.stream(
+                "POST",
+                f"/agent/sessions/{session_id}/messages",
+                json={
+                    "message": "Help me find an NLP mentor.",
+                    "runtime": {
+                        "mode": "ephemeral",
+                        "base_url": "https://api.openai.com/v1",
+                        "model": "gpt-4.1-mini",
+                        "api_key": "sk-test",
+                    },
+                },
+            ) as response:
+                body1 = "".join(response.iter_text())
+            with client.stream(
+                "POST",
+                f"/agent/sessions/{session_id}/messages",
+                json={
+                    "message": "I am an undergraduate CS student with Python and some NLP project experience.",
+                    "runtime": {
+                        "mode": "ephemeral",
+                        "base_url": "https://api.openai.com/v1",
+                        "model": "gpt-4.1-mini",
+                        "api_key": "sk-test",
+                    },
+                },
+            ) as response:
+                body2 = "".join(response.iter_text())
+            with client.stream(
+                "POST",
+                f"/agent/sessions/{session_id}/messages",
+                json={
+                    "message": "yes please",
+                    "runtime": {
+                        "mode": "ephemeral",
+                        "base_url": "https://api.openai.com/v1",
+                        "model": "gpt-4.1-mini",
+                        "api_key": "sk-test",
+                    },
+                },
+            ) as response:
+                body3 = "".join(response.iter_text())
+
+        self.assertIn("background and research interests", body1)
+        self.assertIn("found 2 mentor matches", body2)
+        self.assertIn("related projects", body3)
+
+        messages_response = client.get(f"/agent/sessions/{session_id}/messages")
+        assistant_messages = [
+            message for message in messages_response.json()["messages"] if message["role"] == "assistant"
+        ]
+        self.assertEqual(len(assistant_messages), 3)
+        latest_structured = assistant_messages[-1]["structured_payload"]
+        self.assertEqual(latest_structured["active_goal"], "project")
+        self.assertIn("project_result", latest_structured["latest_result_refs"])
+        self.assertIn("mentor_result", latest_structured["latest_result_refs"])
+
+    def test_message_route_supports_mentor_inspect_explain_and_project_followup(self) -> None:
+        client = TestClient(create_app())
+        create_response = client.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+
+        llm_instance = patch("progrec_service.runtime.agent_v2_runner.LLMClient").start().return_value
+        self.addCleanup(patch.stopall)
+        llm_instance.complete_json.side_effect = [
+            {
+                "action": "ask_user",
+                "message": "Tell me about your background and research interests.",
+                "pending_slot": "profile_context",
+                "expected_answer_shape": "free_text_profile",
+                "reasoning_summary": "Need profile details.",
+            },
+            {
+                "action": "ask_user",
+                "message": "Could you clarify your goal and share a little more profile context so I can choose the right recommendation skill?",
+                "reasoning_summary": "Planner action was invalid or unavailable.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/mentor-discovery.get_mentor_by_rank",
+                "arguments": {"rank": 1},
+                "reasoning_summary": "User asked to inspect the first mentor from the latest mentor result.",
+            },
+            {
+                "action": "answer_from_context",
+                "message": "Here is the first mentor from your last result.",
+                "reasoning_summary": "The inspection result answered the user directly.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/mentor-discovery.explain_mentor_match",
+                "arguments": {"rank": 1},
+                "reasoning_summary": "User asked why the shown mentor was recommended.",
+            },
+            {
+                "action": "answer_from_context",
+                "message": "This mentor matches because of their strong NLP alignment.",
+                "reasoning_summary": "The explanation result answered the user's why question.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/project-teammate-discovery.recommend_projects",
+                "arguments": {"top_k": 5},
+                "reasoning_summary": "The user accepted the suggested project follow-up.",
+            },
+            {
+                "action": "suggest_next_steps",
+                "message": "I found related projects. Want teammate matches too?",
+                "suggested_next_actions": [{"target": "teammate", "label": "Find teammates"}],
+                "reasoning_summary": "Projects are now available.",
+            },
+        ]
+
+        with patch(
+            "progrec_agent.runtime.recommendation_runtime.run_mentor_recommendation_for_profile",
+            return_value={
+                "student_profile": {"student_id": "chat-temp-1"},
+                "skill3_result": {
+                    "mentor_candidates": [
+                        {"mentor_id": "m1", "mentor_name": "Prof A", "reason": "Strong NLP alignment."},
+                        {"mentor_id": "m2", "mentor_name": "Prof B", "reason": "Good research fit."},
+                    ]
+                },
+            },
+        ), patch(
+            "progrec_agent.runtime.recommendation_runtime.run_project_recommendations_for_profile",
+            return_value={
+                "projects": [
+                    {"project_id": "p1", "reason": "Extends your NLP experience."},
+                    {"project_id": "p2", "reason": "Fits your Python background."},
+                ],
+            },
+        ):
+            turns = [
+                "Help me find an NLP mentor.",
+                "I am an undergraduate CS student with Python and some NLP project experience.",
+                "Show me the first mentor.",
+                "Why this mentor?",
+                "yes please",
+            ]
+            bodies: list[str] = []
+            for message in turns:
+                with client.stream(
+                    "POST",
+                    f"/agent/sessions/{session_id}/messages",
+                    json={
+                        "message": message,
+                        "runtime": {
+                            "mode": "ephemeral",
+                            "base_url": "https://api.openai.com/v1",
+                            "model": "gpt-4.1-mini",
+                            "api_key": "sk-test",
+                        },
+                    },
+                ) as response:
+                    self.assertEqual(response.status_code, 200)
+                    bodies.append("".join(response.iter_text()))
+
+        self.assertIn("background and research interests", bodies[0])
+        self.assertIn("found 2 mentor matches", bodies[1])
+        self.assertIn("first mentor", bodies[2])
+        self.assertIn("strong NLP alignment", bodies[3])
+        self.assertIn("related projects", bodies[4])
+
+        messages_response = client.get(f"/agent/sessions/{session_id}/messages")
+        assistant_messages = [
+            message for message in messages_response.json()["messages"] if message["role"] == "assistant"
+        ]
+        self.assertEqual(len(assistant_messages), 5)
+        latest_structured = assistant_messages[-1]["structured_payload"]
+        self.assertEqual(latest_structured["active_goal"], "project")
+        self.assertIn("mentor_result", latest_structured["latest_result_refs"])
+        self.assertIn("project_result", latest_structured["latest_result_refs"])
+        self.assertEqual(latest_structured["last_shown_entities"]["mentor"], "m1")
+
+    def test_message_route_supports_project_inspect_and_explain_followup(self) -> None:
+        client = TestClient(create_app())
+        create_response = client.post("/agent/sessions", json={"session_mode": "chat"})
+        session_id = create_response.json()["session_id"]
+
+        llm_instance = patch("progrec_service.runtime.agent_v2_runner.LLMClient").start().return_value
+        self.addCleanup(patch.stopall)
+        llm_instance.complete_json.side_effect = [
+            {
+                "action": "ask_user",
+                "message": "Tell me about your background and research interests.",
+                "pending_slot": "profile_context",
+                "expected_answer_shape": "free_text_profile",
+                "reasoning_summary": "Need profile details.",
+            },
+            {
+                "action": "ask_user",
+                "message": "Could you clarify your goal and share a little more profile context so I can choose the right recommendation skill?",
+                "reasoning_summary": "Planner action was invalid or unavailable.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/project-teammate-discovery.recommend_projects",
+                "arguments": {"top_k": 5},
+                "reasoning_summary": "The user accepted the suggested project follow-up.",
+            },
+            {
+                "action": "suggest_next_steps",
+                "message": "I found related projects. Want teammate matches too?",
+                "suggested_next_actions": [{"target": "teammate", "label": "Find teammates"}],
+                "reasoning_summary": "Projects are now available.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/project-teammate-discovery.get_project_by_rank",
+                "arguments": {"rank": 1},
+                "reasoning_summary": "User asked to inspect the first project from the latest project result.",
+            },
+            {
+                "action": "answer_from_context",
+                "message": "Here is the first project from your last result.",
+                "reasoning_summary": "The inspection result answered the user directly.",
+            },
+            {
+                "action": "call_tool",
+                "tool_name": "/project-teammate-discovery.explain_project_match",
+                "arguments": {"rank": 1},
+                "reasoning_summary": "User asked why the shown project was recommended.",
+            },
+            {
+                "action": "answer_from_context",
+                "message": "This project fits because it extends your NLP experience.",
+                "reasoning_summary": "The explanation result answered the user's why question.",
+            },
+        ]
+
+        with patch(
+            "progrec_agent.runtime.recommendation_runtime.run_mentor_recommendation_for_profile",
+            return_value={
+                "student_profile": {"student_id": "chat-temp-1"},
+                "skill3_result": {
+                    "mentor_candidates": [
+                        {"mentor_id": "m1", "mentor_name": "Prof A", "reason": "Strong NLP alignment."},
+                        {"mentor_id": "m2", "mentor_name": "Prof B", "reason": "Good research fit."},
+                    ]
+                },
+            },
+        ), patch(
+            "progrec_agent.runtime.recommendation_runtime.run_project_recommendations_for_profile",
+            return_value={
+                "projects": [
+                    {"project_id": "p1", "reason": "Extends your NLP experience."},
+                    {"project_id": "p2", "reason": "Fits your Python background."},
+                ],
+            },
+        ):
+            turns = [
+                "Help me find an NLP mentor.",
+                "I am an undergraduate CS student with Python and some NLP project experience.",
+                "yes please",
+                "Show me the first project.",
+                "Why this project?",
+            ]
+            bodies: list[str] = []
+            for message in turns:
+                with client.stream(
+                    "POST",
+                    f"/agent/sessions/{session_id}/messages",
+                    json={
+                        "message": message,
+                        "runtime": {
+                            "mode": "ephemeral",
+                            "base_url": "https://api.openai.com/v1",
+                            "model": "gpt-4.1-mini",
+                            "api_key": "sk-test",
+                        },
+                    },
+                ) as response:
+                    self.assertEqual(response.status_code, 200)
+                    bodies.append("".join(response.iter_text()))
+
+        self.assertIn("background and research interests", bodies[0])
+        self.assertIn("found 2 mentor matches", bodies[1])
+        self.assertIn("related projects", bodies[2])
+        self.assertIn("first project", bodies[3])
+        self.assertIn("extends your NLP experience", bodies[4])
+
+        messages_response = client.get(f"/agent/sessions/{session_id}/messages")
+        assistant_messages = [
+            message for message in messages_response.json()["messages"] if message["role"] == "assistant"
+        ]
+        self.assertEqual(len(assistant_messages), 5)
+        latest_structured = assistant_messages[-1]["structured_payload"]
+        self.assertEqual(latest_structured["active_goal"], "project")
+        self.assertEqual(latest_structured["last_shown_entities"]["project"], "p1")
+        self.assertIn("project_result", latest_structured["latest_result_refs"])
+
 
 if __name__ == "__main__":
     unittest.main()

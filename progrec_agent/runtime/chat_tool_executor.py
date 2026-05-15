@@ -198,6 +198,20 @@ class ChatToolExecutor:
                 payload={"payload": card, **card},
             )
 
+        if canonical_tool_name == "/mentor-discovery.explain_mentor_match":
+            _require_any_argument(tool_name, arguments, ["mentor_result_ref", "rank"])
+            card = mentor_result_inspector.explain_mentor_match(
+                dict(arguments["mentor_result_ref"]),
+                rank=int(arguments["rank"]),
+            )
+            return ToolExecutionResult(
+                tool_name=tool_name,
+                skill_id="/mentor-discovery",
+                status="succeeded",
+                summary="Explained why the selected mentor was recommended.",
+                payload={"payload": card, **card},
+            )
+
         if canonical_tool_name == "/project-teammate-discovery.get_project_by_rank":
             _require_any_argument(tool_name, arguments, ["project_result_ref", "rank"])
             card = project_result_inspector.get_project_by_rank(
@@ -212,6 +226,20 @@ class ChatToolExecutor:
                 payload={"payload": card, **card},
             )
 
+        if canonical_tool_name == "/project-teammate-discovery.explain_project_match":
+            _require_any_argument(tool_name, arguments, ["project_result_ref", "rank"])
+            card = project_result_inspector.explain_project_match(
+                dict(arguments["project_result_ref"]),
+                rank=int(arguments["rank"]),
+            )
+            return ToolExecutionResult(
+                tool_name=tool_name,
+                skill_id="/project-teammate-discovery",
+                status="succeeded",
+                summary="Explained why the selected project was recommended.",
+                payload={"payload": card, **card},
+            )
+
         if canonical_tool_name == "/project-teammate-discovery.get_teammate_by_rank":
             _require_any_argument(tool_name, arguments, ["teammate_result_ref", "rank"])
             card = teammate_result_inspector.get_teammate_by_rank(
@@ -223,6 +251,20 @@ class ChatToolExecutor:
                 skill_id="/project-teammate-discovery",
                 status="succeeded",
                 summary="Expanded the selected teammate from the current teammate result.",
+                payload={"payload": card, **card},
+            )
+
+        if canonical_tool_name == "/project-teammate-discovery.explain_teammate_match":
+            _require_any_argument(tool_name, arguments, ["teammate_result_ref", "rank"])
+            card = teammate_result_inspector.explain_teammate_match(
+                dict(arguments["teammate_result_ref"]),
+                rank=int(arguments["rank"]),
+            )
+            return ToolExecutionResult(
+                tool_name=tool_name,
+                skill_id="/project-teammate-discovery",
+                status="succeeded",
+                summary="Explained why the selected teammate was recommended.",
                 payload={"payload": card, **card},
             )
 
