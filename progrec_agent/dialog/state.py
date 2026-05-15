@@ -15,6 +15,9 @@ class ExecutionContext:
     result_handle: str | None = None
     selected_entity_type: str | None = None
     selected_entity_id: str | None = None
+    last_result: dict[str, object] = field(default_factory=dict)
+    last_turn_type: str = ""
+    next_question: str = ""
 
 
 @dataclass
@@ -31,3 +34,6 @@ class DialogState:
     clarification_turn_count: int = 0
     last_user_turn: str = ""
     last_agent_turn: str = ""
+    skill_trace: list[dict[str, object]] = field(default_factory=list)
+    last_skill_plan: dict[str, object] = field(default_factory=dict)
+    last_result_summary: str = ""

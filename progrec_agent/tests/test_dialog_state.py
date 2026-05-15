@@ -19,6 +19,9 @@ class TestDialogStateObjects(unittest.TestCase):
         self.assertEqual(state.required_slots, [])
         self.assertEqual(state.missing_slots, [])
         self.assertEqual(state.conflicts, [])
+        self.assertEqual(state.skill_trace, [])
+        self.assertEqual(state.last_skill_plan, {})
+        self.assertEqual(state.last_result_summary, "")
 
     def test_dialog_state_accepts_pending_question(self) -> None:
         state = DialogState(

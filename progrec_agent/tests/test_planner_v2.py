@@ -26,6 +26,31 @@ class TestPlannerV2(unittest.TestCase):
         plan = build_execution_plan(state)
         self.assertEqual(plan.action, "inspect_ranked_entity")
 
+    def test_out_of_scope_plan_refuses(self) -> None:
+        state = DialogState(task="out_of_scope", missing_slots=[])
+
+        plan = build_execution_plan(state)
+
+        self.assertEqual(plan.action, "refuse_out_of_scope")
+
+    def test_meta_question_plan_answers_without_recommendation_runtime(self) -> None:
+        state = DialogState(
+            task="answer_meta_question",
+            missing_slots=[],
+            skill_trace=[{"skill_id": "/mentor-discovery", "summary": "Ranked mentor candidates."}],
+        )
+
+        plan = build_execution_plan(state)
+
+        self.assertEqual(plan.action, "answer_meta_question")
+
+    def test_explain_requires_existing_result(self) -> None:
+        state = DialogState(task="explain_recommendation", missing_slots=[])
+
+        plan = build_execution_plan(state)
+
+        self.assertEqual(plan.action, "await_clarification")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,18 @@
 from __future__ import annotations
 
+from pathlib import Path
+from typing import Any
+
+
+def make_json_safe(value: Any) -> Any:
+    if isinstance(value, Path):
+        return str(value)
+    if isinstance(value, dict):
+        return {str(key): make_json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [make_json_safe(item) for item in value]
+    return value
+
 
 def summarize_pipeline_result(result: dict[str, object]) -> dict[str, int]:
     recommendations = dict((result.get("skill5_result") or {}).get("recommendations") or {})

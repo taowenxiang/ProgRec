@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import tempfile
 from dataclasses import asdict
+from dataclasses import fields
 from pathlib import Path
 
 from progrec_agent.agent_core_v2 import AgentCoreV2
 from progrec_agent.dialog.state import DialogState, ExecutionContext, PendingQuestion
 from progrec_agent.llm_client import LLMClient, LLMConfig
+from progrec_service.runtime.result_mapper import make_json_safe, normalize_result_package, summarize_pipeline_result
 
 
 def _recommendation_skill_usage(state: DialogState) -> list[dict[str, str]]:
@@ -49,7 +51,10 @@ def _dialog_state_from_payload(payload: dict[str, object]) -> DialogState:
         pending_question = PendingQuestion(**pending_question_payload)
     execution_context = ExecutionContext()
     if isinstance(execution_context_payload, dict):
-        execution_context = ExecutionContext(**execution_context_payload)
+        allowed_context_keys = {item.name for item in fields(ExecutionContext)}
+        execution_context = ExecutionContext(
+            **{key: value for key, value in execution_context_payload.items() if key in allowed_context_keys}
+        )
     return DialogState(
         task=str(payload.get("task", "")),
         goal=str(payload.get("goal", "")),
@@ -63,7 +68,27 @@ def _dialog_state_from_payload(payload: dict[str, object]) -> DialogState:
         clarification_turn_count=int(payload.get("clarification_turn_count", 0) or 0),
         last_user_turn=str(payload.get("last_user_turn", "")),
         last_agent_turn=str(payload.get("last_agent_turn", "")),
+        skill_trace=list(payload.get("skill_trace", []) or []),
+        last_skill_plan=dict(payload.get("last_skill_plan", {}) or {}),
+        last_result_summary=str(payload.get("last_result_summary", "")),
     )
+
+
+def _structured_result_from_state(state: DialogState) -> dict[str, object]:
+    turn_type = state.execution_context.last_turn_type or ("recommendation_result" if state.execution_context.result_handle else "refusal")
+    structured: dict[str, object] = {
+        "turn_type": turn_type,
+        "intent": state.task,
+        "missing_slots": list(state.missing_slots),
+        "next_question": state.execution_context.next_question,
+        "last_result_handle": state.execution_context.result_handle,
+        "skill_usage": list(state.skill_trace or []),
+    }
+    if turn_type == "recommendation_result" and state.execution_context.last_result:
+        last_result = dict(state.execution_context.last_result)
+        structured["summary"] = summarize_pipeline_result(last_result)
+        structured["recommendation_result"] = normalize_result_package(last_result)
+    return make_json_safe(structured)
 
 
 def run_agent_turn(*, repo_root: Path, dialog_state_payload: dict[str, object], runtime_context, user_text: str) -> dict[str, object]:
@@ -84,9 +109,6 @@ def run_agent_turn(*, repo_root: Path, dialog_state_payload: dict[str, object], 
         reply_text, next_state = agent.handle_message(state, user_text)
     return {
         "reply_text": reply_text,
-        "structured_result": {
-            "last_result_handle": next_state.execution_context.result_handle,
-            "skill_usage": _recommendation_skill_usage(next_state),
-        },
-        "dialog_state_payload": asdict(next_state),
+        "structured_result": _structured_result_from_state(next_state),
+        "dialog_state_payload": make_json_safe(asdict(next_state)),
     }
