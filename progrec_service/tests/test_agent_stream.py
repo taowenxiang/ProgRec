@@ -109,8 +109,11 @@ class TestAgentStream(unittest.TestCase):
     def test_clarification_stream_uses_collecting_context_stage(self) -> None:
         body = "".join(
             emit_chat_stream(
-                reply_text="What kind of program are you targeting?",
-                structured_result={"turn_type": "clarification", "next_question": "What kind of program are you targeting?"},
+                reply_text="Tell me a little more about your background.",
+                structured_result={
+                    "turn_type": "clarification",
+                    "next_question": "Tell me a little more about your background.",
+                },
             )
         )
         self.assertIn('"stage": "collecting_context"', body)
@@ -174,15 +177,15 @@ class TestAgentStream(unittest.TestCase):
         with patch(
             "progrec_service.runtime.agent_v2_runner.run_agent_turn",
             return_value={
-                "reply_text": "What kind of program are you targeting?",
+                "reply_text": "Tell me about your background and target opportunity.",
                 "structured_result": {
                     "turn_type": "clarification",
-                    "intent": "recommend_temporary_profile",
-                    "missing_slots": ["program_type", "experience_level"],
-                    "next_question": "What kind of program are you targeting?",
+                    "intent": "mentor",
+                    "missing_slots": [],
+                    "next_question": "Tell me about your background and target opportunity.",
                     "skill_usage": [],
                 },
-                "dialog_state_payload": {"task": "recommend_temporary_profile"},
+                "dialog_state_payload": {"active_goal": "mentor"},
             },
         ):
             with client.stream(
@@ -202,7 +205,7 @@ class TestAgentStream(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         reading_stage_index = body.index('"stage": "reading_skill_documents"')
-        reply_index = body.index("What kind of program are you targeting?")
+        reply_index = body.index("Tell me about your background and target opportunity.")
         self.assertLess(reading_stage_index, reply_index)
         self.assertIn('"skill_id": "/progrec-agent"', body)
         self.assertIn("Reading local Skill.md documents", body)
