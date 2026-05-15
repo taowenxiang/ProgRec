@@ -58,6 +58,12 @@ def _dialog_state_from_payload(payload: dict[str, object]) -> DialogState:
     return DialogState(
         task=str(payload.get("task", "")),
         goal=str(payload.get("goal", "")),
+        active_goal=str(payload.get("active_goal", "")),
+        goal_targets=list(payload.get("goal_targets", []) or []),
+        profile_context=dict(payload.get("profile_context", {}) or {}),
+        planner_actions=list(payload.get("planner_actions", []) or []),
+        suggested_next_actions=list(payload.get("suggested_next_actions", []) or []),
+        tool_results_summary=dict(payload.get("tool_results_summary", {}) or {}),
         resolved_slots=dict(payload.get("resolved_slots", {}) or {}),
         candidate_slots=dict(payload.get("candidate_slots", {}) or {}),
         required_slots=list(payload.get("required_slots", []) or []),

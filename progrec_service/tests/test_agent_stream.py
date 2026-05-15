@@ -12,6 +12,25 @@ from progrec_service.services.sse import emit_chat_stream
 
 
 class TestAgentStream(unittest.TestCase):
+    def test_runner_preserves_semi_autonomous_state_fields(self) -> None:
+        state = agent_v2_runner._dialog_state_from_payload(
+            {
+                "active_goal": "mentor",
+                "goal_targets": ["mentor"],
+                "profile_context": {"research_topic": "NLP"},
+                "planner_actions": [{"action": "ask_user"}],
+                "suggested_next_actions": [{"target": "project"}],
+                "tool_results_summary": {"mentor_count": 5},
+            }
+        )
+
+        self.assertEqual(state.active_goal, "mentor")
+        self.assertEqual(state.goal_targets, ["mentor"])
+        self.assertEqual(state.profile_context["research_topic"], "NLP")
+        self.assertEqual(state.planner_actions[0]["action"], "ask_user")
+        self.assertEqual(state.suggested_next_actions[0]["target"], "project")
+        self.assertEqual(state.tool_results_summary["mentor_count"], 5)
+
     def test_runner_returns_clarification_turn_contract(self) -> None:
         class _RuntimeContext:
             model = "demo-model"
