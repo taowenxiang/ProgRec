@@ -31,5 +31,6 @@ env/
 # Local agent temp directories
 .progrec_agent_tmp/
 .superpowers/
+.worktrees/
 
 skill2_academic_graph_builder/outputs/academic_graph.json
